@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
         NavMeshAgent navMeshAgent = obj.GetComponent<NavMeshAgent>();
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        float speed = Random.Range(1f, 2.5f);
-        float accel = Random.Range(1.5f, 3);
-        float angle_speed = Random.Range(70, 210);
+        float speed = Random.Range(1f, 1.5f);
+        float accel = Random.Range(1f, 2f);
+        float angle_speed = Random.Range(45, 120);
         navMeshAgent.speed = speed;
         navMeshAgent.acceleration = accel;
         navMeshAgent.angularSpeed= angle_speed;
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
     }
     private Vector3 FindPointOnNavmesh()
     {
-        float Randx = Random.Range(-63, 80);
-        float Randz = Random.Range(-80, 80);
+        float Randx = Random.Range(-23, 17);
+        float Randz = Random.Range(-50, 45);
         Vector3 newvec = new Vector3(Randx, 0, Randz);
 
         if (NavMesh.SamplePosition(newvec, out NavMeshHit hit, 1,NavMesh.AllAreas))
