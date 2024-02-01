@@ -14,12 +14,17 @@ public class GameManager : MonoBehaviour
    [SerializeField] private Vector3 ZombieSpawnPoint;
     public bool IsIdle;
     public int HordeDifficulty;
+    private bool MovementExecuted;
     void Awake()
     {
         instance = this;
         SpawnZombie(ZombieSpawnPoint, ZombieAmount);
     }
-
+    private void Start()
+    {
+        MovementExecuted= false;
+        SetToLocation();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -40,8 +45,8 @@ public class GameManager : MonoBehaviour
         NavMeshAgent navMeshAgent = obj.GetComponent<NavMeshAgent>();
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        float speed = Random.Range(3f, 6.5f);
-        float accel = Random.Range(3, 7);
+        float speed = Random.Range(1f, 2.5f);
+        float accel = Random.Range(1.5f, 3);
         float angle_speed = Random.Range(70, 210);
         navMeshAgent.speed = speed;
         navMeshAgent.acceleration = accel;
@@ -59,17 +64,32 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            foreach (GameObject Zombie in ZombieList)
-            {
-                Zombie.GetComponent<NavMeshAgent>().SetDestination(Zombie.transform.position);
-            }
+            if (!MovementExecuted) { StartCoroutine(GoToPoint(15)); MovementExecuted = true; }
         }
     }
-    private Vector3 NextLocation()
+    private Vector3 FindPointOnNavmesh()
     {
         float Randx = Random.Range(-63, 80);
         float Randz = Random.Range(-80, 80);
         Vector3 newvec = new Vector3(Randx, 0, Randz);
-        return newvec;
+
+        if (NavMesh.SamplePosition(newvec, out NavMeshHit hit, 1,NavMesh.AllAreas))
+        {
+            return newvec;
+        }
+        return gameObject.transform.position;
+    }
+    private IEnumerator GoToPoint(float Seconds)
+    {
+        yield return new WaitForSeconds(Seconds);
+        SetToLocation();
+        MovementExecuted = false;
+    }
+    private void SetToLocation()
+    {
+        foreach (GameObject Zombie in ZombieList)
+        {
+            Zombie.GetComponent<NavMeshAgent>().SetDestination(FindPointOnNavmesh());
+        }
     }
 }
