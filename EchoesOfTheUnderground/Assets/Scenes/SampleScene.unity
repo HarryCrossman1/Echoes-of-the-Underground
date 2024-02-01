@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombiePrefab: {fileID: 3046291373875613802, guid: 257597792cfc4dd49a7783178bbd4a38,
     type: 3}
-  ZombieAmount: 0
+  ZombieAmount: 3
   ZombieSpawnPoint: {x: 5, y: 0, z: 5}
 --- !u!4 &815756752
 Transform:
@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ebe554b99528f4a81ab3dcbd45882b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 34494504}
 --- !u!4 &864192364
 Transform:
   m_ObjectHideFlags: 0

@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class Zombie_Behaviour : MonoBehaviour
 {
-    public General_Referance General_referance;
+    public static Zombie_Behaviour instance;
     private NavMeshAgent Zombie_Agent;
     private int ZombieHealth { get; set; }
     // Start is called before the first frame update
     void Awake()
     {
-        General_referance = GameObject.FindObjectOfType<General_Referance>();
+        instance= this;
         Zombie_Agent = gameObject.GetComponent<NavMeshAgent>();
         ZombieHealth = 3;
     }
@@ -19,11 +19,11 @@ public class Zombie_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Chase(General_referance.Player);
+       
     }
-    private void Chase(GameObject Target)
+    public void Chase(NavMeshAgent ZombieAgent,GameObject Target)
     {
-        Zombie_Agent.destination = Target.transform.position;
+        ZombieAgent.destination = Target.transform.position;
     }
  
 }
