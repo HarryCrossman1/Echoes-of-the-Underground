@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject ZombiePrefab;
     private GameObject CurrentZombie;
     private List<GameObject> ZombieList = new List<GameObject>();
-    public int ZombieAmount;
+    public int ZombieAmount { get { return ZombieAmount; } set { if (ZombieAmount > 24) ZombieAmount = 24; } }
+    
    [SerializeField] private Vector3 ZombieSpawnPoint;
     public bool IsIdle;
     public int HordeDifficulty;
