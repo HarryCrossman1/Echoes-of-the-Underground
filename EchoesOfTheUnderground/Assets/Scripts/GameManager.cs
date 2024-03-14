@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public GameManager instance;
     public GameObject ZombiePrefab;
     private GameObject CurrentZombie;
-    private List<GameObject> ZombieList = new List<GameObject>();
-    public int ZombieAmount { get { return ZombieAmount; } set { if (ZombieAmount > 24) ZombieAmount = 24; } }
+   [SerializeField] private List<GameObject> ZombiePool = new List<GameObject>();
+    public int ZombiePoolAmount;
     
    [SerializeField] private Vector3 ZombieSpawnPoint;
     public bool IsIdle;
@@ -19,12 +19,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        SpawnZombie(ZombieSpawnPoint, ZombieAmount);
+        
     }
     private void Start()
     {
         MovementExecuted= false;
-        SetToLocation();
+        // SetToLocation();
+        PoolZombies(ZombiePoolAmount);
+        SpawnZombies(ZombieSpawnPoint);
     }
     // Update is called once per frame
     void Update()
@@ -32,13 +34,26 @@ public class GameManager : MonoBehaviour
         HordeActive();
     }
 
-    private void SpawnZombie(Vector3 SpawnPoint, int ZombieAmount)
+    private void PoolZombies(int ZombieAmount)
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
-           GameObject Ins_Obj = Instantiate(ZombiePrefab, SpawnPoint, transform.rotation);
-           ModifyCurrentZombie(Ins_Obj);
-           ZombieList.Add(Ins_Obj);
+            GameObject Ins_Obj = Instantiate(ZombiePrefab);
+            ModifyCurrentZombie(Ins_Obj);
+            Ins_Obj.SetActive(false);
+            ZombiePool.Add(Ins_Obj);
+        }
+    }
+    private void SpawnZombies(Vector3 SpawnPoint)
+    {
+        foreach (GameObject zombie in ZombiePool)
+        {
+            GameObject CurrentZomb = GetPooledZombie();
+            if (CurrentZomb != null)
+            {
+                CurrentZomb.transform.position = SpawnPoint;
+                CurrentZomb.SetActive(true);
+            }
         }
     }
     private void ModifyCurrentZombie(GameObject obj)
@@ -58,7 +73,7 @@ public class GameManager : MonoBehaviour
         //Change after test later 
         if (IsIdle == true)
         {
-            foreach (GameObject Zombie in ZombieList)
+            foreach (GameObject Zombie in ZombiePool)
             {
                 Zombie_Behaviour.instance.Chase(Zombie.GetComponent<NavMeshAgent>(), General_Referance.instance.Player);
             }
@@ -88,9 +103,20 @@ public class GameManager : MonoBehaviour
     }
     private void SetToLocation()
     {
-        foreach (GameObject Zombie in ZombieList)
+        foreach (GameObject Zombie in ZombiePool)
         {
             Zombie.GetComponent<NavMeshAgent>().SetDestination(FindPointOnNavmesh());
         }
+    }
+    public GameObject GetPooledZombie()
+    {
+        for (int i = 0; i < ZombiePool.Count; i++)
+        {
+            if (!ZombiePool[i].activeInHierarchy)
+            {
+                return ZombiePool[i];
+            }
+        }
+        return null;
     }
 }

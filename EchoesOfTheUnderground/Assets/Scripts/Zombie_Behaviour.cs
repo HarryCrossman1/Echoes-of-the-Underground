@@ -13,7 +13,7 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         instance= this;
         Zombie_Agent = gameObject.GetComponent<NavMeshAgent>();
-        ZombieHealth = 3;
+        ZombieHealth = 100;
     }
 
     // Update is called once per frame
