@@ -7,7 +7,7 @@ public class Zombie_Behaviour : MonoBehaviour
 {
     public static Zombie_Behaviour instance;
     private NavMeshAgent Zombie_Agent;
-    private int ZombieHealth { get; set; }
+    public int ZombieHealth { get; set; }
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,11 +19,15 @@ public class Zombie_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       DeathCheck();
     }
     public void Chase(NavMeshAgent ZombieAgent,GameObject Target)
     {
         ZombieAgent.destination = Target.transform.position;
     }
- 
+
+    public void DeathCheck()
+    {
+        if (ZombieHealth <= 0) { gameObject.SetActive(false); }
+    }
 }

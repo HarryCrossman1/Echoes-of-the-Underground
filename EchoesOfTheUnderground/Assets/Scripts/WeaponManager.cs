@@ -26,7 +26,13 @@ public class WeaponManager : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Zombie"))
                 { 
-                   Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
+                    //Get the hit zombie 
+                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
+                    // Deal Damage 
+                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
+                    //Take ammo
+                    CurrentWeapon.AmmoValue--;
+                    zombie_Behaviour.DeathCheck();
                 }
             }
         }
