@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a748ba2b40c4144293745d1d90da27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 0}
+  CurrentWeapon: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
   HeldWeapon: {fileID: 0}
 --- !u!1 &55923303
 GameObject:
@@ -349,9 +349,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 150
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1814,7 +1814,7 @@ MonoBehaviour:
     type: 3}
   ZombiePool: []
   ActiveZombies: []
-  ZombiePoolAmount: 1
+  ZombiePoolAmount: 115
   ZombieSpawnPoint: {x: 5, y: 0, z: 5}
   IsIdle: 1
   HordeDifficulty: 0

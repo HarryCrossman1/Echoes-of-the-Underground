@@ -7,7 +7,7 @@ public class Weapon : ScriptableObject
 {
     public int DamageValue;
     public int AmmoValue;
-    public int FireRate;
+    public float FireRate;
 
     public enum AmmoType {Pistol,Rifle,Sniper }
 
