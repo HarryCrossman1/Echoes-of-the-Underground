@@ -6,12 +6,13 @@ using UnityEngine.Rendering;
 
 public class WeaponManager : MonoBehaviour
 {
-  [SerializeField] private Weapon CurrentWeapon;
+    public static WeaponManager instance;
+  [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] private GameObject HeldWeapon;
     private float GunCoolDownTimer { get; set; }
     void Awake()
     {
-
+        instance= this;
     }
     private void Start()
     {
@@ -24,14 +25,16 @@ public class WeaponManager : MonoBehaviour
         GunCoolDown(CurrentWeapon.FireRate);
     }
     public void Fire(Weapon CurrentWeapon)
-    { 
+    {
+        
         RaycastHit hit;
-        if(HeldWeapon!=null && GunCoolDownTimer <=0)
+        if(HeldWeapon!=null )//&& GunCoolDownTimer <=0)
         {
-            if (Physics.Raycast(HeldWeapon.transform.position,HeldWeapon.transform.forward,out hit))
+            Debug.DrawRay(HeldWeapon.transform.position, HeldWeapon.transform.forward, Color.red);
+            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 50))
             {
                 if (hit.collider.CompareTag("Zombie"))
-                { 
+                {
                     //Get the hit zombie 
                     Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
                     // Deal Damage 
@@ -40,6 +43,10 @@ public class WeaponManager : MonoBehaviour
                     CurrentWeapon.AmmoValue--;
                     zombie_Behaviour.DeathCheck();
                 }
+            }
+            else
+            {
+                Debug.Log("Missed");
             }
         }
        
