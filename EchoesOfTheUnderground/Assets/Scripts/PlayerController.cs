@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("RightTrigger");
                 WeaponManager.instance.Fire(WeaponManager.instance.CurrentWeapon);
             }
+            else
+            {
+                BulletTrail.instance.LineDeactivate();
+            }
         }
         foreach (var controller in ControllerLeft)
         {
@@ -38,6 +42,10 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("LeftTrigger");
                 WeaponManager.instance.Fire(WeaponManager.instance.CurrentWeapon);
+            }
+            else
+            {
+              //  BulletTrail.instance.LineDeactivate();
             }
         }
 
