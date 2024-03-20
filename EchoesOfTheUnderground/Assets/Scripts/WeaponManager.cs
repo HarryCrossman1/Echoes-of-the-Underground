@@ -9,33 +9,25 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager instance;
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
-    [SerializeField]private float GunCoolDownTimer;
+    [SerializeField]private float LastShot;
     void Awake()
     {
         instance= this;
     }
-    private void Start()
-    {
-        GunCoolDownTimer = 1;   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        GunCoolDown();
-        Debug.Log(GunCoolDownTimer);
-    }
     public void Fire(Weapon CurrentWeapon)
     {
-        
-        RaycastHit hit;
-        if (HeldWeapon != null && GunCoolDownTimer <= 0)
+        if (Time.time - LastShot < (CurrentWeapon.FireRate))
         {
-            GunCoolDownTimer+=CurrentWeapon.FireRate;
- 
-            BulletTrail.instance.LineActivate();
+            return;
+        }
+        LastShot = Time.time;
+        RaycastHit hit;
+        if (HeldWeapon != null )
+        {
+           
             if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 50))
             {
+                SoundManager.instance.PlayGunshot(CurrentWeapon);
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     //Get the hit zombie 
@@ -52,17 +44,6 @@ public class WeaponManager : MonoBehaviour
                 Debug.Log("Missed");
             }
         }
-        else
-        {
-            BulletTrail.instance.LineDeactivate();
-        }
        
-    }
-    private void GunCoolDown()
-    {
-        if (GunCoolDownTimer >= 0)
-        {
-            GunCoolDownTimer -= Time.deltaTime;
-        }
     }
 }

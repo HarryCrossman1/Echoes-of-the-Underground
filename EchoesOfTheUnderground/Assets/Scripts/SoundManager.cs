@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource source;
+    public static SoundManager instance;
+    [SerializeField] private AudioSource source,GunSource;
     [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
     // Start is called before the first frame update
     void Awake()
     {
+        instance= this;
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -25,5 +27,10 @@ public class SoundManager : MonoBehaviour
     public void PlayHoverSound()
     { 
         
+    }
+    public void PlayGunshot(Weapon weapon)
+    {
+        GunSource.clip = weapon.Clip;
+        GunSource.Play();
     }
 }

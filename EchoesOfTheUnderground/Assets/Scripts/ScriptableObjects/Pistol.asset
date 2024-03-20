@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11345c285b02154e8b9b4ae310f85ca, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  DamageValue: 35
-  AmmoValue: 8
-  FireRate: 0.6
+  DamageValue: 40
+  AmmoValue: -7
+  FireRate: 0.5
+  Clip: {fileID: 8300000, guid: 21ab1acda3f97734e8525885ccb02c54, type: 3}
   Type: 0

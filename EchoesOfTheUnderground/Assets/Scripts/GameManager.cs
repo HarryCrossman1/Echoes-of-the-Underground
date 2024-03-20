@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
    [SerializeField] private List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] private List<GameObject> ActiveZombies = new List<GameObject>();
     public int ZombiePoolAmount;
+    public int ZombieSpawnAmount;
     
    [SerializeField] private Vector3 ZombieSpawnPoint;
     public bool IsIdle;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         MovementExecuted= false;
         // SetToLocation();
         PoolZombies(ZombiePoolAmount);
+        SpawnZombies(ZombieSpawnPoint,15);
     }
     // Update is called once per frame
     void Update()
@@ -48,9 +50,9 @@ public class GameManager : MonoBehaviour
             ZombiePool.Add(Ins_Obj);
         }
     }
-    private void SpawnZombies(Vector3 SpawnPoint)
+    private void SpawnZombies(Vector3 SpawnPoint,int ZombieAmount)
     {
-        foreach (GameObject zombie in ZombiePool)
+        for (int i = 0; i < ZombieAmount; i++)
         {
             GameObject CurrentZomb = GetPooledZombie();
             if (CurrentZomb != null)
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
                 CurrentZomb.SetActive(true);
                 ActiveZombies.Add(CurrentZomb);
             }
+
         }
     }
     Animator anim;
@@ -132,24 +135,27 @@ public class GameManager : MonoBehaviour
             Zombie.GetComponent<NavMeshAgent>().SetDestination(FindPointOnNavmesh());
         }
     }
-    private void LerpToNextPoint(Transform player, Transform target)
+    private IEnumerator LerpToNextPoint(Transform player,Transform target)
     {
-        player.position = Vector3.Lerp(player.position, target.position, 3 * Time.deltaTime);
+        while (Vector3.Distance(player.position, target.position) > 0.05f)
+        {
+            player.position = Vector3.Lerp(player.position, target.position, 1.3f * Time.deltaTime);
+            yield return null;  
+        }
+    }
+    private void mo()
+    {
+        if (SetPointTracker < SetPoints.Length)
+        {
+            StartCoroutine(LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]));
+            SetPointTracker++;
+        }
     }
     private void GameplayLoop()
     {
-        switch (SetPointTracker)
-        {
-            case 0:
-                {
-                    SpawnZombies(ZombieSpawnPoint);
-                    LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[1]);
-                    break;
-                }
-            case 1: 
-                {
-                    break;
-                }
+        if (Input.GetKeyDown(KeyCode.Space))
+        { 
+            mo();
         }
     }
 }

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11345c285b02154e8b9b4ae310f85ca, type: 3}
   m_Name: SubmachineGun
   m_EditorClassIdentifier: 
-  DamageValue: 5
-  AmmoValue: 30
-  FireRate: 1
+  DamageValue: 15
+  AmmoValue: -86
+  FireRate: 0.2
+  Clip: {fileID: 8300000, guid: 052f28cf925372841ba28f7db743b831, type: 3}
   Type: 1

@@ -8,6 +8,7 @@ public class Weapon : ScriptableObject
     public int DamageValue;
     public int AmmoValue;
     public float FireRate;
+    public AudioClip Clip;
 
     public enum AmmoType {Pistol,Rifle,Sniper }
 
