@@ -6,10 +6,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static PlayerController instance;
+    public Transform PlayerTransform;
+    void Awake()
     {
-        
+        instance = this;
+        PlayerTransform= transform;
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                BulletTrail.instance.LineDeactivate();
+              
             }
         }
         foreach (var controller in ControllerLeft)

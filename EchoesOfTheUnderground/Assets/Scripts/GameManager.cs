@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public bool IsIdle;
     public int HordeDifficulty;
     private bool MovementExecuted;
+
+    [SerializeField] private Transform[] SetPoints;
+    [SerializeField] private int SetPointTracker;
     void Awake()
     {
         instance = this;
@@ -27,12 +30,12 @@ public class GameManager : MonoBehaviour
         MovementExecuted= false;
         // SetToLocation();
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoint);
     }
     // Update is called once per frame
     void Update()
     {
         HordeActive();
+        GameplayLoop();
     }
 
     private void PoolZombies(int ZombieAmount)
@@ -127,6 +130,26 @@ public class GameManager : MonoBehaviour
         foreach (GameObject Zombie in ActiveZombies)
         {
             Zombie.GetComponent<NavMeshAgent>().SetDestination(FindPointOnNavmesh());
+        }
+    }
+    private void LerpToNextPoint(Transform player, Transform target)
+    {
+        player.position = Vector3.Lerp(player.position, target.position, 3 * Time.deltaTime);
+    }
+    private void GameplayLoop()
+    {
+        switch (SetPointTracker)
+        {
+            case 0:
+                {
+                    SpawnZombies(ZombieSpawnPoint);
+                    LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[1]);
+                    break;
+                }
+            case 1: 
+                {
+                    break;
+                }
         }
     }
 }

@@ -9,7 +9,7 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager instance;
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
-    private float GunCoolDownTimer { get; set; }
+    [SerializeField]private float GunCoolDownTimer;
     void Awake()
     {
         instance= this;
@@ -22,16 +22,17 @@ public class WeaponManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GunCoolDown(CurrentWeapon.FireRate);
+        GunCoolDown();
         Debug.Log(GunCoolDownTimer);
     }
     public void Fire(Weapon CurrentWeapon)
     {
         
         RaycastHit hit;
-        if(HeldWeapon!=null&& GunCoolDownTimer <=0)
+        if (HeldWeapon != null && GunCoolDownTimer <= 0)
         {
-            Debug.DrawRay(HeldWeapon.transform.position, HeldWeapon.transform.forward, Color.red);
+            GunCoolDownTimer+=CurrentWeapon.FireRate;
+ 
             BulletTrail.instance.LineActivate();
             if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 50))
             {
@@ -51,17 +52,17 @@ public class WeaponManager : MonoBehaviour
                 Debug.Log("Missed");
             }
         }
+        else
+        {
+            BulletTrail.instance.LineDeactivate();
+        }
        
     }
-    private void GunCoolDown(float FireRate)
+    private void GunCoolDown()
     {
         if (GunCoolDownTimer >= 0)
         {
-            GunCoolDownTimer -= FireRate * Time.deltaTime;
-        }
-        else
-        { 
-            
+            GunCoolDownTimer -= Time.deltaTime;
         }
     }
 }
