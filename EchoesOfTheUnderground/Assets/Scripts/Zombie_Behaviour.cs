@@ -6,13 +6,13 @@ using UnityEngine.AI;
 public class Zombie_Behaviour : MonoBehaviour
 {
     public static Zombie_Behaviour instance;
-    private NavMeshAgent Zombie_Agent;
+   [SerializeField] private NavMeshAgent Zombie_Agent;
     public int ZombieHealth { get; set; }
     // Start is called before the first frame update
     void Awake()
     {
         instance= this;
-        Zombie_Agent = gameObject.GetComponent<NavMeshAgent>();
+        
         ZombieHealth = 100;
     }
 
@@ -20,6 +20,7 @@ public class Zombie_Behaviour : MonoBehaviour
     void Update()
     {
        DeathCheck();
+       Chase(Zombie_Agent, General_Referance.instance.Player);
     }
     public void Chase(NavMeshAgent ZombieAgent,GameObject Target)
     {

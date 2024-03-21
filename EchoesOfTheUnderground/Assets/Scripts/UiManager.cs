@@ -7,20 +7,23 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    public static UiManager instance;
    [SerializeField] private TextMeshProUGUI DifficultyText;
     [SerializeField] private Slider LoadingSlider;
    [SerializeField] private string[] CampaignDifficultyModes;
     private int DifficultyTracker =1;
+
+    [SerializeField] LineRenderer LineRenderer;
     // Start is called before the first frame update
     void Awake()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(DifficultyTracker);
+        
     }
     public void StartCampaign()
     {
@@ -57,5 +60,10 @@ public class UiManager : MonoBehaviour
             LoadingSlider.value = Progress;
             yield return null;
         }
+    }
+    public void DrawLine(Transform Start, Transform Target)
+    {
+        LineRenderer.SetPosition(0, Start.position);
+        LineRenderer.SetPosition(1, Start.position);
     }
 }

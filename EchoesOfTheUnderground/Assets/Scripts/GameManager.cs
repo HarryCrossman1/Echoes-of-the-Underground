@@ -12,31 +12,28 @@ public class GameManager : MonoBehaviour
    [SerializeField] private List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] private List<GameObject> ActiveZombies = new List<GameObject>();
     public int ZombiePoolAmount;
-    public int ZombieSpawnAmount;
     
-   [SerializeField] private Vector3 ZombieSpawnPoint;
     public bool IsIdle;
     public int HordeDifficulty;
     private bool MovementExecuted;
 
     [SerializeField] private Transform[] SetPoints;
-    [SerializeField] private int SetPointTracker;
+    [SerializeField] private Transform[] ZombieSpawnPoints;
+    [SerializeField] private int SetPointTracker,SpawnTracker;
     void Awake()
     {
         instance = this;
-        
+        PoolZombies(ZombiePoolAmount);
+        SpawnZombies(ZombieSpawnPoints[0], 10);
     }
     private void Start()
     {
         MovementExecuted= false;
         // SetToLocation();
-        PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoint,15);
     }
     // Update is called once per frame
     void Update()
     {
-        HordeActive();
         GameplayLoop();
     }
 
@@ -50,14 +47,14 @@ public class GameManager : MonoBehaviour
             ZombiePool.Add(Ins_Obj);
         }
     }
-    private void SpawnZombies(Vector3 SpawnPoint,int ZombieAmount)
+    private void SpawnZombies(Transform SpawnPoint,int ZombieAmount)
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
             GameObject CurrentZomb = GetPooledZombie();
             if (CurrentZomb != null)
             {
-                CurrentZomb.transform.position = SpawnPoint;
+                CurrentZomb.transform.position = SpawnPoint.position;
                 CurrentZomb.SetActive(true);
                 ActiveZombies.Add(CurrentZomb);
             }
@@ -83,21 +80,21 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void HordeActive()
-    {
-        //Change after test later 
-        if (IsIdle == true)
-        {
-            foreach (GameObject Zombie in ActiveZombies)
-            {
-                Zombie_Behaviour.instance.Chase(Zombie.GetComponent<NavMeshAgent>(), General_Referance.instance.Player);
-            }
-        }
-        else
-        {
-            if (!MovementExecuted) { StartCoroutine(GoToPoint(15)); MovementExecuted = true; }
-        }
-    }
+    //private void HordeActive()
+    //{
+    //    //Change after test later 
+    //    if (IsIdle == true)
+    //    {
+    //        foreach (GameObject Zombie in ActiveZombies)
+    //        {
+    //            Zombie_Behaviour.instance.Chase(Zombie.GetComponent<NavMeshAgent>(), General_Referance.instance.Player);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (!MovementExecuted) { StartCoroutine(GoToPoint(15)); MovementExecuted = true; }
+    //    }
+    //}
    
     public GameObject GetPooledZombie()
     {
@@ -143,19 +140,53 @@ public class GameManager : MonoBehaviour
             yield return null;  
         }
     }
-    private void mo()
+    private void MovePoints()
     {
         if (SetPointTracker < SetPoints.Length)
         {
+           // UiManager.instance.DrawLine(SetPoints[SetPointTracker], SetPoints[SetPointTracker + 1]);
             StartCoroutine(LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]));
             SetPointTracker++;
         }
     }
+   [SerializeField] private bool IsActive;
     private void GameplayLoop()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        { 
-            mo();
+        Debug.Log(ZombiePool.Count);
+        for (int i = 0; i < ZombiePool.Count; i++)
+        {
+            if (ZombiePool[i].activeInHierarchy)
+            {
+                IsActive = true;
+                break;
+            }
+            else
+            {
+                IsActive = false;
+            }
+
+            Debug.Log(IsActive);
+        }
+        if (!IsActive)//Input.GetKeyDown(KeyCode.Space))
+        {
+            MovePoints();
+            IsActive = true;
+            for (int i = 0; i < ZombieSpawnPoints.Length; i++)
+            {
+                //check if the spawn point is too close 
+                int rand = Random.Range(0, ZombieSpawnPoints.Length);
+                if (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 2)
+                {
+                    // if good then spawn here 
+                    SpawnTracker++;
+                    SpawnZombies(ZombieSpawnPoints[rand], 5);
+                }
+                else
+                {
+                    SpawnTracker = 0;
+                }
+            }
+            IsActive = true;
         }
     }
 }
