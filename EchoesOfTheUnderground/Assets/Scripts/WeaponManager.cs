@@ -24,10 +24,10 @@ public class WeaponManager : MonoBehaviour
         RaycastHit hit;
         if (HeldWeapon != null )
         {
-           
+            SoundManager.instance.PlayGunshot(CurrentWeapon);
             if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 50))
             {
-                SoundManager.instance.PlayGunshot(CurrentWeapon);
+               
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     //Get the hit zombie 

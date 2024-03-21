@@ -6,11 +6,11 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager instance;
+    public static GameManager instance;
     public GameObject ZombiePrefab;
     private GameObject CurrentZombie;
    [SerializeField] private List<GameObject> ZombiePool = new List<GameObject>();
-    [SerializeField] private List<GameObject> ActiveZombies = new List<GameObject>();
+    [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public int ZombiePoolAmount;
     
     public bool IsIdle;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         MovementExecuted= false;
+        IsIdle = true;
         // SetToLocation();
     }
     // Update is called once per frame
@@ -55,47 +56,28 @@ public class GameManager : MonoBehaviour
             if (CurrentZomb != null)
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
+                if (Physics.Raycast(CurrentZomb.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, NavMesh.AllAreas))
+                {
+                    // Set the position of the spawned object to the hit point
+                    CurrentZomb.transform.position = hit.point;
+                }
                 CurrentZomb.SetActive(true);
                 ActiveZombies.Add(CurrentZomb);
             }
 
         }
     }
-    Animator anim;
     private void ModifyCurrentZombie(GameObject obj)
     { 
         NavMeshAgent navMeshAgent = obj.GetComponent<NavMeshAgent>();
-        anim = obj.GetComponent<Animator>();
+       
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
         navMeshAgent.speed = 2.1f;//Random.Range(1f, 3f);
         navMeshAgent.acceleration = Random.Range(1f, 2f);
         navMeshAgent.angularSpeed = Random.Range(45, 95);
-        if (anim != null)
-        {
-            if (navMeshAgent.speed >= 2)
-            {
-                Debug.Log(anim);
-                anim.SetBool("FastZombie", true);
-            }
-        }
     }
-    //private void HordeActive()
-    //{
-    //    //Change after test later 
-    //    if (IsIdle == true)
-    //    {
-    //        foreach (GameObject Zombie in ActiveZombies)
-    //        {
-    //            Zombie_Behaviour.instance.Chase(Zombie.GetComponent<NavMeshAgent>(), General_Referance.instance.Player);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (!MovementExecuted) { StartCoroutine(GoToPoint(15)); MovementExecuted = true; }
-    //    }
-    //}
-   
+
     public GameObject GetPooledZombie()
     {
         for (int i = 0; i < ZombiePool.Count; i++)
@@ -107,31 +89,8 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-    private Vector3 FindPointOnNavmesh()
-    {
-        float Randx = Random.Range(-23, 17);
-        float Randz = Random.Range(-50, 45);
-        Vector3 newvec = new Vector3(Randx, 0, Randz);
 
-        if (NavMesh.SamplePosition(newvec, out NavMeshHit hit, 1, NavMesh.AllAreas))
-        {
-            return newvec;
-        }
-        return gameObject.transform.position;
-    }
-    private IEnumerator GoToPoint(float Seconds)
-    {
-        yield return new WaitForSeconds(Seconds);
-        SetToLocation();
-        MovementExecuted = false;
-    }
-    private void SetToLocation()
-    {
-        foreach (GameObject Zombie in ActiveZombies)
-        {
-            Zombie.GetComponent<NavMeshAgent>().SetDestination(FindPointOnNavmesh());
-        }
-    }
+
     private IEnumerator LerpToNextPoint(Transform player,Transform target)
     {
         while (Vector3.Distance(player.position, target.position) > 0.05f)
@@ -155,13 +114,16 @@ public class GameManager : MonoBehaviour
         Debug.Log(ZombiePool.Count);
         for (int i = 0; i < ZombiePool.Count; i++)
         {
+            // check if there are any zombies active in the hierarchy 
             if (ZombiePool[i].activeInHierarchy)
             {
                 IsActive = true;
+                
                 break;
             }
             else
             {
+                // if none are active 
                 IsActive = false;
             }
 
@@ -169,24 +131,20 @@ public class GameManager : MonoBehaviour
         }
         if (!IsActive)//Input.GetKeyDown(KeyCode.Space))
         {
-            MovePoints();
-            IsActive = true;
             for (int i = 0; i < ZombieSpawnPoints.Length; i++)
             {
                 //check if the spawn point is too close 
                 int rand = Random.Range(0, ZombieSpawnPoints.Length);
-                if (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 2)
+                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 2)
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 5);
+                    SpawnZombies(ZombieSpawnPoints[rand], 10);
+                    break;
                 }
-                else
-                {
-                    SpawnTracker = 0;
-                }
+                SpawnTracker = 0;
             }
-            IsActive = true;
+            MovePoints();
         }
     }
 }
