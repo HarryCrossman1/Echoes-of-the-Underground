@@ -20,7 +20,7 @@ public class Zombie_Behaviour : MonoBehaviour
     void Update()
     {
        DeathCheck();
-       Chase(Zombie_Agent, General_Referance.instance.Player);
+      
     }
     public void Chase(NavMeshAgent ZombieAgent,GameObject Target)
     {
