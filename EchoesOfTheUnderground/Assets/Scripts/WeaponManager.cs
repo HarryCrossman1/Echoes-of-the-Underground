@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour
         if (HeldWeapon != null )
         {
             SoundManager.instance.PlayGunshot(CurrentWeapon);
-            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 50))
+            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
             {
                
                 if (hit.collider.CompareTag("Zombie"))

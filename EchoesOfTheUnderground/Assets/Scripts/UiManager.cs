@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class UiManager : MonoBehaviour
    [SerializeField] private string[] CampaignDifficultyModes;
     private int DifficultyTracker =1;
 
-    [SerializeField] LineRenderer LineRenderer;
+    [SerializeField] GameObject MovingText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,9 +62,12 @@ public class UiManager : MonoBehaviour
             yield return null;
         }
     }
-    public void DrawLine(Transform Start, Transform Target)
+    public void UiMoving()
     {
-        LineRenderer.SetPosition(0, Start.position);
-        LineRenderer.SetPosition(1, Start.position);
+        MovingText.SetActive(true);
+    }
+    public void UiFight()
+    {
+        MovingText.SetActive(false);
     }
 }

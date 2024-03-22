@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject ZombiePrefab;
     private GameObject CurrentZombie;
-   [SerializeField] private List<GameObject> ZombiePool = new List<GameObject>();
+   [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public int ZombiePoolAmount;
     
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ZombieAmount; i++)
         {
             GameObject Ins_Obj = Instantiate(ZombiePrefab);
-          //  ModifyCurrentZombie(Ins_Obj);
+            ModifyCurrentZombie(Ins_Obj);
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
         }
@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour
             if (CurrentZomb != null)
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
+                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth = 100;
                 CurrentZomb.SetActive(true);
-                ActiveZombies.Add(CurrentZomb);
             }
 
         }
@@ -98,32 +98,13 @@ public class GameManager : MonoBehaviour
     {
         if (SetPointTracker < SetPoints.Length)
         {
-           // UiManager.instance.DrawLine(SetPoints[SetPointTracker], SetPoints[SetPointTracker + 1]);
             StartCoroutine(LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]));
-            SetPointTracker=1;
+            SetPointTracker++;
         }
     }
-   [SerializeField] private bool IsActive;
+   [SerializeField] public bool IsActive;
     private void GameplayLoop()
     {
-        Debug.Log(ZombiePool.Count);
-        for (int i = 0; i < ZombiePool.Count; i++)
-        {
-            // check if there are any zombies active in the hierarchy 
-            if (ZombiePool[i].activeInHierarchy)
-            {
-                IsActive = true;
-                
-                break;
-            }
-            else
-            {
-                // if none are active 
-                IsActive = false;
-            }
-
-            Debug.Log(IsActive);
-        }
         if (!IsActive)//Input.GetKeyDown(KeyCode.Space))
         {
             for (int i = 0; i < ZombieSpawnPoints.Length; i++)
@@ -134,7 +115,8 @@ public class GameManager : MonoBehaviour
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 10);
+                    SpawnZombies(ZombieSpawnPoints[rand], 5);
+                    IsActive = true;
                     break;
                 }
                 SpawnTracker = 0;
