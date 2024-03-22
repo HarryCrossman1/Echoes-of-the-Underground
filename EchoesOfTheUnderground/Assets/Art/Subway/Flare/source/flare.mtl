@@ -1,0 +1,22 @@
+newmtl Default1
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd flare_Default_color.tga
+map_Ks flare_Default_gloss.tga
+map_bump flare_Default_nmap.tga
+newmtl cap
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd flare_cap_color.tga
+map_Ks flare_cap_gloss.tga
+map_bump flare_cap_nmap.tga

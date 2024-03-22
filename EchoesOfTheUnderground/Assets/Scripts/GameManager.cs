@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ZombieAmount; i++)
         {
             GameObject Ins_Obj = Instantiate(ZombiePrefab);
-            ModifyCurrentZombie(Ins_Obj);
+          //  ModifyCurrentZombie(Ins_Obj);
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
         }
@@ -56,11 +56,6 @@ public class GameManager : MonoBehaviour
             if (CurrentZomb != null)
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
-                if (Physics.Raycast(CurrentZomb.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, NavMesh.AllAreas))
-                {
-                    // Set the position of the spawned object to the hit point
-                    CurrentZomb.transform.position = hit.point;
-                }
                 CurrentZomb.SetActive(true);
                 ActiveZombies.Add(CurrentZomb);
             }
@@ -105,7 +100,7 @@ public class GameManager : MonoBehaviour
         {
            // UiManager.instance.DrawLine(SetPoints[SetPointTracker], SetPoints[SetPointTracker + 1]);
             StartCoroutine(LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]));
-            SetPointTracker++;
+            SetPointTracker=1;
         }
     }
    [SerializeField] private bool IsActive;
