@@ -61,9 +61,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1485561510957556, guid: a78a725941312494b930d664f3b315d0, type: 3}
+      propertyPath: m_TagString
+      value: ShootPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 1690370004738036, guid: a78a725941312494b930d664f3b315d0, type: 3}
       propertyPath: m_Name
       value: M1911 Handgun Base Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381382391936632, guid: a78a725941312494b930d664f3b315d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 4878850369403266, guid: a78a725941312494b930d664f3b315d0, type: 3}
       propertyPath: m_RootOrder

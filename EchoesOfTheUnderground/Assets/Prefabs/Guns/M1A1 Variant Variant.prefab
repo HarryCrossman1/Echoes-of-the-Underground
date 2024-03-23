@@ -61,6 +61,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1027351035944238594, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_TagString
+      value: ShootPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size

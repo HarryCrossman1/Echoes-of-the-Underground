@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WeaponManager : MonoBehaviour
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
     [SerializeField]private float LastShot;
+    [SerializeField] private XRGrabInteractable grabInteractable;
     void Awake()
     {
         instance= this;
@@ -45,6 +47,9 @@ public class WeaponManager : MonoBehaviour
                 Debug.Log("Missed");
             }
         }
-       
+    }
+    public void GetHeldWeapon()
+    {
+        Debug.Log(gameObject.name);
     }
 }
