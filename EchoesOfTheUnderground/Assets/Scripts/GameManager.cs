@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         while (Vector3.Distance(player.position, target.position) > 0.05f)
         {
-            player.position = Vector3.Lerp(player.position, target.position, 1.3f * Time.deltaTime);
+            player.position = Vector3.Lerp(player.position, target.position, 0.5f * Time.deltaTime);
             yield return null;  
         }
     }

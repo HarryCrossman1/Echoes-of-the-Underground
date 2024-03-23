@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     }
     public void Fire(Weapon CurrentWeapon)
     {
+      
         if (Time.time - LastShot < (CurrentWeapon.FireRate))
         {
             return;
@@ -27,7 +28,7 @@ public class WeaponManager : MonoBehaviour
             SoundManager.instance.PlayGunshot(CurrentWeapon);
             if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
             {
-               
+                Debug.Log("Fire");
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     //Get the hit zombie 
