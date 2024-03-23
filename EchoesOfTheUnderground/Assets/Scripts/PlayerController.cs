@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
             if (controller.IsPressed(InputHelpers.Button.Trigger, out bool IsPressedRight) && IsPressedRight == true)
             {
                 Debug.Log("RightTrigger");
-                WeaponManager.instance.Fire(WeaponManager.instance.CurrentWeapon);
+                
             }
             else
             {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             if (controller.IsPressed(InputHelpers.Button.Trigger, out bool IsPressedLeft) && IsPressedLeft == true)
             {
                 Debug.Log("LeftTrigger");
-                WeaponManager.instance.Fire(WeaponManager.instance.CurrentWeapon);
+                
             }
             else
             {

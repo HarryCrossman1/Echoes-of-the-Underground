@@ -11,12 +11,18 @@ public class WeaponManager : MonoBehaviour
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
     [SerializeField]private float LastShot;
-    [SerializeField] private XRGrabInteractable grabInteractable;
+    [SerializeField] public XrSocketTag xRSocketInteractor;
+    [SerializeField] private Magazine magazine;
     void Awake()
     {
         instance= this;
     }
-    public void Fire(Weapon CurrentWeapon)
+    private void Start()
+    {
+        xRSocketInteractor.selectEntered.AddListener(AddMagazine);
+        xRSocketInteractor.selectExited.AddListener(RemoveMagazine);
+    }
+    public void Fire()
     {
       
         if (Time.time - LastShot < (CurrentWeapon.FireRate))
@@ -28,9 +34,9 @@ public class WeaponManager : MonoBehaviour
         if (HeldWeapon != null )
         {
             SoundManager.instance.PlayGunshot(CurrentWeapon);
-            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
+            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100) && magazine.BulletNumber>0)
             {
-                Debug.Log("Fire");
+                magazine.BulletNumber--;
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     //Get the hit zombie 
@@ -38,7 +44,6 @@ public class WeaponManager : MonoBehaviour
                     // Deal Damage 
                     zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
                     //Take ammo
-                    CurrentWeapon.AmmoValue--;
                     zombie_Behaviour.DeathCheck();
                 }
             }
@@ -48,8 +53,12 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
-    public void GetHeldWeapon()
+    public void AddMagazine(SelectEnterEventArgs args)
     {
-        Debug.Log(gameObject.name);
+        magazine = args.interactableObject.transform.GetComponent<Magazine>();
+    }
+    public void RemoveMagazine(SelectExitEventArgs args)
+    {
+        magazine = null;
     }
 }

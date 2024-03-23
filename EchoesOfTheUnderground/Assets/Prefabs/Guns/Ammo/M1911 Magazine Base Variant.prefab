@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: M1911 Magazine Base Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1688796160857414, guid: 71d42f13891e48c4487496fd15802eda, type: 3}
+      propertyPath: m_TagString
+      value: PistolMag
+      objectReference: {fileID: 0}
     - target: {fileID: 4000101247158624, guid: 71d42f13891e48c4487496fd15802eda, type: 3}
       propertyPath: m_RootOrder
       value: 0

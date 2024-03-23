@@ -73,6 +73,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 2
       objectReference: {fileID: 0}
@@ -84,6 +89,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -91,6 +101,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4216021840191946866}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WeaponPickedUp
       objectReference: {fileID: 0}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
@@ -105,8 +130,18 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: XrWeaponPickup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: Weapon, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8329258937913905179, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
@@ -190,6 +225,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6409717227297619992, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
+    - {fileID: 3379793998716393210, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
+    - {fileID: 7824923733916842309, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6756100818089997288, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
     - {fileID: 2350026542642898798, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
@@ -200,6 +237,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2101919292697110691}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8709020992211208865, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4216021840191946866}
     - targetCorrespondingSourceObject: {fileID: 8367056586694479127, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
       insertIndex: -1
@@ -207,8 +248,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8367056586694479127, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6371717180934265996}
+      addedObject: {fileID: 6763506735786770931}
   m_SourcePrefab: {fileID: 100100000, guid: 3b13c9b5797d2bc4ab779290324318d8, type: 3}
+--- !u!1 &1283409913817144712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8709020992211208865, guid: 3b13c9b5797d2bc4ab779290324318d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7571464631137490729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4216021840191946866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283409913817144712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05094fda2ae1116458c5c5f25c3da9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponShootPoint: {fileID: 7445255737597995307}
+  weapon: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
+  socket: {fileID: 6763506735786770931}
 --- !u!4 &1910729283097675570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8329258937913905179, guid: 3b13c9b5797d2bc4ab779290324318d8,
@@ -242,7 +304,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.06164854
   m_Center: {x: 0, y: -0.013234475, z: 0.024883026}
---- !u!114 &6371717180934265996
+--- !u!114 &6763506735786770931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +313,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2093891621235333694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60523e0647cc6ab43acc73cb266a32a7, type: 3}
+  m_Script: {fileID: 11500000, guid: cffd88e1459ad234d96bbc0d545e4bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -297,3 +359,10 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+  TargetTag: RifleMag
+--- !u!1 &7445255737597995307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1027351035944238594, guid: 3b13c9b5797d2bc4ab779290324318d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7571464631137490729}
+  m_PrefabAsset: {fileID: 0}

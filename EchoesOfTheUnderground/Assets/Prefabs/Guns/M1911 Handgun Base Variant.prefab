@@ -69,6 +69,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: M1911 Handgun Base Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1690370004738036, guid: a78a725941312494b930d664f3b315d0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4381382391936632, guid: a78a725941312494b930d664f3b315d0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.195
@@ -158,6 +162,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 175319851725614288}
+    - targetCorrespondingSourceObject: {fileID: 1690370004738036, guid: a78a725941312494b930d664f3b315d0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7130642984269399608}
     - targetCorrespondingSourceObject: {fileID: 2058722250136529284, guid: a78a725941312494b930d664f3b315d0,
         type: 3}
       insertIndex: -1
@@ -165,8 +173,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2058722250136529284, guid: a78a725941312494b930d664f3b315d0,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2784432510150105692}
+      addedObject: {fileID: 6129625714410172897}
   m_SourcePrefab: {fileID: 100100000, guid: a78a725941312494b930d664f3b315d0, type: 3}
+--- !u!1 &7341061926319189817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1485561510957556, guid: a78a725941312494b930d664f3b315d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7342547383403773645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7341982918998925625 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1690370004738036, guid: a78a725941312494b930d664f3b315d0,
@@ -347,6 +361,21 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &7130642984269399608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341982918998925625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05094fda2ae1116458c5c5f25c3da9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponShootPoint: {fileID: 7341061926319189817}
+  weapon: {fileID: 11400000, guid: f18804a8d22f2ee47b224cf201ba5058, type: 2}
+  socket: {fileID: 6129625714410172897}
 --- !u!4 &7346675805611575119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4878850369403266, guid: a78a725941312494b930d664f3b315d0,
@@ -380,7 +409,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2784432510150105692
+--- !u!114 &6129625714410172897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,7 +418,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8752740428917626697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60523e0647cc6ab43acc73cb266a32a7, type: 3}
+  m_Script: {fileID: 11500000, guid: cffd88e1459ad234d96bbc0d545e4bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -435,3 +464,4 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
+  TargetTag: PistolMag

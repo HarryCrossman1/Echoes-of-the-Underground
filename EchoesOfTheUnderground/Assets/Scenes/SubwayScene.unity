@@ -1001,6 +1001,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &141794605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7130642984269399608, guid: 6885103ce4504a14198b0b10e1056c7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1644223346}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05094fda2ae1116458c5c5f25c3da9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &177255425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,12 +1963,6 @@ Transform:
   m_Father: {fileID: 746483889}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &859677341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1283409913817144712, guid: fa374a07953bfa241aac5f14bb7b95be,
-    type: 3}
-  m_PrefabInstance: {fileID: 1587674206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &864192362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,8 +2299,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8694543812531234881, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1063067597}
   m_SourcePrefab: {fileID: 100100000, guid: 5ac4f2e3827dfb04abf4a711fb9573a5, type: 3}
+--- !u!1 &1063067596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8694543812531234881, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1063067595}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1063067597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063067596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109d529a882552045abbe244a5b35405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletNumber: 8
 --- !u!1 &1078366354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,10 +2482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a748ba2b40c4144293745d1d90da27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
-  HeldWeapon: {fileID: 859677341}
+  CurrentWeapon: {fileID: 0}
+  HeldWeapon: {fileID: 0}
   LastShot: 1
-  grabInteractable: {fileID: 0}
+  xRSocketInteractor: {fileID: 0}
+  magazine: {fileID: 0}
 --- !u!114 &1281077589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,7 +2907,7 @@ PrefabInstance:
     - target: {fileID: 3220605379190902718, guid: fa374a07953bfa241aac5f14bb7b95be,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3220605379190902718, guid: fa374a07953bfa241aac5f14bb7b95be,
         type: 3}
@@ -2903,12 +2933,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3220605379190902718, guid: fa374a07953bfa241aac5f14bb7b95be,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Weapon, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 397592591450812012, guid: fa374a07953bfa241aac5f14bb7b95be, type: 3}
@@ -2927,13 +2956,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
+      propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
+        type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -2954,7 +2988,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1281077588}
+      objectReference: {fileID: 141794605}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -2963,7 +2997,7 @@ PrefabInstance:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GetHeldWeapon
+      value: WeaponPickedUp
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -2974,17 +3008,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: f18804a8d22f2ee47b224cf201ba5058,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: WeaponManager, Assembly-CSharp
+      value: XrWeaponPickup, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Weapon, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
