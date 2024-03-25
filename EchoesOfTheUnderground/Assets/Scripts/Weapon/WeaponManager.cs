@@ -14,6 +14,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] public XrSocketTag[] AllInteractors;
     [SerializeField] private Magazine magazine;
     [SerializeField] public Light MuzzleFlash;
+    [SerializeField] private GameObject PistolAmmoPrefab;
     void Awake()
     {
         instance= this;

@@ -374,8 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponShootPoint: {fileID: 7341061926319189817}
+  WeaponParent: {fileID: 7341982918998925625}
   weapon: {fileID: 11400000, guid: f18804a8d22f2ee47b224cf201ba5058, type: 2}
-  socket: {fileID: 6129625714410172897}
+  MuzzleFlash: {fileID: 0}
 --- !u!4 &7346675805611575119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4878850369403266, guid: a78a725941312494b930d664f3b315d0,

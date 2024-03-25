@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     public Transform PlayerTransform;
+    public Transform PistolHip,AmmoHip;
     public int PlayerHealth { get; set; }
     void Awake()
     {

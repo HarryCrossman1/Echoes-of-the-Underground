@@ -30,12 +30,13 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1.5f)
         {
             ZombieAgent.destination = Target.transform.position;
         }
         else
         {
+            ZombieAgent.SetDestination(gameObject.transform.position);
             Attack();
         }
     }
@@ -59,7 +60,7 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         if (ZombieHealth <= 0)
         {
-            Chase(Zombie_Agent, gameObject);
+            Zombie_Agent.SetDestination(gameObject.transform.position);
             StartCoroutine(WaitForAnim(2f));
             ZombieAnimator.SetBool("Dead", true);
             ZombieAnimator.SetBool("Walking", false);
