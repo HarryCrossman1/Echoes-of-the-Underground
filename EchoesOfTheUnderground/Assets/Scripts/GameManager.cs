@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth = 100;
+                // update speed 
                 CurrentZomb.SetActive(true);
             }
 
