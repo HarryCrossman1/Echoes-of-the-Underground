@@ -51,17 +51,27 @@ public class WeaponManager : MonoBehaviour
                // MuzzleFlash.enabled = true;
                 if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
                 {
-                    if (hit.collider.CompareTag("Zombie"))
-                    {
-                        //Get the hit zombie 
-                        Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
-                        // Deal Damage 
-                        zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
-                        //Apply Stun
-                        zombie_Behaviour.ShotStun();
-                        //Take ammo
-                        zombie_Behaviour.DeathCheck();
-                    }
+                if (hit.collider.CompareTag("ZombieBody"))
+                {
+                    //Get the hit zombie 
+                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
+                    // Deal Damage 
+                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
+                    //Apply Stun
+                    zombie_Behaviour.ShotStun();
+                    //Take ammo
+                    zombie_Behaviour.DeathCheck();
+                }
+                else if (hit.collider.CompareTag("ZombieHead"))
+                {
+                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
+                    // Deal Damage 
+                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue * 2;
+                    //Apply Stun
+                    zombie_Behaviour.ShotStun();
+                    //Take ammo
+                    zombie_Behaviour.DeathCheck();
+                }
                 }
             }
             else { SoundManager.instance.PlayEmpty(); }

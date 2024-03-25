@@ -1352,8 +1352,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 1542099622}
+  GunSource: {fileID: 0}
   MenuClipSelect: {fileID: 8300000, guid: 804f78b2473dfad4e8ee06ceae550a36, type: 3}
   MenuClipHover: {fileID: 8300000, guid: 8c316298fc7f6f541ae15f29849d568e, type: 3}
+  GunEmpty: {fileID: 0}
+  GunReload: {fileID: 0}
+  GunUnload: {fileID: 0}
 --- !u!4 &433331260
 Transform:
   m_ObjectHideFlags: 0
@@ -3839,6 +3843,7 @@ MonoBehaviour:
   - Medium
   - Hard
   - Death
+  MovingText: {fileID: 0}
 --- !u!4 &1700328103
 Transform:
   m_ObjectHideFlags: 0

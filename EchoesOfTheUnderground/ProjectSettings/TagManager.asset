@@ -7,10 +7,12 @@ TagManager:
   - Ground
   - BookStand
   - Office
-  - Zombie
   - ShootPoint
   - PistolMag
   - RifleMag
+  - ZombieBody
+  - ZombieHead
+  - SniperMag
   layers:
   - Default
   - TransparentFX
