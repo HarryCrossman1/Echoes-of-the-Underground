@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
     public Transform PlayerTransform;
+    public int PlayerHealth { get; set; }
     void Awake()
     {
         instance = this;
         PlayerTransform= transform;
+        PlayerHealth = 3;
     }
 
     // Update is called once per frame
@@ -51,5 +53,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+    private void PlayerDeathCheck()
+    {
+        if (PlayerHealth <= 0)
+        { 
+            
+        }
     }
 }

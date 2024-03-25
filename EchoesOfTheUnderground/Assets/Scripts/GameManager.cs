@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[0], 10);
+        SpawnZombies(ZombieSpawnPoints[0], 5);
     }
     private void Start()
     {
@@ -63,14 +63,14 @@ public class GameManager : MonoBehaviour
         }
     }
     private void ModifyCurrentZombie(GameObject obj)
-    { 
+    {
         NavMeshAgent navMeshAgent = obj.GetComponent<NavMeshAgent>();
-       
+
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        navMeshAgent.speed = 2.1f;//Random.Range(1f, 3f);
+        navMeshAgent.speed = Random.Range(1f, 2.7f);
         navMeshAgent.acceleration = Random.Range(1f, 2f);
-        navMeshAgent.angularSpeed = Random.Range(45, 95);
+        navMeshAgent.angularSpeed = Random.Range(75, 165);
     }
 
     public GameObject GetPooledZombie()
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         while (Vector3.Distance(player.position, target.position) > 0.05f)
         {
-            player.position = Vector3.Lerp(player.position, target.position, 0.5f * Time.deltaTime);
+            player.position = Vector3.Lerp(player.position, target.position, 3f * Time.deltaTime);
             yield return null;  
         }
     }
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 5);
+                    SpawnZombies(ZombieSpawnPoints[rand], 2);
                     IsActive = true;
                     break;
                 }

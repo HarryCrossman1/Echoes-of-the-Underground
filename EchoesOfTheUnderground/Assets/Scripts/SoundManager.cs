@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
     [SerializeField] private AudioSource source,GunSource;
     [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
+    [SerializeField] private AudioClip GunEmpty,GunReload, GunUnload;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,5 +33,23 @@ public class SoundManager : MonoBehaviour
     {
         GunSource.clip = weapon.Clip;
         GunSource.Play();
+    }
+    public void PlayEmpty()
+    {
+        GunSource.clip = GunEmpty;
+        GunSource.Play();
+    }
+    public void PlayReload(bool Loading)
+    {
+        if (Loading)
+        {
+            GunSource.clip = GunReload;
+            GunSource.Play();
+        }
+        else
+        {
+            GunSource.clip = GunUnload;
+            GunSource.Play();
+        }
     }
 }

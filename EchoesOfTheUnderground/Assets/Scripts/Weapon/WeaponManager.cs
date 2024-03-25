@@ -11,16 +11,24 @@ public class WeaponManager : MonoBehaviour
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
     [SerializeField]private float LastShot;
-    [SerializeField] public XrSocketTag xRSocketInteractor;
+    [SerializeField] public XrSocketTag[] AllInteractors;
     [SerializeField] private Magazine magazine;
+    [SerializeField] public Light MuzzleFlash;
     void Awake()
     {
         instance= this;
     }
     private void Start()
     {
-        xRSocketInteractor.selectEntered.AddListener(AddMagazine);
-        xRSocketInteractor.selectExited.AddListener(RemoveMagazine);
+        for (int i = 0; i < AllInteractors.Length; i++)
+        {
+            AllInteractors[i].selectEntered.AddListener(AddMagazine);
+            AllInteractors[i].selectExited.AddListener(RemoveMagazine);
+        }
+    }
+    private void Update()
+    {
+        if (MuzzleFlash != null) { MuzzleFlash.enabled = false; }
     }
     public void Fire()
     {
@@ -31,34 +39,40 @@ public class WeaponManager : MonoBehaviour
         }
         LastShot = Time.time;
         RaycastHit hit;
-        if (HeldWeapon != null )
-        {
-            SoundManager.instance.PlayGunshot(CurrentWeapon);
-            if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100) && magazine.BulletNumber>0)
+
+            if (magazine != null && magazine.BulletNumber > 0)
             {
+                //Play Sound
+                SoundManager.instance.PlayGunshot(CurrentWeapon);
+                //Take Ammo 
                 magazine.BulletNumber--;
-                if (hit.collider.CompareTag("Zombie"))
+                //MuzzleFlash 
+               // MuzzleFlash.enabled = true;
+                if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
                 {
-                    //Get the hit zombie 
-                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
-                    // Deal Damage 
-                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
-                    //Take ammo
-                    zombie_Behaviour.DeathCheck();
+                    if (hit.collider.CompareTag("Zombie"))
+                    {
+                        //Get the hit zombie 
+                        Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponent<Zombie_Behaviour>();
+                        // Deal Damage 
+                        zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
+                        //Apply Stun
+                        zombie_Behaviour.ShotStun();
+                        //Take ammo
+                        zombie_Behaviour.DeathCheck();
+                    }
                 }
             }
-            else
-            {
-                Debug.Log("Missed");
-            }
-        }
+            else { SoundManager.instance.PlayEmpty(); }
     }
     public void AddMagazine(SelectEnterEventArgs args)
     {
         magazine = args.interactableObject.transform.GetComponent<Magazine>();
+        SoundManager.instance.PlayReload(true);
     }
     public void RemoveMagazine(SelectExitEventArgs args)
     {
         magazine = null;
+        SoundManager.instance.PlayReload(false);
     }
 }
