@@ -13,8 +13,9 @@ public class UiManager : MonoBehaviour
     [SerializeField] private Slider LoadingSlider;
    [SerializeField] private string[] CampaignDifficultyModes;
     private int DifficultyTracker =1;
-
+    public Canvas DeathCanvas;
     [SerializeField] GameObject MovingText;
+    [SerializeField] public TextMeshProUGUI HealthText;
     // Start is called before the first frame update
     void Awake()
     {

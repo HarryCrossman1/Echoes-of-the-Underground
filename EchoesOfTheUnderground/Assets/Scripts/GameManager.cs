@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[0], 5);
+        SpawnZombies(ZombieSpawnPoints[0], 1);
     }
     private void Start()
     {
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ZombieAmount; i++)
         {
             GameObject Ins_Obj = Instantiate(ZombiePrefab);
-            ModifyCurrentZombie(Ins_Obj);
+            
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
         }
@@ -57,8 +57,10 @@ public class GameManager : MonoBehaviour
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth = 100;
-                // update speed 
+                ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
+                CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
+                CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
             }
 
         }
@@ -116,12 +118,13 @@ public class GameManager : MonoBehaviour
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 2);
+                    SpawnZombies(ZombieSpawnPoints[rand], 1);
                     IsActive = true;
                     break;
                 }
-                SpawnTracker = 0;
+                
             }
+            SpawnTracker = 0;
             MovePoints();
         }
     }

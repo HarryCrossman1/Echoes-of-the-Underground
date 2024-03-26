@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -55,11 +56,37 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    private void PlayerDeathCheck()
+    public void PlayerDeathCheck()
     {
-        if (PlayerHealth <= 0)
-        { 
-            
+        UiManager.instance.HealthText.text = PlayerHealth.ToString();
+        if (PlayerHealth < 2)
+        {
+            SoundManager.instance.PlayWatch();
         }
+        else
+        {
+            SoundManager.instance.StopWatch();
+        }
+
+        if (PlayerHealth <= 0)
+        {
+            PlayerDeath();
+            Debug.Log("Dead");
+        }
+     
+    }
+    public void PlayerDeath()
+    {
+        UiManager.instance.DeathCanvas.enabled = true;
+       
+        SoundManager.instance.PlayDeath();
+        SoundManager.instance.StopWatch();
+        StartCoroutine(DeathTimer(3));
+    }
+    private IEnumerator DeathTimer(float seconds)
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

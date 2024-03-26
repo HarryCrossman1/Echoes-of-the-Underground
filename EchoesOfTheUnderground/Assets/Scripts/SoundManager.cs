@@ -5,9 +5,10 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    [SerializeField] private AudioSource source,GunSource;
+    [SerializeField] private AudioSource source,GunSource,WatchSource;
     [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
-    [SerializeField] private AudioClip GunEmpty,GunReload, GunUnload;
+    [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
+    [HideInInspector]public bool WatchIsPlaying;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,9 +17,9 @@ public class SoundManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        WatchIsPlaying = false;
     }
     public void PlaySelectSound()
     { 
@@ -51,5 +52,24 @@ public class SoundManager : MonoBehaviour
             GunSource.clip = GunUnload;
             GunSource.Play();
         }
+    }
+    public void PlayWatch()
+    {
+        if (!WatchIsPlaying)
+        {
+            WatchSource.Play();
+            WatchIsPlaying= true;
+        }
+       
+    }
+    public void StopWatch()
+    {
+        WatchSource.Stop();
+        WatchIsPlaying = false;
+    }
+    public void PlayDeath()
+    {
+        GunSource.clip = PlayerDeathClip;
+        GunSource.Play();
     }
 }

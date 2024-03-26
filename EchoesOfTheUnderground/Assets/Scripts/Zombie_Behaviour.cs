@@ -7,7 +7,7 @@ public class Zombie_Behaviour : MonoBehaviour
 {
     public static Zombie_Behaviour instance;
     [SerializeField] private NavMeshAgent Zombie_Agent;
-    private Animator ZombieAnimator;
+    public Animator ZombieAnimator;
     public int ZombieHealth; //{ get; set; }
     private bool HasAtacked;
     // Start is called before the first frame update
@@ -19,8 +19,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void Start()
     {
-        ZombieAnimator.SetBool("Walking", true);
-        ZombieAnimator.SetBool("Idle", false);
+       
     }
     // Update is called once per frame
     void Update()
@@ -45,7 +44,7 @@ public class Zombie_Behaviour : MonoBehaviour
         if (!HasAtacked)
         { 
             HasAtacked= true;
-            StartCoroutine(StartAttack(2));
+            StartCoroutine(StartAttack(3));
         }
     }
     private IEnumerator StartAttack(float cooldown) 
@@ -53,6 +52,7 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Attacking", true);
         ZombieAnimator.SetBool("Walking", false);
         PlayerController.instance.PlayerHealth--;
+        PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
         HasAtacked= false;
     }
