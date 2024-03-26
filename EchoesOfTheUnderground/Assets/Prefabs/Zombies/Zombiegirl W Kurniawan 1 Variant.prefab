@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2219796074604266252
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.58455056
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.1762931
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1781356600409242780, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_TagString
+      value: ZombieHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_Name
+      value: Zombiegirl W Kurniawan 1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835093890288579312, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      propertyPath: m_TagString
+      value: ZombieBody
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2227299533572151350}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6680600491940531136}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3537078692397697921}
+    - targetCorrespondingSourceObject: {fileID: -1781356600409242780, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6115905908656421437}
+    - targetCorrespondingSourceObject: {fileID: 6835093890288579312, guid: d928100b0b90a9841ac853881e6f627b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2433552763977508597}
+  m_SourcePrefab: {fileID: 100100000, guid: d928100b0b90a9841ac853881e6f627b, type: 3}
+--- !u!1 &1301299590272990813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d928100b0b90a9841ac853881e6f627b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2219796074604266252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &2227299533572151350
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301299590272990813}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &6680600491940531136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301299590272990813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38aa57197e4dcd241851b9f6cf6d3405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Zombie_Agent: {fileID: 2227299533572151350}
+  ZombieAnimator: {fileID: 3537078692397697921}
+  ZombieHealth: 100
+--- !u!95 &3537078692397697921
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301299590272990813}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e28a12bdcd3ad304ba996337e0dbe6a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &4617717291710149116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6835093890288579312, guid: d928100b0b90a9841ac853881e6f627b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2219796074604266252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2433552763977508597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617717291710149116}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.46800542, y: 1.7751137, z: 0.4361842}
+  m_Center: {x: -0.005054176, y: 0.7827869, z: -0.009686813}
+--- !u!1 &8757554422174138472 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: d928100b0b90a9841ac853881e6f627b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2219796074604266252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6115905908656421437
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8757554422174138472}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.21522975, y: 0.30143118, z: 0.27293324}
+  m_Center: {x: -0.0018454194, y: 0.075742066, z: -0.0008571596}

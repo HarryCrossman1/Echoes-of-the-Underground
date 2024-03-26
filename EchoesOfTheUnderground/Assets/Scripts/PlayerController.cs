@@ -78,15 +78,14 @@ public class PlayerController : MonoBehaviour
     public void PlayerDeath()
     {
         UiManager.instance.DeathCanvas.enabled = true;
-       
+        Time.timeScale= 0;
         SoundManager.instance.PlayDeath();
         SoundManager.instance.StopWatch();
         StartCoroutine(DeathTimer(3));
     }
     private IEnumerator DeathTimer(float seconds)
-    {
-        Time.timeScale = 0;
-        yield return new WaitForSeconds(seconds);
+    { 
+        yield return new WaitForSecondsRealtime(seconds);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
