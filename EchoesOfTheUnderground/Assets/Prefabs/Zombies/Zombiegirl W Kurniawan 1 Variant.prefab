@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d928100b0b90a9841ac853881e6f627b,
         type: 3}
@@ -146,6 +146,11 @@ MonoBehaviour:
   Zombie_Agent: {fileID: 2227299533572151350}
   ZombieAnimator: {fileID: 3537078692397697921}
   ZombieHealth: 100
+  IsStunned: 0
+  Attacking: {fileID: -203655887218126122, guid: 1d769ed64b5f2a940a5545681226c758,
+    type: 3}
+  Hit: {fileID: -203655887218126122, guid: c58939933563098458da7fcb5e22fa59, type: 3}
+  Dead: {fileID: -203655887218126122, guid: 5c38d8b6fb1ebcc4caf97df23eee6c12, type: 3}
 --- !u!95 &3537078692397697921
 Animator:
   serializedVersion: 5
