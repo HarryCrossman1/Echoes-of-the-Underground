@@ -75,7 +75,7 @@ public class Zombie_Behaviour : MonoBehaviour
         if (ZombieHealth <= 0)
         {
             PlayZombieAudio(DeathAudio, false);
-            Zombie_Agent.SetDestination(gameObject.transform.position);
+            Zombie_Agent.isStopped=true;
             StartCoroutine(WaitForAnim(3f));
             ZombieAnimator.SetBool("Dead", true);
             ZombieAnimator.SetBool("Walking", false);

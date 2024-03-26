@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth = 100;
                 ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
+                CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
                 CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
                 CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
             }
