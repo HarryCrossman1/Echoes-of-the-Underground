@@ -14,8 +14,12 @@ public class Zombie_Behaviour : MonoBehaviour
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
+    // Zombie Audio
+    [SerializeField] private AudioSource ZombieSource;
+    [SerializeField] private AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
     void Awake()
     {
+        ZombieSource = GetComponent<AudioSource>();
         ZombieAnimator = GetComponent<Animator>();
         instance = this;
         ZombieHealth = 100;
@@ -59,6 +63,7 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Attacking", true);
         ZombieAnimator.SetBool("Walking", false);
         ZombieAnimator.SetBool("Stunned", false);
+        PlayZombieAudio(AttackAudio, false);
         PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
         PlayerController.instance.PlayerHealth--;
@@ -69,6 +74,7 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         if (ZombieHealth <= 0)
         {
+            PlayZombieAudio(DeathAudio, false);
             Zombie_Agent.SetDestination(gameObject.transform.position);
             StartCoroutine(WaitForAnim(3f));
             ZombieAnimator.SetBool("Dead", true);
@@ -100,7 +106,10 @@ public class Zombie_Behaviour : MonoBehaviour
     private IEnumerator StunTimer(float TimerLength)
     {
         Zombie_Agent.isStopped = true;
+        PlayZombieAudio(ShotAudio,false);
         yield return new WaitForSeconds(TimerLength);
+        PlayZombieAudio(AmbientAudio,true);
+        
         Zombie_Agent.isStopped = false;
         IsStunned = false;
         if (ZombieInRange)
@@ -130,5 +139,15 @@ public class Zombie_Behaviour : MonoBehaviour
                 GameManager.instance.IsActive = false;
             }
         }
+    }
+    public void PlayZombieAudio(AudioClip clip,bool loop)
+    {
+        if (!loop)
+        {
+            ZombieSource.clip = clip;
+            ZombieSource.Play();
+            ZombieSource.loop = false;
+        }
+        else { ZombieSource.loop = true; }
     }
 }

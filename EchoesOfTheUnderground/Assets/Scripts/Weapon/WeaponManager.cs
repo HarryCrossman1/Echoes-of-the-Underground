@@ -72,6 +72,15 @@ public class WeaponManager : MonoBehaviour
                     //Take ammo
                     zombie_Behaviour.DeathCheck();
                 }
+                else if (hit.collider.CompareTag("Medkit"))
+                {
+                    if (PlayerController.instance.PlayerHealth < 3)
+                    {
+                        PlayerController.instance.PlayerHealth++;
+                        UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
+                        hit.collider.gameObject.SetActive(false);
+                    }
+                }
                 }
             }
             else { SoundManager.instance.PlayEmpty(); }

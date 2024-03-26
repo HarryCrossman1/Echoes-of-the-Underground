@@ -13,6 +13,7 @@ TagManager:
   - ZombieBody
   - ZombieHead
   - SniperMag
+  - Medkit
   layers:
   - Default
   - TransparentFX
