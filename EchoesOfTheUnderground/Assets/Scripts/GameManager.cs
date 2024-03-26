@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
 
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        navMeshAgent.speed = Random.Range(1f, 2.7f);
-        navMeshAgent.acceleration = Random.Range(1f, 2f);
+        navMeshAgent.speed = Random.Range(0.7f, 1.7f);
+        navMeshAgent.acceleration = Random.Range(1f, 0.5f);
         navMeshAgent.angularSpeed = Random.Range(75, 165);
     }
 

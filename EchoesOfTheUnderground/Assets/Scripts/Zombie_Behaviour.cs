@@ -10,6 +10,7 @@ public class Zombie_Behaviour : MonoBehaviour
     public Animator ZombieAnimator;
     public int ZombieHealth; //{ get; set; }
     private bool HasAtacked;
+   [SerializeField] private bool IsStunned;
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,8 +30,9 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1.5f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1f)
         {
+            if(!IsStunned)
             ZombieAgent.destination = Target.transform.position;
         }
         else
@@ -51,6 +53,7 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         ZombieAnimator.SetBool("Attacking", true);
         ZombieAnimator.SetBool("Walking", false);
+        ZombieAnimator.SetBool("Stunned", false);
         PlayerController.instance.PlayerHealth--;
         PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
@@ -61,11 +64,12 @@ public class Zombie_Behaviour : MonoBehaviour
         if (ZombieHealth <= 0)
         {
             Zombie_Agent.SetDestination(gameObject.transform.position);
-            StartCoroutine(WaitForAnim(2f));
+            StartCoroutine(WaitForAnim(3f));
             ZombieAnimator.SetBool("Dead", true);
             ZombieAnimator.SetBool("Walking", false);
             ZombieAnimator.SetBool("Attacking", false);
-           
+            ZombieAnimator.SetBool("Stunned", false);
+
         }
     }
     private IEnumerator WaitForAnim(float seconds)
@@ -76,13 +80,24 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void ShotStun()
     {
-        Zombie_Agent.speed = (Zombie_Agent.speed / 2);
-        StartCoroutine(StunTimer(1));
+        IsStunned= true;
+        if (IsStunned)
+        {
+            
+            ZombieAnimator.SetBool("Walking", false);
+            ZombieAnimator.SetBool("Attacking", false);
+            ZombieAnimator.SetBool("Stunned", true);
+            StartCoroutine(StunTimer(1));
+        }
+        
     }
     private IEnumerator StunTimer(float TimerLength)
     { 
         yield return new WaitForSeconds(TimerLength);
-        Zombie_Agent.speed = (Zombie_Agent.speed * 1.5f);
+        IsStunned= false;
+        ZombieAnimator.SetBool("Walking", true);
+        ZombieAnimator.SetBool("Attacking", false);
+        ZombieAnimator.SetBool("Stunned", false);
     }
     private void CheckActiveZombies()
     {
