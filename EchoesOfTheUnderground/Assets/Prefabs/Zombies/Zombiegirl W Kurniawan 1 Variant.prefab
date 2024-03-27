@@ -151,6 +151,8 @@ MonoBehaviour:
   ZombieAnimator: {fileID: 3537078692397697921}
   ZombieHealth: 100
   IsStunned: 0
+  SpeedMin: 0.5
+  SpeedMax: 1.1
   Attacking: {fileID: -203655887218126122, guid: 1d769ed64b5f2a940a5545681226c758,
     type: 3}
   Hit: {fileID: -203655887218126122, guid: c58939933563098458da7fcb5e22fa59, type: 3}
@@ -194,7 +196,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8a57c2b9d63127d42a55ac6cd1f66f54, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 1
   Mute: 0
   Spatialize: 0

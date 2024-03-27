@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour
 
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        navMeshAgent.speed = Random.Range(0.7f, 1.7f);
-        navMeshAgent.acceleration = Random.Range(1f, 0.5f);
+        navMeshAgent.speed = Random.Range(obj.GetComponent<Zombie_Behaviour>().SpeedMin, obj.GetComponent<Zombie_Behaviour>().SpeedMax);
+        navMeshAgent.acceleration = Random.Range(1f, 1.5f);
         navMeshAgent.angularSpeed = Random.Range(75, 165);
     }
 

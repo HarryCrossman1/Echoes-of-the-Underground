@@ -11,6 +11,7 @@ public class Zombie_Behaviour : MonoBehaviour
     public int ZombieHealth; //{ get; set; }
     private bool HasAtacked,ZombieInRange;
    [SerializeField] private bool IsStunned;
+    public float SpeedMin,SpeedMax;
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
