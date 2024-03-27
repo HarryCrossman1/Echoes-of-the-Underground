@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
+                CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
                 ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
                 CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;

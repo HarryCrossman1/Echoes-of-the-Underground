@@ -391,8 +391,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponShootPoint: {fileID: 7445255737597995307}
+  WeaponParent: {fileID: 0}
   weapon: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
   MuzzleFlash: {fileID: 5534592295632705326}
+  CurrentAnimator: {fileID: 1283409913817144715}
+--- !u!95 &1283409913817144715 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8709020992211208866, guid: 3b13c9b5797d2bc4ab779290324318d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7571464631137490729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1910729283097675570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8329258937913905179, guid: 3b13c9b5797d2bc4ab779290324318d8,

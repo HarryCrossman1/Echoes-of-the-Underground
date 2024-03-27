@@ -166,6 +166,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7130642984269399608}
+    - targetCorrespondingSourceObject: {fileID: 1690370004738036, guid: a78a725941312494b930d664f3b315d0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -922305828885482587}
     - targetCorrespondingSourceObject: {fileID: 2058722250136529284, guid: a78a725941312494b930d664f3b315d0,
         type: 3}
       insertIndex: -1
@@ -377,6 +381,28 @@ MonoBehaviour:
   WeaponParent: {fileID: 7341982918998925625}
   weapon: {fileID: 11400000, guid: f18804a8d22f2ee47b224cf201ba5058, type: 2}
   MuzzleFlash: {fileID: 0}
+  CurrentAnimator: {fileID: -922305828885482587}
+--- !u!95 &-922305828885482587
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341982918998925625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03d1fe4e93c9d4445b3a611df2ee5713, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &7346675805611575119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4878850369403266, guid: a78a725941312494b930d664f3b315d0,

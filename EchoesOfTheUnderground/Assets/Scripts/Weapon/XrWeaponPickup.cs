@@ -9,11 +9,13 @@ public class XrWeaponPickup : MonoBehaviour
     [SerializeField] private GameObject WeaponParent;
     [SerializeField] private Weapon weapon;
     [SerializeField] public Light MuzzleFlash;
+    [SerializeField] private Animator CurrentAnimator;
     public void WeaponPickedUp()
     {
         WeaponManager.instance.HeldWeapon = WeaponShootPoint;
         WeaponManager.instance.CurrentWeapon= weapon;
         WeaponManager.instance.MuzzleFlash = MuzzleFlash;
+        WeaponManager.instance.HeldAnimator = CurrentAnimator;
         if (weapon.Type == Weapon.AmmoType.Pistol)
         {
             WeaponParent.transform.SetParent(null);

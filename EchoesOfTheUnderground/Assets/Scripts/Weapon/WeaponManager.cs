@@ -10,11 +10,14 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager instance;
   [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
+    [SerializeField] public Animator HeldAnimator;
     [SerializeField]private float LastShot;
     [SerializeField] public XrSocketTag[] AllInteractors;
     [SerializeField] private Magazine magazine;
     [SerializeField] public Light MuzzleFlash;
     [SerializeField] private GameObject PistolAmmoPrefab;
+    // Visual Effects 
+    [SerializeField] private GameObject BloodPrefab;
     void Awake()
     {
         instance= this;
@@ -47,7 +50,9 @@ public class WeaponManager : MonoBehaviour
                 SoundManager.instance.PlayGunshot(CurrentWeapon);
                 //Take Ammo 
                 magazine.BulletNumber--;
-                //MuzzleFlash 
+            //MuzzleFlash 
+            //Play Animation 
+            HeldAnimator.SetTrigger("Shooting");
                // MuzzleFlash.enabled = true;
                 if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
                 {
@@ -61,6 +66,11 @@ public class WeaponManager : MonoBehaviour
                     zombie_Behaviour.ShotStun();
                     //Take ammo
                     zombie_Behaviour.DeathCheck();
+
+                    // Do blood effect
+                    
+                    GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
+                    Blood.transform.position = hit.point;
                 }
                 else if (hit.collider.CompareTag("ZombieHead"))
                 {
@@ -71,6 +81,11 @@ public class WeaponManager : MonoBehaviour
                     zombie_Behaviour.ShotStun();
                     //Take ammo
                     zombie_Behaviour.DeathCheck();
+
+                    // Do blood effect
+
+                    GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
+                    Blood.transform.position = hit.point;
                 }
                 else if (hit.collider.CompareTag("Medkit"))
                 {

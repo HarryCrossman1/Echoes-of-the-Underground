@@ -10,7 +10,7 @@ public class Zombie_Behaviour : MonoBehaviour
     public Animator ZombieAnimator;
     public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
     private bool HasAtacked,ZombieInRange;
-   [SerializeField] private bool IsStunned;
+   [SerializeField] public bool IsStunned;
     public float SpeedMin,SpeedMax;
 
     // Store Animations 
@@ -24,7 +24,6 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator = GetComponent<Animator>();
         instance = this;
         ZombieInRange= false;
-        IsStunned= false;
     }
     private void Start()
     {
