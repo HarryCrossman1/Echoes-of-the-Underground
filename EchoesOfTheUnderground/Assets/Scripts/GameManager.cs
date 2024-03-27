@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] ZombiePrefabs;
    [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
+    public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
     
     public bool IsIdle;
@@ -56,11 +57,20 @@ public class GameManager : MonoBehaviour
             if (CurrentZomb != null)
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
+                // Reset values 
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
                 CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
                 ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
                 CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
+                // Remove blood 
+                foreach (GameObject bloodObj in BulletWounds)
+                { 
+                    bloodObj.SetActive(false);
+                }
+                //Clear the list
+                BulletWounds.Clear();
+                //Set Animatons
                 CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
                 CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
             }

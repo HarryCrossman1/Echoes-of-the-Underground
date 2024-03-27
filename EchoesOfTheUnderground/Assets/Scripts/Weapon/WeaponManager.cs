@@ -71,6 +71,7 @@ public class WeaponManager : MonoBehaviour
                     
                     GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                     Blood.transform.position = hit.point;
+                    GameManager.instance.BulletWounds.Add(Blood);
                 }
                 else if (hit.collider.CompareTag("ZombieHead"))
                 {
@@ -86,6 +87,7 @@ public class WeaponManager : MonoBehaviour
 
                     GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                     Blood.transform.position = hit.point;
+                    GameManager.instance.BulletWounds.Add(Blood);
                 }
                 else if (hit.collider.CompareTag("Medkit"))
                 {
