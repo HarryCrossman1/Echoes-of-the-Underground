@@ -8,7 +8,7 @@ public class Zombie_Behaviour : MonoBehaviour
     public static Zombie_Behaviour instance;
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
-    public int ZombieHealth; //{ get; set; }
+    public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
     private bool HasAtacked,ZombieInRange;
    [SerializeField] private bool IsStunned;
     public float SpeedMin,SpeedMax;
@@ -23,8 +23,8 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieSource = GetComponent<AudioSource>();
         ZombieAnimator = GetComponent<Animator>();
         instance = this;
-        ZombieHealth = 100;
         ZombieInRange= false;
+        IsStunned= false;
     }
     private void Start()
     {
@@ -73,7 +73,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void DeathCheck()
     {
-        if (ZombieHealth <= 0)
+        if (ZombieCurrentHealth <= 0)
         {
             PlayZombieAudio(DeathAudio, false);
             Zombie_Agent.isStopped=true;

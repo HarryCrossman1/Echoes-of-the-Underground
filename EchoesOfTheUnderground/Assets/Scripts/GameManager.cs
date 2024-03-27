@@ -7,8 +7,7 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject ZombiePrefab;
-    private GameObject CurrentZombie;
+    public GameObject[] ZombiePrefabs;
    [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public int ZombiePoolAmount;
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[0], 1);
+        SpawnZombies(ZombieSpawnPoints[0], 5);
     }
     private void Start()
     {
@@ -42,7 +41,8 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
-            GameObject Ins_Obj = Instantiate(ZombiePrefab);
+            int rand = Random.Range(0, ZombiePrefabs.Length);
+            GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
             
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             if (CurrentZomb != null)
             {
                 CurrentZomb.transform.position = SpawnPoint.position;
-                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth = 100;
+                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
                 ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
                 CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 1);
+                    SpawnZombies(ZombieSpawnPoints[rand], 3);
                     IsActive = true;
                     break;
                 }

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Zombie_Agent: {fileID: 2227299533572151350}
   ZombieAnimator: {fileID: 3537078692397697921}
+  ZombieCurrentHealth: 100
   ZombieHealth: 100
   IsStunned: 0
   SpeedMin: 0.5

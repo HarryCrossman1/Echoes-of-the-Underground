@@ -56,7 +56,7 @@ public class WeaponManager : MonoBehaviour
                     //Get the hit zombie 
                     Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                     // Deal Damage 
-                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue;
+                    zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
                     //Apply Stun
                     zombie_Behaviour.ShotStun();
                     //Take ammo
@@ -66,7 +66,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                     // Deal Damage 
-                    zombie_Behaviour.ZombieHealth -= CurrentWeapon.DamageValue * 2;
+                    zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
                     //Apply Stun
                     zombie_Behaviour.ShotStun();
                     //Take ammo
