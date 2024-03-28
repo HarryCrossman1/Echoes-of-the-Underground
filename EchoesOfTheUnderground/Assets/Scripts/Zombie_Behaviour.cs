@@ -9,7 +9,7 @@ public class Zombie_Behaviour : MonoBehaviour
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
     public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
-    private bool HasAtacked,ZombieInRange;
+    public bool HasAtacked,ZombieInRange;
    [SerializeField] public bool IsStunned;
     public float SpeedMin,SpeedMax;
 
@@ -23,7 +23,6 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieSource = GetComponent<AudioSource>();
         ZombieAnimator = GetComponent<Animator>();
         instance = this;
-        ZombieInRange= false;
     }
     private void Start()
     {
@@ -37,7 +36,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1.7f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1f)
         {
             ZombieInRange = false;
             if (!IsStunned)
@@ -45,7 +44,7 @@ public class Zombie_Behaviour : MonoBehaviour
         }
         else
         {
-            ZombieAgent.SetDestination(gameObject.transform.position);
+            ZombieAgent.isStopped = true;
             ZombieInRange = true;
             Attack();
         }

@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
                 // Reset values 
                 CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
                 CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
+                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieInRange = false;
+                CurrentZomb.GetComponent<Zombie_Behaviour>().HasAtacked = false;
                 ModifyCurrentZombie(CurrentZomb);
                 CurrentZomb.SetActive(true);
                 CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
@@ -128,12 +130,16 @@ public class GameManager : MonoBehaviour
             {
                 //check if the spawn point is too close 
                 int rand = UnityEngine.Random.Range(0, ZombieSpawnPoints.Length);
-                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 2)
+                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 3)
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    float SpawnNum = math.ceil((ZombieSpawnPoints.Length + 1 * CurrentDifficulty) / 3);
+                    float SpawnNum = math.ceil((SetPointTracker + 1 * (CurrentDifficulty+1)) / 7);
                     Debug.Log(SpawnNum);
+                    if (SpawnNum < 1)
+                    { 
+                        SpawnNum = 1;
+                    }
                     SpawnZombies(ZombieSpawnPoints[rand], (int)SpawnNum);
                     IsActive = true;
                     break;
