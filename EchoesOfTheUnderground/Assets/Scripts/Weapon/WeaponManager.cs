@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject PistolAmmoPrefab;
     // Visual Effects 
     [SerializeField] private GameObject BloodPrefab;
+
+    [SerializeField] private Weapon Smg;
     void Awake()
     {
         instance= this;
@@ -63,7 +65,11 @@ public class WeaponManager : MonoBehaviour
                     // Deal Damage 
                     zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
                     //Apply Stun
-                    zombie_Behaviour.ShotStun();
+                    if (!CurrentWeapon == Smg)
+                    {
+                        zombie_Behaviour.ShotStun();
+                    }
+                    
                     //Take ammo
                     zombie_Behaviour.DeathCheck();
 
@@ -79,7 +85,10 @@ public class WeaponManager : MonoBehaviour
                     // Deal Damage 
                     zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
                     //Apply Stun
-                    zombie_Behaviour.ShotStun();
+                    if (!CurrentWeapon == Smg)
+                    {
+                        zombie_Behaviour.ShotStun();
+                    }
                     //Take ammo
                     zombie_Behaviour.DeathCheck();
 

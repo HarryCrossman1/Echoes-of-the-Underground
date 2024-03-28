@@ -6,6 +6,12 @@ public class Magazine : MonoBehaviour
 {
     public int BulletNumber;
 
+    public void UseGravity()
+    { 
+        //hack
+        gameObject.GetComponent<Rigidbody>().useGravity= true;
+    }
+
     //public void ManageAmmo()
     //{ 
     //    gameObject.SetActive(false);

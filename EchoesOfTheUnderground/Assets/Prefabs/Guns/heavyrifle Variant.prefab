@@ -470,7 +470,7 @@ MonoBehaviour:
   WeaponParent: {fileID: 3444776214399589553}
   weapon: {fileID: 11400000, guid: 1d855b49fd0817140869ff848c994575, type: 2}
   MuzzleFlash: {fileID: 0}
-  CurrentAnimator: {fileID: 0}
+  CurrentAnimator: {fileID: -720228006205743856}
 --- !u!95 &-720228006205743856
 Animator:
   serializedVersion: 5
@@ -481,7 +481,7 @@ Animator:
   m_GameObject: {fileID: 3444776214399589553}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e48820d7a64a60d4d8a078a1a0b6c7fb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

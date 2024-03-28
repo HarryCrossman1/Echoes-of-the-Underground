@@ -20,6 +20,7 @@ public class UiManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class UiManager : MonoBehaviour
     private IEnumerator LoadSceneAsync(string SceneName)
     { 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
-
+        PlayerPrefs.SetInt("Difficulty", DifficultyTracker);
         while (!operation.isDone)
         { 
             float Progress = Mathf.Clamp01(operation.progress/0.9f);

@@ -37,7 +37,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1.7f)
         {
             ZombieInRange = false;
             if (!IsStunned)

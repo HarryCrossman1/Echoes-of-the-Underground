@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11345c285b02154e8b9b4ae310f85ca, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
-  DamageValue: 100
+  DamageValue: 125
   AmmoValue: 5
-  FireRate: 1.5
+  FireRate: 2
   Clip: {fileID: 8300000, guid: ac317d1ff354605419251e51d87b5f5c, type: 3}
   Type: 2

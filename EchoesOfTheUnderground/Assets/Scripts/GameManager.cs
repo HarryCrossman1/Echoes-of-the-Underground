@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,15 +17,16 @@ public class GameManager : MonoBehaviour
     public bool IsIdle;
     public int HordeDifficulty;
     private bool MovementExecuted;
-
+    private int CurrentDifficulty;
     [SerializeField] private Transform[] SetPoints;
     [SerializeField] private Transform[] ZombieSpawnPoints;
     [SerializeField] private int SetPointTracker,SpawnTracker;
     void Awake()
     {
         instance = this;
+        CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[0], 5);
+        SpawnZombies(ZombieSpawnPoints[5], 3);
     }
     private void Start()
     {
@@ -42,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
-            int rand = Random.Range(0, ZombiePrefabs.Length);
+            int rand = UnityEngine.Random.Range(0, ZombiePrefabs.Length);
             GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
             
             Ins_Obj.SetActive(false);
@@ -83,9 +85,9 @@ public class GameManager : MonoBehaviour
 
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        navMeshAgent.speed = Random.Range(obj.GetComponent<Zombie_Behaviour>().SpeedMin, obj.GetComponent<Zombie_Behaviour>().SpeedMax);
-        navMeshAgent.acceleration = Random.Range(1f, 1.5f);
-        navMeshAgent.angularSpeed = Random.Range(75, 165);
+        navMeshAgent.speed = UnityEngine.Random.Range(obj.GetComponent<Zombie_Behaviour>().SpeedMin, obj.GetComponent<Zombie_Behaviour>().SpeedMax);
+        navMeshAgent.acceleration = UnityEngine.Random.Range(1f, 1.5f);
+        navMeshAgent.angularSpeed = UnityEngine.Random.Range(75, 165);
     }
 
     public GameObject GetPooledZombie()
@@ -125,12 +127,14 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < ZombieSpawnPoints.Length; i++)
             {
                 //check if the spawn point is too close 
-                int rand = Random.Range(0, ZombieSpawnPoints.Length);
+                int rand = UnityEngine.Random.Range(0, ZombieSpawnPoints.Length);
                 while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 2)
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    SpawnZombies(ZombieSpawnPoints[rand], 3);
+                    float SpawnNum = math.ceil((ZombieSpawnPoints.Length + 1 * CurrentDifficulty) / 3);
+                    Debug.Log(SpawnNum);
+                    SpawnZombies(ZombieSpawnPoints[rand], (int)SpawnNum);
                     IsActive = true;
                     break;
                 }
