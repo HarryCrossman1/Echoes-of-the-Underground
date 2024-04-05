@@ -12865,6 +12865,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
+      propertyPath: m_SelectMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
+        type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

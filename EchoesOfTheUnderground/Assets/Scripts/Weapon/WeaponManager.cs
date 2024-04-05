@@ -13,7 +13,6 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] public Animator HeldAnimator;
     [SerializeField]private float LastShot;
     [SerializeField] public XrSocketTag[] AllInteractors;
-    [SerializeField] private Magazine magazine;
     [SerializeField] public Light MuzzleFlash;
     [SerializeField] private GameObject PistolAmmoPrefab;
     // Visual Effects 
@@ -34,7 +33,7 @@ public class WeaponManager : MonoBehaviour
     }
     private void Update()
     {
-        if (MuzzleFlash != null) { MuzzleFlash.enabled = false; }
+       // if (MuzzleFlash != null) { MuzzleFlash.enabled = false; }
     }
     public void Fire()
     {
@@ -46,12 +45,12 @@ public class WeaponManager : MonoBehaviour
         LastShot = Time.time;
         RaycastHit hit;
 
-            if (magazine != null && magazine.BulletNumber > 0)
+            if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
             {
                 //Play Sound
                 SoundManager.instance.PlayGunshot(CurrentWeapon);
-                //Take Ammo 
-                magazine.BulletNumber--;
+            //Take Ammo 
+            HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber--;
             //MuzzleFlash 
             //Play Animation 
             HeldAnimator.SetTrigger("Shooting");
@@ -65,9 +64,10 @@ public class WeaponManager : MonoBehaviour
                     // Deal Damage 
                     zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
                     //Apply Stun
-                    if (!CurrentWeapon == Smg)
+                    if (CurrentWeapon != Smg)
                     {
                         zombie_Behaviour.ShotStun();
+                        Debug.Log("Check");
                     }
                     
                     //Take ammo
@@ -85,7 +85,7 @@ public class WeaponManager : MonoBehaviour
                     // Deal Damage 
                     zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
                     //Apply Stun
-                    if (!CurrentWeapon == Smg)
+                    if (CurrentWeapon != Smg)
                     {
                         zombie_Behaviour.ShotStun();
                     }
@@ -113,12 +113,13 @@ public class WeaponManager : MonoBehaviour
     }
     public void AddMagazine(SelectEnterEventArgs args)
     {
-        magazine = args.interactableObject.transform.GetComponent<Magazine>();
+        HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = args.interactableObject.transform.GetComponent<Magazine>();
+        Debug.Log(args.interactableObject.transform.GetComponent<Magazine>());
         SoundManager.instance.PlayReload(true);
     }
     public void RemoveMagazine(SelectExitEventArgs args)
     {
-        magazine = null;
+        HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
         SoundManager.instance.PlayReload(false);
     }
 }

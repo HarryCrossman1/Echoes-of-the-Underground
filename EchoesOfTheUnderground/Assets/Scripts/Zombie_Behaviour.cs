@@ -44,7 +44,7 @@ public class Zombie_Behaviour : MonoBehaviour
         }
         else
         {
-            ZombieAgent.isStopped = true;
+            ZombieAgent.destination = gameObject.transform.position;
             ZombieInRange = true;
             Attack();
         }

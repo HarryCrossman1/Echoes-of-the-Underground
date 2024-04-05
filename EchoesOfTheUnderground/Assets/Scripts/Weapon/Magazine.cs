@@ -11,11 +11,4 @@ public class Magazine : MonoBehaviour
         //hack
         gameObject.GetComponent<Rigidbody>().useGravity= true;
     }
-
-    //public void ManageAmmo()
-    //{ 
-    //    gameObject.SetActive(false);
-    //    GameObject obj = Instantiate(gameObject,PlayerController.instance.AmmoHip,PlayerController.instance.AmmoHip);
-    //    obj.GetComponent<Magazine>().BulletNumber = 8;
-    //}
 }

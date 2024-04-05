@@ -10,6 +10,7 @@ public class XrWeaponPickup : MonoBehaviour
     [SerializeField] private Weapon weapon;
     [SerializeField] public Light MuzzleFlash;
     [SerializeField] private Animator CurrentAnimator;
+    public Magazine CurrentMag;
     public void WeaponPickedUp()
     {
         WeaponManager.instance.HeldWeapon = WeaponShootPoint;

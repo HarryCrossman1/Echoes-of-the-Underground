@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] SetPoints;
     [SerializeField] private Transform[] ZombieSpawnPoints;
     [SerializeField] private int SetPointTracker,SpawnTracker;
+    private enum GameState {Active,Inactive,End }
+    private GameState CurrentState;
     void Awake()
     {
         instance = this;
@@ -148,6 +150,28 @@ public class GameManager : MonoBehaviour
             }
             SpawnTracker = 0;
             MovePoints();
+        }
+    }
+    private void StateManager()
+    {
+        switch (CurrentState)
+        {
+            case GameState.Active:
+                {
+                    if (!IsActive)
+                    {
+                        CurrentState = GameState.Inactive;
+                    }
+                    break;
+                }
+            case GameState.Inactive: 
+                {
+                    break;
+                }
+            case GameState.End: 
+                {
+                    break;
+                }
         }
     }
 }
