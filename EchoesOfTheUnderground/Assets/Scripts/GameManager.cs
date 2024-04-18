@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameplayLoop();
+        StateManager();
     }
 
     private void PoolZombies(int ZombieAmount)
@@ -158,6 +159,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Active:
                 {
+                    LineManager.instance.lineRenderer.enabled = false;
                     if (!IsActive)
                     {
                         CurrentState = GameState.Inactive;
@@ -166,6 +168,8 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.Inactive: 
                 {
+                    LineManager.instance.RenderLine(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]);
+                    LineManager.instance.lineRenderer.enabled= true;
                     break;
                 }
             case GameState.End: 
