@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using AcmLib;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class PlayerController : MonoBehaviour
     public Transform PlayerTransform;
     public Transform PistolHip,AmmoHip;
     public int PlayerHealth { get; set; }
+    string Path;
     void Awake()
     {
+        Path = Application.persistentDataPath + ".txt";
         instance = this;
         PlayerTransform= transform;
         PlayerHealth = 3;
+        AcmLib.Log.WriteLog("Hi", Path);
     }
 
     // Update is called once per frame
