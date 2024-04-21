@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using AcmLib;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class PlayerController : MonoBehaviour
         instance = this;
         PlayerTransform= transform;
         PlayerHealth = 3;
-        AcmLib.Log.WriteLog("Hi", Path);
     }
 
     // Update is called once per frame

@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
                 }
             case GameState.End: 
                 {
+
                     break;
                 }
         }
