@@ -45,8 +45,8 @@ public class WeaponManager : MonoBehaviour
         LastShot = Time.time;
         RaycastHit hit;
 
-            if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
-            {
+            //if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
+           // {
                 //Play Sound
                 SoundManager.instance.PlayGunshot(CurrentWeapon);
             //Take Ammo 
@@ -54,62 +54,68 @@ public class WeaponManager : MonoBehaviour
             //MuzzleFlash 
             //Play Animation 
             HeldAnimator.SetTrigger("Shooting");
-               // MuzzleFlash.enabled = true;
-                if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
+        // MuzzleFlash.enabled = true;
+        if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
+        {
+            if (hit.collider.CompareTag("ZombieBody"))
+            {
+                //Get the hit zombie 
+                Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
+                // Deal Damage 
+                zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
+                //Apply Stun
+                if (CurrentWeapon != Smg)
                 {
-                if (hit.collider.CompareTag("ZombieBody"))
-                {
-                    //Get the hit zombie 
-                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
-                    // Deal Damage 
-                    zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
-                    //Apply Stun
-                    if (CurrentWeapon != Smg)
-                    {
-                        zombie_Behaviour.ShotStun();
-                        Debug.Log("Check");
-                    }
-                    
-                    //Take ammo
-                    zombie_Behaviour.DeathCheck();
-
-                    // Do blood effect
-                    
-                    GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
-                    Blood.transform.position = hit.point;
-                    GameManager.instance.BulletWounds.Add(Blood);
+                    zombie_Behaviour.ShotStun();
+                    Debug.Log("Check");
                 }
-                else if (hit.collider.CompareTag("ZombieHead"))
-                {
-                    Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
-                    // Deal Damage 
-                    zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
-                    //Apply Stun
-                    if (CurrentWeapon != Smg)
-                    {
-                        zombie_Behaviour.ShotStun();
-                    }
-                    //Take ammo
-                    zombie_Behaviour.DeathCheck();
 
-                    // Do blood effect
+                //Take ammo
+                zombie_Behaviour.DeathCheck();
 
-                    GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
-                    Blood.transform.position = hit.point;
-                    GameManager.instance.BulletWounds.Add(Blood);
-                }
-                else if (hit.collider.CompareTag("Medkit"))
+                // Do blood effect
+
+                GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
+                Blood.transform.position = hit.point;
+                GameManager.instance.BulletWounds.Add(Blood);
+                //Update High Score 
+                HighScoreManager.instance.CurrentHighScore += 50;
+            }
+            else if (hit.collider.CompareTag("ZombieHead"))
+            {
+                Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
+                // Deal Damage 
+                zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
+                //Apply Stun
+                if (CurrentWeapon != Smg)
                 {
-                    if (PlayerController.instance.PlayerHealth < 3)
-                    {
-                        PlayerController.instance.PlayerHealth++;
-                        UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
-                        hit.collider.gameObject.SetActive(false);
-                    }
+                    zombie_Behaviour.ShotStun();
                 }
+                //Take ammo
+                zombie_Behaviour.DeathCheck();
+
+                // Do blood effect
+
+                GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
+                Blood.transform.position = hit.point;
+                GameManager.instance.BulletWounds.Add(Blood);
+
+                HighScoreManager.instance.CurrentHighScore += 125;
+            }
+            else if (hit.collider.CompareTag("Medkit"))
+            {
+                if (PlayerController.instance.PlayerHealth < 3)
+                {
+                    PlayerController.instance.PlayerHealth++;
+                    UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
+                    HighScoreManager.instance.CurrentHighScore += 10;
+                    hit.collider.gameObject.SetActive(false);
                 }
             }
-            else { SoundManager.instance.PlayEmpty(); }
+        }
+              //  }
+           // }
+          //  else { SoundManager.instance.PlayEmpty(); }
     }
     public void AddMagazine(SelectEnterEventArgs args)
     {

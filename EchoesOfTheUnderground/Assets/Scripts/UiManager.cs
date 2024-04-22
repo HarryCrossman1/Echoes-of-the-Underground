@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
-   [SerializeField] private TextMeshProUGUI DifficultyText;
+   [SerializeField] public TextMeshProUGUI DifficultyText,HighScoreText,IngameHighScoreAllTime,IngameCurrentStore;
     [SerializeField] private Slider LoadingSlider;
    [SerializeField] private string[] CampaignDifficultyModes;
     private int DifficultyTracker =1;
@@ -21,12 +21,15 @@ public class UiManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        HighScoreManager.instance.Load();
+        if(HighScoreText!=null)
+        HighScoreText.text = HighScoreManager.instance.AllTimeHighScore.ToString();
     }
     public void StartCampaign()
     {
@@ -53,7 +56,7 @@ public class UiManager : MonoBehaviour
             DifficultyText.text = CampaignDifficultyModes[DifficultyTracker];
         }
     }
-    private IEnumerator LoadSceneAsync(string SceneName)
+    public IEnumerator LoadSceneAsync(string SceneName)
     { 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
         PlayerPrefs.SetInt("Difficulty", DifficultyTracker);

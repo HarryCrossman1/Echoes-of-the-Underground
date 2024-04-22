@@ -1,9 +1,11 @@
+using AcmLib;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,8 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] SetPoints;
     [SerializeField] private Transform[] ZombieSpawnPoints;
     [SerializeField] private int SetPointTracker,SpawnTracker;
-    private enum GameState {Active,Inactive,End }
-    private GameState CurrentState;
     void Awake()
     {
         instance = this;
@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameplayLoop();
-        StateManager();
     }
 
     private void PoolZombies(int ZombieAmount)
@@ -127,7 +126,12 @@ public class GameManager : MonoBehaviour
    [SerializeField] public bool IsActive;
     private void GameplayLoop()
     {
-        if (!IsActive)//Input.GetKeyDown(KeyCode.Space))
+        if (SetPointTracker == SetPoints.Length+1)
+        {
+            HighScoreManager.instance.Save();
+            SceneManager.LoadScene("MenuScene");
+        }
+        if (!IsActive)
         {
             for (int i = 0; i < ZombieSpawnPoints.Length; i++)
             {
@@ -137,13 +141,16 @@ public class GameManager : MonoBehaviour
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    float SpawnNum = math.ceil((SetPointTracker + 1 * (CurrentDifficulty+1)) / 7);
-                    Debug.Log(SpawnNum);
+                    float Difficulty = Math.Squared(CurrentDifficulty) + SetPointTracker;
+                    double DifficultyModified = Math.SquareRoot((double)Difficulty, 0.001);
+                    float SpawnNum = math.ceil((float)DifficultyModified);
+                    
                     if (SpawnNum < 1)
                     { 
                         SpawnNum = 1;
                     }
                     SpawnZombies(ZombieSpawnPoints[rand], (int)SpawnNum);
+                    Debug.Log(SpawnNum);
                     IsActive = true;
                     break;
                 }
@@ -151,32 +158,6 @@ public class GameManager : MonoBehaviour
             }
             SpawnTracker = 0;
             MovePoints();
-        }
-    }
-    private void StateManager()
-    {
-        switch (CurrentState)
-        {
-            case GameState.Active:
-                {
-                    LineManager.instance.lineRenderer.enabled = false;
-                    if (!IsActive)
-                    {
-                        CurrentState = GameState.Inactive;
-                    }
-                    break;
-                }
-            case GameState.Inactive: 
-                {
-                    LineManager.instance.RenderLine(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]);
-                    LineManager.instance.lineRenderer.enabled= true;
-                    break;
-                }
-            case GameState.End: 
-                {
-
-                    break;
-                }
         }
     }
 }

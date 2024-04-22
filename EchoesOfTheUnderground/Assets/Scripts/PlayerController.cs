@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         instance = this;
         PlayerTransform= transform;
         PlayerHealth = 3;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerHealth <= 0)
         {
             PlayerDeath();
+            HighScoreManager.instance.Save();
             Debug.Log("Dead");
         }
      
@@ -82,6 +84,8 @@ public class PlayerController : MonoBehaviour
     public void PlayerDeath()
     {
         UiManager.instance.DeathCanvas.enabled = true;
+        UiManager.instance.IngameCurrentStore.text = HighScoreManager.instance.CurrentHighScore.ToString();
+        UiManager.instance.IngameHighScoreAllTime.text = HighScoreManager.instance.AllTimeHighScore.ToString();
         Time.timeScale= 0;
         SoundManager.instance.PlayDeath();
         SoundManager.instance.StopWatch();
@@ -90,6 +94,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DeathTimer(float seconds)
     { 
         yield return new WaitForSecondsRealtime(seconds);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("SubwayScene");
     }
 }

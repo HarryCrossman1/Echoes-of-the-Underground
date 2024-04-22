@@ -34,8 +34,8 @@ public class Grenade : MonoBehaviour
         foreach (var Hit in HitColliders)
         {
             if (Hit.CompareTag("ZombieBody"))
-            { 
-                
+            {
+                HighScoreManager.instance.CurrentHighScore += 75;
                 Hit.gameObject.GetComponentInParent<Zombie_Behaviour>().ZombieCurrentHealth -= 300;
             }
         }

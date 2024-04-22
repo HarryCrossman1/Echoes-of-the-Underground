@@ -66,6 +66,7 @@ public class Zombie_Behaviour : MonoBehaviour
         PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
         PlayerController.instance.PlayerHealth--;
+        HighScoreManager.instance.CurrentHighScore -= 100;
         //Could bug If player kills during anim
         HasAtacked = false;
     }
