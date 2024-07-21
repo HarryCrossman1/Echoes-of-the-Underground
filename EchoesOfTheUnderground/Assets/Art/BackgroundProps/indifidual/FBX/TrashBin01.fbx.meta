@@ -3,7 +3,12 @@ guid: 83db31018a00c7a4f9cb7edb620ba6c8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set9_PortaPotties
+    second: {fileID: 2100000, guid: 2cbb0e399ebf30b40b2b27705b4d1f29, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

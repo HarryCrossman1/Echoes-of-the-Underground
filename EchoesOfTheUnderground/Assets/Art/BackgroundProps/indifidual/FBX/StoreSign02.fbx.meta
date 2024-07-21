@@ -3,7 +3,12 @@ guid: e97bfa5e292882a4bae5de41dd883c9a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set3_TrafficLightPole
+    second: {fileID: 2100000, guid: 06c81a060036a8249a97516fc84d6562, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

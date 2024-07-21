@@ -3,7 +3,12 @@ guid: 4995718f6065e47438edeaa8113743cb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set4_NewsStand
+    second: {fileID: 2100000, guid: 7833b47fa3257d545ae529e23d4e67e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

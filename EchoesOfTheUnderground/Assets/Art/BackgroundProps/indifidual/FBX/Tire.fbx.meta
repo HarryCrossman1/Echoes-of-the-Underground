@@ -3,7 +3,12 @@ guid: 10fa61a9d8ac1ad43ac77ef41367c224
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set2_TrafficEquipments
+    second: {fileID: 2100000, guid: adf76ed291586f64789f225cc6b741bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

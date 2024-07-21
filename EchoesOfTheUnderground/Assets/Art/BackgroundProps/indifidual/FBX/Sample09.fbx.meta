@@ -3,7 +3,22 @@ guid: e2690691fc93ee0499a3fced058f3ac7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set10_Commercial_Trash_Containers
+    second: {fileID: 2100000, guid: 72952776415bc9b41ba2a89990eb3d52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set6_TentsTrash
+    second: {fileID: 2100000, guid: b0970433f9ba0434180386bc509a7346, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set8_GarbageBags
+    second: {fileID: 2100000, guid: d7ee80ada6c516142845892a6c334c31, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

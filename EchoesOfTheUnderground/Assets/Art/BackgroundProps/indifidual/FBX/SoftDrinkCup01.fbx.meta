@@ -3,7 +3,12 @@ guid: 1634087595454b9459e9816aa65c3e48
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set6_TentsTrash
+    second: {fileID: 2100000, guid: b0970433f9ba0434180386bc509a7346, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

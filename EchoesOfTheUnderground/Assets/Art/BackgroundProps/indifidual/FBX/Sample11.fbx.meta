@@ -3,7 +3,17 @@ guid: 26cc778fc6f66a544bdd87f2f17d109e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set11_Large_Commercial_Containers
+    second: {fileID: 2100000, guid: 788536fa8668e4a43bbd548494633829, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Set18_RubblesWoodSticks
+    second: {fileID: 2100000, guid: 3d497ba84ab73d34fab2b194d736939f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
