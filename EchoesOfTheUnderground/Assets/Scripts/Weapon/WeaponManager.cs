@@ -14,7 +14,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]private float LastShot;
     [SerializeField] public XrSocketTag[] AllInteractors;
     [SerializeField] public Light MuzzleFlash;
-    [SerializeField] private GameObject PistolAmmoPrefab;
+   // [SerializeField] private GameObject PistolAmmoPrefab;
     // Visual Effects 
     [SerializeField] private GameObject BloodPrefab;
 
