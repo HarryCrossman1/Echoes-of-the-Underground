@@ -33,7 +33,7 @@ public class UiManager : MonoBehaviour
     }
     public void StartCampaign()
     {
-        StartCoroutine(LoadSceneAsync("SubwayScene"));
+        StartCoroutine(LoadSceneAsync("HomeScene",true));
     }
     public void Quit()
     {
@@ -56,15 +56,18 @@ public class UiManager : MonoBehaviour
             DifficultyText.text = CampaignDifficultyModes[DifficultyTracker];
         }
     }
-    public IEnumerator LoadSceneAsync(string SceneName)
+    public IEnumerator LoadSceneAsync(string SceneName,bool IsInMenu)
     { 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
-        PlayerPrefs.SetInt("Difficulty", DifficultyTracker);
-        while (!operation.isDone)
-        { 
-            float Progress = Mathf.Clamp01(operation.progress/0.9f);
-            LoadingSlider.value = Progress;
-            yield return null;
+        if (IsInMenu == true)
+        {
+            PlayerPrefs.SetInt("Difficulty", DifficultyTracker);
+            while (!operation.isDone)
+            {
+                float Progress = Mathf.Clamp01(operation.progress / 0.9f);
+                LoadingSlider.value = Progress;
+                yield return null;
+            }
         }
     }
     public void UiMoving()
