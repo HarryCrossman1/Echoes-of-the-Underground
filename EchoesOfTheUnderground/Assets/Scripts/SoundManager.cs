@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [HideInInspector]public bool WatchIsPlaying;
+    [SerializeField] private AudioClip[] VoiceLine;
     // Start is called before the first frame update
     void Awake()
     {
@@ -71,5 +72,9 @@ public class SoundManager : MonoBehaviour
     {
         GunSource.clip = PlayerDeathClip;
         GunSource.Play();
+    }
+    public void PlayVoiceLine(AudioSource source,int voicelineNum)
+    { 
+        
     }
 }
