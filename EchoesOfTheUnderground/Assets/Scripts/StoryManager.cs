@@ -10,6 +10,7 @@ public class StoryManager : MonoBehaviour
     //Tutorial Stuff
     [SerializeField] private GameObject AlertIcon;
     [SerializeField] private GameObject TutorialCharacter;
+    [SerializeField] private int TutorialState;
     void Start()
     {
         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -23,7 +24,12 @@ public class StoryManager : MonoBehaviour
             case StoryState.Tutorial:
             {
                     AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
-                    AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(0,2,0);
+                    AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(-0.13f,2,-0.2f);
+
+                    if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) > 3 && TutorialState == 0)
+                    { 
+                        
+                    }
                     break;    
             }
         }

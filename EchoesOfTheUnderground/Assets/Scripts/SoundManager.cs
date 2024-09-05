@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [HideInInspector]public bool WatchIsPlaying;
     [SerializeField] private AudioClip[] VoiceLine;
+    [SerializeField] private bool VoiceLineFinished;
+    [SerializeField] private float VoiceLineTimer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -73,8 +75,20 @@ public class SoundManager : MonoBehaviour
         GunSource.clip = PlayerDeathClip;
         GunSource.Play();
     }
-    public void PlayVoiceLine(AudioSource source,int voicelineNum)
-    { 
-        
+    public void PlayVoiceLine(AudioSource source,Character character,int voicelineNum)
+    {
+        VoiceLineTimer += Time.deltaTime;
+        if (VoiceLineFinished)
+        {
+            int rand = Random.Range(0, character.Clips.Length);
+            source.clip = character.Clips[rand];
+            source.Play();
+            VoiceLineFinished= false;
+        }
+        if (source.clip.length <= VoiceLineTimer)
+        { 
+            VoiceLineFinished= true;
+            VoiceLineTimer= 0;
+        }
     }
 }
