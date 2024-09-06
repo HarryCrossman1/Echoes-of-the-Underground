@@ -27,8 +27,8 @@ public class StoryManager : MonoBehaviour
                     AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(-0.13f,2,-0.2f);
 
                     if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) > 3 && TutorialState == 0)
-                    { 
-                        
+                    {
+                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponentInChildren<AudioSource>(), TutorialCharacter.GetComponentInChildren<CharacterHolder>().character, 0, false);
                     }
                     break;    
             }

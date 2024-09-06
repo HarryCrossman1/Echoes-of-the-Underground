@@ -75,14 +75,22 @@ public class SoundManager : MonoBehaviour
         GunSource.clip = PlayerDeathClip;
         GunSource.Play();
     }
-    public void PlayVoiceLine(AudioSource source,Character character,int voicelineNum)
+    public void PlayVoiceLine(AudioSource source,Character character,int voicelineNum,bool random = true)
     {
         VoiceLineTimer += Time.deltaTime;
         if (VoiceLineFinished)
         {
-            int rand = Random.Range(0, character.Clips.Length);
-            source.clip = character.Clips[rand];
-            source.Play();
+            if (random == true)
+            {
+                int rand = Random.Range(0, character.Clips.Length);
+                source.clip = character.Clips[rand];
+                source.Play();
+            } 
+            else 
+            {
+                source.clip = character.Clips[voicelineNum];
+                source.Play();
+            }
             VoiceLineFinished= false;
         }
         if (source.clip.length <= VoiceLineTimer)
