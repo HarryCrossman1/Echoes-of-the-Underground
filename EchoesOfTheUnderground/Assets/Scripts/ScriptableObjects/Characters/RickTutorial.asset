@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb0e77b8592c15540a4088dce2b3524b, type: 3}
-  m_Name: TestDummy
+  m_Name: RickTutorial
   m_EditorClassIdentifier: 
-  Obj: {fileID: 1470193184033347606, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
+  Obj: {fileID: 464352020919524040, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
   Clips:
-  - {fileID: 8300000, guid: fb5b5ffb60e0e4746b4ac9cea6ed5c28, type: 3}
-  - {fileID: 8300000, guid: d81dd0da90eef864e97203b8f8ce92fd, type: 3}
+  - {fileID: 8300000, guid: 8315b8a50b74f714dba6a07b47063520, type: 3}

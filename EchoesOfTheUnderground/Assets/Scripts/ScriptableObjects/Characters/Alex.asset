@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0e77b8592c15540a4088dce2b3524b, type: 3}
+  m_Name: Alex
+  m_EditorClassIdentifier: 
+  Obj: {fileID: 1470193184033347606, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
+  Clips:
+  - {fileID: 8300000, guid: fb5b5ffb60e0e4746b4ac9cea6ed5c28, type: 3}
+  - {fileID: 8300000, guid: d81dd0da90eef864e97203b8f8ce92fd, type: 3}
