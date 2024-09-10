@@ -112,6 +112,23 @@ public class WeaponManager : MonoBehaviour
                     hit.collider.gameObject.SetActive(false);
                 }
             }
+            else if (hit.collider.CompareTag("MiscItem"))
+            {
+                if (StoryManager.Instance.gameObject != null)
+                { 
+                    StoryManager.Instance.HitMiscItem = false;
+                }
+                if (hit.collider.attachedRigidbody != null)
+                { 
+                    Rigidbody body = hit.collider.attachedRigidbody;
+                    body.AddForce(hit.point, ForceMode.Impulse);
+
+                    if (StoryManager.Instance.gameObject != null)
+                    {
+                        StoryManager.Instance.HitMiscItem = true;
+                    }
+                }
+            }
         }
               //  }
            // }

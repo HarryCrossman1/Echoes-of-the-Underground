@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletNumber: 30
+  MaxAmmo: 30
 --- !u!1 &8676009372773007696
 GameObject:
   m_ObjectHideFlags: 0

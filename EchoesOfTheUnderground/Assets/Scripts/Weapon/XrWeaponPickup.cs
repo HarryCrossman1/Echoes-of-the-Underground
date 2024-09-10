@@ -10,6 +10,7 @@ public class XrWeaponPickup : MonoBehaviour
     [SerializeField] private Weapon weapon;
     [SerializeField] public Light MuzzleFlash;
     [SerializeField] private Animator CurrentAnimator;
+    [SerializeField] private Light Torch;
     public Magazine CurrentMag;
     [SerializeField] private bool NeedsPistolHip;
     public void WeaponPickedUp()
@@ -18,6 +19,8 @@ public class XrWeaponPickup : MonoBehaviour
         WeaponManager.instance.CurrentWeapon= weapon;
         WeaponManager.instance.MuzzleFlash = MuzzleFlash;
         WeaponManager.instance.HeldAnimator = CurrentAnimator;
+        Torch = GetComponentInChildren<Light>();
+        Torch.enabled= true;
         if (weapon.Type == Weapon.AmmoType.Pistol)
         {
             WeaponParent.transform.SetParent(null);
@@ -25,6 +28,7 @@ public class XrWeaponPickup : MonoBehaviour
     }
     public void PistolDropped()
     {
+        Torch.enabled = false;
         if (NeedsPistolHip)
         {
             WeaponParent.transform.position = PlayerController.instance.PistolHip.position;

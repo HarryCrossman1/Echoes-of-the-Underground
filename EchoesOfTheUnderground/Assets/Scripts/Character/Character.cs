@@ -7,4 +7,5 @@ public class Character : ScriptableObject
 {
     public GameObject Obj;
     public AudioClip[] Clips;
+    public bool TutorialCharacter;
 }

@@ -94,9 +94,19 @@ public class SoundManager : MonoBehaviour
             VoiceLineFinished= false;
         }
         if (source.clip.length <= VoiceLineTimer)
-        { 
-            VoiceLineFinished= true;
-            VoiceLineTimer= 0;
+        {
+            if (random == true)
+            {
+                VoiceLineFinished = true;
+                VoiceLineTimer = 0;
+            }
+            else
+            {
+                VoiceLineFinished = true;
+                VoiceLineTimer = 0;
+                StoryManager.Instance.TutorialState++;
+            }
+        
         }
     }
 }

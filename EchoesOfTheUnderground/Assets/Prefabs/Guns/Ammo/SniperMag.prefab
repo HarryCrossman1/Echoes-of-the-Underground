@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletNumber: 5
+  MaxAmmo: 5
 --- !u!64 &4204557803215530653
 MeshCollider:
   m_ObjectHideFlags: 0

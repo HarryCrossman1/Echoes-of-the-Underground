@@ -10,9 +10,11 @@ public class CharacterHolder : MonoBehaviour
     {
         if (Vector3.Distance(gameObject.transform.position, PlayerController.instance.PlayerTransform.position) < 3)
         {
-            Debug.Log("here");
-            AudioSource scr= gameObject.GetComponentInChildren<AudioSource>();
-            SoundManager.instance.PlayVoiceLine(scr,character, 0);
+            if (!character.TutorialCharacter)
+            {
+                AudioSource scr = gameObject.GetComponentInChildren<AudioSource>();
+                SoundManager.instance.PlayVoiceLine(scr, character, 0);
+            }
         }
     }
 }

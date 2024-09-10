@@ -15,3 +15,9 @@ MonoBehaviour:
   Obj: {fileID: 464352020919524040, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
   Clips:
   - {fileID: 8300000, guid: 8315b8a50b74f714dba6a07b47063520, type: 3}
+  - {fileID: 8300000, guid: d03557611c4f2bf4083c7137a3ec4154, type: 3}
+  - {fileID: 8300000, guid: 75c42acaa54a4574f95f2efe0336ecad, type: 3}
+  - {fileID: 8300000, guid: 3f347059a6452ed46bee50cf8950e698, type: 3}
+  - {fileID: 8300000, guid: 7597fd24ce9fb4f44b737f0f1a879b8d, type: 3}
+  - {fileID: 8300000, guid: 92531859884409349bf1ceaee1e3ef96, type: 3}
+  TutorialCharacter: 1

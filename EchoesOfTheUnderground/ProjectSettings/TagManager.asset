@@ -15,6 +15,7 @@ TagManager:
   - SniperMag
   - Medkit
   - DontInteractWithPlayer
+  - MiscItem
   layers:
   - Default
   - TransparentFX

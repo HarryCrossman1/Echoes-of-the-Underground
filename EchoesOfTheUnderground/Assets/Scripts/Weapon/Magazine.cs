@@ -5,6 +5,7 @@ using UnityEngine;
 public class Magazine : MonoBehaviour
 {
     public int BulletNumber;
+    public int MaxAmmo;
 
     public void UseGravity()
     { 
