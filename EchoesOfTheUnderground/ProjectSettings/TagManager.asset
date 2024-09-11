@@ -16,6 +16,7 @@ TagManager:
   - Medkit
   - DontInteractWithPlayer
   - MiscItem
+  - Pistol
   layers:
   - Default
   - TransparentFX

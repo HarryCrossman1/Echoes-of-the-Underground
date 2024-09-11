@@ -14,6 +14,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private GameObject TutorialCharacter;
     [SerializeField] public int TutorialState;
     [SerializeField] public bool HitMiscItem;
+    private Animator animator;
+    private NavMeshAgent agent;
     private void Awake()
     {
         Instance = this;
@@ -21,6 +23,8 @@ public class StoryManager : MonoBehaviour
     void Start()
     {
         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
+        animator = TutorialCharacter.GetComponentInChildren<Animator>();
+        agent = TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -40,9 +44,13 @@ public class StoryManager : MonoBehaviour
                     }
                     if (TutorialState == 1)
                     {
-                        TutorialCharacter.GetComponentInChildren<NavMeshAgent>().SetDestination(new Vector3(-2, 0, 2));
-                        if (Vector3.Distance(TutorialCharacter.transform.position,new Vector3(-2,0,2))<2)
+                        animator.SetBool("IsIdle", false);
+                        animator.SetBool("IsWalking", true);
+                        agent.SetDestination(new Vector3(-1.775f, 0, 1.825f));
+                        if (Vector3.Distance(TutorialCharacter.transform.position,new Vector3(-1.775f, 0, 1.825f))<0.1f)
                         {
+                            animator.SetBool("IsIdle", true);
+                            animator.SetBool("IsWalking", false);
                             AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
                             if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && TutorialState == 1)
                             {
