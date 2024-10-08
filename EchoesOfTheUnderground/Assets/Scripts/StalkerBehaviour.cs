@@ -8,7 +8,7 @@ public class StalkerBehaviour : MonoBehaviour
 {
     public static StalkerBehaviour instance;
     [SerializeField] private NavMeshAgent StalkerAgent;
-    public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
+    public int ZombieCurrentHealth,ZombieHealth;
     public bool HasAtacked,ZombieInRange;
    [SerializeField] public bool IsStunned;
     [SerializeField] private bool ReachedDestination;
@@ -16,12 +16,14 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private float StalkingAccuracy;
     [SerializeField] private float ViewCone;
     [SerializeField] private float ViewRange;
-    private enum BehaviourState {Stalking,Inspecting,Chase,Attacking }
+    private enum BehaviourState {Stalking,Inspecting,Chase,Attacking,Reset }
    [SerializeField] private BehaviourState CurrentState;
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
     private Animator StalkerAnimator;
+    private int AniamtionFrames = 110;
+    private int ElapsedFrames;
     // Zombie Audio
     [SerializeField] private AudioSource ZombieSource;
     [SerializeField] private AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
@@ -40,9 +42,8 @@ public class StalkerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // DeathCheck();
+        DeathCheck();
         StateMachine();
-       // Chase(StalkerAgent, PlayerController.instance.PlayerTransform.gameObject);
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
@@ -75,17 +76,19 @@ public class StalkerBehaviour : MonoBehaviour
                 {
                     if (SightCheck(PlayerController.instance.transform.position,ViewRange))
                     {
+                     
                         EditDetails(0.8f, 7f, 2.5f);
                         ReachedDestination = true;
-                        StoredPos = PlayerController.instance.transform.position;
                         StalkerAnimator.SetBool("Crawling", false);
                         StalkerAnimator.SetBool("Inspecting", true);
+                        StoredPos = PlayerController.instance.transform.position;
                         CurrentState = BehaviourState.Inspecting;
+                        break;
                     }
                     if (ReachedDestination)
                     {
                         StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * StalkingAccuracy, 0, Random.insideUnitSphere.z * StalkingAccuracy);
-                        Debug.Log(NavmeshCheck(StoredPos) +":"+ StoredPos);
+                     
                         if (NavmeshCheck(StoredPos))
                         {
                             StalkerAgent.SetDestination(StoredPos);
@@ -107,11 +110,8 @@ public class StalkerBehaviour : MonoBehaviour
                     }
                     if (ReachedDestination)
                     {
-                        if (NavmeshCheck(StoredPos))
-                        {
-                            StalkerAgent.SetDestination(StoredPos);
-                            ReachedDestination = false;
-                        }
+                        StalkerAgent.SetDestination(StoredPos);
+                        ReachedDestination = false;
                         break;
                     }
                     if (Vector3.Distance(StoredPos, transform.position) < 1f)
@@ -131,7 +131,7 @@ public class StalkerBehaviour : MonoBehaviour
                     StalkerAnimator.SetBool("Inspecting", false);
                     EditDetails(0, 0, 7);
                     StalkerAgent.SetDestination(PlayerController.instance.transform.position);
-                    if (Vector3.Distance(PlayerController.instance.transform.position, transform.position) < 3)
+                    if (Vector3.Distance(PlayerController.instance.transform.position, transform.position) < 2f)
                     {
                         CurrentState = BehaviourState.Attacking;
                     }
@@ -139,6 +139,34 @@ public class StalkerBehaviour : MonoBehaviour
                 }
             case BehaviourState.Attacking:
                 {
+                    transform.SetParent(PlayerController.instance.transform);
+                    StalkerAgent.enabled = false;
+
+                    Attack();
+                    break;
+                }
+            case BehaviourState.Reset:
+                {
+                   
+                    StalkerAgent.enabled = true;
+                    // REMEMBER TO ADD THE CORRECT NUMBERS LATER 
+                    float RandomX = Random.Range(0, 20);
+                    float RandomZ = Random.Range(0, 20);
+                    Vector3 NewVec = new Vector3(RandomX, 0, RandomZ);
+                    StalkerAgent.SetDestination(NewVec);
+                    if (NavmeshCheck(NewVec))
+                    {
+                        if (Vector3.Distance(transform.position, NewVec) < 1f)
+                        {
+                           
+                            CurrentState = BehaviourState.Stalking;
+                            EditDetails(0.7f, 1, 7);
+                            StalkerAnimator.SetBool("Sprinting", false);
+                            StalkerAnimator.SetBool("Crawling", true);
+                            ReachedDestination = true;
+                            break;
+                        }
+                    }
                     break;
                 }
         }
@@ -168,7 +196,7 @@ public class StalkerBehaviour : MonoBehaviour
         Vector3 Forward = transform.forward;
         Vector3 ToPlayer = (PlayerPosition - transform.position).normalized;
 
-        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition,transform.position) < Range)
+        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition,transform.position) < Range || Vector3.Distance(PlayerPosition, transform.position) < 2 )
         {
             Debug.DrawLine(transform.position, ToPlayer, Color.black);
             RaycastHit hit;
@@ -193,14 +221,24 @@ public class StalkerBehaviour : MonoBehaviour
     }
     private IEnumerator StartAttack(float cooldown) 
     {
-       
-        PlayZombieAudio(AttackAudio, false);
-        PlayerController.instance.PlayerDeathCheck();
+        if (AttackAudio != null)
+        {
+            PlayZombieAudio(AttackAudio, false);
+        }
+        StalkerAnimator.SetBool("Sprinting", false);
+        StalkerAnimator.SetBool("Attacking", true);
+        //PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
+        StalkerAnimator.SetBool("Sprinting", true);
+        StalkerAnimator.SetBool("Attacking", false);
+        StalkerAgent.enabled = true;
         PlayerController.instance.PlayerHealth--;
         HighScoreManager.instance.CurrentHighScore -= 100;
         //Could bug If player kills during anim
         HasAtacked = false;
+        CurrentState = BehaviourState.Reset;
+
+ 
     }
     public void DeathCheck()
     {

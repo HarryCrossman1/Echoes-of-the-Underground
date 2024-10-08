@@ -229,6 +229,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &593555534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593555536}
+  - component: {fileID: 593555535}
+  m_Layer: 0
+  m_Name: HighScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &593555535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593555534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae1457dc4575874ea8cb963ceeab8f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHighScore: 0
+  AllTimeHighScore: 0
+--- !u!4 &593555536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593555534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.79724, y: -3.8493118, z: -0.08791542}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &699616717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -715,7 +761,7 @@ NavMeshAgent:
   m_Speed: 1
   m_Acceleration: 2
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -737,17 +783,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StalkerAgent: {fileID: 0}
-  ZombieCurrentHealth: 1000
-  ZombieHealth: 1000
+  ZombieCurrentHealth: 50
+  ZombieHealth: 50
   HasAtacked: 0
   ZombieInRange: 0
   IsStunned: 0
   ReachedDestination: 1
-  StalkingAccuracy: 10
-  ViewCone: 0.5
-  ViewRange: 15
+  StalkingAccuracy: 20
+  ViewCone: 0.8
+  ViewRange: 20
   CurrentState: 0
-  Attacking: {fileID: 0}
+  Attacking: {fileID: -203655887218126122, guid: ed896de892d3f7948a32aa68c230f928,
+    type: 3}
   Hit: {fileID: 0}
   Dead: {fileID: 0}
   ZombieSource: {fileID: 0}
