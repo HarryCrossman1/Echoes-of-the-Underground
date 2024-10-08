@@ -17,7 +17,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void Start()
     {
-        GenerateGrid(20,20);
+        GenerateGrid(WorldSizeX, WorldSizeZ);
     }
 
     private void GenerateGrid(int worldSizeX,int worldSizeZ)
@@ -27,7 +27,7 @@ public class ProceduralGeneration : MonoBehaviour
             for (int l = 0; l < worldSizeZ; l++)
             {
                 //Spawn the blocks 
-                Vector3 pos = new Vector3(i * GridSpacing, 0, l * GridSpacing);
+                Vector3 pos = new Vector3(gameObject.transform.position.x + (i * GridSpacing), 0, gameObject.transform.position.z + (l * GridSpacing));
                 GameObject Grid = Instantiate(Block, pos, Quaternion.identity);
                 //Random gen the object placement (scene)
                 int RandomObject = Random.Range(0, PlaceableSceneObjects.Length);
@@ -37,7 +37,8 @@ public class ProceduralGeneration : MonoBehaviour
                 if (RandomPlacement <= threshold && !JustGenerated)
                 {
                     JustGenerated = true;
-                    GameObject SceneObj = Instantiate(PlaceableSceneObjects[RandomObject], Grid.transform.position, Quaternion.identity);
+                    float RandomY = Random.Range(0, 360);
+                    GameObject SceneObj = Instantiate(PlaceableSceneObjects[RandomObject], Grid.transform.position, Quaternion.Euler(0,RandomY,0));
                     GeneratePickup(Grid);
                    
                 }
@@ -55,11 +56,4 @@ public class ProceduralGeneration : MonoBehaviour
         int RandomPickup = Random.Range(0, PlaceablePickups.Length);
         GameObject scenePickup = Instantiate(PlaceablePickups[RandomPickup], grid.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
     }
-    //private float NoiseGeneration(int x, int z, float detailScale)
-    //{
-    //    float xNoise = (x + transform.position.x) / detailScale;
-    //    float zNoise = (z + transform.position.y) / detailScale;
-
-    //    return Mathf.PerlinNoise(xNoise, zNoise);
-    //}
 }

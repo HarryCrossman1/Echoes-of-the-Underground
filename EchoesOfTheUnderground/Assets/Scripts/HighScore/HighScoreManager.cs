@@ -30,7 +30,7 @@ public class HighScoreManager : MonoBehaviour
         if (CurrentHighScore >= AllTimeHighScore)
         {
             HighScoreData.Score = CurrentHighScore;
-            Saving.WriteToXmlFile(Path, HighScoreData);
+           // Saving.WriteToXmlFile(Path, HighScoreData);
         }
     }
     public void Load()
@@ -38,7 +38,7 @@ public class HighScoreManager : MonoBehaviour
         if (File.Exists(Path))
         {
             Debug.Log(Path);
-            HighScoreData = (HighScore)Saving.ReadFromXmlFile(Path, HighScoreData);
+           // HighScoreData = (HighScore)Saving.ReadFromXmlFile(Path, HighScoreData);
             
         }
         else
@@ -47,7 +47,7 @@ public class HighScoreManager : MonoBehaviour
             // create the file here 
             HighScoreData.Score=0;
             // save it 
-            Saving.WriteToXmlFile(Path, HighScoreData);
+           // Saving.WriteToXmlFile(Path, HighScoreData);
             // initilize position
             AllTimeHighScore = HighScoreData.Score;
         }

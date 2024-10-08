@@ -17,6 +17,7 @@ TagManager:
   - DontInteractWithPlayer
   - MiscItem
   - Pistol
+  - Enviroment
   layers:
   - Default
   - TransparentFX

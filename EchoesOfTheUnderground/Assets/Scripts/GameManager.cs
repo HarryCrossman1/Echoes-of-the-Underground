@@ -11,30 +11,31 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject[] ZombiePrefabs;
-   [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
+    [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
-    
+
     public bool IsIdle;
     public int HordeDifficulty;
     private bool MovementExecuted;
     private int CurrentDifficulty;
-    [SerializeField] private Transform[] SetPoints;
+
     [SerializeField] private Transform[] ZombieSpawnPoints;
-    [SerializeField] private int SetPointTracker,SpawnTracker;
+    [SerializeField] private int SetPointTracker, SpawnTracker;
+    public bool IsActive;
     void Awake()
     {
         instance = this;
         CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
         PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[5], 3);
+        SpawnZombies(ZombieSpawnPoints[1], 3);
     }
     private void Start()
     {
-        MovementExecuted= false;
+        MovementExecuted = false;
         IsIdle = true;
-        // SetToLocation();
+
     }
     // Update is called once per frame
     void Update()
@@ -48,12 +49,12 @@ public class GameManager : MonoBehaviour
         {
             int rand = UnityEngine.Random.Range(0, ZombiePrefabs.Length);
             GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
-            
+
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
         }
     }
-    private void SpawnZombies(Transform SpawnPoint,int ZombieAmount)
+    private void SpawnZombies(Transform SpawnPoint, int ZombieAmount)
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
                 CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
                 // Remove blood 
                 foreach (GameObject bloodObj in BulletWounds)
-                { 
+                {
                     bloodObj.SetActive(false);
                 }
                 //Clear the list
@@ -105,59 +106,30 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-
-
-    private IEnumerator LerpToNextPoint(Transform player,Transform target)
-    {
-        while (Vector3.Distance(player.position, target.position) > 0.05f)
-        {
-            player.position = Vector3.Lerp(player.position, target.position, 3f * Time.deltaTime);
-            yield return null;  
-        }
-    }
-    private void MovePoints()
-    {
-        if (SetPointTracker < SetPoints.Length)
-        {
-            StartCoroutine(LerpToNextPoint(PlayerController.instance.PlayerTransform, SetPoints[SetPointTracker]));
-            SetPointTracker++;
-        }
-    }
-   [SerializeField] public bool IsActive;
     private void GameplayLoop()
     {
-        if (SetPointTracker == SetPoints.Length+1)
-        {
-            HighScoreManager.instance.Save();
-            SceneManager.LoadScene("MenuScene");
-        }
         if (!IsActive)
         {
             for (int i = 0; i < ZombieSpawnPoints.Length; i++)
             {
                 //check if the spawn point is too close 
                 int rand = UnityEngine.Random.Range(0, ZombieSpawnPoints.Length);
-                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.PlayerTransform.position) > 10f && SpawnTracker < 3)
+                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.transform.position) > 1f && SpawnTracker < 3)
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                    float Difficulty = Math.Squared(CurrentDifficulty) + SetPointTracker;
-                    double DifficultyModified = Math.SquareRoot((double)Difficulty, 0.001);
-                    float SpawnNum = math.ceil((float)DifficultyModified);
-                    
-                    if (SpawnNum < 1)
-                    { 
-                        SpawnNum = 1;
-                    }
-                    SpawnZombies(ZombieSpawnPoints[rand], (int)SpawnNum);
-                    Debug.Log(SpawnNum);
+                  
+
+                 
+                    SpawnZombies(ZombieSpawnPoints[rand], 1);
+                  
                     IsActive = true;
                     break;
                 }
-                
+
             }
             SpawnTracker = 0;
-            MovePoints();
         }
+
     }
 }

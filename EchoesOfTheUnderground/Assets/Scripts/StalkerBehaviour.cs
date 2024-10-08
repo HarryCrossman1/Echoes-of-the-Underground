@@ -1,0 +1,277 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class StalkerBehaviour : MonoBehaviour
+{
+    public static StalkerBehaviour instance;
+    [SerializeField] private NavMeshAgent StalkerAgent;
+    public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
+    public bool HasAtacked,ZombieInRange;
+   [SerializeField] public bool IsStunned;
+    [SerializeField] private bool ReachedDestination;
+    private Vector3 StoredPos;
+    [SerializeField] private float StalkingAccuracy;
+    [SerializeField] private float ViewCone;
+    [SerializeField] private float ViewRange;
+    private enum BehaviourState {Stalking,Inspecting,Chase,Attacking }
+   [SerializeField] private BehaviourState CurrentState;
+
+    // Store Animations 
+    [SerializeField] private AnimationClip Attacking, Hit, Dead;
+    private Animator StalkerAnimator;
+    // Zombie Audio
+    [SerializeField] private AudioSource ZombieSource;
+    [SerializeField] private AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
+    void Awake()
+    {
+        StalkerAgent = GetComponent<NavMeshAgent>();
+        ZombieSource = GetComponent<AudioSource>();
+
+        StalkerAnimator = GetComponent<Animator>();
+        instance = this;
+    }
+    private void Start()
+    {
+       
+    }
+    // Update is called once per frame
+    void Update()
+    {
+       // DeathCheck();
+        StateMachine();
+       // Chase(StalkerAgent, PlayerController.instance.PlayerTransform.gameObject);
+    }
+    public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
+    {
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 2f)
+        {
+            ZombieInRange = false;
+            if (!IsStunned)
+            ZombieAgent.destination = Target.transform.position;
+        }
+        else
+        {
+            ZombieAgent.destination = gameObject.transform.position;
+            ZombieInRange = true;
+            Attack();
+        }
+    }
+    private void Attack()
+    {
+        if (!HasAtacked)
+        { 
+            HasAtacked= true;
+            StartCoroutine(StartAttack(Attacking.length));
+        }
+    }
+    private void StateMachine()
+    {
+        switch (CurrentState)
+        {
+            case BehaviourState.Stalking:
+                {
+                    if (SightCheck(PlayerController.instance.transform.position,ViewRange))
+                    {
+                        EditDetails(0.8f, 7f, 2.5f);
+                        ReachedDestination = true;
+                        StoredPos = PlayerController.instance.transform.position;
+                        StalkerAnimator.SetBool("Crawling", false);
+                        StalkerAnimator.SetBool("Inspecting", true);
+                        CurrentState = BehaviourState.Inspecting;
+                    }
+                    if (ReachedDestination)
+                    {
+                        StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * StalkingAccuracy, 0, Random.insideUnitSphere.z * StalkingAccuracy);
+                        Debug.Log(NavmeshCheck(StoredPos) +":"+ StoredPos);
+                        if (NavmeshCheck(StoredPos))
+                        {
+                            StalkerAgent.SetDestination(StoredPos);
+                            ReachedDestination = false;
+                        }
+                        break;
+                    }
+                    if (Vector3.Distance(StoredPos,transform.position)<1f)
+                    { 
+                        ReachedDestination = true;
+                    }
+                    break;
+                }
+            case BehaviourState.Inspecting:
+                {
+                    if (SightCheck(PlayerController.instance.transform.position,ViewRange))
+                    {
+                        CurrentState = BehaviourState.Chase;
+                    }
+                    if (ReachedDestination)
+                    {
+                        if (NavmeshCheck(StoredPos))
+                        {
+                            StalkerAgent.SetDestination(StoredPos);
+                            ReachedDestination = false;
+                        }
+                        break;
+                    }
+                    if (Vector3.Distance(StoredPos, transform.position) < 1f)
+                    {
+                        ReachedDestination = true;
+                        EditDetails(0.5f, 15f, 1);
+                        StalkerAnimator.SetBool("Crawling", true);
+                        StalkerAnimator.SetBool("Inspecting", false);
+                        CurrentState = BehaviourState.Stalking;
+                    }
+                    break;
+                }
+               
+            case BehaviourState.Chase:
+                {
+                    StalkerAnimator.SetBool("Sprinting", true);
+                    StalkerAnimator.SetBool("Inspecting", false);
+                    EditDetails(0, 0, 7);
+                    StalkerAgent.SetDestination(PlayerController.instance.transform.position);
+                    if (Vector3.Distance(PlayerController.instance.transform.position, transform.position) < 3)
+                    {
+                        CurrentState = BehaviourState.Attacking;
+                    }
+                    break;
+                }
+            case BehaviourState.Attacking:
+                {
+                    break;
+                }
+        }
+    }
+    private bool NavmeshCheck(Vector3 OriginalPosition)
+    {
+        NavMeshHit hit;
+
+        if (NavMesh.SamplePosition(OriginalPosition, out hit,0.1f, NavMesh.AllAreas))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+       
+    }
+    private void EditDetails(float viewCone, float viewRange, float Speed)
+    {
+        ViewCone = viewCone;
+        ViewRange = viewRange;
+        StalkerAgent.speed = Speed;
+    }
+    protected virtual bool SightCheck(Vector3 PlayerPosition,float Range)
+    {
+        Vector3 Forward = transform.forward;
+        Vector3 ToPlayer = (PlayerPosition - transform.position).normalized;
+
+        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition,transform.position) < Range)
+        {
+            Debug.DrawLine(transform.position, ToPlayer, Color.black);
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, ToPlayer, out hit))
+            {
+                if (hit.collider.CompareTag("Enviroment"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+               
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
+    }
+    private IEnumerator StartAttack(float cooldown) 
+    {
+       
+        PlayZombieAudio(AttackAudio, false);
+        PlayerController.instance.PlayerDeathCheck();
+        yield return new WaitForSeconds(cooldown);
+        PlayerController.instance.PlayerHealth--;
+        HighScoreManager.instance.CurrentHighScore -= 100;
+        //Could bug If player kills during anim
+        HasAtacked = false;
+    }
+    public void DeathCheck()
+    {
+        if (ZombieCurrentHealth <= 0)
+        {
+            PlayZombieAudio(DeathAudio, false);
+            StalkerAgent.isStopped=true;
+            StartCoroutine(WaitForAnim(3f));
+
+        }
+    }
+    private IEnumerator WaitForAnim(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        gameObject.SetActive(false);
+        CheckActiveZombies();
+    }
+    public void ShotStun()
+    {
+        IsStunned= true;
+        if (IsStunned)
+        {
+            
+         
+            StartCoroutine(StunTimer(Hit.length));
+        }
+        
+    }
+    private IEnumerator StunTimer(float TimerLength)
+    {
+        StalkerAgent.isStopped = true;
+        PlayZombieAudio(ShotAudio,false);
+        yield return new WaitForSeconds(TimerLength);
+        PlayZombieAudio(AmbientAudio,true);
+
+        StalkerAgent.isStopped = false;
+        IsStunned = false;
+        if (ZombieInRange)
+        {
+         
+        }
+        else
+        {
+            
+        }
+    }
+    private void CheckActiveZombies()
+    {
+        for (int i = 0; i < GameManager.instance.ZombiePool.Count; i++)
+        {
+            // check if there are any zombies active in the hierarchy 
+            if (GameManager.instance.ZombiePool[i].activeInHierarchy)
+            {
+                GameManager.instance.IsActive = true;
+                break;
+            }
+            else
+            {
+                // if none are active 
+                GameManager.instance.IsActive = false;
+            }
+        }
+    }
+    public void PlayZombieAudio(AudioClip clip,bool loop)
+    {
+        if (!loop)
+        {
+            ZombieSource.clip = clip;
+            ZombieSource.Play();
+            ZombieSource.loop = false;
+        }
+        else { ZombieSource.loop = true; }
+    }
+}

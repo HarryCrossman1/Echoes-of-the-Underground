@@ -25,10 +25,15 @@ public class WeaponManager : MonoBehaviour
     }
     private void Start()
     {
+       
         for (int i = 0; i < AllInteractors.Length; i++)
         {
-            AllInteractors[i].selectEntered.AddListener(AddMagazine);
-            AllInteractors[i].selectExited.AddListener(RemoveMagazine);
+            if (AllInteractors[i] != null)
+            {
+                AllInteractors[i].selectEntered.AddListener(AddMagazine);
+                AllInteractors[i].selectExited.AddListener(RemoveMagazine);
+            }
+           
         }
     }
     private void Update()
