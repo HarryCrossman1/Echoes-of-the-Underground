@@ -789,15 +789,15 @@ MonoBehaviour:
   ZombieInRange: 0
   IsStunned: 0
   ReachedDestination: 1
-  StalkingAccuracy: 20
-  ViewCone: 0.8
-  ViewRange: 20
+  StalkingAccuracy: 30
+  ViewCone: 0.6
+  ViewRange: 14
   CurrentState: 0
   Attacking: {fileID: -203655887218126122, guid: ed896de892d3f7948a32aa68c230f928,
     type: 3}
   Hit: {fileID: 0}
   Dead: {fileID: 0}
-  ZombieSource: {fileID: 0}
+  ZombieSource: {fileID: 1365257150}
   AttackAudio: {fileID: 0}
   ShotAudio: {fileID: 0}
   DeathAudio: {fileID: 0}

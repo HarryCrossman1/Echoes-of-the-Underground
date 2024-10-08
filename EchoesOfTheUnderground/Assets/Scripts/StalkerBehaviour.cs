@@ -37,7 +37,7 @@ public class StalkerBehaviour : MonoBehaviour
     }
     private void Start()
     {
-       
+       ChooseRandomVec()
     }
     // Update is called once per frame
     void Update()
@@ -76,8 +76,6 @@ public class StalkerBehaviour : MonoBehaviour
                 {
                     if (SightCheck(PlayerController.instance.transform.position,ViewRange))
                     {
-                     
-                        EditDetails(0.8f, 7f, 2.5f);
                         ReachedDestination = true;
                         StalkerAnimator.SetBool("Crawling", false);
                         StalkerAnimator.SetBool("Inspecting", true);
@@ -87,6 +85,7 @@ public class StalkerBehaviour : MonoBehaviour
                     }
                     if (ReachedDestination)
                     {
+                        EditDetails(0.65f, 11f, 1f);
                         StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * StalkingAccuracy, 0, Random.insideUnitSphere.z * StalkingAccuracy);
                      
                         if (NavmeshCheck(StoredPos))
@@ -104,6 +103,7 @@ public class StalkerBehaviour : MonoBehaviour
                 }
             case BehaviourState.Inspecting:
                 {
+                    EditDetails(0.8f, 4f, 2.5f);
                     if (SightCheck(PlayerController.instance.transform.position,ViewRange))
                     {
                         CurrentState = BehaviourState.Chase;
@@ -117,7 +117,6 @@ public class StalkerBehaviour : MonoBehaviour
                     if (Vector3.Distance(StoredPos, transform.position) < 1f)
                     {
                         ReachedDestination = true;
-                        EditDetails(0.5f, 15f, 1);
                         StalkerAnimator.SetBool("Crawling", true);
                         StalkerAnimator.SetBool("Inspecting", false);
                         CurrentState = BehaviourState.Stalking;
@@ -150,9 +149,7 @@ public class StalkerBehaviour : MonoBehaviour
                    
                     StalkerAgent.enabled = true;
                     // REMEMBER TO ADD THE CORRECT NUMBERS LATER 
-                    float RandomX = Random.Range(0, 20);
-                    float RandomZ = Random.Range(0, 20);
-                    Vector3 NewVec = new Vector3(RandomX, 0, RandomZ);
+                  
                     StalkerAgent.SetDestination(NewVec);
                     if (NavmeshCheck(NewVec))
                     {
@@ -160,7 +157,6 @@ public class StalkerBehaviour : MonoBehaviour
                         {
                            
                             CurrentState = BehaviourState.Stalking;
-                            EditDetails(0.7f, 1, 7);
                             StalkerAnimator.SetBool("Sprinting", false);
                             StalkerAnimator.SetBool("Crawling", true);
                             ReachedDestination = true;
@@ -184,6 +180,12 @@ public class StalkerBehaviour : MonoBehaviour
             return false;
         }
        
+    }
+    private void ChooseRandomVec(float RanMaxX,float RanMaxZ,out Vector3 vector)
+    {
+        float RandomX = Random.Range(0, RanMaxX);
+        float RandomZ = Random.Range(0, RanMaxZ);
+        vector = new Vector3(RandomX, 0, RandomZ);
     }
     private void EditDetails(float viewCone, float viewRange, float Speed)
     {
