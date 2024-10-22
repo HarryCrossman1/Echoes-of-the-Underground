@@ -139,10 +139,12 @@ public class GameManager : MonoBehaviour
     }
     private void CalculateDifficultyScore()
     { 
-        // Playerhealth 
-        // PlayerAmmo 
-        // PlayerAccuracy 
-        // LevelPosition 
+        // Playerhealth * 1  
+        // PlayerAmmostores / 2  round down 
+        // PlayerAccuracy <50 = 1 50 -75 = 2 75+ = 3 
+        // LevelPosition * 1 
+
+        // if >10 round to 10 else if <3 round to 3 
 
     }
 }
