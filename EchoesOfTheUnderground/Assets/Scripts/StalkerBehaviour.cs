@@ -15,6 +15,7 @@ public class StalkerBehaviour : MonoBehaviour
     [SerializeField] private bool RunningAway;
     private Vector3 StoredPos;
     [SerializeField] private float StalkingAccuracy;
+    [HideInInspector] public float CurrentStalkingAccuracy;
     [SerializeField] private float ViewCone;
     [SerializeField] private float ViewRange;
     private enum BehaviourState {Stalking,Inspecting,Chase,Attacking,Reset }
@@ -38,7 +39,7 @@ public class StalkerBehaviour : MonoBehaviour
     }
     private void Start()
     {
-
+        CurrentStalkingAccuracy = StalkingAccuracy;
     }
     // Update is called once per frame
     void Update()
@@ -87,7 +88,7 @@ public class StalkerBehaviour : MonoBehaviour
                     if (ReachedDestination)
                     {
                         EditDetails(0.65f, 11f, 1f);
-                        StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * StalkingAccuracy, 0, Random.insideUnitSphere.z * StalkingAccuracy);
+                        StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * CurrentStalkingAccuracy, 0, Random.insideUnitSphere.z * CurrentStalkingAccuracy);
                      
                         if (NavmeshCheck(StoredPos))
                         {
@@ -165,6 +166,7 @@ public class StalkerBehaviour : MonoBehaviour
                             StalkerAnimator.SetBool("Crawling", true);
                             ReachedDestination = true;
                             RunningAway = true;
+                            CurrentStalkingAccuracy = StalkingAccuracy;
                             break;
                         }
                     }
@@ -186,11 +188,21 @@ public class StalkerBehaviour : MonoBehaviour
         }
        
     }
-    private Vector3 ChooseRandomVec(float RanMaxX,float RanMaxZ)
+    private Vector3? ChooseRandomVec(float RanMaxX,float RanMaxZ)
     {
         float RandomX = Random.Range(0, RanMaxX);
         float RandomZ = Random.Range(0, RanMaxZ);
-        return new Vector3(RandomX, 0, RandomZ);
+        Vector3 Vec = new Vector3(RandomX, 0, RandomZ);
+
+        if (Vector3.Distance(Vec, PlayerController.instance.transform.position) < 12f)
+        {
+            return Vec;
+        }
+        else
+        { 
+            
+        }
+        
     }
     private void EditDetails(float viewCone, float viewRange, float Speed)
     {

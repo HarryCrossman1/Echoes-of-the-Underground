@@ -1328,6 +1328,7 @@ MonoBehaviour:
   Smg: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
   ShotsHit: 0
   ShotsTaken: 0
+  StoredAmmoCount: 0
 --- !u!143 &6510696055758903781
 CharacterController:
   m_ObjectHideFlags: 0

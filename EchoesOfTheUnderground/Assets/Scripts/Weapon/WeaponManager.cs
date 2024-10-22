@@ -22,6 +22,7 @@ public class WeaponManager : MonoBehaviour
 
     public int ShotsHit;
     public int ShotsTaken;
+    [SerializeField] private int StoredAmmoCount;
     void Awake()
     {
         instance= this;
