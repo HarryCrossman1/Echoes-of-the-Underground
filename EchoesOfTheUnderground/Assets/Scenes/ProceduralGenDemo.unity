@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 275238677}
   - component: {fileID: 275238676}
   - component: {fileID: 275238675}
+  - component: {fileID: 275238678}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,6 +216,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &275238678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275238674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &403447791
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,11 +295,11 @@ MonoBehaviour:
   NoiseHeight: 3
   GridSpacing: 5
   ObjectDensity: 100
+  PickupDensity: 1
   PlaceableSceneObjects:
   - {fileID: 5428229217074581752, guid: e334d1a5db11c4c4a90ae4525b6a98f2, type: 3}
   - {fileID: 3774923934443018565, guid: 4cf3d8bc6bf54524a8ec527f28a2b24a, type: 3}
   - {fileID: 4171332145603542927, guid: 2495f73db9158c749aa6e9fdea5c476b, type: 3}
-  - {fileID: 3051504600367765630, guid: 9a3e290b6ad235b4d8991db8b20d4b37, type: 3}
   PlaceablePickups:
   - {fileID: 8597304211162988581, guid: 60cbbf5ad6ce1dc448198abf1de673d2, type: 3}
   - {fileID: 7812234114908762432, guid: 9f6c32914eafab746a202860ebbfef50, type: 3}

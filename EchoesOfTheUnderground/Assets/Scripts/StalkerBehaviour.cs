@@ -12,6 +12,7 @@ public class StalkerBehaviour : MonoBehaviour
     public bool HasAtacked,ZombieInRange;
    [SerializeField] public bool IsStunned;
     [SerializeField] private bool ReachedDestination;
+    [SerializeField] private bool RunningAway;
     private Vector3 StoredPos;
     [SerializeField] private float StalkingAccuracy;
     [SerializeField] private float ViewCone;
@@ -37,7 +38,7 @@ public class StalkerBehaviour : MonoBehaviour
     }
     private void Start()
     {
-       ChooseRandomVec()
+
     }
     // Update is called once per frame
     void Update()
@@ -146,20 +147,24 @@ public class StalkerBehaviour : MonoBehaviour
                 }
             case BehaviourState.Reset:
                 {
-                   
+                    if (RunningAway)
+                    {
+                        RunningAway = false;
+                        StoredPos = ChooseRandomVec(20, 20);
+                        StalkerAgent.SetDestination(StoredPos);
+                    }
                     StalkerAgent.enabled = true;
                     // REMEMBER TO ADD THE CORRECT NUMBERS LATER 
-                  
-                    StalkerAgent.SetDestination(NewVec);
-                    if (NavmeshCheck(NewVec))
+                    if (NavmeshCheck(StoredPos))
                     {
-                        if (Vector3.Distance(transform.position, NewVec) < 1f)
+                        if (Vector3.Distance(transform.position, StoredPos) < 1f)
                         {
                            
                             CurrentState = BehaviourState.Stalking;
                             StalkerAnimator.SetBool("Sprinting", false);
                             StalkerAnimator.SetBool("Crawling", true);
                             ReachedDestination = true;
+                            RunningAway = true;
                             break;
                         }
                     }
@@ -181,11 +186,11 @@ public class StalkerBehaviour : MonoBehaviour
         }
        
     }
-    private void ChooseRandomVec(float RanMaxX,float RanMaxZ,out Vector3 vector)
+    private Vector3 ChooseRandomVec(float RanMaxX,float RanMaxZ)
     {
         float RandomX = Random.Range(0, RanMaxX);
         float RandomZ = Random.Range(0, RanMaxZ);
-        vector = new Vector3(RandomX, 0, RandomZ);
+        return new Vector3(RandomX, 0, RandomZ);
     }
     private void EditDetails(float viewCone, float viewRange, float Speed)
     {

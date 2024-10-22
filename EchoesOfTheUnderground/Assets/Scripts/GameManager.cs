@@ -22,12 +22,17 @@ public class GameManager : MonoBehaviour
     private int CurrentDifficulty;
 
     [SerializeField] private Transform[] ZombieSpawnPoints;
-    [SerializeField] private int SetPointTracker, SpawnTracker;
+    [SerializeField] private int SpawnTracker;
     public bool IsActive;
+
+    // Values For Difficulty 
+    private int DiffucultyScore;
+    public int LevelPosition;
+    public float AccuracyRating = 100f;
     void Awake()
     {
         instance = this;
-        CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
+      //  CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
         PoolZombies(ZombiePoolAmount);
         SpawnZombies(ZombieSpawnPoints[1], 3);
     }
@@ -130,6 +135,14 @@ public class GameManager : MonoBehaviour
             }
             SpawnTracker = 0;
         }
+
+    }
+    private void CalculateDifficultyScore()
+    { 
+        // Playerhealth 
+        // PlayerAmmo 
+        // PlayerAccuracy 
+        // LevelPosition 
 
     }
 }

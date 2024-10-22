@@ -56,4 +56,5 @@ public class ProceduralGeneration : MonoBehaviour
         int RandomPickup = Random.Range(0, PlaceablePickups.Length);
         GameObject scenePickup = Instantiate(PlaceablePickups[RandomPickup], grid.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
     }
+    //private void GeneratePoint(GameObject grid,GameObject Point)
 }

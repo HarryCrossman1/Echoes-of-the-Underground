@@ -789,6 +789,7 @@ MonoBehaviour:
   ZombieInRange: 0
   IsStunned: 0
   ReachedDestination: 1
+  RunningAway: 1
   StalkingAccuracy: 30
   ViewCone: 0.6
   ViewRange: 14

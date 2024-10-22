@@ -19,6 +19,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private GameObject BloodPrefab;
 
     [SerializeField] private Weapon Smg;
+
+    public int ShotsHit;
+    public int ShotsTaken;
     void Awake()
     {
         instance= this;
@@ -64,6 +67,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("ZombieBody"))
             {
+                ShotsHit++;
                 //Get the hit zombie 
                 Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                 // Deal Damage 
@@ -88,6 +92,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (hit.collider.CompareTag("ZombieHead"))
             {
+                ShotsHit++;
                 Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
@@ -111,6 +116,7 @@ public class WeaponManager : MonoBehaviour
             {
                 if (PlayerController.instance.PlayerHealth < 3)
                 {
+                    ShotsHit++;
                     PlayerController.instance.PlayerHealth++;
                     UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
                     HighScoreManager.instance.CurrentHighScore += 10;
@@ -120,11 +126,11 @@ public class WeaponManager : MonoBehaviour
             else if (hit.collider.CompareTag("MiscItem"))
             {
                 if (StoryManager.Instance.gameObject != null)
-                { 
+                {
                     StoryManager.Instance.HitMiscItem = false;
                 }
                 if (hit.collider.attachedRigidbody != null)
-                { 
+                {
                     Rigidbody body = hit.collider.attachedRigidbody;
                     body.AddForce(hit.point, ForceMode.Impulse);
 
@@ -134,6 +140,11 @@ public class WeaponManager : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                ShotsTaken++;
+            }
+            GameManager.instance.AccuracyRating = (ShotsHit / ShotsTaken) * 100f;
         }
               //  }
            // }
