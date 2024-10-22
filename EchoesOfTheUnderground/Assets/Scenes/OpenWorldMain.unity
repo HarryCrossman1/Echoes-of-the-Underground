@@ -1029,7 +1029,8 @@ MonoBehaviour:
   ZombieSpawnPoints: []
   SpawnTracker: 0
   IsActive: 0
-  LevelPosition: 1
+  LevelPosition: 0
+  AccuracyRating: 100
 --- !u!4 &420728252
 Transform:
   m_ObjectHideFlags: 0
@@ -3381,6 +3382,8 @@ MonoBehaviour:
   BloodPrefab: {fileID: 7782137563645058448, guid: d2b02ad6ee8b5cb40ac027a439e311e0,
     type: 3}
   Smg: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
+  ShotsHit: 0
+  ShotsTaken: 0
 --- !u!114 &1281077589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4492,7 +4495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feac9c201fc254a49ae8dde76569b826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPos: 2
+  LevelPos: 1
 --- !u!65 &1619298134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4958,7 +4961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feac9c201fc254a49ae8dde76569b826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPos: 3
+  LevelPos: 2
 --- !u!65 &1658843615
 BoxCollider:
   m_ObjectHideFlags: 0
