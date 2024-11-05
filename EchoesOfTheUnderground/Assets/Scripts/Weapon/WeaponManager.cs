@@ -46,7 +46,7 @@ public class WeaponManager : MonoBehaviour
     }
     public void Fire()
     {
-      
+        Debug.Log("Firing");
         if (Time.time - LastShot < (CurrentWeapon.FireRate))
         {
             return;

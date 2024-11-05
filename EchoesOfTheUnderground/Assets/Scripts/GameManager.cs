@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
 
-    public bool IsIdle;
+    public bool HasZombies;
     public int HordeDifficulty;
     private bool MovementExecuted;
     private int CurrentDifficulty;
@@ -32,14 +32,17 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-      //  CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
-        PoolZombies(ZombiePoolAmount);
-        SpawnZombies(ZombieSpawnPoints[1], 3);
+        //  CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
+        if (HasZombies)
+        {
+            PoolZombies(ZombiePoolAmount);
+            SpawnZombies(ZombieSpawnPoints[1], 3);
+        }
+      
     }
     private void Start()
     {
         MovementExecuted = false;
-        IsIdle = true;
 
     }
     // Update is called once per frame

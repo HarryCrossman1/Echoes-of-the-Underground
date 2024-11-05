@@ -12,7 +12,6 @@ public class XrWeaponPickup : MonoBehaviour
     [SerializeField] private Animator CurrentAnimator;
     [SerializeField] private Light Torch;
     public Magazine CurrentMag;
-    [SerializeField] private bool NeedsPistolHip;
     public void WeaponPickedUp()
     {
         WeaponManager.instance.HeldWeapon = WeaponShootPoint;
@@ -24,18 +23,6 @@ public class XrWeaponPickup : MonoBehaviour
         if (weapon.Type == Weapon.AmmoType.Pistol)
         {
             WeaponParent.transform.SetParent(null);
-        }
-    }
-    public void PistolDropped()
-    {
-        Torch.enabled = false;
-        if (NeedsPistolHip)
-        {
-            WeaponParent.transform.position = PlayerController.instance.PistolHip.position;
-            Vector3 DirVec = PlayerController.instance.PistolHip.position - WeaponParent.transform.position;
-            Quaternion TargetAngle = Quaternion.LookRotation(DirVec);
-            WeaponParent.transform.rotation = TargetAngle;
-            WeaponParent.transform.SetParent(PlayerController.instance.PistolHip);
         }
     }
 }

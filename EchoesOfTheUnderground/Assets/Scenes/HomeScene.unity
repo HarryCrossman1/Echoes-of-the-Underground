@@ -393,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -404,7 +404,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1592073580}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -419,7 +419,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 70292535}
+      objectReference: {fileID: 335399538}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -443,7 +443,7 @@ PrefabInstance:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PistolDropped
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -458,7 +458,7 @@ PrefabInstance:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: XrWeaponPickup, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -473,7 +473,7 @@ PrefabInstance:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -615,7 +615,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 70292533}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 335399538}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05094fda2ae1116458c5c5f25c3da9f1, type: 3}
@@ -2129,6 +2129,68 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7301332725997032765, guid: 402602461e5765a47b31fd9ea70689f9, type: 3}
+--- !u!1 &335399538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7341982918998925625, guid: 6885103ce4504a14198b0b10e1056c7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 70292533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &370874126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370874128}
+  - component: {fileID: 370874127}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &370874127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370874126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0317991aaf2ef49468ac5095b5ca9b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ZombiePrefabs: []
+  ZombiePool: []
+  ActiveZombies: []
+  BulletWounds: []
+  ZombiePoolAmount: 0
+  HasZombies: 0
+  HordeDifficulty: 0
+  ZombieSpawnPoints: []
+  SpawnTracker: 0
+  IsActive: 0
+  LevelPosition: 0
+  AccuracyRating: 100
+--- !u!4 &370874128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370874126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4518216, y: 0.86264074, z: 2.6739774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 119
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &377339042
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,6 +5468,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 160409764}
   m_SourcePrefab: {fileID: 100100000, guid: be2816261f0421042a6509635c1533c0, type: 3}
+--- !u!114 &965879191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6129625714410172897, guid: 6885103ce4504a14198b0b10e1056c7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 70292533}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffd88e1459ad234d96bbc0d545e4bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1002947901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9175,6 +9249,36 @@ PrefabInstance:
       propertyPath: m_IgnoreTrackingState
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6875347495941310612, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: m_PositionInput.m_Action.m_Id
+      value: bcbf1fcd-4d11-4421-95f9-01341c86946f
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875347495941310612, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: m_RotationInput.m_Action.m_Id
+      value: 5d7e3708-bb8d-4467-a0be-0731ac32cd91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875347495941310612, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: m_PositionInput.m_Action.m_Name
+      value: Position Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875347495941310612, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: m_RotationInput.m_Action.m_Name
+      value: Rotation Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099033311613460159, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: AllInteractors.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099033311613460159, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: AllInteractors.Array.data[0]
+      value: 
+      objectReference: {fileID: 965879191}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4548794613748866650, guid: 3ef4eeb3cd4d954478e9a1887c597c55, type: 3}
@@ -9189,6 +9293,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 737328078}
   m_SourcePrefab: {fileID: 100100000, guid: 3ef4eeb3cd4d954478e9a1887c597c55, type: 3}
+--- !u!114 &1592073580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7099033311613460159, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+    type: 3}
+  m_PrefabInstance: {fileID: 1592073579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a748ba2b40c4144293745d1d90da27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1597220061
 PrefabInstance:
   m_ObjectHideFlags: 0

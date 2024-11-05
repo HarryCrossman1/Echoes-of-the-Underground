@@ -15315,6 +15315,26 @@ PrefabInstance:
       propertyPath: AllInteractors.Array.data[2]
       value: 
       objectReference: {fileID: 422451242}
+    - target: {fileID: 5693286223671969561, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: m_PositionInput.m_Action.m_Id
+      value: aaa27ebc-1dbe-491a-b6fb-223628f03a9c
+      objectReference: {fileID: 0}
+    - target: {fileID: 5693286223671969561, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: m_RotationInput.m_Action.m_Id
+      value: f89bafc7-782a-458a-8556-f71e9f192310
+      objectReference: {fileID: 0}
+    - target: {fileID: 5693286223671969561, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: m_PositionInput.m_Action.m_Name
+      value: Position Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 5693286223671969561, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: m_RotationInput.m_Action.m_Name
+      value: Rotation Input
+      objectReference: {fileID: 0}
     - target: {fileID: 7428920916947945243, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
       propertyPath: m_InteractionManager
