@@ -151,7 +151,7 @@ public class StalkerBehaviour : MonoBehaviour
                     if (RunningAway)
                     {
                         RunningAway = false;
-                        StoredPos = ChooseRandomVec(20, 20);
+                       // StoredPos = ChooseRandomVec(20, 20);
                         StalkerAgent.SetDestination(StoredPos);
                     }
                     StalkerAgent.enabled = true;
@@ -188,22 +188,17 @@ public class StalkerBehaviour : MonoBehaviour
         }
        
     }
-    private Vector3? ChooseRandomVec(float RanMaxX,float RanMaxZ)
-    {
-        float RandomX = Random.Range(0, RanMaxX);
-        float RandomZ = Random.Range(0, RanMaxZ);
-        Vector3 Vec = new Vector3(RandomX, 0, RandomZ);
+    //private Vector3 ChooseRandomVec(float RanMaxX,float RanMaxZ)
+    //{
+    //    float RandomX = Random.Range(0, RanMaxX);
+    //    float RandomZ = Random.Range(0, RanMaxZ);
+    //    Vector3 Vec = new Vector3(RandomX, 0, RandomZ);
 
-        if (Vector3.Distance(Vec, PlayerController.instance.transform.position) < 12f)
-        {
-            return Vec;
-        }
-        else
-        { 
-            
-        }
-        
-    }
+    //    if (Vector3.Distance(Vec, PlayerController.instance.transform.position) < 12f)
+    //    {
+    //        return Vec;
+    //    }
+    //}
     private void EditDetails(float viewCone, float viewRange, float Speed)
     {
         ViewCone = viewCone;

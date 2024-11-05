@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SubwayScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/HomeScene.unity
+    guid: 814294fc0ea896940be74e50a5fea24d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0d6cf3e4c7bbd7748b4274f4bdb2ddb7,
       type: 2}

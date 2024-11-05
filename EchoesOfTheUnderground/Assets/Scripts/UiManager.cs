@@ -15,7 +15,7 @@ public class UiManager : MonoBehaviour
     private int DifficultyTracker =1;
     public Canvas DeathCanvas;
     [SerializeField] GameObject MovingText;
-    [SerializeField] public TextMeshProUGUI HealthText;
+    [SerializeField] public TextMeshProUGUI HealthText,AmmoText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,9 +27,9 @@ public class UiManager : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        HighScoreManager.instance.Load();
-        if(HighScoreText!=null)
-        HighScoreText.text = HighScoreManager.instance.AllTimeHighScore.ToString();
+        //HighScoreManager.instance.Load();
+        //if(HighScoreText!=null)
+        //HighScoreText.text = HighScoreManager.instance.AllTimeHighScore.ToString();
     }
     public void StartCampaign()
     {
@@ -70,12 +70,8 @@ public class UiManager : MonoBehaviour
             }
         }
     }
-    public void UiMoving()
+    public void UpdateAmmoCounter()
     {
-        MovingText.SetActive(true);
-    }
-    public void UiFight()
-    {
-        MovingText.SetActive(false);
+        AmmoText.text = WeaponManager.instance.StoredAmmoCount.ToString(); 
     }
 }

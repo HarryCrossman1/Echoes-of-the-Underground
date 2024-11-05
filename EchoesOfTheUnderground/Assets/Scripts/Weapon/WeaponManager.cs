@@ -22,7 +22,7 @@ public class WeaponManager : MonoBehaviour
 
     public int ShotsHit;
     public int ShotsTaken;
-    [SerializeField] private int StoredAmmoCount;
+    public int StoredAmmoCount;
     void Awake()
     {
         instance= this;
@@ -161,5 +161,15 @@ public class WeaponManager : MonoBehaviour
     {
         HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
         SoundManager.instance.PlayReload(false);
+    }
+    public void StoreMagazine()
+    { 
+        StoredAmmoCount++;
+        UiManager.instance.UpdateAmmoCounter();
+    }
+    public void UnStoreMagazine()
+    {
+        StoredAmmoCount--;
+        UiManager.instance.UpdateAmmoCounter();
     }
 }
