@@ -9170,6 +9170,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6875347495941310612, guid: 3ef4eeb3cd4d954478e9a1887c597c55,
+        type: 3}
+      propertyPath: m_IgnoreTrackingState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4548794613748866650, guid: 3ef4eeb3cd4d954478e9a1887c597c55, type: 3}
