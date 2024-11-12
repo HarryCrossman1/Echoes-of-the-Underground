@@ -18,6 +18,7 @@ TagManager:
   - MiscItem
   - Pistol
   - Enviroment
+  - CampTrigger
   layers:
   - Default
   - TransparentFX

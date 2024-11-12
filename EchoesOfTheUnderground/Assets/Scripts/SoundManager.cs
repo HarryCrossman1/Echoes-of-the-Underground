@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] VoiceLine;
     [SerializeField] private bool VoiceLineFinished;
     [SerializeField] private float VoiceLineTimer;
+    // 
+    [SerializeField] private AudioSource AmbienceSource;
+    [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
     // Start is called before the first frame update
     void Awake()
     {
@@ -107,6 +110,18 @@ public class SoundManager : MonoBehaviour
                 StoryManager.Instance.TutorialState++;
             }
         
+        }
+    }
+
+    public void ChangeAmbientMusic(bool IsScary)
+    {
+        if (IsScary)
+        {
+            AmbienceSource.clip = ScaryAmbienceClip;
+        }
+        else
+        {
+            AmbienceSource.clip = ChillAmbienceClip;
         }
     }
 }
