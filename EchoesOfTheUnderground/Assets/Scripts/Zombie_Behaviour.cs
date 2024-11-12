@@ -32,7 +32,11 @@ public class Zombie_Behaviour : MonoBehaviour
     void Update()
     {
         DeathCheck();
-        Chase(Zombie_Agent, PlayerController.instance.PlayerTransform.gameObject);
+        if (StalkerBehaviour.instance.SightCheck(PlayerController.instance.PlayerTransform.position, 13, 0.5f))
+        {
+            Chase(Zombie_Agent, PlayerController.instance.PlayerTransform.gameObject);
+        }       
+        
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
@@ -90,39 +94,39 @@ public class Zombie_Behaviour : MonoBehaviour
         gameObject.SetActive(false);
         CheckActiveZombies();
     }
-    public void ShotStun()
-    {
-        IsStunned= true;
-        if (IsStunned)
-        {
+    //public void ShotStun()
+    //{
+    //    IsStunned= true;
+    //    if (IsStunned)
+    //    {
             
-            ZombieAnimator.SetBool("Walking", false);
-            ZombieAnimator.SetBool("Attacking", false);
-            ZombieAnimator.SetBool("Stunned", true);
-            StartCoroutine(StunTimer(Hit.length));
-        }
+    //        ZombieAnimator.SetBool("Walking", false);
+    //        ZombieAnimator.SetBool("Attacking", false);
+    //        ZombieAnimator.SetBool("Stunned", true);
+    //        StartCoroutine(StunTimer(Hit.length));
+    //    }
         
-    }
-    private IEnumerator StunTimer(float TimerLength)
-    {
-        Zombie_Agent.isStopped = true;
-        PlayZombieAudio(ShotAudio,false);
-        yield return new WaitForSeconds(TimerLength);
-        PlayZombieAudio(AmbientAudio,true);
+    //}
+    //private IEnumerator StunTimer(float TimerLength)
+    //{
+    //    Zombie_Agent.isStopped = true;
+    //    PlayZombieAudio(ShotAudio,false);
+    //    yield return new WaitForSeconds(TimerLength);
+    //    PlayZombieAudio(AmbientAudio,true);
         
-        Zombie_Agent.isStopped = false;
-        IsStunned = false;
-        if (ZombieInRange)
-        {
-            ZombieAnimator.SetBool("Stunned", false);
-            ZombieAnimator.SetBool("Attacking", true);
-        }
-        else
-        {
-            ZombieAnimator.SetBool("Stunned", false);
-            ZombieAnimator.SetBool("Walking", true);
-        }
-    }
+    //    Zombie_Agent.isStopped = false;
+    //    IsStunned = false;
+    //    if (ZombieInRange)
+    //    {
+    //        ZombieAnimator.SetBool("Stunned", false);
+    //        ZombieAnimator.SetBool("Attacking", true);
+    //    }
+    //    else
+    //    {
+    //        ZombieAnimator.SetBool("Stunned", false);
+    //        ZombieAnimator.SetBool("Walking", true);
+    //    }
+    //}
     private void CheckActiveZombies()
     {
         for (int i = 0; i < GameManager.instance.ZombiePool.Count; i++)

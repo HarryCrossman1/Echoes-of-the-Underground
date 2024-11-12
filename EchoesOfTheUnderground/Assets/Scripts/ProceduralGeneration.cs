@@ -15,7 +15,7 @@ public class ProceduralGeneration : MonoBehaviour
     [SerializeField] private GameObject[] PlaceablePickups;
     [SerializeField] private bool JustGenerated;
 
-    private void Start()
+    private void Awake()
     {
         GenerateGrid(WorldSizeX, WorldSizeZ);
     }

@@ -74,11 +74,11 @@ public class WeaponManager : MonoBehaviour
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
                 //Apply Stun
-                if (CurrentWeapon != Smg)
-                {
-                    zombie_Behaviour.ShotStun();
-                    Debug.Log("Check");
-                }
+                //if (CurrentWeapon != Smg)
+                //{
+                //    zombie_Behaviour.ShotStun();
+                //    Debug.Log("Check");
+                //}
 
                 //Take ammo
                 zombie_Behaviour.DeathCheck();
@@ -98,10 +98,10 @@ public class WeaponManager : MonoBehaviour
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
                 //Apply Stun
-                if (CurrentWeapon != Smg)
-                {
-                    zombie_Behaviour.ShotStun();
-                }
+                //if (CurrentWeapon != Smg)
+                //{
+                //    zombie_Behaviour.ShotStun();
+                //}
                 //Take ammo
                 zombie_Behaviour.DeathCheck();
 

@@ -76,7 +76,7 @@ public class StalkerBehaviour : MonoBehaviour
         {
             case BehaviourState.Stalking:
                 {
-                    if (SightCheck(PlayerController.instance.transform.position,ViewRange))
+                    if (SightCheck(PlayerController.instance.transform.position,ViewRange,ViewCone))
                     {
                         ReachedDestination = true;
                         StalkerAnimator.SetBool("Crawling", false);
@@ -106,7 +106,7 @@ public class StalkerBehaviour : MonoBehaviour
             case BehaviourState.Inspecting:
                 {
                     EditDetails(0.8f, 4f, 2.5f);
-                    if (SightCheck(PlayerController.instance.transform.position,ViewRange))
+                    if (SightCheck(PlayerController.instance.transform.position,ViewRange,ViewCone))
                     {
                         CurrentState = BehaviourState.Chase;
                     }
@@ -205,7 +205,7 @@ public class StalkerBehaviour : MonoBehaviour
         ViewRange = viewRange;
         StalkerAgent.speed = Speed;
     }
-    protected virtual bool SightCheck(Vector3 PlayerPosition,float Range)
+    public bool SightCheck(Vector3 PlayerPosition,float Range,float ViewCone)
     {
         Vector3 Forward = transform.forward;
         Vector3 ToPlayer = (PlayerPosition - transform.position).normalized;
