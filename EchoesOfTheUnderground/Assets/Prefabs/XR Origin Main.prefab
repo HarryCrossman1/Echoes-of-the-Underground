@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 1438130757053624305}
   - component: {fileID: 1352083414336824835}
   m_Layer: 0
-  m_Name: XR Origin 1
+  m_Name: XR Origin Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1322,7 +1322,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 100
+  far clip plane: 30
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5

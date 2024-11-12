@@ -15,8 +15,8 @@ GameObject:
   m_Name: civillow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 16
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 24
   m_IsActive: 1
 --- !u!4 &4266301520150154826
 Transform:

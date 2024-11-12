@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6113768617667890442}
   - component: {fileID: 778170384786512191}
   - component: {fileID: 6395450091644400188}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: FogThick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
