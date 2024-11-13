@@ -117,11 +117,15 @@ public class SoundManager : MonoBehaviour
     {
         if (IsScary)
         {
+            AmbienceSource.Stop();
             AmbienceSource.clip = ScaryAmbienceClip;
+            AmbienceSource.Play();
         }
         else
         {
+            AmbienceSource.Stop();
             AmbienceSource.clip = ChillAmbienceClip;
+            AmbienceSource.Play();
         }
     }
 }
