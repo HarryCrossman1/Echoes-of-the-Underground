@@ -580,6 +580,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &133964757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 133964759}
+  - component: {fileID: 133964758}
+  m_Layer: 0
+  m_Name: LevelSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &133964758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133964757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acaad4a7f8cc504ea25257109c98ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &133964759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133964757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.507679, y: 2.6367285, z: 4.6652613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157045895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,19 +1553,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af32c87848291c4687afedd591783b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 1542099622}
+  source: {fileID: 0}
   GunSource: {fileID: 0}
   WatchSource: {fileID: 0}
+  AmbienceSource: {fileID: 0}
   MenuClipSelect: {fileID: 8300000, guid: 804f78b2473dfad4e8ee06ceae550a36, type: 3}
   MenuClipHover: {fileID: 8300000, guid: 8c316298fc7f6f541ae15f29849d568e, type: 3}
-  GunEmpty: {fileID: 0}
-  GunReload: {fileID: 0}
-  GunUnload: {fileID: 0}
-  PlayerDeathClip: {fileID: 0}
+  GunEmpty: {fileID: 8300000, guid: d18a15bcea3d21d40a9a4aa6d00973a6, type: 3}
+  GunReload: {fileID: 8300000, guid: 8bfd70689a79211459370920505ca102, type: 3}
+  GunUnload: {fileID: 8300000, guid: 2cb0416f2910bc34fbbe4efd8b3c4936, type: 3}
+  PlayerDeathClip: {fileID: 8300000, guid: 53513e4c6d4aad841a7c0ff43f332506, type: 3}
   WatchIsPlaying: 0
-  VoiceLine: []
+  VoiceLine:
+  - {fileID: 8300000, guid: 8315b8a50b74f714dba6a07b47063520, type: 3}
+  - {fileID: 8300000, guid: d03557611c4f2bf4083c7137a3ec4154, type: 3}
+  - {fileID: 8300000, guid: 75c42acaa54a4574f95f2efe0336ecad, type: 3}
+  - {fileID: 8300000, guid: 3f347059a6452ed46bee50cf8950e698, type: 3}
+  - {fileID: 8300000, guid: 7597fd24ce9fb4f44b737f0f1a879b8d, type: 3}
+  - {fileID: 8300000, guid: 92531859884409349bf1ceaee1e3ef96, type: 3}
   VoiceLineFinished: 0
   VoiceLineTimer: 0
+  ScaryAmbienceClip: {fileID: 8300000, guid: dab963fa643e7aa448fbba85ff5aec92, type: 3}
+  ChillAmbienceClip: {fileID: 8300000, guid: 18d8a48bb20bb0d4f86138a553b46608, type: 3}
 --- !u!4 &433331260
 Transform:
   m_ObjectHideFlags: 0
@@ -4114,7 +4167,7 @@ GameObject:
   - component: {fileID: 1542099623}
   - component: {fileID: 1542099622}
   m_Layer: 0
-  m_Name: SoundFx
+  m_Name: soundfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

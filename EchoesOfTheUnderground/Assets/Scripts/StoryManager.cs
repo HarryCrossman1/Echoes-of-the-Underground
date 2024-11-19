@@ -78,6 +78,13 @@ public class StoryManager : MonoBehaviour
                     if (TutorialState == 4)
                     {
                         SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 5, false);
+                        Vector3 LoadZoneVec = new Vector3(10, 2, 2);
+                        AlertIcon.transform.position = LoadZoneVec;
+                        AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
+                        if (Vector3.Distance(AlertIcon.transform.position, LoadZoneVec) < 2)
+                        {
+                            UiManager.instance.LoadSceneAsync("OpenWorldMain", false);
+                        }
                     }
                     break;    
             }

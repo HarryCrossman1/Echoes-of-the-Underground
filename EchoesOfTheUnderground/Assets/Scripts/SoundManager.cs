@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    [SerializeField] private AudioSource source,GunSource,WatchSource;
+    [SerializeField] public AudioSource source,GunSource,WatchSource, AmbienceSource;
     [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [HideInInspector]public bool WatchIsPlaying;
@@ -13,7 +13,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private bool VoiceLineFinished;
     [SerializeField] private float VoiceLineTimer;
     // 
-    [SerializeField] private AudioSource AmbienceSource;
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
     // Start is called before the first frame update
     void Awake()

@@ -54,16 +54,16 @@ public class WeaponManager : MonoBehaviour
         LastShot = Time.time;
         RaycastHit hit;
 
-            //if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
-           // {
-                //Play Sound
-                SoundManager.instance.PlayGunshot(CurrentWeapon);
-            //Take Ammo 
+        if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
+        {
+            SoundManager.instance.PlayGunshot(CurrentWeapon);
+   
             HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber--;
-            //MuzzleFlash 
-            //Play Animation 
-            HeldAnimator.SetTrigger("Shooting");
-        // MuzzleFlash.enabled = true;
+        }
+        else
+        {
+            SoundManager.instance.PlayEmpty();
+        }
         if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
         {
             if (hit.collider.CompareTag("ZombieBody"))
