@@ -162,14 +162,5 @@ public class WeaponManager : MonoBehaviour
         HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
         SoundManager.instance.PlayReload(false);
     }
-    public void StoreMagazine()
-    { 
-        StoredAmmoCount++;
-        UiManager.instance.UpdateAmmoCounter();
-    }
-    public void UnStoreMagazine()
-    {
-        StoredAmmoCount--;
-        UiManager.instance.UpdateAmmoCounter();
-    }
+    
 }

@@ -70,8 +70,4 @@ public class UiManager : MonoBehaviour
             }
         }
     }
-    public void UpdateAmmoCounter()
-    {
-        AmmoText.text = WeaponManager.instance.StoredAmmoCount.ToString(); 
-    }
 }
