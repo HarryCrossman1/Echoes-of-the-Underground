@@ -5,13 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class LevelSetter : MonoBehaviour
 {
+    public static LevelSetter Instance;
     private string LevelName;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Instance= this;
+    }
     void Start()
     {
-        
+        SetLevel();
+    }
+    public void SetLevel()
+    {
+       
         DontDestroyOnLoad(this);
         LevelName = SceneManager.GetActiveScene().name;
+        Debug.Log(LevelName);
         switch (LevelName)
         {
             case "MenuScene":
@@ -21,12 +31,20 @@ public class LevelSetter : MonoBehaviour
                 }
             case "HomeScene":
                 {
-                    SoundManager.instance.GunSource = GameObject.Find("M1911 Handgun Base Variant").GetComponent<AudioSource>();
+                    if (GameObject.Find("Pistol") != null)
+                    {
+                        SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
+                        Debug.Log("CodeReached");
+                    }
                     break;
                 }
             case "OpenWorldMain":
                 {
-                    SoundManager.instance.GunSource = GameObject.Find("M1911 Handgun Base Variant").GetComponent<AudioSource>();
+                    if (GameObject.Find("Pistol") != null)
+                    {
+                        SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
+                        Debug.Log("CodeReached");
+                    }
                     break;
                 }
             case "SubwayScene":

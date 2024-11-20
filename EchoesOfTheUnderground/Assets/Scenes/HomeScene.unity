@@ -6682,7 +6682,7 @@ PrefabInstance:
     - target: {fileID: 7341982918998925625, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_Name
-      value: M1911 Handgun Base Variant
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 7346675805611575119, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
@@ -8752,11 +8752,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 18d8a48bb20bb0d4f86138a553b46608, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

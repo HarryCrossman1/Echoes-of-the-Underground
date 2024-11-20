@@ -16,6 +16,7 @@ public class UiManager : MonoBehaviour
     public Canvas DeathCanvas;
     [SerializeField] GameObject MovingText;
     [SerializeField] public TextMeshProUGUI HealthText,AmmoText;
+    public bool PauseLevelLoading;
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,14 +60,31 @@ public class UiManager : MonoBehaviour
     public IEnumerator LoadSceneAsync(string SceneName,bool IsInMenu)
     { 
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
+        operation.allowSceneActivation = false;
         if (IsInMenu == true)
         {
+            operation.allowSceneActivation = true;
             PlayerPrefs.SetInt("Difficulty", DifficultyTracker);
             while (!operation.isDone)
             {
                 float Progress = Mathf.Clamp01(operation.progress / 0.9f);
                 LoadingSlider.value = Progress;
                 yield return null;
+            }
+            if (operation.isDone)
+            {
+                LevelSetter.Instance.SetLevel();
+            }
+        }
+        else
+        {
+            if(!PauseLevelLoading)
+            {
+                operation.allowSceneActivation = true;
+                if (operation.isDone)
+                {
+                    LevelSetter.Instance.SetLevel();
+                }
             }
         }
     }

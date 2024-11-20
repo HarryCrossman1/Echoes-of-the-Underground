@@ -1570,7 +1570,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 75c42acaa54a4574f95f2efe0336ecad, type: 3}
   - {fileID: 8300000, guid: 3f347059a6452ed46bee50cf8950e698, type: 3}
   - {fileID: 8300000, guid: 7597fd24ce9fb4f44b737f0f1a879b8d, type: 3}
-  - {fileID: 8300000, guid: 92531859884409349bf1ceaee1e3ef96, type: 3}
+  - {fileID: 8300000, guid: a0f21bdd779d5274eb2effc95144a147, type: 3}
   VoiceLineFinished: 0
   VoiceLineTimer: 0
   ScaryAmbienceClip: {fileID: 8300000, guid: dab963fa643e7aa448fbba85ff5aec92, type: 3}
@@ -4410,6 +4410,7 @@ MonoBehaviour:
   MovingText: {fileID: 0}
   HealthText: {fileID: 0}
   AmmoText: {fileID: 0}
+  PauseLevelLoading: 1
 --- !u!4 &1700328103
 Transform:
   m_ObjectHideFlags: 0

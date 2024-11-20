@@ -78,36 +78,20 @@ public class StoryManager : MonoBehaviour
                     if (TutorialState == 4)
                     {
                         SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 5, false);
+                    }
+                    if (TutorialState == 5)
+                    {
+                        UiManager.instance.LoadSceneAsync("OpenWorldMain", false);
                         Vector3 LoadZoneVec = new Vector3(10, 2, 2);
                         AlertIcon.transform.position = LoadZoneVec;
                         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
-                        if (Vector3.Distance(AlertIcon.transform.position, LoadZoneVec) < 2)
+                        if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, LoadZoneVec) < 3)
                         {
-                            UiManager.instance.LoadSceneAsync("OpenWorldMain", false);
+                            UiManager.instance.PauseLevelLoading = false;
                         }
                     }
                     break;    
             }
         }
-    }
-    public void Streets()
-    {
-        UiManager.instance.LoadSceneAsync("StreetsScene", false);
-    }
-    public void Subway()
-    {
-        UiManager.instance.LoadSceneAsync("SubwayScene", false);
-    }
-    public void Sewers()
-    {
-        UiManager.instance.LoadSceneAsync("SewerScene", false);
-    }
-    public void DefHome()
-    {
-        UiManager.instance.LoadSceneAsync("HomeDefendScene", false);
-    }
-    public void Home() 
-    {
-        UiManager.instance.LoadSceneAsync("HomeScene", false);
     }
 }
