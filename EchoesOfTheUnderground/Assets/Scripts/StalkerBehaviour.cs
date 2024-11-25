@@ -4,13 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StalkerBehaviour : MonoBehaviour
+public class StalkerBehaviour : Zombie_Behaviour
 {
-    public static StalkerBehaviour instance;
     [SerializeField] private NavMeshAgent StalkerAgent;
-    public int ZombieCurrentHealth,ZombieHealth;
-    public bool HasAtacked,ZombieInRange;
-   [SerializeField] public bool IsStunned;
+    public int StalkerCurrentHealth,StalkerHealth;
+   // public bool HasAtacked,ZombieInRange;
     [SerializeField] private bool ReachedDestination;
     [SerializeField] private bool RunningAway;
     private Vector3 StoredPos;
@@ -47,36 +45,13 @@ public class StalkerBehaviour : MonoBehaviour
         DeathCheck();
         StateMachine();
     }
-    public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
-    {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 2f)
-        {
-            ZombieInRange = false;
-            if (!IsStunned)
-            ZombieAgent.destination = Target.transform.position;
-        }
-        else
-        {
-            ZombieAgent.destination = gameObject.transform.position;
-            ZombieInRange = true;
-            Attack();
-        }
-    }
-    private void Attack()
-    {
-        if (!HasAtacked)
-        { 
-            HasAtacked= true;
-            StartCoroutine(StartAttack(Attacking.length));
-        }
-    }
     private void StateMachine()
     {
         switch (CurrentState)
         {
             case BehaviourState.Stalking:
                 {
-                    if (SightCheck(PlayerController.instance.transform.position,ViewRange,ViewCone))
+                    if (SightCheck(PlayerController.instance.transform.position,this.gameObject,ViewRange,ViewCone))
                     {
                         ReachedDestination = true;
                         StalkerAnimator.SetBool("Crawling", false);
@@ -106,7 +81,7 @@ public class StalkerBehaviour : MonoBehaviour
             case BehaviourState.Inspecting:
                 {
                     EditDetails(0.8f, 4f, 2.5f);
-                    if (SightCheck(PlayerController.instance.transform.position,ViewRange,ViewCone))
+                    if (SightCheck(PlayerController.instance.transform.position,gameObject,ViewRange,ViewCone))
                     {
                         CurrentState = BehaviourState.Chase;
                     }
@@ -205,125 +180,5 @@ public class StalkerBehaviour : MonoBehaviour
         ViewRange = viewRange;
         StalkerAgent.speed = Speed;
     }
-    public bool SightCheck(Vector3 PlayerPosition,float Range,float ViewCone)
-    {
-        Vector3 Forward = transform.forward;
-        Vector3 ToPlayer = (PlayerPosition - transform.position).normalized;
-
-        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition,transform.position) < Range || Vector3.Distance(PlayerPosition, transform.position) < 2 )
-        {
-            Debug.DrawLine(transform.position, ToPlayer, Color.black);
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, ToPlayer, out hit))
-            {
-                if (hit.collider.CompareTag("Enviroment"))
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-               
-            }
-        }
-        else
-        {
-            return false;
-        }
-        return false;
-    }
-    private IEnumerator StartAttack(float cooldown) 
-    {
-        if (AttackAudio != null)
-        {
-            PlayZombieAudio(AttackAudio, false);
-        }
-        StalkerAnimator.SetBool("Sprinting", false);
-        StalkerAnimator.SetBool("Attacking", true);
-        //PlayerController.instance.PlayerDeathCheck();
-        yield return new WaitForSeconds(cooldown);
-        StalkerAnimator.SetBool("Sprinting", true);
-        StalkerAnimator.SetBool("Attacking", false);
-        StalkerAgent.enabled = true;
-        PlayerController.instance.PlayerHealth--;
-        HighScoreManager.instance.CurrentHighScore -= 100;
-        //Could bug If player kills during anim
-        HasAtacked = false;
-        CurrentState = BehaviourState.Reset;
-
- 
-    }
-    public void DeathCheck()
-    {
-        if (ZombieCurrentHealth <= 0)
-        {
-            PlayZombieAudio(DeathAudio, false);
-            StalkerAgent.isStopped=true;
-            StartCoroutine(WaitForAnim(3f));
-
-        }
-    }
-    private IEnumerator WaitForAnim(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        gameObject.SetActive(false);
-        CheckActiveZombies();
-    }
-    public void ShotStun()
-    {
-        IsStunned= true;
-        if (IsStunned)
-        {
-            
-         
-            StartCoroutine(StunTimer(Hit.length));
-        }
-        
-    }
-    private IEnumerator StunTimer(float TimerLength)
-    {
-        StalkerAgent.isStopped = true;
-        PlayZombieAudio(ShotAudio,false);
-        yield return new WaitForSeconds(TimerLength);
-        PlayZombieAudio(AmbientAudio,true);
-
-        StalkerAgent.isStopped = false;
-        IsStunned = false;
-        if (ZombieInRange)
-        {
-         
-        }
-        else
-        {
-            
-        }
-    }
-    private void CheckActiveZombies()
-    {
-        for (int i = 0; i < GameManager.instance.ZombiePool.Count; i++)
-        {
-            // check if there are any zombies active in the hierarchy 
-            if (GameManager.instance.ZombiePool[i].activeInHierarchy)
-            {
-                GameManager.instance.IsActive = true;
-                break;
-            }
-            else
-            {
-                // if none are active 
-                GameManager.instance.IsActive = false;
-            }
-        }
-    }
-    public void PlayZombieAudio(AudioClip clip,bool loop)
-    {
-        if (!loop)
-        {
-            ZombieSource.clip = clip;
-            ZombieSource.Play();
-            ZombieSource.loop = false;
-        }
-        else { ZombieSource.loop = true; }
-    }
+   
 }

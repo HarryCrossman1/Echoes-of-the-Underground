@@ -32,11 +32,7 @@ public class Zombie_Behaviour : MonoBehaviour
     void Update()
     {
         DeathCheck();
-        if (StalkerBehaviour.instance.SightCheck(PlayerController.instance.PlayerTransform.position, 13, 0.5f))
-        {
-            Chase(Zombie_Agent, PlayerController.instance.PlayerTransform.gameObject);
-        }       
-        
+        Chase(Zombie_Agent, PlayerController.instance.PlayerTransform.gameObject);     
     }
     public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
     {
@@ -53,7 +49,7 @@ public class Zombie_Behaviour : MonoBehaviour
             Attack();
         }
     }
-    private void Attack()
+    protected void Attack()
     {
         if (!HasAtacked)
         { 
@@ -94,39 +90,34 @@ public class Zombie_Behaviour : MonoBehaviour
         gameObject.SetActive(false);
         CheckActiveZombies();
     }
-    //public void ShotStun()
-    //{
-    //    IsStunned= true;
-    //    if (IsStunned)
-    //    {
-            
-    //        ZombieAnimator.SetBool("Walking", false);
-    //        ZombieAnimator.SetBool("Attacking", false);
-    //        ZombieAnimator.SetBool("Stunned", true);
-    //        StartCoroutine(StunTimer(Hit.length));
-    //    }
-        
-    //}
-    //private IEnumerator StunTimer(float TimerLength)
-    //{
-    //    Zombie_Agent.isStopped = true;
-    //    PlayZombieAudio(ShotAudio,false);
-    //    yield return new WaitForSeconds(TimerLength);
-    //    PlayZombieAudio(AmbientAudio,true);
-        
-    //    Zombie_Agent.isStopped = false;
-    //    IsStunned = false;
-    //    if (ZombieInRange)
-    //    {
-    //        ZombieAnimator.SetBool("Stunned", false);
-    //        ZombieAnimator.SetBool("Attacking", true);
-    //    }
-    //    else
-    //    {
-    //        ZombieAnimator.SetBool("Stunned", false);
-    //        ZombieAnimator.SetBool("Walking", true);
-    //    }
-    //}
+    protected bool SightCheck(Vector3 PlayerPosition, GameObject Zombie, float Range, float ViewCone)
+    {
+        Vector3 Forward = Zombie.transform.forward;
+        Vector3 ToPlayer = (PlayerPosition - Zombie.transform.position).normalized;
+
+        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition, transform.position) < Range || Vector3.Distance(PlayerPosition, transform.position) < 2)
+        {
+            Debug.DrawLine(transform.position, ToPlayer, Color.black);
+            RaycastHit hit;
+            if (Physics.Raycast(Zombie.transform.position, ToPlayer, out hit))
+            {
+                if (hit.collider.CompareTag("Enviroment"))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
+    }
     private void CheckActiveZombies()
     {
         for (int i = 0; i < GameManager.instance.ZombiePool.Count; i++)
@@ -144,7 +135,7 @@ public class Zombie_Behaviour : MonoBehaviour
             }
         }
     }
-    public void PlayZombieAudio(AudioClip clip,bool loop)
+    protected void PlayZombieAudio(AudioClip clip,bool loop)
     {
         if (!loop)
         {

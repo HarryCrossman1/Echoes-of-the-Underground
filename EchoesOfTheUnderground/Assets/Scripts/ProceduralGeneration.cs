@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class ProceduralGeneration : MonoBehaviour
 {
+    [SerializeField] private NavMeshSurface[] NavmeshSurface;
     [SerializeField] private GameObject Block;
     [SerializeField] private int WorldSizeX;
     [SerializeField] private int WorldSizeZ;
@@ -18,6 +20,8 @@ public class ProceduralGeneration : MonoBehaviour
     private void Awake()
     {
         GenerateGrid(WorldSizeX, WorldSizeZ);
+        //NavmeshSurface.BuildNavMesh();
+        GenerateNavmesh();
     }
 
     private void GenerateGrid(int worldSizeX,int worldSizeZ)
@@ -55,6 +59,13 @@ public class ProceduralGeneration : MonoBehaviour
     {
         int RandomPickup = Random.Range(0, PlaceablePickups.Length);
         GameObject scenePickup = Instantiate(PlaceablePickups[RandomPickup], grid.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+    }
+    private void GenerateNavmesh()
+    {
+        for (int i = 0; i < NavmeshSurface.Length; i++)
+        {
+            NavmeshSurface[i].BuildNavMesh();
+        }
     }
     //private void GeneratePoint(GameObject grid,GameObject Point)
 }

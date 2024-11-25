@@ -8218,6 +8218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5045321867904240884, guid: f3d806d6024e56a4a85a0dcc774e23b4,
         type: 3}
+      propertyPath: ZombiePoolAmount
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045321867904240884, guid: f3d806d6024e56a4a85a0dcc774e23b4,
+        type: 3}
       propertyPath: SetPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1330907672}

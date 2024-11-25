@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         MovementExecuted = false;
-
+        
     }
     // Update is called once per frame
     void Update()
