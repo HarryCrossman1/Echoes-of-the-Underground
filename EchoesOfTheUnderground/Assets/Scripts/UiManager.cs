@@ -77,14 +77,12 @@ public class UiManager : MonoBehaviour
                 LevelSetter.Instance.SetLevel();
             }
         }
-    }
-    public void LevelStarter()
-    {
-
-            Operation.allowSceneActivation = true;
+        else
+        {
             if (Operation.isDone)
             {
                 LevelSetter.Instance.SetLevel();
             }
+        }
     }
 }

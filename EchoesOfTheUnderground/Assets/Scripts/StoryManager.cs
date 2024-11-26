@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] public bool HitMiscItem;
     private Animator animator;
     private NavMeshAgent agent;
-    private bool StartLoad;
+   [SerializeField] private bool StartLoad;
     private void Awake()
     {
         Instance = this;
@@ -82,17 +83,16 @@ public class StoryManager : MonoBehaviour
                     }
                     if (TutorialState == 5)
                     {
-                        if (StartLoad)
-                        {
-                            UiManager.instance.LoadSceneAsync("OpenWorldMain", false);
-                            StartLoad = false;
-                        }
                         Vector3 LoadZoneVec = new Vector3(10, 2, 2);
                         AlertIcon.transform.position = LoadZoneVec;
                         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
                         if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, LoadZoneVec) < 3)
                         {
-                            UiManager.instance.LevelStarter();
+                            if (StartLoad)
+                            {
+                                SceneManager.LoadScene("OpenWorldMain");
+                                StartLoad = false;
+                            }
                         }
                     }
                     break;    

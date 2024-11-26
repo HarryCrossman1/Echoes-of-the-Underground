@@ -1102,6 +1102,7 @@ MonoBehaviour:
   TutorialCharacter: {fileID: 2045784174}
   TutorialState: 0
   HitMiscItem: 0
+  StartLoad: 1
 --- !u!4 &215231033
 Transform:
   m_ObjectHideFlags: 0
