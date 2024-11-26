@@ -178,9 +178,11 @@ MonoBehaviour:
   ZombieAnimator: {fileID: 2607460671245114793}
   ZombieCurrentHealth: 60
   ZombieHealth: 70
+  HasAtacked: 0
+  ZombieInRange: 0
   IsStunned: 0
-  SpeedMin: 2
-  SpeedMax: 3.5
+  AccelMin: 13
+  AccelMax: 16
   Attacking: {fileID: -203655887218126122, guid: e646a73105cacfb4d80f15c000f2d6b2,
     type: 3}
   Hit: {fileID: -203655887218126122, guid: ad9773cfe2eeda24aa57d23cbfd00a21, type: 3}

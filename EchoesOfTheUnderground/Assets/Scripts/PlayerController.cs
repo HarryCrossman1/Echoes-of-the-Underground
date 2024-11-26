@@ -63,11 +63,11 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDeathCheck()
     {
-        if (UiManager.instance.HealthText.text!=null)
+        if (UiManager.instance.HealthText.text != null)
         {
             UiManager.instance.HealthText.text = PlayerHealth.ToString();
         }
-       
+
         if (PlayerHealth < 2)
         {
             SoundManager.instance.PlayWatch();

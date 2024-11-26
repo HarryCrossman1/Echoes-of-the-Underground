@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         if (HasZombies)
         {
             PoolZombies(ZombiePoolAmount);
-            SpawnZombies(ZombieSpawnPoints[1], 3);
         }
       
     }
@@ -98,8 +97,7 @@ public class GameManager : MonoBehaviour
 
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
-        navMeshAgent.speed = UnityEngine.Random.Range(obj.GetComponent<Zombie_Behaviour>().SpeedMin, obj.GetComponent<Zombie_Behaviour>().SpeedMax);
-        navMeshAgent.acceleration = UnityEngine.Random.Range(1f, 1.5f);
+        navMeshAgent.acceleration = UnityEngine.Random.Range(obj.GetComponent<Zombie_Behaviour>().AccelMin, obj.GetComponent<Zombie_Behaviour>().AccelMax);
         navMeshAgent.angularSpeed = UnityEngine.Random.Range(75, 165);
     }
 
@@ -122,21 +120,25 @@ public class GameManager : MonoBehaviour
             {
                 //check if the spawn point is too close 
                 int rand = UnityEngine.Random.Range(0, ZombieSpawnPoints.Length);
-                while (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.transform.position) > 1f && SpawnTracker < 3)
+                if (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.transform.position) > 10f && SpawnTracker < 3)
                 {
                     // if good then spawn here 
                     SpawnTracker++;
-                  
 
-                 
+
+
                     SpawnZombies(ZombieSpawnPoints[rand], 1);
-                  
-                    IsActive = true;
+
+                   // IsActive = true;
                     break;
+                }
+                else
+                {
+                    SpawnTracker++;
                 }
 
             }
-            SpawnTracker = 0;
+            
         }
 
     }

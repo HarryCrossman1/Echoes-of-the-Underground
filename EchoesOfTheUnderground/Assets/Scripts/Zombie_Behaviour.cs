@@ -11,7 +11,7 @@ public class Zombie_Behaviour : MonoBehaviour
     public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
     public bool HasAtacked,ZombieInRange;
    [SerializeField] public bool IsStunned;
-    public float SpeedMin,SpeedMax;
+    public float AccelMin,AccelMax;
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
@@ -66,7 +66,7 @@ public class Zombie_Behaviour : MonoBehaviour
         PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
         PlayerController.instance.PlayerHealth--;
-        HighScoreManager.instance.CurrentHighScore -= 100;
+       // HighScoreManager.instance.CurrentHighScore -= 100;
         //Could bug If player kills during anim
         HasAtacked = false;
     }
