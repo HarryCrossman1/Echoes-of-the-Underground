@@ -17,6 +17,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject MovingText;
     [SerializeField] public TextMeshProUGUI HealthText,AmmoText;
     public bool PauseLevelLoading;
+    private AsyncOperation Operation;
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,33 +60,31 @@ public class UiManager : MonoBehaviour
     }
     public IEnumerator LoadSceneAsync(string SceneName,bool IsInMenu)
     { 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
-        operation.allowSceneActivation = false;
+        Operation = SceneManager.LoadSceneAsync(SceneName);
+        Operation.allowSceneActivation = false;
         if (IsInMenu == true)
         {
-            operation.allowSceneActivation = true;
+            Operation.allowSceneActivation = true;
             PlayerPrefs.SetInt("Difficulty", DifficultyTracker);
-            while (!operation.isDone)
+            while (!Operation.isDone)
             {
-                float Progress = Mathf.Clamp01(operation.progress / 0.9f);
+                float Progress = Mathf.Clamp01(Operation.progress / 0.9f);
                 LoadingSlider.value = Progress;
                 yield return null;
             }
-            if (operation.isDone)
+            if (Operation.isDone)
             {
                 LevelSetter.Instance.SetLevel();
             }
         }
-        else
-        {
-            if(!PauseLevelLoading)
+    }
+    public void LevelStarter()
+    {
+
+            Operation.allowSceneActivation = true;
+            if (Operation.isDone)
             {
-                operation.allowSceneActivation = true;
-                if (operation.isDone)
-                {
-                    LevelSetter.Instance.SetLevel();
-                }
+                LevelSetter.Instance.SetLevel();
             }
-        }
     }
 }
