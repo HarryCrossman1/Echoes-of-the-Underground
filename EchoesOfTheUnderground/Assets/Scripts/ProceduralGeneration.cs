@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ProceduralGeneration : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class ProceduralGeneration : MonoBehaviour
         GenerateGrid(WorldSizeX, WorldSizeZ);
         //NavmeshSurface.BuildNavMesh();
         GenerateNavmesh();
+       
     }
 
     private void GenerateGrid(int worldSizeX,int worldSizeZ)
@@ -40,10 +42,15 @@ public class ProceduralGeneration : MonoBehaviour
 
                 if (RandomPlacement <= threshold && !JustGenerated)
                 {
-                    JustGenerated = true;
-                    float RandomY = Random.Range(0, 360);
-                    GameObject SceneObj = Instantiate(PlaceableSceneObjects[RandomObject], Grid.transform.position, Quaternion.Euler(0,RandomY,0));
-                    GeneratePickup(Grid);
+                    NavMeshHit hit;
+                    if(NavMesh.SamplePosition(pos,out hit,1,NavMesh.AllAreas))
+                    {
+                        JustGenerated = true;
+                        float RandomY = Random.Range(0, 360);
+                        GameObject SceneObj = Instantiate(PlaceableSceneObjects[RandomObject], Grid.transform.position, Quaternion.Euler(0, RandomY, 0));
+                        GeneratePickup(Grid);
+                    }
+                    
                    
                 }
                 else
