@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 3291497994689678495}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3037403628275952500
 PrefabInstance:
@@ -106,7 +106,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8147435380100081152, guid: df8d541a8d3a4464595d1e02d2e9f811,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7327925820987567804}
+      addedObject: {fileID: 7077614385666787664}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: df8d541a8d3a4464595d1e02d2e9f811,
         type: 3}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830600e4a2b852d47aa002c75dddd550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: d524560ae3d6d9d439c178b5e8b92cc1, type: 2}
 --- !u!111 &965190791531799762
 Animation:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e5488ad0d4b9643bc798255c355f8f, type: 3}
---- !u!4 &7327925820987567804 stripped
+--- !u!4 &7077614385666787664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28e5488ad0d4b9643bc798255c355f8f,
     type: 3}
