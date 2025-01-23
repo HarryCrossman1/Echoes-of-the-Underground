@@ -19,6 +19,7 @@ TagManager:
   - Pistol
   - Enviroment
   - CampTrigger
+  - Rifle
   layers:
   - Default
   - TransparentFX

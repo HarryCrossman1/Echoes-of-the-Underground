@@ -43,7 +43,7 @@ public class ProceduralGeneration : MonoBehaviour
                 if (PlacementChance >= 70 && !JustGenerated)
                 {
                     NavMeshHit hit;
-                    if(NavMesh.SamplePosition(pos,out hit,1,NavMesh.AllAreas))
+                    if(NavMesh.SamplePosition(pos,out hit,0.2f,NavMesh.AllAreas))
                     {
                         JustGenerated = true;
                         float RandomY = Random.Range(0, 360);

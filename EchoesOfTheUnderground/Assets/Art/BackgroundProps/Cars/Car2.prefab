@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2390435714783340711}
   - component: {fileID: 430747658903305845}
   - component: {fileID: 3714852477952224262}
+  - component: {fileID: 7913397838701320570}
   m_Layer: 0
   m_Name: Box003
   m_TagString: Untagged
@@ -135,3 +136,25 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!64 &7913397838701320570
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8237072391902821305}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 690106047850165013, guid: 6ac147026a3cd184ab402f26443291a7, type: 3}

@@ -106,7 +106,7 @@ public class SoundManager : MonoBehaviour
             {
                 VoiceLineFinished = true;
                 VoiceLineTimer = 0;
-                StoryManager.Instance.TutorialState++;
+                StoryManager.Instance.CurrentState++;
             }
         
         }

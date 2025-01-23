@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2691427821978162922}
   - component: {fileID: 6210555954224704357}
   - component: {fileID: 2289570980039134548}
+  - component: {fileID: 3923203513013716988}
   m_Layer: 0
   m_Name: civillow
   m_TagString: Untagged
@@ -103,6 +104,28 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!64 &3923203513013716988
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277466385509372000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1187370924088802528, guid: 6ac147026a3cd184ab402f26443291a7, type: 3}
 --- !u!1 &4171332145603542927
 GameObject:
   m_ObjectHideFlags: 0
