@@ -12,8 +12,8 @@ public class ProceduralGeneration : MonoBehaviour
     [SerializeField] private int WorldSizeZ;
     [SerializeField] private int NoiseHeight;
     [SerializeField] private float GridSpacing;
-    [Range(1,100)] [SerializeField] private int ObjectDensity;
-    [Range(1, 100)][SerializeField] private int PickupDensity;
+    [Range(1,2)] [SerializeField] private float ObjectDensity;
+    [Range(1, 2)][SerializeField] private float PickupDensity;
     [SerializeField] private GameObject[] PlaceableSceneObjects;
     [SerializeField] private GameObject[] PlaceablePickups;
     [SerializeField] private bool JustGenerated;
@@ -37,10 +37,10 @@ public class ProceduralGeneration : MonoBehaviour
                 GameObject Grid = Instantiate(Block, pos, Quaternion.identity);
                 //Random gen the object placement (scene)
                 int RandomObject = Random.Range(0, PlaceableSceneObjects.Length);
-                float RandomPlacement = Random.Range(0, ObjectDensity + 1);
-                int threshold = ObjectDensity / 2;
+                float RandomPlacement = Random.Range(0, 99);
+                float PlacementChance = RandomPlacement * ObjectDensity;
 
-                if (RandomPlacement <= threshold && !JustGenerated)
+                if (PlacementChance >= 70 && !JustGenerated)
                 {
                     NavMeshHit hit;
                     if(NavMesh.SamplePosition(pos,out hit,1,NavMesh.AllAreas))
@@ -48,7 +48,7 @@ public class ProceduralGeneration : MonoBehaviour
                         JustGenerated = true;
                         float RandomY = Random.Range(0, 360);
                         GameObject SceneObj = Instantiate(PlaceableSceneObjects[RandomObject], Grid.transform.position, Quaternion.Euler(0, RandomY, 0));
-                        GeneratePickup(Grid);
+                        
                     }
                     
                    
@@ -56,6 +56,7 @@ public class ProceduralGeneration : MonoBehaviour
                 else
                 { 
                     JustGenerated = false;
+                    GeneratePickup(Grid);
                 }
                 
 ;            }
@@ -65,7 +66,19 @@ public class ProceduralGeneration : MonoBehaviour
     private void GeneratePickup(GameObject grid)
     {
         int RandomPickup = Random.Range(0, PlaceablePickups.Length);
-        GameObject scenePickup = Instantiate(PlaceablePickups[RandomPickup], grid.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+        int RandomPickupPlacement = Random.Range(0, 99);
+        float PickupChance = RandomPickupPlacement * PickupDensity;
+        if (PickupChance >= 70)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(grid.transform.position, out hit, 1, NavMesh.AllAreas))
+            {
+                float RandomY = Random.Range(0, 360);
+                GameObject scenePickup = Instantiate(PlaceablePickups[RandomPickup], grid.transform.position + new Vector3(0, 5, 0), Quaternion.Euler(0, RandomY, 0));
+            }
+                
+        }
+        
     }
     private void GenerateNavmesh()
     {
