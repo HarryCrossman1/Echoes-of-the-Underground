@@ -25,6 +25,8 @@ public class StoryManager : MonoBehaviour
     //Streets Part Two 
     [SerializeField] private GameObject NewGun;
     [SerializeField] private GameObject Rubble;
+    //Subway 
+    public string PressedButtonName;
     private void Awake()
     {
         Instance = this;

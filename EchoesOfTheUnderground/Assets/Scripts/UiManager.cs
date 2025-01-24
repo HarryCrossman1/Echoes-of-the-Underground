@@ -42,6 +42,21 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetPerformance()
+    {
+        QualitySettings.SetQualityLevel(0, true);
+    }
+    public void SetBalanced()
+    {
+        QualitySettings.SetQualityLevel(1, true);
+    }
+    public void SetQuality()
+    {
+        QualitySettings.SetQualityLevel(2, true);
+    }
+
+
+
     public void IncreaseDifficulty()
     {
         if (DifficultyTracker < CampaignDifficultyModes.Length-1)
