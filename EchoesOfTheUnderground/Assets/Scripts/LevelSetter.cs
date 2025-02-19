@@ -26,11 +26,12 @@ public class LevelSetter : MonoBehaviour
         {
             case "MenuScene":
                 {
-                    SoundManager.instance.source = GameObject.Find("soundfx").GetComponent<AudioSource>();
                     break;
                 }
             case "HomeScene":
                 {
+                    SoundManager.instance.GetAudioSources();
+                    SoundManager.instance.AssignVolumeIngame();
                     if (GameObject.Find("Pistol") != null)
                     {
                         SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
@@ -40,6 +41,8 @@ public class LevelSetter : MonoBehaviour
                 }
             case "OpenWorldMain":
                 {
+                    SoundManager.instance.GetAudioSources();
+                    SoundManager.instance.AssignVolumeIngame();
                     if (GameObject.Find("Pistol") != null)
                     {
                         SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
@@ -47,8 +50,15 @@ public class LevelSetter : MonoBehaviour
                     }
                     break;
                 }
+            case "CampDynamite":
+                {
+                    SoundManager.instance.AssignVolumeIngame();
+
+                    break;
+                }
             case "SubwayScene":
                 {
+                    SoundManager.instance.AssignVolumeIngame();
                     break;
                 }
         }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -14,6 +16,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private float VoiceLineTimer;
     // 
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
+    public List<AudioSource>SoundFxSources = new List<AudioSource>();
+    public List<AudioSource>MusicSources = new List<AudioSource>();
+    public List<AudioSource>NpcSources = new List<AudioSource>();
+    [SerializeField] private Slider MusicSlider, SoundSlider, NpcSlider;
+    [SerializeField] private float MusicVol;
+    [SerializeField] private float FxVol;
+    [SerializeField] private float NpcVol;
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,6 +34,84 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         WatchIsPlaying = false;
+    }
+    public void AssignVolumeStartMenu()
+    {
+        MusicVol = MusicSlider.value;
+        FxVol = SoundSlider.value;
+        NpcVol = NpcSlider.value;
+        //
+        AmbienceSource.volume = MusicSlider.value;
+        source.volume = SoundSlider.value;
+    }
+    public void GetAudioSources()
+    {
+        AudioCategory[] Objects = FindObjectsOfType<AudioCategory>();
+
+        foreach (AudioCategory category in Objects)
+        {
+            AudioSource source = category.GetComponent<AudioSource>();
+            if (source != null) 
+            {
+                switch (category.Category)
+                {
+                    case AudioCategory.CategoryType.Music:
+                        {
+                            MusicSources.Add(source);
+                            break;
+                        }
+                    case AudioCategory.CategoryType.SoundFx:
+                        {
+                            SoundFxSources.Add(source);
+                            break;
+                        }
+                    case AudioCategory.CategoryType.Npc:
+                        {
+                            NpcSources.Add(source);
+                            break;
+                        }
+                }
+            }
+        }
+    }
+    public void AddAudioSource(AudioCategory.CategoryType categoryType)
+    {
+        switch (categoryType)
+        {
+            case AudioCategory.CategoryType.Music:
+                MusicSources.Add(source);
+                break;
+            case AudioCategory.CategoryType.SoundFx:
+                SoundFxSources.Add(source);
+                break;
+            case AudioCategory.CategoryType.Npc:
+                NpcSources.Add(source);
+                break;
+        }
+    }
+    public void AssignVolumeIngame()
+    {
+        if (MusicSources != null)
+        {
+            foreach (AudioSource source in MusicSources)
+            {
+                source.volume = MusicVol;
+            }
+        }
+        if (SoundFxSources != null)
+        {
+            foreach (AudioSource source in SoundFxSources)
+            {
+                source.volume = FxVol;
+            }
+        }
+        if (NpcSources != null)
+        {
+            foreach (AudioSource source in NpcSources)
+            {
+                source.volume = NpcVol;
+            }
+        }
     }
     public void PlaySelectSound()
     { 

@@ -22,6 +22,8 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         ZombieSource = GetComponent<AudioSource>();
         ZombieAnimator = GetComponent<Animator>();
+        SoundManager.instance.AddAudioSource(AudioCategory.CategoryType.Npc);
+        SoundManager.instance.AssignVolumeIngame();
         instance = this;
     }
     private void Start()

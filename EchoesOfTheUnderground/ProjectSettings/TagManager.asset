@@ -20,6 +20,9 @@ TagManager:
   - Enviroment
   - CampTrigger
   - Rifle
+  - AmbientAudio
+  - SoundFxAudio
+  - NpcAudio
   layers:
   - Default
   - TransparentFX
