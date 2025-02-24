@@ -51931,6 +51931,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5929335800312019220, guid: 2cf3482e3fc53c54f836f92e56d37fbf,
         type: 3}
+      propertyPath: CarChance
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929335800312019220, guid: 2cf3482e3fc53c54f836f92e56d37fbf,
+        type: 3}
       propertyPath: WorldSizeX
       value: 35
       objectReference: {fileID: 0}
@@ -51938,6 +51943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: WorldSizeZ
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929335800312019220, guid: 2cf3482e3fc53c54f836f92e56d37fbf,
+        type: 3}
+      propertyPath: GridSpacing
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5929335800312019220, guid: 2cf3482e3fc53c54f836f92e56d37fbf,
         type: 3}
