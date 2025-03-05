@@ -7,10 +7,21 @@ public class LevelSetter : MonoBehaviour
 {
     public static LevelSetter Instance;
     private string LevelName;
+    public Vector3 PlayerNextSpawnLocation;
+   [SerializeField] private GameObject SoundManagerPrefab;
     // Start is called before the first frame update
     private void Awake()
     {
-        Instance= this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        { 
+            Destroy(this);
+        }
+      
+        
     }
     void Start()
     {
@@ -18,31 +29,57 @@ public class LevelSetter : MonoBehaviour
     }
     public void SetLevel()
     {
-       
-        DontDestroyOnLoad(this);
         LevelName = SceneManager.GetActiveScene().name;
-        Debug.Log(LevelName);
+        // Across all scenes 
+       
         switch (LevelName)
         {
             case "MenuScene":
                 {
+                    //Setup Sound
+                    if (SoundManager.instance != null)
+                    {
+                        // Load the settings if they exist 
+                        SavingAndLoading.instance.LoadSettings();
+                        //Set the sliders for astethic purposes, actual volume set in the loadsettings()
+                        SoundManager.instance.SoundSlider.value = SoundManager.instance.FxVol;
+                        SoundManager.instance.MusicSlider.value = SoundManager.instance.MusicVol;
+                        SoundManager.instance.NpcSlider.value = SoundManager.instance.NpcVol;
+                        // Get and set the audiosources ingame
+                        SoundManager.instance.GetAudioSources();
+                        SoundManager.instance.SetAudioSources();
+                    }
                     break;
                 }
             case "HomeScene":
                 {
-                    SoundManager.instance.GetAudioSources();
-                    SoundManager.instance.AssignVolumeIngame();
+                    //Setup Sound no need for null check 
+                    if (SoundManager.instance != null)
+                    {
+                        SoundManager.instance.GetAudioSources();
+                        SoundManager.instance.SetAudioSources();
+                    }
+                    else
+                    { 
+                        Instantiate(SoundManagerPrefab);
+                        SoundManager.instance.GetAudioSources();
+                        SoundManager.instance.SetAudioSources();
+                    }
                     if (GameObject.Find("Pistol") != null)
                     {
                         SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
-                        Debug.Log("CodeReached");
+
+                    }
+                    if (GameObject.Find("Watch") != null)
+                    {
+                        SoundManager.instance.WatchSource = GameObject.Find("Watch").GetComponent<AudioSource>();
                     }
                     break;
                 }
             case "OpenWorldMain":
                 {
                     SoundManager.instance.GetAudioSources();
-                    SoundManager.instance.AssignVolumeIngame();
+                    
                     if (GameObject.Find("Pistol") != null)
                     {
                         SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
@@ -52,13 +89,13 @@ public class LevelSetter : MonoBehaviour
                 }
             case "CampDynamite":
                 {
-                    SoundManager.instance.AssignVolumeIngame();
+                    
 
                     break;
                 }
             case "SubwayScene":
                 {
-                    SoundManager.instance.AssignVolumeIngame();
+                    
                     break;
                 }
         }

@@ -225,6 +225,11 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   PistolHip: {fileID: 0}
   AmmoHip: {fileID: 0}
+  PlayerHealth: 0
+  MagLocations:
+  - {fileID: 4353222970606845800}
+  - {fileID: 8149630778245954271}
+  MagList: []
 --- !u!114 &7897730511431175910
 MonoBehaviour:
   m_ObjectHideFlags: 0

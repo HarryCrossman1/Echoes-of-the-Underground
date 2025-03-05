@@ -12,21 +12,33 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public Transform PlayerTransform;
     public Transform PistolHip,AmmoHip;
-    public int PlayerHealth { get; set; }
+    public int PlayerHealth;
+    public XrSocketTag[] MagLocations;
+    public List<GameObject> MagList = new List<GameObject>();
     string Path;
     void Awake()
     {
         Path = Application.persistentDataPath + ".txt";
         instance = this;
         PlayerTransform= transform;
-        PlayerHealth = 3;
         Time.timeScale = 1;
+        foreach (XrSocketTag xrSocketTag in MagLocations)
+        {
+            xrSocketTag.selectEntered.AddListener(OnSelectEntered);
+            xrSocketTag.selectExited.AddListener(OnSelectExited);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //AccessControllers();
+        if (UiManager.instance != null)
+           // UiManager.instance.PositionText.text = GetPlayerPosition(PlayerTransform).ToString();
+
+        if (Input.GetKeyDown(KeyCode.I))
+        { 
+            SavingAndLoading.instance.SaveIngameData();
+        }
     }
     private void AccessControllers()
     {
@@ -61,6 +73,16 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    public void OnSelectEntered(SelectEnterEventArgs args)
+    {
+        GameObject interactor = args.interactableObject.transform.gameObject;
+        MagList.Add(interactor);
+    }
+    public void OnSelectExited(SelectExitEventArgs args)
+    {
+        GameObject interactor = args.interactableObject.transform.gameObject;
+        MagList.Remove(interactor);
+    }
     public void PlayerDeathCheck()
     {
         if (UiManager.instance.HealthText.text != null)
@@ -84,6 +106,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Dead");
         }
      
+    }
+    public Vector3 GetPlayerPosition(Transform playerTransform)
+    { 
+        return playerTransform.position;
     }
     public void PlayerDeath()
     {

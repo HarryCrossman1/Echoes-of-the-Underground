@@ -7,26 +7,42 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    [SerializeField] public AudioSource source,GunSource,WatchSource, AmbienceSource;
-    [SerializeField] private AudioClip MenuClipSelect, MenuClipHover;
+    [Header("Main Menu")]
+    [SerializeField] public AudioSource GenericSource;
+    public AudioSource AmbienceSource;
+    [SerializeField] private AudioClip MenuClipSelect;
+    [SerializeField] public Slider MusicSlider, SoundSlider, NpcSlider;
+
+    [Header("In Game")]
+    public AudioSource  GunSource;
+    public AudioSource  WatchSource;
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
+    [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
     [HideInInspector]public bool WatchIsPlaying;
+    [Header("Voicelines")]
     [SerializeField] private AudioClip[] VoiceLine;
     [SerializeField] private bool VoiceLineFinished;
     [SerializeField] private float VoiceLineTimer;
-    // 
-    [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
+    [Header("Data")]
+    public float MusicVol;
+    public float FxVol;
+    public float NpcVol;
+   
     public List<AudioSource>SoundFxSources = new List<AudioSource>();
     public List<AudioSource>MusicSources = new List<AudioSource>();
     public List<AudioSource>NpcSources = new List<AudioSource>();
-    [SerializeField] private Slider MusicSlider, SoundSlider, NpcSlider;
-    [SerializeField] private float MusicVol;
-    [SerializeField] private float FxVol;
-    [SerializeField] private float NpcVol;
     // Start is called before the first frame update
     void Awake()
     {
-        instance= this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        { 
+            Destroy(this);
+        }
+        
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -34,15 +50,6 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         WatchIsPlaying = false;
-    }
-    public void AssignVolumeStartMenu()
-    {
-        MusicVol = MusicSlider.value;
-        FxVol = SoundSlider.value;
-        NpcVol = NpcSlider.value;
-        //
-        AmbienceSource.volume = MusicSlider.value;
-        source.volume = SoundSlider.value;
     }
     public void GetAudioSources()
     {
@@ -74,23 +81,9 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-    public void AddAudioSource(AudioCategory.CategoryType categoryType)
+    public void SetAudioSources()
     {
-        switch (categoryType)
-        {
-            case AudioCategory.CategoryType.Music:
-                MusicSources.Add(source);
-                break;
-            case AudioCategory.CategoryType.SoundFx:
-                SoundFxSources.Add(source);
-                break;
-            case AudioCategory.CategoryType.Npc:
-                NpcSources.Add(source);
-                break;
-        }
-    }
-    public void AssignVolumeIngame()
-    {
+        SavingAndLoading.instance.LoadSettings();
         if (MusicSources != null)
         {
             foreach (AudioSource source in MusicSources)
@@ -115,12 +108,8 @@ public class SoundManager : MonoBehaviour
     }
     public void PlaySelectSound()
     { 
-        source.clip= MenuClipSelect;
-        source.Play();
-    }
-    public void PlayHoverSound()
-    { 
-        
+        GenericSource.clip= MenuClipSelect;
+        GenericSource.Play();
     }
     public void PlayGunshot(Weapon weapon)
     {

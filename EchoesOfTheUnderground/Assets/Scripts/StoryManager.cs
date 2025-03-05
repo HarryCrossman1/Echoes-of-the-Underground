@@ -55,6 +55,7 @@ public class StoryManager : MonoBehaviour
 
                     if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 0)
                     {
+                        Debug.Log(TutorialCharacter.GetComponent<AudioSource>());
                         SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 0, false);
                         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
                     }

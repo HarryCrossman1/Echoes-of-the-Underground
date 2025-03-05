@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="Panel1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="WorldStats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Foldout text="World Generation Stats" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;);">
+                <uie:PropertyField binding-path="WorldSizeX" />
+                <uie:PropertyField binding-path="WorldSizeZ" />
+                <uie:PropertyField binding-path="GridSpacing" />
+            </ui:Foldout>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Panel2" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgb(255, 255, 255);">
+        <ui:Foldout text="Object Spawn Rates" style="font-size: 12px; -unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;); background-image: none; background-color: rgba(255, 255, 255, 0);">
+            <uie:PropertyField binding-path="CarChance" name="Car" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;); -unity-text-align: upper-left;" />
+            <uie:PropertyField name="Pickup" binding-path="PickupChance" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;);" />
+        </ui:Foldout>
+    </ui:VisualElement>
+    <ui:VisualElement name="Panel3" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); opacity: 1;">
+        <ui:ListView focusable="true" binding-path="PlaceableSceneObjects" selection-type="Single" header-title="Static Objects" show-foldout-header="true" show-add-remove-footer="true" show-border="true" reorderable="true" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;);" />
+        <ui:ListView focusable="true" binding-path="PlaceablePickups" show-border="true" show-foldout-header="true" show-add-remove-footer="true" header-title="Dynamic Objects" reorderable="true" />
+        <ui:ListView focusable="true" header-title="Key Items" binding-path="KeyItems" show-add-remove-footer="true" show-foldout-header="true" name="ListView" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Panel4" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+    <ui:ListView focusable="true" binding-path="NavmeshSurface" show-foldout-header="true" show-add-remove-footer="true" header-title="Navmesh Surface" show-border="true" reorderable="true" />
+    <ui:VisualElement name="Panel5" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:TextField picking-mode="Ignore" label="Save File Location" value="filler text" binding-path="saveFilePath" readonly="true" auto-correction="false" multiline="false" hide-mobile-input="false" is-delayed="false" password="false" name="Savefile" focusable="false" style="background-color: rgba(255, 255, 255, 0); background-image: none; position: relative;" />
+    </ui:VisualElement>
+    <ui:Button text="Save File" display-tooltip-when-elided="true" name="savefile" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;); color: rgb(48, 255, 0); background-color: rgb(0, 0, 0);" />
+    <ui:Button text="Delete File " display-tooltip-when-elided="true" name="deletefile" style="-unity-font: resource(&apos;FlatSkin/Font/Roboto-Bold&apos;); color: rgb(243, 21, 0); background-color: rgb(0, 0, 0);" />
+    <ui:Button text="Open File" display-tooltip-when-elided="true" name="openfile" style="background-color: rgb(0, 0, 0);" />
+</ui:UXML>

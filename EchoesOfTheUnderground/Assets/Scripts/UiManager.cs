@@ -15,23 +15,28 @@ public class UiManager : MonoBehaviour
     private int DifficultyTracker =1;
     public Canvas DeathCanvas;
     [SerializeField] GameObject MovingText;
-    [SerializeField] public TextMeshProUGUI HealthText,AmmoText;
+    [SerializeField] public TextMeshProUGUI HealthText,PositionText,AmmoText;
     public bool PauseLevelLoading;
     private AsyncOperation Operation;
     // Start is called before the first frame update
     void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        { 
+            Destroy(this);
+        }
         
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Start()
     {
-        //HighScoreManager.instance.Load();
-        //if(HighScoreText!=null)
-        //HighScoreText.text = HighScoreManager.instance.AllTimeHighScore.ToString();
+
     }
     public void StartCampaign()
     {
@@ -42,21 +47,10 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetPerformance()
+    public void SetGraphics(int Level)
     {
-        QualitySettings.SetQualityLevel(0, true);
+        QualitySettings.SetQualityLevel(Level, true);
     }
-    public void SetBalanced()
-    {
-        QualitySettings.SetQualityLevel(1, true);
-    }
-    public void SetQuality()
-    {
-        QualitySettings.SetQualityLevel(2, true);
-    }
-
-
-
     public void IncreaseDifficulty()
     {
         if (DifficultyTracker < CampaignDifficultyModes.Length-1)

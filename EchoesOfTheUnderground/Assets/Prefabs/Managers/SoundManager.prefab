@@ -45,19 +45,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af32c87848291c4687afedd591783b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  GunSource: {fileID: 6910870641802802442}
-  WatchSource: {fileID: 0}
+  GenericSource: {fileID: 0}
+  AmbienceSource: {fileID: 0}
   MenuClipSelect: {fileID: 0}
   MenuClipHover: {fileID: 0}
+  MusicSlider: {fileID: 0}
+  SoundSlider: {fileID: 0}
+  NpcSlider: {fileID: 0}
+  GunSource: {fileID: 6910870641802802442}
+  WatchSource: {fileID: 0}
   GunEmpty: {fileID: 8300000, guid: d18a15bcea3d21d40a9a4aa6d00973a6, type: 3}
   GunReload: {fileID: 8300000, guid: 8bfd70689a79211459370920505ca102, type: 3}
   GunUnload: {fileID: 8300000, guid: 2cb0416f2910bc34fbbe4efd8b3c4936, type: 3}
   PlayerDeathClip: {fileID: 8300000, guid: 53513e4c6d4aad841a7c0ff43f332506, type: 3}
+  ScaryAmbienceClip: {fileID: 0}
+  ChillAmbienceClip: {fileID: 0}
   WatchIsPlaying: 0
-  VoiceLine: []
+  VoiceLine:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   VoiceLineFinished: 0
   VoiceLineTimer: 0
+  MusicVol: 0
+  FxVol: 0
+  NpcVol: 0
+  SoundFxSources: []
+  MusicSources: []
+  NpcSources: []
 --- !u!82 &6910870641802802442
 AudioSource:
   m_ObjectHideFlags: 0

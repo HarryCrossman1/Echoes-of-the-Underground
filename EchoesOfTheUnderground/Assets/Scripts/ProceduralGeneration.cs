@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.AI.Navigation;
@@ -15,23 +14,24 @@ public class WorldData
 
 public class ProceduralGeneration : MonoBehaviour
 {
+    public static ProceduralGeneration Instance;
     [SerializeField] private NavMeshSurface[] NavmeshSurface;
-    [SerializeField] private GameObject Block;
     [SerializeField] private int WorldSizeX;
     [SerializeField] private int WorldSizeZ;
     [SerializeField] private float GridSpacing;
-    [SerializeField] [Range(0,100)] public int CarChance;
-    private bool JustGenerated;
+    [Range(0,100)] public int CarChance;
+    [Range(0, 100)] public int PickupChance;
+    
     [SerializeField] private GameObject[] PlaceableSceneObjects;
     [SerializeField] private GameObject[] PlaceablePickups;
-   [SerializeField] private List<GameObject> spawnedBlocks = new List<GameObject>();
-    private List<GameObject> spawnedObjects = new List<GameObject>();
-    private string saveFilePath;
-    private int Index;
-
+    [SerializeField] private GameObject[] KeyItems;
+    private int ItemsIndex;
+    [HideInInspector] public List<GameObject> spawnedBlocks = new List<GameObject>();
+    [HideInInspector] public List<GameObject> spawnedObjects = new List<GameObject>();
+    [SerializeField] private string saveFilePath;
     private void Awake()
     {
-        saveFilePath = Path.Combine(Application.persistentDataPath, "worlddata.json");
+        Instance = this;
         if (File.Exists(saveFilePath))
         {
             LoadWorld();
@@ -39,9 +39,7 @@ public class ProceduralGeneration : MonoBehaviour
         else
         {
             GenerateGrid(WorldSizeX, WorldSizeZ);
-           
             GenerateNavmesh();
-           
         }  
     }
     private void Update()
@@ -63,21 +61,34 @@ public class ProceduralGeneration : MonoBehaviour
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(pos, out hit, 0.2f, NavMesh.AllAreas))
                 {
-                    if (JustGenerated && Random.Range(0, 100) > CarChance)
+                    if (Random.Range(0, 100) < CarChance)
                     {
-                        GameObject gridblock = Instantiate(PlaceableSceneObjects[Random.Range(0, 2)], pos, Quaternion.Euler(0,Random.Range(0,360),0));
+                        GameObject gridblock = Instantiate(PlaceableSceneObjects[Random.Range(0, 2)], pos, Quaternion.Euler(0, Random.Range(0, 360), 0));
                         spawnedBlocks.Add(gridblock);
-                        JustGenerated = false;
                     }
                     // Spawn the item pickups
-                    if (Random.Range(0, 100) < 30)
+                    else if (Random.Range(0, 100) < PickupChance)
                     {
-                       GameObject Pickup = Instantiate(PlaceablePickups[Random.Range(0, PlaceablePickups.Length)],pos, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                        GameObject Pickup = Instantiate(PlaceablePickups[Random.Range(0, PlaceablePickups.Length)], pos, Quaternion.Euler(0, Random.Range(0, 360), 0));
                         spawnedObjects.Add(Pickup);
                     }
                 }
-                else 
-                JustGenerated = true;
+                if (worldSizeZ == WorldSizeZ && ItemsIndex < KeyItems.Length)
+                {
+                   
+                    for (int a = ItemsIndex; a < KeyItems.Length; a++)
+                    {
+                        Vector3 RandomPos = new Vector3(gameObject.transform.position.x + (Random.Range(0, WorldSizeX) * GridSpacing), 0, gameObject.transform.position.z + (Random.Range(0, WorldSizeZ) * GridSpacing));
+                        NavMeshHit RandHit;
+                        if (NavMesh.SamplePosition(RandomPos, out RandHit, 0.1f, NavMesh.AllAreas))
+                        {
+                            GameObject Item = Instantiate(KeyItems[ItemsIndex], RandomPos, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                            Item.AddComponent<KeyItemsCollider>();
+                            spawnedObjects.Add(Item);
+                            ItemsIndex++;
+                        }
+                    }
+                }
             }
 
         }
@@ -92,6 +103,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     public void SaveWorld()
     {
+        saveFilePath = Path.Combine(Application.persistentDataPath, "WorldData.json");
         WorldData worldData = new WorldData();
         //Cars Save 
         foreach (GameObject block in spawnedBlocks)
@@ -109,8 +121,14 @@ public class ProceduralGeneration : MonoBehaviour
         }
         // Write that to a json file, i love data readablility !!!!
         string json = JsonUtility.ToJson(worldData, true);
-        File.WriteAllText(saveFilePath, json);
-        Debug.Log("Saving world to: " + saveFilePath);
+        if (saveFilePath != null)
+        {
+            File.WriteAllText(saveFilePath, json);
+            Debug.Log("Saving world to: " + saveFilePath);
+        }
+        else
+            Debug.Log("No date to save, try running the game then saving");
+        
     }
 
     public void LoadWorld()
@@ -139,6 +157,33 @@ public class ProceduralGeneration : MonoBehaviour
         GenerateNavmesh();
         Debug.Log("World loaded successfully!");
     }
+    public void DeleteWorld()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            File.Delete(saveFilePath);
+            saveFilePath = null;
+            Debug.Log("File deleted");
+        }
+        else
+            Debug.Log("No file to delete");
+    }
+    public void OpenFile()
+    {
+        if (saveFilePath != null)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(saveFilePath);
+            }
+            catch
+            {
+                Debug.LogError("System error, no save file path present");
+            }
+        }
+        else
+            Debug.Log("File has been deleted, so it can't open");
+    }
 
     public GameObject ReturnPrefab(string Name)
     {
@@ -156,6 +201,13 @@ public class ProceduralGeneration : MonoBehaviour
             if (Pickup.name == NewName)
             {
                 return Pickup;
+            }
+        }
+        foreach (GameObject KeyItem in KeyItems)
+        {
+            if (KeyItem.name == NewName)
+            {
+                return KeyItem;
             }
         }
         return null;
