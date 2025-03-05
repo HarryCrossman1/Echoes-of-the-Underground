@@ -20,7 +20,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
     [HideInInspector]public bool WatchIsPlaying;
     [Header("Voicelines")]
-    [SerializeField] private AudioClip[] VoiceLine;
     [SerializeField] private bool VoiceLineFinished;
     [SerializeField] private float VoiceLineTimer;
     [Header("Data")]
@@ -155,36 +154,50 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayVoiceLine(AudioSource source,Character character,int voicelineNum,bool random = true)
     {
-        VoiceLineTimer += Time.deltaTime;
-        if (VoiceLineFinished)
+        // Add null checks 
+        if (source == null)
         {
-            if (random == true)
-            {
-                int rand = Random.Range(0, character.Clips.Length);
-                source.clip = character.Clips[rand];
-                source.Play();
-            } 
-            else 
-            {
-                source.clip = character.Clips[voicelineNum];
-                source.Play();
-            }
-            VoiceLineFinished= false;
+            Debug.LogError("The Audiosource is null buddy boy");
+            return;
         }
-        if (source.clip.length <= VoiceLineTimer)
+        if (character == null)
         {
-            if (random == true)
+            Debug.LogError("The Character is null buddy boy");
+            return;
+        }
+        else
+        {
+            VoiceLineTimer += Time.deltaTime;
+            if (VoiceLineFinished)
             {
-                VoiceLineFinished = true;
-                VoiceLineTimer = 0;
+                if (random == true)
+                {
+                    int rand = Random.Range(0, character.Clips.Length);
+                    source.clip = character.Clips[rand];
+                    source.Play();
+                }
+                else
+                {
+                    source.clip = character.Clips[voicelineNum];
+                    source.Play();
+                }
+                VoiceLineFinished = false;
             }
-            else
+            if (source.clip.length <= VoiceLineTimer)
             {
-                VoiceLineFinished = true;
-                VoiceLineTimer = 0;
-                StoryManager.Instance.CurrentState++;
+                if (random == true)
+                {
+                    VoiceLineFinished = true;
+                    VoiceLineTimer = 0;
+                }
+                else
+                {
+                    VoiceLineFinished = true;
+                    VoiceLineTimer = 0;
+                    StoryManager.Instance.CurrentState++;
+                }
+
             }
-        
         }
     }
 

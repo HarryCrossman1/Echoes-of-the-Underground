@@ -12,7 +12,7 @@ public class StoryManager : MonoBehaviour
 
     //Tutorial Stuff
     [SerializeField] private GameObject AlertIcon;
-    [SerializeField] private GameObject TutorialCharacter;
+    [SerializeField] public GameObject TutorialCharacter;
     [SerializeField] public int CurrentState;
     [SerializeField] public bool HitMiscItem;
     private Animator animator;
@@ -29,7 +29,15 @@ public class StoryManager : MonoBehaviour
     public string PressedButtonName;
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
         DontDestroyOnLoad(this);
     }
     void Start()
@@ -56,6 +64,7 @@ public class StoryManager : MonoBehaviour
                     if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 0)
                     {
                         Debug.Log(TutorialCharacter.GetComponent<AudioSource>());
+                        Debug.Log(TutorialCharacter.GetComponent<CharacterHolder>());
                         SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 0, false);
                         AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
                     }
