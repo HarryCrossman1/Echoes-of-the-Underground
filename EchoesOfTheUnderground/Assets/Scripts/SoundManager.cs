@@ -19,9 +19,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
     [HideInInspector]public bool WatchIsPlaying;
-    [Header("Voicelines")]
-    [SerializeField] private bool VoiceLineFinished;
-    [SerializeField] private float VoiceLineTimer;
     [Header("Data")]
     public float MusicVol;
     public float FxVol;
@@ -42,7 +39,7 @@ public class SoundManager : MonoBehaviour
             Destroy(this);
         }
         
-        DontDestroyOnLoad(this.gameObject);
+      
     }
 
     // Update is called once per frame
@@ -152,9 +149,9 @@ public class SoundManager : MonoBehaviour
         GunSource.clip = PlayerDeathClip;
         GunSource.Play();
     }
-    public void PlayVoiceLine(AudioSource source,Character character,int voicelineNum,bool random = true)
+    public void PlayVoiceLine(AudioSource source,CharacterHolder character,int voicelineNum,bool random = true)
     {
-        // Add null checks 
+       // Add null checks
         if (source == null)
         {
             Debug.LogError("The Audiosource is null buddy boy");
@@ -167,33 +164,41 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            VoiceLineTimer += Time.deltaTime;
-            if (VoiceLineFinished)
+            character.VoiceLineTimer += Time.deltaTime;
+            if (character.ReadyForVoiceline)
             {
+                Debug.Log("1");
+                
                 if (random == true)
                 {
-                    int rand = Random.Range(0, character.Clips.Length);
-                    source.clip = character.Clips[rand];
+                    Debug.Log("2");
+                    int rand = Random.Range(0, character.character.Clips.Length);
+                    source.clip = character.character.Clips[rand];
                     source.Play();
+                    character.ReadyForVoiceline = false;
                 }
                 else
                 {
-                    source.clip = character.Clips[voicelineNum];
+                    Debug.Log("3");
+                    source.clip = character.character.Clips[voicelineNum];
                     source.Play();
+                    character.ReadyForVoiceline = false;
                 }
-                VoiceLineFinished = false;
             }
-            if (source.clip.length <= VoiceLineTimer)
+            if (source.clip.length <= character.VoiceLineTimer)
             {
+                Debug.Log("4");
                 if (random == true)
                 {
-                    VoiceLineFinished = true;
-                    VoiceLineTimer = 0;
+                    Debug.Log("5");
+                    character.ReadyForVoiceline = true;
+                    character.VoiceLineTimer = 0;
                 }
                 else
                 {
-                    VoiceLineFinished = true;
-                    VoiceLineTimer = 0;
+                    Debug.Log("6");
+                    character.ReadyForVoiceline = true;
+                    character.VoiceLineTimer = 0;
                     StoryManager.Instance.CurrentState++;
                 }
 

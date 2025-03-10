@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterHolder : MonoBehaviour
 {
     [SerializeField] public Character character;
+    [SerializeField] public float VoiceLineTimer;
+    [SerializeField] public bool ReadyForVoiceline;
 
     private void Update()
     {
@@ -12,8 +14,8 @@ public class CharacterHolder : MonoBehaviour
         {
             if (!character.TutorialCharacter)
             {
-                AudioSource scr = gameObject.GetComponentInChildren<AudioSource>();
-                SoundManager.instance.PlayVoiceLine(scr, character, 0);
+                AudioSource scr = gameObject.GetComponent<AudioSource>();
+                SoundManager.instance.PlayVoiceLine(scr, this, 0);
             }
         }
     }

@@ -113,17 +113,6 @@ public class WeaponManager : MonoBehaviour
 
                 HighScoreManager.instance.CurrentHighScore += 125;
             }
-            else if (hit.collider.CompareTag("Medkit"))
-            {
-                if (PlayerController.instance.PlayerHealth < 3)
-                {
-                    ShotsHit++;
-                    PlayerController.instance.PlayerHealth++;
-                    UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
-                    HighScoreManager.instance.CurrentHighScore += 10;
-                    hit.collider.gameObject.SetActive(false);
-                }
-            }
             else if (hit.collider.CompareTag("MiscItem"))
             {
                 if (StoryManager.Instance.gameObject != null)

@@ -11,12 +11,14 @@ public class StoryManager : MonoBehaviour
     public StoryState State;
 
     //Tutorial Stuff
+    [SerializeField] private MeshRenderer[] AlertIconMesh;
     [SerializeField] private GameObject AlertIcon;
     [SerializeField] public GameObject TutorialCharacter;
     [SerializeField] public int CurrentState;
     [SerializeField] public bool HitMiscItem;
     private Animator animator;
     private NavMeshAgent agent;
+   [SerializeField] private GameObject PlaceToMove;
    [SerializeField] private bool StartLoad;
     //Camp Dynamite 
     [SerializeField] private GameObject Leo;
@@ -42,7 +44,7 @@ public class StoryManager : MonoBehaviour
     }
     void Start()
     {
-        AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
+        AlertIconState(false);
         animator = TutorialCharacter.GetComponentInChildren<Animator>();
         agent = TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
     }
@@ -58,58 +60,61 @@ public class StoryManager : MonoBehaviour
         {
             case StoryState.Tutorial:
                 {
-                    AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
+                    AlertIconState(true);
                     AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(-0.13f, 2, -0.2f);
 
                     if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 0)
                     {
-                        Debug.Log(TutorialCharacter.GetComponent<AudioSource>());
-                        Debug.Log(TutorialCharacter.GetComponent<CharacterHolder>());
-                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 0, false);
-                        AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
+                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 0, false);
+                        AlertIconState(false);
                     }
-                    if (CurrentState == 1)
+                    else if (CurrentState == 1)
                     {
                         animator.SetBool("IsIdle", false);
                         animator.SetBool("IsWalking", true);
-                        agent.SetDestination(new Vector3(-1.775f, 0, 1.825f));
-                        if (Vector3.Distance(TutorialCharacter.transform.position, new Vector3(-1.775f, 0, 1.825f)) < 0.1f)
+                        agent.SetDestination(PlaceToMove.transform.position);
+                        AlertIcon.transform.position = agent.transform.position + new Vector3(-0.13f, 2, -0.2f);
+                        if (Vector3.Distance(agent.transform.position, PlaceToMove.transform.position) < 0.2f)
                         {
                             animator.SetBool("IsIdle", true);
                             animator.SetBool("IsWalking", false);
-                            AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
-                            if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 1)
+                            AlertIconState(true);
+                          
+                            if (Vector3.Distance(agent.transform.position, PlayerController.instance.PlayerTransform.position) < 2)
                             {
-                                AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = false;
-                                SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 1, false);
+                                AlertIconState(false);
+                                SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 1, false);
                             }
                         }
                     }
-                    if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 2)
+                    else if (Vector3.Distance(agent.transform.position, PlayerController.instance.PlayerTransform.position) < 2 && CurrentState == 2)
                     {
-                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 2, false);
+                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 2, false);
 
                     }
-                    if (CurrentState == 3 && WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.MaxAmmo > WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber)
+                    else if (WeaponManager.instance.HeldWeapon != null&&WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag!=null&&CurrentState == 3)
                     {
-                        if (HitMiscItem)
+                        if (WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.MaxAmmo > WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber)
                         {
-                            SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 3, false);
-                        }
-                        else
-                        {
-                            SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 4, false);
+                            if (HitMiscItem)
+                            {
+                                SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 3, false);
+                            }
+                            else
+                            {
+                                SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 4, false);
+                            }
                         }
                     }
-                    if (CurrentState == 4)
+                    else if (CurrentState == 4)
                     {
-                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>().character, 5, false);
+                        SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 5, false);
                     }
-                    if (CurrentState == 5)
+                    else if (CurrentState == 5)
                     {
                         Vector3 LoadZoneVec = new Vector3(10, 2, 2);
                         AlertIcon.transform.position = LoadZoneVec;
-                        AlertIcon.GetComponentInChildren<MeshRenderer>().enabled = true;
+                        AlertIconState(true);
                         if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, LoadZoneVec) < 3)
                         {
                             if (StartLoad)
@@ -164,6 +169,23 @@ public class StoryManager : MonoBehaviour
                     }
                     break;
                 }
+        }
+    }
+    private void AlertIconState(bool state)
+    {
+        if (state)
+        {
+            for (int i = 0; i < AlertIconMesh.Length; i++)
+            {
+                AlertIconMesh[i].enabled = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < AlertIconMesh.Length; i++)
+            {
+                AlertIconMesh[i].enabled = false;
+            }
         }
     }
 }

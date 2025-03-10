@@ -17,14 +17,10 @@ public class LevelSetter : MonoBehaviour
             Instance = this;
         }
         else
-        { 
+        {
             Destroy(this);
         }
-      
-        
-    }
-    void Start()
-    {
+
         SetLevel();
     }
     public void SetLevel()
@@ -53,6 +49,12 @@ public class LevelSetter : MonoBehaviour
                 }
             case "HomeScene":
                 {
+                    //Add Saving and loading Manager 
+                    if (SavingAndLoading.instance == null)
+                    { 
+                        GameObject obj = new GameObject("Saving And Loading");
+                        obj.AddComponent<SavingAndLoading>();
+                    }
                     //Setup Sound no need for null check 
                     if (SoundManager.instance != null)
                     {

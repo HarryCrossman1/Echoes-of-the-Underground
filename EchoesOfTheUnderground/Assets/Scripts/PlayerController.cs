@@ -114,8 +114,6 @@ public class PlayerController : MonoBehaviour
     public void PlayerDeath()
     {
         UiManager.instance.DeathCanvas.enabled = true;
-        UiManager.instance.IngameCurrentStore.text = HighScoreManager.instance.CurrentHighScore.ToString();
-        UiManager.instance.IngameHighScoreAllTime.text = HighScoreManager.instance.AllTimeHighScore.ToString();
         Time.timeScale= 0;
         SoundManager.instance.PlayDeath();
         SoundManager.instance.StopWatch();

@@ -121,7 +121,7 @@ public class StalkerBehaviour : Zombie_Behaviour
                     Attack();
                     break;
                 }
-            case BehaviourState.Reset:
+          //  case BehaviourState.Reset:
                 {
                     if (RunningAway)
                     {
@@ -131,20 +131,26 @@ public class StalkerBehaviour : Zombie_Behaviour
                     }
                     StalkerAgent.enabled = true;
                     // REMEMBER TO ADD THE CORRECT NUMBERS LATER 
+
                     if (NavmeshCheck(StoredPos))
-                    {
-                        if (Vector3.Distance(transform.position, StoredPos) < 1f)
-                        {
+
+                  
+                   // StalkerAgent.SetDestination(ChooseRandomVec());
+                    //if (NavmeshCheck(NewVec))
+
+                    //{
+                    //    if (Vector3.Distance(transform.position, StoredPos) < 1f)
+                    //    {
                            
-                            CurrentState = BehaviourState.Stalking;
-                            StalkerAnimator.SetBool("Sprinting", false);
-                            StalkerAnimator.SetBool("Crawling", true);
-                            ReachedDestination = true;
-                            RunningAway = true;
-                            CurrentStalkingAccuracy = StalkingAccuracy;
-                            break;
-                        }
-                    }
+                    //        CurrentState = BehaviourState.Stalking;
+                    //        StalkerAnimator.SetBool("Sprinting", false);
+                    //        StalkerAnimator.SetBool("Crawling", true);
+                    //        ReachedDestination = true;
+                    //        RunningAway = true;
+                    //        CurrentStalkingAccuracy = StalkingAccuracy;
+                    //        break;
+                    //    }
+                    //}
                     break;
                 }
         }
@@ -163,6 +169,7 @@ public class StalkerBehaviour : Zombie_Behaviour
         }
        
     }
+
     //private Vector3 ChooseRandomVec(float RanMaxX,float RanMaxZ)
     //{
     //    float RandomX = Random.Range(0, RanMaxX);
@@ -174,6 +181,13 @@ public class StalkerBehaviour : Zombie_Behaviour
     //        return Vec;
     //    }
     //}
+
+    private Vector3 ChooseRandomVec(float RanMaxX,float RanMaxZ)
+    {
+        float RandomX = Random.Range(0, RanMaxX);
+        float RandomZ = Random.Range(0, RanMaxZ);
+        return new Vector3(RandomX, 0, RandomZ);
+    }
     private void EditDetails(float viewCone, float viewRange, float Speed)
     {
         ViewCone = viewCone;
