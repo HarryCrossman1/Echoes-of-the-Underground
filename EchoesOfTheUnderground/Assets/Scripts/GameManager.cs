@@ -15,24 +15,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
+    private int RandomZombieAmount;
 
     public bool HasZombies;
-    public int HordeDifficulty;
     private bool MovementExecuted;
     private int CurrentDifficulty;
 
-    [SerializeField] private Transform[] ZombieSpawnPoints;
-    [SerializeField] private int SpawnTracker;
     public bool IsActive;
 
     // Values For Difficulty 
-    private int DiffucultyScore;
-    public int LevelPosition;
     public float AccuracyRating = 100f;
     void Awake()
     {
         instance = this;
-        //  CurrentDifficulty = PlayerPrefs.GetInt("Difficulty");
         if (HasZombies)
         {
             PoolZombies(ZombiePoolAmount);
@@ -42,9 +37,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         MovementExecuted = false;
-        
+        RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
     }
-    // Update is called once per frame
     void Update()
     {
         GameplayLoop();
@@ -61,34 +55,30 @@ public class GameManager : MonoBehaviour
             ZombiePool.Add(Ins_Obj);
         }
     }
-    private void SpawnZombies(Transform SpawnPoint, int ZombieAmount)
+    private void SpawnZombies(Vector3 SpawnPoint)
     {
-        for (int i = 0; i < ZombieAmount; i++)
-        {
             GameObject CurrentZomb = GetPooledZombie();
-            if (CurrentZomb != null)
+        if (CurrentZomb != null)
+        {
+            CurrentZomb.transform.position = SpawnPoint;
+            // Reset values 
+            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
+            CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
+            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieInRange = false;
+            CurrentZomb.GetComponent<Zombie_Behaviour>().HasAtacked = false;
+            ModifyCurrentZombie(CurrentZomb);
+            CurrentZomb.SetActive(true);
+            CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
+            // Remove blood 
+            foreach (GameObject bloodObj in BulletWounds)
             {
-                CurrentZomb.transform.position = SpawnPoint.position;
-                // Reset values 
-                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
-                CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
-                CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieInRange = false;
-                CurrentZomb.GetComponent<Zombie_Behaviour>().HasAtacked = false;
-                ModifyCurrentZombie(CurrentZomb);
-                CurrentZomb.SetActive(true);
-                CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
-                // Remove blood 
-                foreach (GameObject bloodObj in BulletWounds)
-                {
-                    bloodObj.SetActive(false);
-                }
-                //Clear the list
-                BulletWounds.Clear();
-                //Set Animatons
-                CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
-                CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
+                bloodObj.SetActive(false);
             }
-
+            //Clear the list
+            BulletWounds.Clear();
+            //Set Animatons
+            CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
+            CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
         }
     }
     private void ModifyCurrentZombie(GameObject obj)
@@ -116,40 +106,26 @@ public class GameManager : MonoBehaviour
     {
         if (!IsActive)
         {
-            for (int i = 0; i < ZombieSpawnPoints.Length; i++)
+            for (int i = 0; i < RandomZombieAmount; i++)
             {
-                //check if the spawn point is too close 
-                int rand = UnityEngine.Random.Range(0, ZombieSpawnPoints.Length);
-                if (Vector3.Distance(ZombieSpawnPoints[rand].position, PlayerController.instance.transform.position) > 10f && SpawnTracker < 3)
+                //Choose a random spawn point on z 
+                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(10, 25)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
+                Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(RandomSpawn, out hit, 2, NavMesh.AllAreas))
                 {
-                    // if good then spawn here 
-                    SpawnTracker++;
-
-
-
-                    SpawnZombies(ZombieSpawnPoints[rand], 1);
-
-                   // IsActive = true;
+                    SpawnZombies(hit.position);
                     break;
                 }
-                else
+                else if(NavMesh.SamplePosition(RandomSpawnBackup, out hit, 2, NavMesh.AllAreas))
                 {
-                    SpawnTracker++;
+                    SpawnZombies(hit.position);
                 }
+
 
             }
             
         }
-
-    }
-    private void CalculateDifficultyScore()
-    { 
-        // Playerhealth * 1  
-        // PlayerAmmostores / 2  round down 
-        // PlayerAccuracy <50 = 1 50 -75 = 2 75+ = 3 
-        // LevelPosition * 1 
-
-        // if >10 round to 10 else if <3 round to 3 
 
     }
 }
