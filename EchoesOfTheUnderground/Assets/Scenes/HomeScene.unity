@@ -1789,11 +1789,7 @@ MonoBehaviour:
   BulletWounds: []
   ZombiePoolAmount: 0
   HasZombies: 0
-  HordeDifficulty: 0
-  ZombieSpawnPoints: []
-  SpawnTracker: 0
   IsActive: 0
-  LevelPosition: 0
   AccuracyRating: 100
 --- !u!4 &370874128
 Transform:
@@ -3112,6 +3108,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1173447397}
   m_SourcePrefab: {fileID: 100100000, guid: 9778a2c2af1991147b00b56053869c2e, type: 3}
+--- !u!1 &614365067 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 389216603363037211, guid: a7659eb46f31f884c9f83a7f974a7c25,
+    type: 3}
+  m_PrefabInstance: {fileID: 2221952742817112162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &631171178
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4271,8 +4273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acaad4a7f8cc504ea25257109c98ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNextSpawnLocation: {x: 0, y: 0, z: 0}
   SoundManagerPrefab: {fileID: 1440131964564172660, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
+    type: 3}
+  SavingAndLoadingPrefab: {fileID: 379309441248803531, guid: 0611be95786742d4eb9f80d9079ada3b,
+    type: 3}
+  UiManagerPrefab: {fileID: 6802728485690297328, guid: 8b3c98d99d65e7a41ac80828a8df4dfc,
+    type: 3}
+  StoryManagerPrefab: {fileID: 614365067}
+  GameManagerPrefab: {fileID: 1684303226467612079, guid: f3d806d6024e56a4a85a0dcc774e23b4,
     type: 3}
 --- !u!4 &912878419
 Transform:
@@ -4435,7 +4443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 933332669}
   m_Layer: 0
-  m_Name: Place
+  m_Name: PlaceToMove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6644,6 +6652,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175319851725614288, guid: 6885103ce4504a14198b0b10e1056c7d,
+        type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2067579098}
@@ -8407,6 +8420,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RickTutorialCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 624806462681092421, guid: e5a6a12f929953f49a73813661b7c44a,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 624806462681092421, guid: e5a6a12f929953f49a73813661b7c44a,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4698862329725003746, guid: e5a6a12f929953f49a73813661b7c44a,
         type: 3}
@@ -12711,8 +12734,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2702537963033956, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
+      propertyPath: MaxDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702537963033956, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
       propertyPath: m_audioClip
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702537963033956, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702537963033956, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1470193184033347606, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6,
         type: 3}

@@ -9,7 +9,7 @@ public class Zombie_Behaviour : MonoBehaviour
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
     public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
-    public bool HasAtacked,ZombieInRange;
+    public bool HasAtacked;
    [SerializeField] public bool IsStunned;
     public float AccelMin,AccelMax;
 
@@ -26,28 +26,29 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void Start()
     {
-       
+        InvokeRepeating("Chase", 1, 0.1f);
+        Zombie_Agent.autoRepath = true;
     }
     // Update is called once per frame
     void Update()
     {
         DeathCheck();
-        Chase(Zombie_Agent, PlayerController.instance.PlayerTransform.gameObject);     
+        CheckAttackRange(PlayerController.instance.PlayerTransform.gameObject);     
     }
-    public void Chase(NavMeshAgent ZombieAgent, GameObject Target)
+    public void CheckAttackRange(GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 2f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.5f)
         {
-            ZombieInRange = false;
-            if (!IsStunned)
-            ZombieAgent.destination = Target.transform.position;
+
         }
         else
         {
-            ZombieAgent.destination = gameObject.transform.position;
-            ZombieInRange = true;
-            Attack();
+            Invoke("Attack",Attacking.length);
         }
+    }
+    private void Chase()
+    {
+        Zombie_Agent.SetDestination(PlayerController.instance.PlayerTransform.transform.position);
     }
     protected void Attack()
     {
@@ -63,11 +64,9 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Walking", false);
         ZombieAnimator.SetBool("Stunned", false);
         PlayZombieAudio(AttackAudio, false);
-        PlayerController.instance.PlayerDeathCheck();
         yield return new WaitForSeconds(cooldown);
         PlayerController.instance.PlayerHealth--;
-       // HighScoreManager.instance.CurrentHighScore -= 100;
-        //Could bug If player kills during anim
+        PlayerController.instance.PlayerDeathCheck();
         HasAtacked = false;
     }
     public void DeathCheck()
@@ -95,7 +94,7 @@ public class Zombie_Behaviour : MonoBehaviour
         Vector3 Forward = Zombie.transform.forward;
         Vector3 ToPlayer = (PlayerPosition - Zombie.transform.position).normalized;
 
-        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition, transform.position) < Range || Vector3.Distance(PlayerPosition, transform.position) < 2)
+        if (Vector3.Dot(Forward, ToPlayer) > ViewCone && Vector3.Distance(PlayerPosition, transform.position) < Range || Vector3.Distance(PlayerPosition, transform.position) < 4)
         {
             Debug.DrawLine(transform.position, ToPlayer, Color.black);
             RaycastHit hit;

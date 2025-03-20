@@ -11,7 +11,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] public AudioSource GenericSource;
     public AudioSource AmbienceSource;
     [SerializeField] private AudioClip MenuClipSelect;
-    [SerializeField] public Slider MusicSlider, SoundSlider, NpcSlider;
 
     [Header("In Game")]
     public AudioSource  GunSource;
@@ -30,16 +29,16 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        DontDestroyOnLoad(this);
         if (instance == null)
         {
             instance = this;
         }
         else
         { 
-            Destroy(this);
+            Destroy(gameObject);
         }
-        
-      
+        Debug.Log(instance);
     }
 
     // Update is called once per frame
@@ -84,6 +83,7 @@ public class SoundManager : MonoBehaviour
         {
             foreach (AudioSource source in MusicSources)
             {
+                if(source!=null)
                 source.volume = MusicVol;
             }
         }
@@ -91,14 +91,16 @@ public class SoundManager : MonoBehaviour
         {
             foreach (AudioSource source in SoundFxSources)
             {
-                source.volume = FxVol;
+                if (source != null)
+                    source.volume = FxVol;
             }
         }
         if (NpcSources != null)
         {
             foreach (AudioSource source in NpcSources)
             {
-                source.volume = NpcVol;
+                if (source != null)
+                    source.volume = NpcVol;
             }
         }
     }
@@ -199,7 +201,7 @@ public class SoundManager : MonoBehaviour
                     Debug.Log("6");
                     character.ReadyForVoiceline = true;
                     character.VoiceLineTimer = 0;
-                    StoryManager.Instance.CurrentState++;
+                    StoryManager.instance.CurrentState++;
                 }
 
             }

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Megan
   m_EditorClassIdentifier: 
   Obj: {fileID: 5439152733682015658, guid: 75adbdae387dcdd46809f74e300a864c, type: 3}
-  Clips: []
+  Clips:
+  - {fileID: 8300000, guid: 42b0ab7cb7ec63948bf56aa132768103, type: 3}
   TutorialCharacter: 0

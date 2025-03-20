@@ -47,3 +47,11 @@ MonoBehaviour:
   PlayerNextSpawnLocation: {x: 0, y: 0, z: 0}
   SoundManagerPrefab: {fileID: 1440131964564172660, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
     type: 3}
+  SavingAndLoadingPrefab: {fileID: 379309441248803531, guid: 0611be95786742d4eb9f80d9079ada3b,
+    type: 3}
+  UiManagerPrefab: {fileID: 6802728485690297328, guid: 8b3c98d99d65e7a41ac80828a8df4dfc,
+    type: 3}
+  StoryManagerPrefab: {fileID: 389216603363037211, guid: a7659eb46f31f884c9f83a7f974a7c25,
+    type: 3}
+  GameManagerPrefab: {fileID: 1684303226467612079, guid: f3d806d6024e56a4a85a0dcc774e23b4,
+    type: 3}

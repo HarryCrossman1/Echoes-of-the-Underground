@@ -26,7 +26,7 @@ public class ButtonInteractor : MonoBehaviour
     }
     public void ButtonPressed()
     {
-        if(StoryManager.Instance!=null)
-        StoryManager.Instance.PressedButtonName = gameObject.name;
+        if(StoryManager.instance !=null)
+        StoryManager.instance.PressedButtonName = gameObject.name;
     }
 }

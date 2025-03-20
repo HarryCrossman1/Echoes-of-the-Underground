@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb979ba4757ca844daaea3562178f853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MagPrefab: {fileID: 8694543812531234881, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
+    type: 3}

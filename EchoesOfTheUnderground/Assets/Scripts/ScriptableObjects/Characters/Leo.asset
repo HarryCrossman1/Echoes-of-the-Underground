@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Leo
   m_EditorClassIdentifier: 
   Obj: {fileID: 867748307187467166, guid: 4f80d5ad2ce493c45a0b171b3f8c8b17, type: 3}
-  Clips: []
-  TutorialCharacter: 0
+  Clips:
+  - {fileID: 8300000, guid: 31d475e3d9f1c944aacabc13cf52b3e3, type: 3}
+  TutorialCharacter: 1

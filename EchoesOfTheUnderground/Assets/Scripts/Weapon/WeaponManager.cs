@@ -88,8 +88,6 @@ public class WeaponManager : MonoBehaviour
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
                 GameManager.instance.BulletWounds.Add(Blood);
-                //Update High Score 
-                HighScoreManager.instance.CurrentHighScore += 50;
             }
             else if (hit.collider.CompareTag("ZombieHead"))
             {
@@ -110,23 +108,21 @@ public class WeaponManager : MonoBehaviour
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
                 GameManager.instance.BulletWounds.Add(Blood);
-
-                HighScoreManager.instance.CurrentHighScore += 125;
             }
             else if (hit.collider.CompareTag("MiscItem"))
             {
-                if (StoryManager.Instance.gameObject != null)
+                if (StoryManager.instance.gameObject != null)
                 {
-                    StoryManager.Instance.HitMiscItem = false;
+                    StoryManager.instance.HitMiscItem = false;
                 }
                 if (hit.collider.attachedRigidbody != null)
                 {
                     Rigidbody body = hit.collider.attachedRigidbody;
                     body.AddForce(hit.point, ForceMode.Impulse);
 
-                    if (StoryManager.Instance.gameObject != null)
+                    if (StoryManager.instance.gameObject != null)
                     {
-                        StoryManager.Instance.HitMiscItem = true;
+                        StoryManager.instance.HitMiscItem = true;
                     }
                 }
             }
@@ -134,6 +130,7 @@ public class WeaponManager : MonoBehaviour
             {
                 ShotsTaken++;
             }
+            if (ShotsTaken >= 0) 
             GameManager.instance.AccuracyRating = (ShotsHit / ShotsTaken) * 100f;
         }
               //  }

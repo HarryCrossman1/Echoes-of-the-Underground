@@ -2942,7 +2942,7 @@ PrefabInstance:
     - target: {fileID: 6431739047459286209, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.836
+      value: -26.19
       objectReference: {fileID: 0}
     - target: {fileID: 6431739047459286209, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
@@ -12292,7 +12292,7 @@ PrefabInstance:
     - target: {fileID: 5045321867904240884, guid: f3d806d6024e56a4a85a0dcc774e23b4,
         type: 3}
       propertyPath: HasZombies
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5045321867904240884, guid: f3d806d6024e56a4a85a0dcc774e23b4,
         type: 3}

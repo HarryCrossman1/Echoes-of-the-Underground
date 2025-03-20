@@ -27,17 +27,18 @@ public class GameManager : MonoBehaviour
     public float AccuracyRating = 100f;
     void Awake()
     {
+        DontDestroyOnLoad(this);
         instance = this;
-        if (HasZombies)
-        {
-            PoolZombies(ZombiePoolAmount);
-        }
-      
     }
     private void Start()
     {
         MovementExecuted = false;
         RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
+        if (HasZombies)
+        {
+            PoolZombies(ZombiePoolAmount);
+        }
+
     }
     void Update()
     {
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ZombieAmount; i++)
         {
             int rand = UnityEngine.Random.Range(0, ZombiePrefabs.Length);
-            GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
+            GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand],new Vector3(15,0.1f,3.6f),quaternion.identity);
 
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
@@ -57,14 +58,13 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnZombies(Vector3 SpawnPoint)
     {
-            GameObject CurrentZomb = GetPooledZombie();
+        GameObject CurrentZomb = GetPooledZombie();
         if (CurrentZomb != null)
         {
             CurrentZomb.transform.position = SpawnPoint;
             // Reset values 
             CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
             CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
-            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieInRange = false;
             CurrentZomb.GetComponent<Zombie_Behaviour>().HasAtacked = false;
             ModifyCurrentZombie(CurrentZomb);
             CurrentZomb.SetActive(true);
@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
         if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
 
         navMeshAgent.acceleration = UnityEngine.Random.Range(obj.GetComponent<Zombie_Behaviour>().AccelMin, obj.GetComponent<Zombie_Behaviour>().AccelMax);
-        navMeshAgent.angularSpeed = UnityEngine.Random.Range(75, 165);
     }
 
     public GameObject GetPooledZombie()
@@ -106,18 +105,19 @@ public class GameManager : MonoBehaviour
     {
         if (!IsActive)
         {
+           // Debug.Log("Zombies spawning = " + RandomZombieAmount);
             for (int i = 0; i < RandomZombieAmount; i++)
             {
                 //Choose a random spawn point on z 
-                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(10, 25)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
+                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(20, 55)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
                 Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(RandomSpawn, out hit, 2, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
                 {
                     SpawnZombies(hit.position);
                     break;
                 }
-                else if(NavMesh.SamplePosition(RandomSpawnBackup, out hit, 2, NavMesh.AllAreas))
+                else if(NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
                 {
                     SpawnZombies(hit.position);
                 }

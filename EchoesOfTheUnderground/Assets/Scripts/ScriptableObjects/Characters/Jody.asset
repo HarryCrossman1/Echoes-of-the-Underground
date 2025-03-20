@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Jody
   m_EditorClassIdentifier: 
   Obj: {fileID: 4402787454484080497, guid: fb8837a7c4324634f99a23ecdc085dcf, type: 3}
-  Clips: []
+  Clips:
+  - {fileID: 8300000, guid: 262f1ba22cf47e8448262774338209d4, type: 3}
+  - {fileID: 8300000, guid: 3faea6651751ebc4eb07e87a8ea30b71, type: 3}
+  - {fileID: 8300000, guid: 1c363d58772cd814ebc9d6ebb7c308d1, type: 3}
   TutorialCharacter: 0

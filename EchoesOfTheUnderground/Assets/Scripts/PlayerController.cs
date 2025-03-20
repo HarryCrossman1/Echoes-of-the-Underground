@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 //using AcmLib;
 using System;
 
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public XrSocketTag[] MagLocations;
     public List<GameObject> MagList = new List<GameObject>();
     string Path;
+    private float LerpValue = 1f;
+    private float LerpDuration = 1f;
     void Awake()
     {
         Path = Application.persistentDataPath + ".txt";
@@ -32,45 +35,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UiManager.instance != null)
-           // UiManager.instance.PositionText.text = GetPlayerPosition(PlayerTransform).ToString();
-
-        if (Input.GetKeyDown(KeyCode.I))
-        { 
-            SavingAndLoading.instance.SaveIngameData();
-        }
-    }
-    private void AccessControllers()
-    {
-        var ControllerRight = new List<InputDevice>();
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right, ControllerRight);
-
-        var ControllerLeft = new List<InputDevice>();
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Left, ControllerLeft);
-        foreach (var controller in ControllerRight)
-        {
-            if (controller.IsPressed(InputHelpers.Button.Trigger, out bool IsPressedRight) && IsPressedRight == true)
-            {
-                Debug.Log("RightTrigger");
-                
-            }
-            else
-            {
-              
-            }
-        }
-        foreach (var controller in ControllerLeft)
-        {
-            if (controller.IsPressed(InputHelpers.Button.Trigger, out bool IsPressedLeft) && IsPressedLeft == true)
-            {
-                Debug.Log("LeftTrigger");
-                
-            }
-            else
-            {
-              //  BulletTrail.instance.LineDeactivate();
-            }
-        }
 
     }
     public void OnSelectEntered(SelectEnterEventArgs args)
@@ -85,10 +49,10 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDeathCheck()
     {
-        if (UiManager.instance.HealthText.text != null)
-        {
-            UiManager.instance.HealthText.text = PlayerHealth.ToString();
-        }
+        //if (UiManager.instance.HealthText.text != null)
+        //{
+        //    UiManager.instance.HealthText.text = PlayerHealth.ToString();
+        //}
 
         if (PlayerHealth < 2)
         {
@@ -102,26 +66,31 @@ public class PlayerController : MonoBehaviour
         if (PlayerHealth <= 0)
         {
             PlayerDeath();
-            HighScoreManager.instance.Save();
             Debug.Log("Dead");
         }
      
     }
-    public Vector3 GetPlayerPosition(Transform playerTransform)
-    { 
-        return playerTransform.position;
-    }
     public void PlayerDeath()
     {
-        UiManager.instance.DeathCanvas.enabled = true;
         Time.timeScale= 0;
         SoundManager.instance.PlayDeath();
         SoundManager.instance.StopWatch();
-        StartCoroutine(DeathTimer(3));
+        StartCoroutine(DeathTimer(2));
     }
     private IEnumerator DeathTimer(float seconds)
-    { 
+    {
+        float Elapsed = 0f;
+        while (Elapsed < LerpDuration) 
+        {
+            Elapsed += Time.unscaledDeltaTime;
+            LerpValue = Mathf.Lerp(1f, 0f, Elapsed / LerpDuration);
+            yield return null;
+        }
+        LerpValue = 0f;
+        Color NewCol = UiManager.instance.DeathCanvas.GetComponent<Image>().color;
+        NewCol.a = LerpValue;
+        UiManager.instance.DeathCanvas.gameObject.GetComponent<Image>().color = NewCol;
         yield return new WaitForSecondsRealtime(seconds);
-        SceneManager.LoadScene("SubwayScene");
+        SceneManager.LoadScene("MenuScene");
     }
 }

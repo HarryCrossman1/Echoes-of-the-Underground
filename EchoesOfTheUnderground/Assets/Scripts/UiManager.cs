@@ -11,10 +11,10 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     [SerializeField] private Slider LoadingSlider;
     public Canvas DeathCanvas;
-    [SerializeField] GameObject MovingText;
-    [SerializeField] public TextMeshProUGUI HealthText, PositionText, AmmoText;
+    [SerializeField] public TextMeshProUGUI HealthText;
     public bool PauseLevelLoading;
     private AsyncOperation Operation;
+    [SerializeField] public Slider MusicSlider, SoundSlider, NpcSlider;
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,6 +47,15 @@ public class UiManager : MonoBehaviour
     public void SetGraphics(int Level)
     {
         QualitySettings.SetQualityLevel(Level, true);
+    }
+    public void SetSoundSlider()
+    {
+        if (UiManager.instance.SoundSlider != null)
+        {
+            UiManager.instance.SoundSlider.value = SoundManager.instance.FxVol;
+            UiManager.instance.MusicSlider.value = SoundManager.instance.MusicVol;
+            UiManager.instance.NpcSlider.value = SoundManager.instance.NpcVol;
+        }
     }
     public IEnumerator LoadSceneAsync(string SceneName, bool IsInMenu)
     {
