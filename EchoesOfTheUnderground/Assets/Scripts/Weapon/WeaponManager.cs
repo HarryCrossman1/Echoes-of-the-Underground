@@ -126,6 +126,10 @@ public class WeaponManager : MonoBehaviour
                     }
                 }
             }
+            else if (hit.collider.CompareTag("Rubble"))
+            { 
+                
+            }
             else
             {
                 ShotsTaken++;

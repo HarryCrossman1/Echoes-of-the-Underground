@@ -42,17 +42,23 @@ public class LevelSetter : MonoBehaviour
             case "HomeScene":
                 {
                     SoundManagerSetup();
+                    UiManagerSetup();
                     StoryManagerSetup();
                     StoryManager.instance.State = StoryManager.StoryState.Tutorial;
                     break;
                 }
             case "OpenWorldMain":
                 {
-                    Debug.Log("AAAAAAAAAAAAAAAAAA");
+                   
+                    StoryManager.instance.State = StoryManager.StoryState.Streets;
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
                     SavingAndLoading.instance.LoadIngameData();
+                    GameManager.instance.HasZombies= true;
+                    GameManager.instance.IsActive= false;
+                    Debug.Log(GameManager.instance.HasZombies);
+                    GameManager.instance.Init();
                     break;
                 }
             case "CampDynamite":
@@ -100,7 +106,16 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("Health") != null)
         {
             UiManager.instance.HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
+            if (UiManager.instance.HealthText != null)
+            {
+                StartCoroutine(SetHealthTextOnStart());
+            }
         }
+    }
+    private IEnumerator SetHealthTextOnStart()
+    {
+        yield return new WaitUntil(() => PlayerController.instance != null);
+        UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
     }
     private void SoundManagerSetup()
     {

@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Medkit : MonoBehaviour
 {
-    void Update()
+    public void MedkitPickup()
     {
-       // gameObject.transform.Rotate(0, 0, 10*Time.deltaTime);
+        Debug.Log("PickedUp");
+        if (PlayerController.instance.PlayerHealth <= 2)
+        {
+            PlayerController.instance.PlayerHealth++;
+            gameObject.SetActive(false);
+            Debug.Log("RestoringHealth");
+        }
     }
 }

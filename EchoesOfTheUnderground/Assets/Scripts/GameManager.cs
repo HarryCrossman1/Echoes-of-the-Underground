@@ -32,13 +32,16 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        Init();
+    }
+    public void Init()
+    {
         MovementExecuted = false;
         RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
         if (HasZombies)
         {
             PoolZombies(ZombiePoolAmount);
         }
-
     }
     void Update()
     {
@@ -69,6 +72,7 @@ public class GameManager : MonoBehaviour
             ModifyCurrentZombie(CurrentZomb);
             CurrentZomb.SetActive(true);
             CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
+            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCalledOnStart();
             // Remove blood 
             foreach (GameObject bloodObj in BulletWounds)
             {

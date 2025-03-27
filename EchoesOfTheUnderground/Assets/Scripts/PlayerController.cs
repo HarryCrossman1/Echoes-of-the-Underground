@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDeathCheck()
     {
-        //if (UiManager.instance.HealthText.text != null)
-        //{
-        //    UiManager.instance.HealthText.text = PlayerHealth.ToString();
-        //}
+        if (UiManager.instance.HealthText.text != null)
+        {
+            UiManager.instance.HealthText.text = PlayerHealth.ToString();
+        }
 
         if (PlayerHealth < 2)
         {
@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Dead");
         }
      
+    }
+    public void AddHealth()
+    {
+        PlayerHealth++;
+        if (UiManager.instance.HealthText.text != null)
+        {
+            UiManager.instance.HealthText.text = PlayerHealth.ToString();
+        }
     }
     public void PlayerDeath()
     {

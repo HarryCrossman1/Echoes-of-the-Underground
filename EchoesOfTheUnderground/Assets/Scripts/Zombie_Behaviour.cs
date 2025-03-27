@@ -12,6 +12,8 @@ public class Zombie_Behaviour : MonoBehaviour
     public bool HasAtacked;
    [SerializeField] public bool IsStunned;
     public float AccelMin,AccelMax;
+    private bool HasChecked = false;
+    private Vector3 OldPosition;
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
@@ -26,7 +28,12 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void Start()
     {
+        ZombieCalledOnStart();
+    }
+    public void ZombieCalledOnStart()
+    {
         InvokeRepeating("Chase", 1, 0.1f);
+        InvokeRepeating("CheckPosition", 5, 3);
         Zombie_Agent.autoRepath = true;
     }
     // Update is called once per frame
@@ -49,6 +56,25 @@ public class Zombie_Behaviour : MonoBehaviour
     private void Chase()
     {
         Zombie_Agent.SetDestination(PlayerController.instance.PlayerTransform.transform.position);
+    }
+    private void CheckPosition()
+    {
+        if (!HasChecked)
+        {
+            OldPosition = transform.position;
+            HasChecked = true;
+            
+            return;
+        }
+        else
+        {
+            if (Vector3.Distance(OldPosition, transform.position) < 1)
+            {
+                Debug.Log("OldPosition = "+ OldPosition + "New Position =" + transform.position);
+                ZombieCurrentHealth = 0;
+            }
+        }
+        
     }
     protected void Attack()
     {
@@ -80,6 +106,9 @@ public class Zombie_Behaviour : MonoBehaviour
             ZombieAnimator.SetBool("Walking", false);
             ZombieAnimator.SetBool("Attacking", false);
             ZombieAnimator.SetBool("Stunned", false);
+            //Cancel invokes memory reasons 
+            CancelInvoke("Chase");
+            CancelInvoke("CheckPosition");
 
         }
     }

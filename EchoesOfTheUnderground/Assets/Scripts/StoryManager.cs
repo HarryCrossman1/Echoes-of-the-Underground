@@ -24,7 +24,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] public GameObject CampDynamiteLoadTrigger;
     
     //Streets Part Two 
-    [SerializeField] public GameObject Rubble;
+    [SerializeField] public GameObject Rubble,NewRubble;
     [SerializeField] public GameObject Dynamite;
     //Subway 
     public string PressedButtonName;
@@ -104,7 +104,6 @@ public class StoryManager : MonoBehaviour
                             Vector3 LoadZoneVec = new Vector3(10, 2, 2);
                             if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, LoadZoneVec) < 3)
                             {
-                                State = StoryState.Tutorial;
                                 if (StartLoad)
                                 {
                                     SavingAndLoading.instance.SaveIngameData(new Vector3(12, 0.1f, 3));
@@ -161,7 +160,9 @@ public class StoryManager : MonoBehaviour
                 {
                     if (CurrentState == 0)
                     {
+                        Vector3 RubbleOriginalPos = Rubble.transform.position;
                         Rubble.transform.position = new Vector3(28, 0, 0);
+                        NewRubble.transform.position = RubbleOriginalPos;
                         CurrentState++;
                     }
                     else if (CurrentState == 1) 
