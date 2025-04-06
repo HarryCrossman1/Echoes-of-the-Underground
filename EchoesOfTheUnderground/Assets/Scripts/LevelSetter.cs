@@ -10,6 +10,7 @@ public class LevelSetter : MonoBehaviour
     public static LevelSetter Instance;
     private string LevelName;
    [SerializeField] private GameObject SoundManagerPrefab,SavingAndLoadingPrefab,UiManagerPrefab,StoryManagerPrefab,GameManagerPrefab;
+    private bool CoroutineStarted = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -44,35 +45,78 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
-                    StoryManager.instance.State = StoryManager.StoryState.Tutorial;
+                    StoryManager.State = StoryManager.StoryState.Tutorial;
                     break;
                 }
             case "OpenWorldMain":
                 {
-                   
-                    StoryManager.instance.State = StoryManager.StoryState.Streets;
+                    if (StoryManager.State == StoryManager.StoryState.Streets)
+                    {
+                        GameManager.instance.IsActive = false;
+                    }
+                    else
+                    {
+                        GameManager.instance.IsActive = false;
+                    }
+                    
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
                     SavingAndLoading.instance.LoadIngameData();
                     GameManager.instance.HasZombies= true;
-                    GameManager.instance.IsActive= false;
+                    
                     Debug.Log(GameManager.instance.HasZombies);
                     GameManager.instance.Init();
                     break;
                 }
             case "CampDynamite":
                 {
-                    InstatiateCoreManagers();
+                    SoundManagerSetup();
+                    UiManagerSetup();
+                    StoryManagerSetup();
                     GameManager.instance.HasZombies= false;
+                    GameManager.instance.IsActive = true;
                     break;
                 }
             case "SubwayScene":
                 {
-                    
+                    SoundManagerSetup();
+                    UiManagerSetup();
+                    StoryManagerSetup();
+                    GameManager.instance.HasZombies = true;
+                    GameManager.instance.IsActive = false;
+                    break;
+                }
+            case "CampDynamiteRunied":
+                {
+                    SoundManagerSetup();
+                    GameManager.instance.HasZombies = false;
+                    GameManager.instance.IsActive = true;
+                    if (!CoroutineStarted)
+                    {
+                        StartCoroutine(EndGame());
+                        CoroutineStarted = true;
+                    }
+                    break;
+                }
+            case "HomeSceneRuined":
+                {
+                    SoundManagerSetup();
+                    GameManager.instance.HasZombies = false;
+                    GameManager.instance.IsActive = true;
+                    if (!CoroutineStarted)
+                    {
+                        StartCoroutine(EndGame());
+                        CoroutineStarted= true;
+                    }
                     break;
                 }
         }
+    }
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(8);
+        Application.Quit();
     }
     private void InstatiateCoreManagers()
     {
@@ -148,9 +192,9 @@ public class LevelSetter : MonoBehaviour
     }
     private void StoryManagerSetup()
     {
-        if (GameObject.Find("RickTutorialCharacter") != null)
+        if (GameObject.Find("Ch35_nonPBR") != null)
         {
-            StoryManager.instance.TutorialCharacter = GameObject.Find("RickTutorialCharacter");
+            StoryManager.instance.TutorialCharacter = GameObject.Find("Ch35_nonPBR");
             StoryManager.instance.agent = StoryManager.instance.TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
             StoryManager.instance.animator = StoryManager.instance.TutorialCharacter.GetComponentInChildren<Animator>();
         }
@@ -170,9 +214,9 @@ public class LevelSetter : MonoBehaviour
         {
             StoryManager.instance.Rubble = GameObject.Find("Rubble");
         }
-        if (GameObject.Find("Dynamite") != null)
+        if (GameObject.Find("NewRubble") != null)
         {
-            StoryManager.instance.Dynamite = GameObject.Find("Dynamite");
+            StoryManager.instance.NewRubble = GameObject.Find("NewRubble");
         }
         if (GameObject.Find("Dynamite") != null)
         {

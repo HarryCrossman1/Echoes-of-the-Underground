@@ -126,16 +126,22 @@ public class WeaponManager : MonoBehaviour
                     }
                 }
             }
-            else if (hit.collider.CompareTag("Rubble"))
-            { 
-                
+            else if (hit.collider.CompareTag("Dynamite"))
+            {
+                DynamiteExplosion.instance.TriggerExplosion();
             }
             else
             {
                 ShotsTaken++;
             }
-            if (ShotsTaken >= 0) 
-            GameManager.instance.AccuracyRating = (ShotsHit / ShotsTaken) * 100f;
+            if (ShotsTaken > 0)
+            {
+                GameManager.instance.AccuracyRating = (ShotsHit / (float)ShotsTaken) * 100f;
+            }
+            else
+            {
+                GameManager.instance.AccuracyRating = 0f;
+            }
         }
               //  }
            // }

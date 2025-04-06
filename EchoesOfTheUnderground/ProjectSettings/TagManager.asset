@@ -23,6 +23,7 @@ TagManager:
   - AmbientAudio
   - SoundFxAudio
   - NpcAudio
+  - Dynamite
   layers:
   - Default
   - TransparentFX

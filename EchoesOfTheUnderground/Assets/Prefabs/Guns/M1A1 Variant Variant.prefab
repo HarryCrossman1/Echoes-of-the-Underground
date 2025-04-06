@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: ShootPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 2218153023739959218, guid: 3b13c9b5797d2bc4ab779290324318d8,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5017816408420030615, guid: 3b13c9b5797d2bc4ab779290324318d8,
         type: 3}
       propertyPath: m_Activated.m_PersistentCalls.m_Calls.Array.size

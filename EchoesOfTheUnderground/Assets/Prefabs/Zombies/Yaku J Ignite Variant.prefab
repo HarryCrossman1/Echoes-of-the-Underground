@@ -180,10 +180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Zombie_Agent: {fileID: 6707679259899382866}
   ZombieAnimator: {fileID: 2607460671245114793}
-  ZombieCurrentHealth: 70
-  ZombieHealth: 70
+  ZombieCurrentHealth: 50
+  ZombieHealth: 50
   HasAtacked: 0
-  ZombieInRange: 0
   IsStunned: 0
   AccelMin: 4
   AccelMax: 6
@@ -228,7 +227,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a57c2b9d63127d42a55ac6cd1f66f54, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0.9
   Loop: 1

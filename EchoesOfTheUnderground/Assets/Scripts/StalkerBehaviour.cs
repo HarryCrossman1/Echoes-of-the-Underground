@@ -33,7 +33,6 @@ public class StalkerBehaviour : Zombie_Behaviour
         ZombieSource = GetComponent<AudioSource>();
 
         StalkerAnimator = GetComponent<Animator>();
-        instance = this;
     }
     private void Start()
     {

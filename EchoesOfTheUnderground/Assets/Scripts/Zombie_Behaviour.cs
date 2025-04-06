@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Zombie_Behaviour : MonoBehaviour
 {
-    public static Zombie_Behaviour instance;
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
     public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
@@ -19,22 +18,24 @@ public class Zombie_Behaviour : MonoBehaviour
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
     // Zombie Audio
     [SerializeField] private AudioSource ZombieSource;
-    [SerializeField] private AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
+    [SerializeField] public AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
     void Awake()
     {
         ZombieSource = GetComponent<AudioSource>();
         ZombieAnimator = GetComponent<Animator>();
-        instance = this;
     }
     private void Start()
     {
-        ZombieCalledOnStart();
+
     }
     public void ZombieCalledOnStart()
     {
-        InvokeRepeating("Chase", 1, 0.1f);
-        InvokeRepeating("CheckPosition", 5, 3);
-        Zombie_Agent.autoRepath = true;
+        if (isActiveAndEnabled)
+        {
+            InvokeRepeating("Chase", 1, 0.1f);
+            StartCoroutine(CheckIfStuck());
+            Zombie_Agent.autoRepath = true;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -44,7 +45,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void CheckAttackRange(GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.5f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.8f)
         {
 
         }
@@ -57,24 +58,23 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         Zombie_Agent.SetDestination(PlayerController.instance.PlayerTransform.transform.position);
     }
-    private void CheckPosition()
+    private IEnumerator CheckIfStuck()
     {
-        if (!HasChecked)
+        while (gameObject.activeInHierarchy)
         {
-            OldPosition = transform.position;
-            HasChecked = true;
+            Vector3 oldPos = transform.position;
+            yield return new WaitForSeconds(5f);
+            Vector3 newPos = transform.position;
+
+            float distance = Vector3.Distance(oldPos, newPos);
             
-            return;
-        }
-        else
-        {
-            if (Vector3.Distance(OldPosition, transform.position) < 1)
+
+            if (distance < 1f)
             {
-                Debug.Log("OldPosition = "+ OldPosition + "New Position =" + transform.position);
+                Debug.LogWarning("Zombie is stuck — killing.");
                 ZombieCurrentHealth = 0;
             }
         }
-        
     }
     protected void Attack()
     {
@@ -109,6 +109,8 @@ public class Zombie_Behaviour : MonoBehaviour
             //Cancel invokes memory reasons 
             CancelInvoke("Chase");
             CancelInvoke("CheckPosition");
+            //Stop coroutine  
+            StopCoroutine(CheckIfStuck());
 
         }
     }
@@ -163,7 +165,7 @@ public class Zombie_Behaviour : MonoBehaviour
             }
         }
     }
-    protected void PlayZombieAudio(AudioClip clip,bool loop)
+    public void PlayZombieAudio(AudioClip clip,bool loop)
     {
         if (!loop)
         {

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
         if (HasZombies)
         {
+            ZombiePool.Clear();
             PoolZombies(ZombiePoolAmount);
         }
     }
@@ -64,7 +65,10 @@ public class GameManager : MonoBehaviour
         GameObject CurrentZomb = GetPooledZombie();
         if (CurrentZomb != null)
         {
+            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCalledOnStart();
             CurrentZomb.transform.position = SpawnPoint;
+            // Sound 
+            CurrentZomb.GetComponent<Zombie_Behaviour>().PlayZombieAudio(CurrentZomb.GetComponent<Zombie_Behaviour>().AmbientAudio, true);
             // Reset values 
             CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
             CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;

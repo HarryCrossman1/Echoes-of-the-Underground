@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CampDynamite.unity
     guid: 9b817ba84ccbc2f41ad14ab3798fa85f
+  - enabled: 1
+    path: Assets/Scenes/HomeSceneRuined.unity
+    guid: 9f248061639ab0f499511bd692db79e9
+  - enabled: 1
+    path: Assets/Scenes/CampDynamiteRuined.unity
+    guid: dd26c0db629b62148b8d745897d0309c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0d6cf3e4c7bbd7748b4274f4bdb2ddb7,
       type: 2}

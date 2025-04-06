@@ -151,60 +151,24 @@ public class SoundManager : MonoBehaviour
         GunSource.clip = PlayerDeathClip;
         GunSource.Play();
     }
-    public void PlayVoiceLine(AudioSource source,CharacterHolder character,int voicelineNum,bool random = true)
+    public void PlayVoiceLine(AudioSource source, CharacterHolder character, int voicelineNum, bool random = true)
     {
-       // Add null checks
-        if (source == null)
+        if (source == null || character == null)
         {
-            Debug.LogError("The Audiosource is null buddy boy");
+            Debug.LogError("AudioSource or Character is null.");
             return;
         }
-        if (character == null)
-        {
-            Debug.LogError("The Character is null buddy boy");
-            return;
-        }
-        else
-        {
-            character.VoiceLineTimer += Time.deltaTime;
-            if (character.ReadyForVoiceline)
-            {
-                Debug.Log("1");
-                
-                if (random == true)
-                {
-                    Debug.Log("2");
-                    int rand = Random.Range(0, character.character.Clips.Length);
-                    source.clip = character.character.Clips[rand];
-                    source.Play();
-                    character.ReadyForVoiceline = false;
-                }
-                else
-                {
-                    Debug.Log("3");
-                    source.clip = character.character.Clips[voicelineNum];
-                    source.Play();
-                    character.ReadyForVoiceline = false;
-                }
-            }
-            if (source.clip.length <= character.VoiceLineTimer)
-            {
-                Debug.Log("4");
-                if (random == true)
-                {
-                    Debug.Log("5");
-                    character.ReadyForVoiceline = true;
-                    character.VoiceLineTimer = 0;
-                }
-                else
-                {
-                    Debug.Log("6");
-                    character.ReadyForVoiceline = true;
-                    character.VoiceLineTimer = 0;
-                    StoryManager.instance.CurrentState++;
-                }
 
-            }
+        if (character.ReadyForVoiceline)
+        {
+            AudioClip clip = random
+                ? character.character.Clips[Random.Range(0, character.character.Clips.Length)]
+                : character.character.Clips[voicelineNum];
+
+            source.clip = clip;
+            source.Play();
+            character.ReadyForVoiceline = false;
+            character.VoiceLineTimer = 0f; // reset timer so CharacterHolder picks it up
         }
     }
 

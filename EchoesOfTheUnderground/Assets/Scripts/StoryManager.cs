@@ -8,10 +8,13 @@ public class StoryManager : MonoBehaviour
 {
     public static StoryManager instance;
     public enum StoryState {Menu,Tutorial,Streets,StreetsPartTwo,Subway }
-    public StoryState State;
+    public static StoryState State;
+    //State for debugging 
+    [SerializeField] private StoryState DebugState;
 
     //Tutorial Stuff
     [SerializeField] public GameObject TutorialCharacter;
+    private Transform TutorialCharacterRealTranform;
     [SerializeField] public int CurrentState;
     [SerializeField] public bool HitMiscItem;
     public Animator animator;
@@ -46,6 +49,7 @@ public class StoryManager : MonoBehaviour
     void Update()
     {
         StoryLoop();
+        DebugState= State;
     }
     private void StoryLoop()
     {
@@ -53,83 +57,89 @@ public class StoryManager : MonoBehaviour
         {
             case StoryState.Tutorial:
                 {
-                    if (TutorialCharacter != null)
-                    {
-                        if (Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position) < 3 && CurrentState == 0)
-                        {
-                            SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 0, false);
-                        }
+                    if (TutorialCharacter == null) break;
 
-                        else if (CurrentState == 1)
-                        {
+                    float distanceToPlayer = Vector3.Distance(TutorialCharacter.transform.position, PlayerController.instance.PlayerTransform.position);
+
+                    CharacterHolder character = TutorialCharacter.GetComponent<CharacterHolder>();
+                    AudioSource source = TutorialCharacter.GetComponent<AudioSource>();
+
+                    switch (CurrentState)
+                    {
+                        case 0:
+                            if (distanceToPlayer < 3f && character.ReadyForVoiceline)
+                            {
+                                SoundManager.instance.PlayVoiceLine(source, character, 0, false);
+                            }
+                            break;
+
+                        case 1:
                             animator.SetBool("IsIdle", false);
                             animator.SetBool("IsWalking", true);
                             agent.SetDestination(PlaceToMove.transform.position);
+
                             if (Vector3.Distance(agent.transform.position, PlaceToMove.transform.position) < 0.2f)
                             {
                                 animator.SetBool("IsIdle", true);
                                 animator.SetBool("IsWalking", false);
 
-                                if (Vector3.Distance(agent.transform.position, PlayerController.instance.PlayerTransform.position) < 2)
+                                if (distanceToPlayer < 2f && character.ReadyForVoiceline)
                                 {
-                                    SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 1, false);
+                                    SoundManager.instance.PlayVoiceLine(source, character, 1, false);
                                 }
                             }
-                        }
-                        else if (Vector3.Distance(agent.transform.position, PlayerController.instance.PlayerTransform.position) < 2 && CurrentState == 2)
-                        {
-                            SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 2, false);
+                            break;
 
-                        }
-                        else if (WeaponManager.instance.HeldWeapon != null && WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && CurrentState == 3)
-                        {
-                            if (WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.MaxAmmo > WeaponManager.instance.HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber)
+                        case 2:
+                            if (distanceToPlayer < 2f && character.ReadyForVoiceline)
                             {
-                                if (HitMiscItem)
+                                SoundManager.instance.PlayVoiceLine(source, character, 2, false);
+                            }
+                            break;
+
+                        case 3:
+                            var weapon = WeaponManager.instance.HeldWeapon;
+                            if (weapon != null && weapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null)
+                            {
+                                var mag = weapon.GetComponentInParent<XrWeaponPickup>().CurrentMag;
+                                if (mag.MaxAmmo > mag.BulletNumber && character.ReadyForVoiceline)
                                 {
-                                    SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 3, false);
-                                }
-                                else
-                                {
-                                    SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 4, false);
+                                    int line = HitMiscItem ? 3 : 4;
+                                    SoundManager.instance.PlayVoiceLine(source, character, line, false);
                                 }
                             }
-                        }
-                        else if (CurrentState == 4)
-                        {
-                            SoundManager.instance.PlayVoiceLine(TutorialCharacter.GetComponent<AudioSource>(), TutorialCharacter.GetComponent<CharacterHolder>(), 5, false);
-                        }
-                        else if (CurrentState == 5)
-                        {
-                            Vector3 LoadZoneVec = new Vector3(10, 2, 2);
-                            if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, LoadZoneVec) < 3)
+                            break;
+
+                        case 4:
+                            if (character.ReadyForVoiceline)
                             {
-                                if (StartLoad)
-                                {
-                                    SavingAndLoading.instance.SaveIngameData(new Vector3(12, 0.1f, 3));
-                                    CurrentState = 0;
-                                    SceneManager.LoadScene("OpenWorldMain");
-                                    StartLoad = false;
-                                }
+                                SoundManager.instance.PlayVoiceLine(source, character, 5, false);
                             }
-                        }
+                            break;
+
+                        case 5:
+                            Vector3 loadZoneVec = new Vector3(10, 2, 2);
+                            if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, loadZoneVec) < 3)
+                            {
+                                SavingAndLoading.instance.SaveIngameData(new Vector3(12, 0.1f, 3));
+                                CurrentState = 0;
+                                SceneManager.LoadScene("OpenWorldMain");
+                            }
+                            break;
                     }
+
                     break;
                 }
-                case StoryState.Streets: 
+            case StoryState.Streets: 
                 {
                     if (CurrentState == 0)
                     {
                         if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, CampDynamiteLoadTrigger.transform.position) < 2)
                         {
                             CurrentState++;
-                            if (StartLoad)
-                            {
+
                                 SavingAndLoading.instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
-                                SceneManager.LoadScene("CampDynamite");
-                                StartLoad= false;
-                            }
-                           
+                                SceneManager.LoadScene("CampDynamite");          
                         }
                     }
                     if (CurrentState == 1 && Leo!=null)
@@ -144,14 +154,10 @@ public class StoryManager : MonoBehaviour
                     {
                         if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, Megan.transform.position) < 3)
                         {
-                            if (StartLoad)
-                            {
-                                SavingAndLoading.instance.SaveIngameData(new Vector3(20.52f, -0.02447182f, -46.21f));
+                                SavingAndLoading.instance.SaveIngameData(new Vector3(160, 1, 44));
                                 CurrentState = 0;
                                 State = StoryState.StreetsPartTwo;
                                 SceneManager.LoadScene("OpenWorldMain");
-                                StartLoad = false;
-                            }
                         }
                     }
                         break;
@@ -161,7 +167,7 @@ public class StoryManager : MonoBehaviour
                     if (CurrentState == 0)
                     {
                         Vector3 RubbleOriginalPos = Rubble.transform.position;
-                        Rubble.transform.position = new Vector3(28, 0, 0);
+                        Rubble.transform.position = new Vector3(200, 0, 0);
                         NewRubble.transform.position = RubbleOriginalPos;
                         CurrentState++;
                     }
@@ -169,8 +175,21 @@ public class StoryManager : MonoBehaviour
                     {
                         if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, new Vector3(184, 1, 162)) < 3)
                         {
+                            SavingAndLoading.instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
                             SceneManager.LoadScene("SubwayScene");
                         }
+                    }
+                    break;
+                }
+            case StoryState.Subway: 
+                {
+                    if (PressedButtonName == "RickCampButton")
+                    {
+                        SceneManager.LoadScene("CampDynamiteRuined");
+                    }
+                    else if (PressedButtonName == "CampDynamiteButton")
+                    {
+                        SceneManager.LoadScene("HomeSceneRuined");
                     }
                     break;
                 }

@@ -7,7 +7,7 @@ public class Medkit : MonoBehaviour
         Debug.Log("PickedUp");
         if (PlayerController.instance.PlayerHealth <= 2)
         {
-            PlayerController.instance.PlayerHealth++;
+            PlayerController.instance.AddHealth();
             gameObject.SetActive(false);
             Debug.Log("RestoringHealth");
         }
