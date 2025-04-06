@@ -65,28 +65,32 @@ public class GameManager : MonoBehaviour
         GameObject CurrentZomb = GetPooledZombie();
         if (CurrentZomb != null)
         {
-            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCalledOnStart();
             CurrentZomb.transform.position = SpawnPoint;
-            // Sound 
-            CurrentZomb.GetComponent<Zombie_Behaviour>().PlayZombieAudio(CurrentZomb.GetComponent<Zombie_Behaviour>().AmbientAudio, true);
-            // Reset values 
-            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCurrentHealth = CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieHealth;
-            CurrentZomb.GetComponent<Zombie_Behaviour>().IsStunned = false;
-            CurrentZomb.GetComponent<Zombie_Behaviour>().HasAtacked = false;
-            ModifyCurrentZombie(CurrentZomb);
             CurrentZomb.SetActive(true);
+
+            var zombie = CurrentZomb.GetComponent<Zombie_Behaviour>();
+
+            // Reset values
+            zombie.ZombieCurrentHealth = zombie.ZombieHealth;
+            zombie.IsStunned = false;
+            zombie.HasAtacked = false;
+
+            // Audio & Anim
+            zombie.PlayZombieAudio(zombie.AmbientAudio, true);
+            zombie.ZombieCalledOnStart();
+
+            ModifyCurrentZombie(CurrentZomb);
             CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
-            CurrentZomb.GetComponent<Zombie_Behaviour>().ZombieCalledOnStart();
-            // Remove blood 
+
             foreach (GameObject bloodObj in BulletWounds)
             {
                 bloodObj.SetActive(false);
             }
-            //Clear the list
             BulletWounds.Clear();
-            //Set Animatons
-            CurrentZomb.GetComponent<Animator>().SetBool("Walking", true);
-            CurrentZomb.GetComponent<Animator>().SetBool("Idle", false);
+
+            var anim = zombie.ZombieAnimator;
+            anim.SetBool("Walking", true);
+            anim.SetBool("Idle", false);
         }
     }
     private void ModifyCurrentZombie(GameObject obj)
@@ -117,7 +121,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < RandomZombieAmount; i++)
             {
                 //Choose a random spawn point on z 
-                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(20, 55)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
+                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
                 Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
@@ -132,8 +136,15 @@ public class GameManager : MonoBehaviour
 
 
             }
-            
         }
 
+    }
+    public void DebugAgents()
+    {
+        foreach (GameObject gb in ZombiePool)
+        {
+            NavMeshAgent agent = gb.GetComponent<NavMeshAgent>();
+            Debug.Log($"{agent.name} - isOnNavMesh: {agent.isOnNavMesh}, hasPath: {agent.hasPath}, pathStatus: {agent.pathStatus}, remainingDistance: {agent.remainingDistance}");
+        }
     }
 }

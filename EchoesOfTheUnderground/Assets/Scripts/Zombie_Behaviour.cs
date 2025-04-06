@@ -32,7 +32,7 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
-            InvokeRepeating("Chase", 1, 0.1f);
+            InvokeRepeating("Chase", 0.1f, 0.1f);
             StartCoroutine(CheckIfStuck());
             Zombie_Agent.autoRepath = true;
         }
@@ -62,14 +62,16 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            Debug.Log($"{agent.name} - isOnNavMesh: {agent.isOnNavMesh}, hasPath: {agent.hasPath}, pathStatus: {agent.pathStatus}, remainingDistance: {agent.remainingDistance}");
             Vector3 oldPos = transform.position;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
             Vector3 newPos = transform.position;
 
             float distance = Vector3.Distance(oldPos, newPos);
             
 
-            if (distance < 1f)
+            if (distance < 0.4f)
             {
                 Debug.LogWarning("Zombie is stuck — killing.");
                 ZombieCurrentHealth = 0;

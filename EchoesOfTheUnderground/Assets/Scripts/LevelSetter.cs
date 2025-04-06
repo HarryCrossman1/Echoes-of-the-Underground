@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class LevelSetter : MonoBehaviour
 {
@@ -159,6 +160,15 @@ public class LevelSetter : MonoBehaviour
                 StartCoroutine(SetHealthTextOnStart());
             }
         }
+        if (GameObject.Find("Panel") != null)
+        {
+            UiManager.instance.Panel = GameObject.Find("Panel");
+        }
+        if (GameObject.Find("Panel (1)") != null)
+        {
+            UiManager.instance.Panel1 = GameObject.Find("Panel (1)");
+        }
+        UiManager.instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
     }
     private IEnumerator SetHealthTextOnStart()
     {
