@@ -14,7 +14,7 @@ public class StoryManager : MonoBehaviour
 
     //Tutorial Stuff
     [SerializeField] public GameObject TutorialCharacter;
-    private Transform TutorialCharacterRealTranform;
+    [SerializeField] public GameObject AlertIcon;
     [SerializeField] public int CurrentState;
     [SerializeField] public bool HitMiscItem;
     public Animator animator;
@@ -67,6 +67,7 @@ public class StoryManager : MonoBehaviour
                     switch (CurrentState)
                     {
                         case 0:
+                            AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(0,1.6f,0);
                             if (distanceToPlayer < 3f && character.ReadyForVoiceline)
                             {
                                 SoundManager.instance.PlayVoiceLine(source, character, 0, false);
@@ -77,7 +78,8 @@ public class StoryManager : MonoBehaviour
                             animator.SetBool("IsIdle", false);
                             animator.SetBool("IsWalking", true);
                             agent.SetDestination(PlaceToMove.transform.position);
-
+                            AlertIcon.transform.position = TutorialCharacter.transform.position + new Vector3(0, 2.3f, 0);
+                            UiManager.instance.TutorialCanvas.GetComponent<Canvas>().enabled = true;
                             if (Vector3.Distance(agent.transform.position, PlaceToMove.transform.position) < 0.2f)
                             {
                                 animator.SetBool("IsIdle", true);
@@ -86,6 +88,7 @@ public class StoryManager : MonoBehaviour
                                 if (distanceToPlayer < 2f && character.ReadyForVoiceline)
                                 {
                                     SoundManager.instance.PlayVoiceLine(source, character, 1, false);
+                                    AlertIcon.SetActive(false);
                                 }
                             }
                             break;
@@ -119,6 +122,8 @@ public class StoryManager : MonoBehaviour
 
                         case 5:
                             Vector3 loadZoneVec = new Vector3(10, 2, 2);
+                            AlertIcon.transform.position = loadZoneVec;
+                            AlertIcon.SetActive(true);
                             if (Vector3.Distance(PlayerController.instance.PlayerTransform.position, loadZoneVec) < 3)
                             {
                                 SavingAndLoading.instance.SaveIngameData(new Vector3(12, 0.1f, 3));

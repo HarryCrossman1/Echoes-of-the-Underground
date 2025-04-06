@@ -10,11 +10,13 @@ public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
     [SerializeField] private Slider LoadingSlider;
-    public Canvas DeathCanvas;
+    public Canvas DeathCanvas,TutorialCanvas;
     [SerializeField] public TextMeshProUGUI HealthText;
     public bool PauseLevelLoading;
     private AsyncOperation Operation;
     [SerializeField] public Slider MusicSlider, SoundSlider, NpcSlider;
+    [SerializeField] private GameObject Panel, Panel1;
+    private bool TutorialControls = true;
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,7 +35,15 @@ public class UiManager : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-
+        if (GameObject.Find("Panel") != null)
+        {
+            Panel = GameObject.Find("Panel");
+        }
+        if (GameObject.Find("Panel (1)") != null)
+        {
+            Panel1 = GameObject.Find("Panel (1)");
+        }
+        InvokeRepeating("SwitchPanel", 0, 15.1f);
     }
     public void StartCampaign()
     {
@@ -43,7 +53,22 @@ public class UiManager : MonoBehaviour
     {
         Application.Quit();
     }
-
+    private void SwitchPanel()
+    {
+        if (TutorialCanvas != null&&TutorialCanvas.enabled)
+        {
+            if (TutorialControls)
+            {
+                Panel.SetActive(true);
+                Panel1.SetActive(false);
+            }
+            else
+            {
+                Panel.SetActive(false);
+                Panel1.SetActive(true);
+            }
+        }
+    }
     public void SetGraphics(int Level)
     {
         QualitySettings.SetQualityLevel(Level, true);

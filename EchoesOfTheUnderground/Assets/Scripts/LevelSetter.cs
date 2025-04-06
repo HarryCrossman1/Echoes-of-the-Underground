@@ -147,6 +147,10 @@ public class LevelSetter : MonoBehaviour
         { 
             UiManager.instance.DeathCanvas = GameObject.Find("DeathCanvas").GetComponent<Canvas>();
         }
+        if (GameObject.Find("TutorialCanvas") != null)
+        {
+            UiManager.instance.TutorialCanvas = GameObject.Find("TutorialCanvas").GetComponent<Canvas>();
+        }
         if (GameObject.Find("Health") != null)
         {
             UiManager.instance.HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
@@ -222,9 +226,9 @@ public class LevelSetter : MonoBehaviour
         {
             StoryManager.instance.Dynamite = GameObject.Find("Dynamite");
         }
-        if (GameObject.Find("Dynamite") != null)
+        if (GameObject.Find("AlertIconParent 1") != null)
         {
-            StoryManager.instance.Dynamite = GameObject.Find("Dynamite");
+            StoryManager.instance.AlertIcon = GameObject.Find("AlertIconParent 1");
         }
         if (GameObject.Find("PlaceToMove") != null)
         {
