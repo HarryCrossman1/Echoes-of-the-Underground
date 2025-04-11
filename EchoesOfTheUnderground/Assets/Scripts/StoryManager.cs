@@ -128,6 +128,7 @@ public class StoryManager : MonoBehaviour
                             {
                                 SavingAndLoading.instance.SaveIngameData(new Vector3(12, 0.1f, 3));
                                 CurrentState = 0;
+                                State = StoryState.Streets;
                                 SceneManager.LoadScene("OpenWorldMain");
                             }
                             break;

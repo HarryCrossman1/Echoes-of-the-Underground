@@ -113,6 +113,7 @@ public class Zombie_Behaviour : MonoBehaviour
             CancelInvoke("CheckPosition");
             //Stop coroutine  
             StopCoroutine(CheckIfStuck());
+            StopCoroutine(StartAttack(Attacking.length));
 
         }
     }

@@ -63,6 +63,7 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    GameManagerSetup();
                     SavingAndLoading.instance.LoadIngameData();
                     GameManager.instance.HasZombies= true;
                     
@@ -243,6 +244,17 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("PlaceToMove") != null)
         {
             StoryManager.instance.PlaceToMove = GameObject.Find("PlaceToMove");
+        }
+    }
+    private void GameManagerSetup()
+    {
+        if (GameObject.Find("SpawnPoint1") != null)
+        {
+            GameManager.instance.FixedSpawnsLocations[0] = GameObject.Find("SpawnPoint1");
+        }
+        if (GameObject.Find("SpawnPoint1 (1)") != null)
+        {
+            GameManager.instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnPoint1 (1)");
         }
     }
 }

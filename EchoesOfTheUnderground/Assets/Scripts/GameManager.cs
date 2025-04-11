@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private int RandomZombieAmount;
 
     public bool HasZombies;
+    public static bool FixedSpawns=true;
+    [SerializeField] public GameObject[] FixedSpawnsLocations; 
     private bool MovementExecuted;
     private int CurrentDifficulty;
 
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ZombieAmount; i++)
         {
             int rand = UnityEngine.Random.Range(0, ZombiePrefabs.Length);
-            GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand],new Vector3(15,0.1f,3.6f),quaternion.identity);
+            GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
 
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
 
             // Audio & Anim
             zombie.PlayZombieAudio(zombie.AmbientAudio, true);
+            SoundManager.instance.GetAudioSources();
+            SoundManager.instance.SetAudioSources();
             zombie.ZombieCalledOnStart();
 
             ModifyCurrentZombie(CurrentZomb);
@@ -117,24 +121,35 @@ public class GameManager : MonoBehaviour
     {
         if (!IsActive)
         {
-           // Debug.Log("Zombies spawning = " + RandomZombieAmount);
-            for (int i = 0; i < RandomZombieAmount; i++)
+            if (!FixedSpawns)
             {
-                //Choose a random spawn point on z 
-                Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10,10)));
-                Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
+                // Debug.Log("Zombies spawning = " + RandomZombieAmount);
+                for (int i = 0; i < RandomZombieAmount; i++)
                 {
-                    SpawnZombies(hit.position);
-                    break;
-                }
-                else if(NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
-                {
-                    SpawnZombies(hit.position);
-                }
+                    //Choose a random spawn point on z 
+                    Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
+                    Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
+                    {
+                        SpawnZombies(hit.position);
+                        break;
+                    }
+                    else if (NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
+                    {
+                        SpawnZombies(hit.position);
+                    }
 
 
+                }
+            }
+            else
+            {
+                for (int i = 0; i < RandomZombieAmount; i++)
+                {
+                    int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
+                    SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+                }
             }
         }
 
