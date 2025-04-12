@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public static UiManager instance;
+    public static UiManager Instance;
     [SerializeField] private Slider LoadingSlider;
     public Canvas DeathCanvas,TutorialCanvas;
     [SerializeField] public TextMeshProUGUI HealthText;
@@ -20,9 +20,9 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -69,11 +69,11 @@ public class UiManager : MonoBehaviour
     }
     public void SetSoundSlider()
     {
-        if (UiManager.instance.SoundSlider != null)
+        if (SoundSlider != null)
         {
-            UiManager.instance.SoundSlider.value = SoundManager.instance.FxVol;
-            UiManager.instance.MusicSlider.value = SoundManager.instance.MusicVol;
-            UiManager.instance.NpcSlider.value = SoundManager.instance.NpcVol;
+            SoundSlider.value = SoundManager.Instance.FxVol;
+            MusicSlider.value = SoundManager.Instance.MusicVol;
+            NpcSlider.value = SoundManager.Instance.NpcVol;
         }
     }
     public IEnumerator LoadSceneAsync(string SceneName, bool IsInMenu)

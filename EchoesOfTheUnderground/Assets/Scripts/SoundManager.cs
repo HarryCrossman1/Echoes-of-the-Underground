@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static SoundManager Instance;
     [Header("Main Menu")]
     [SerializeField] public AudioSource GenericSource;
     public AudioSource AmbienceSource;
@@ -30,15 +30,14 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         { 
             Destroy(gameObject);
         }
-        Debug.Log(instance);
     }
 
     // Update is called once per frame
@@ -78,7 +77,7 @@ public class SoundManager : MonoBehaviour
     }
     public void SetAudioSources()
     {
-        SavingAndLoading.instance.LoadSettings();
+        SavingAndLoading.Instance.LoadSettings();
         MusicSources.Clear();
         SoundFxSources.Clear();
         NpcSources.Clear();
@@ -142,7 +141,6 @@ public class SoundManager : MonoBehaviour
             WatchSource.Play();
             WatchIsPlaying= true;
         }
-       
     }
     public void StopWatch()
     {
@@ -158,36 +156,20 @@ public class SoundManager : MonoBehaviour
     {
         if (source == null || character == null)
         {
-            Debug.LogError("AudioSource or Character is null.");
+            Debug.LogError("AudioSource or Character is null");
             return;
         }
 
         if (character.ReadyForVoiceline)
         {
             AudioClip clip = random
-                ? character.character.Clips[Random.Range(0, character.character.Clips.Length)]
-                : character.character.Clips[voicelineNum];
+                ? character.Character.Clips[Random.Range(0, character.Character.Clips.Length)]
+                : character.Character.Clips[voicelineNum];
 
             source.clip = clip;
             source.Play();
             character.ReadyForVoiceline = false;
             character.VoiceLineTimer = 0f; // reset timer so CharacterHolder picks it up
-        }
-    }
-
-    public void ChangeAmbientMusic(bool IsScary)
-    {
-        if (IsScary)
-        {
-            AmbienceSource.Stop();
-            AmbienceSource.clip = ScaryAmbienceClip;
-            AmbienceSource.Play();
-        }
-        else
-        {
-            AmbienceSource.Stop();
-            AmbienceSource.clip = ChillAmbienceClip;
-            AmbienceSource.Play();
         }
     }
 }

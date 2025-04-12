@@ -44,10 +44,7 @@ public class ProceduralGeneration : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        { 
-            SaveWorld();
-        }
+
     }
 
     private void GenerateGrid(int worldSizeX,int worldSizeZ)

@@ -50,19 +50,19 @@ public class StalkerBehaviour : Zombie_Behaviour
         {
             case BehaviourState.Stalking:
                 {
-                    if (SightCheck(PlayerController.instance.transform.position,this.gameObject,ViewRange,ViewCone))
+                    if (SightCheck(PlayerController.Instance.transform.position,this.gameObject,ViewRange,ViewCone))
                     {
                         ReachedDestination = true;
                         StalkerAnimator.SetBool("Crawling", false);
                         StalkerAnimator.SetBool("Inspecting", true);
-                        StoredPos = PlayerController.instance.transform.position;
+                        StoredPos = PlayerController.Instance.transform.position;
                         CurrentState = BehaviourState.Inspecting;
                         break;
                     }
                     if (ReachedDestination)
                     {
                         EditDetails(0.65f, 11f, 1f);
-                        StoredPos = PlayerController.instance.transform.position + new Vector3(Random.insideUnitSphere.x * CurrentStalkingAccuracy, 0, Random.insideUnitSphere.z * CurrentStalkingAccuracy);
+                        StoredPos = PlayerController.Instance.transform.position + new Vector3(Random.insideUnitSphere.x * CurrentStalkingAccuracy, 0, Random.insideUnitSphere.z * CurrentStalkingAccuracy);
                      
                         if (NavmeshCheck(StoredPos))
                         {
@@ -80,7 +80,7 @@ public class StalkerBehaviour : Zombie_Behaviour
             case BehaviourState.Inspecting:
                 {
                     EditDetails(0.8f, 4f, 2.5f);
-                    if (SightCheck(PlayerController.instance.transform.position,gameObject,ViewRange,ViewCone))
+                    if (SightCheck(PlayerController.Instance.transform.position,gameObject,ViewRange,ViewCone))
                     {
                         CurrentState = BehaviourState.Chase;
                     }
@@ -105,8 +105,8 @@ public class StalkerBehaviour : Zombie_Behaviour
                     StalkerAnimator.SetBool("Sprinting", true);
                     StalkerAnimator.SetBool("Inspecting", false);
                     EditDetails(0, 0, 7);
-                    StalkerAgent.SetDestination(PlayerController.instance.transform.position);
-                    if (Vector3.Distance(PlayerController.instance.transform.position, transform.position) < 2f)
+                    StalkerAgent.SetDestination(PlayerController.Instance.transform.position);
+                    if (Vector3.Distance(PlayerController.Instance.transform.position, transform.position) < 2f)
                     {
                         CurrentState = BehaviourState.Attacking;
                     }
@@ -114,7 +114,7 @@ public class StalkerBehaviour : Zombie_Behaviour
                 }
             case BehaviourState.Attacking:
                 {
-                    transform.SetParent(PlayerController.instance.transform);
+                    transform.SetParent(PlayerController.Instance.transform);
                     StalkerAgent.enabled = false;
 
                     Attack();

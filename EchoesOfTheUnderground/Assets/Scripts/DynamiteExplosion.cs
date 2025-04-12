@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DynamiteExplosion : MonoBehaviour
 {
-    public static DynamiteExplosion instance;
+    public static DynamiteExplosion Instance;
     private ParticleSystem System;
     private AudioSource Source;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     void Start()
     {

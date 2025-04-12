@@ -11,13 +11,13 @@ public class KeyItemsCollider : MonoBehaviour
         if (ProceduralGeneration.Instance.spawnedObjects.Contains(collision.gameObject))
         {
             ProceduralGeneration.Instance.spawnedObjects.Remove(collision.gameObject);
-            Debug.Log(collision.gameObject);
+
             collision.gameObject.SetActive(false);
         }
         else if (ProceduralGeneration.Instance.spawnedBlocks.Contains(collision.gameObject))
         {
             ProceduralGeneration.Instance.spawnedBlocks.Remove(collision.gameObject);
-            Debug.Log(collision.gameObject);
+
             collision.gameObject.SetActive(false);
         }
     }

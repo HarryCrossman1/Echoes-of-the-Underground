@@ -53,22 +53,22 @@ public class LevelSetter : MonoBehaviour
                 {
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
-                        GameManager.instance.IsActive = false;
+                        GameManager.Instance.IsActive = false;
                     }
                     else
                     {
-                        GameManager.instance.IsActive = false;
+                        GameManager.Instance.IsActive = false;
                     }
                     
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
                     GameManagerSetup();
-                    SavingAndLoading.instance.LoadIngameData();
-                    GameManager.instance.HasZombies= true;
+                    SavingAndLoading.Instance.LoadIngameData();
+                    GameManager.Instance.HasZombies= true;
                     
-                    Debug.Log(GameManager.instance.HasZombies);
-                    GameManager.instance.Init();
+                    Debug.Log(GameManager.Instance.HasZombies);
+                    GameManager.Instance.Init();
                     break;
                 }
             case "CampDynamite":
@@ -76,8 +76,8 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
-                    GameManager.instance.HasZombies= false;
-                    GameManager.instance.IsActive = true;
+                    GameManager.Instance.HasZombies= false;
+                    GameManager.Instance.IsActive = true;
                     break;
                 }
             case "SubwayScene":
@@ -85,15 +85,15 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
-                    GameManager.instance.HasZombies = true;
-                    GameManager.instance.IsActive = false;
+                    GameManager.Instance.HasZombies = true;
+                    GameManager.Instance.IsActive = false;
                     break;
                 }
             case "CampDynamiteRunied":
                 {
                     SoundManagerSetup();
-                    GameManager.instance.HasZombies = false;
-                    GameManager.instance.IsActive = true;
+                    GameManager.Instance.HasZombies = false;
+                    GameManager.Instance.IsActive = true;
                     if (!CoroutineStarted)
                     {
                         StartCoroutine(EndGame());
@@ -104,8 +104,8 @@ public class LevelSetter : MonoBehaviour
             case "HomeSceneRuined":
                 {
                     SoundManagerSetup();
-                    GameManager.instance.HasZombies = false;
-                    GameManager.instance.IsActive = true;
+                    GameManager.Instance.HasZombies = false;
+                    GameManager.Instance.IsActive = true;
                     if (!CoroutineStarted)
                     {
                         StartCoroutine(EndGame());
@@ -122,15 +122,15 @@ public class LevelSetter : MonoBehaviour
     }
     private void InstatiateCoreManagers()
     {
-        if (UiManager.instance == null)
+        if (UiManager.Instance == null)
         {
             Instantiate(UiManagerPrefab);
         }
-        if (SoundManager.instance == null)
+        if (SoundManager.Instance == null)
         {
             Instantiate(SoundManagerPrefab);
         }
-        if (GameManager.instance == null)
+        if (GameManager.Instance == null)
         {
             Instantiate(GameManagerPrefab);
         }
@@ -138,7 +138,7 @@ public class LevelSetter : MonoBehaviour
         {
             Instantiate(StoryManagerPrefab);
         }
-        if (SavingAndLoading.instance == null)
+        if (SavingAndLoading.Instance == null)
         {
             Instantiate(SavingAndLoadingPrefab);
         }
@@ -147,71 +147,71 @@ public class LevelSetter : MonoBehaviour
     {
         if (GameObject.Find("DeathCanvas")!=null)
         { 
-            UiManager.instance.DeathCanvas = GameObject.Find("DeathCanvas").GetComponent<Canvas>();
+            UiManager.Instance.DeathCanvas = GameObject.Find("DeathCanvas").GetComponent<Canvas>();
         }
         if (GameObject.Find("TutorialCanvas") != null)
         {
-            UiManager.instance.TutorialCanvas = GameObject.Find("TutorialCanvas").GetComponent<Canvas>();
+            UiManager.Instance.TutorialCanvas = GameObject.Find("TutorialCanvas").GetComponent<Canvas>();
         }
         if (GameObject.Find("Health") != null)
         {
-            UiManager.instance.HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
-            if (UiManager.instance.HealthText != null)
+            UiManager.Instance.HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
+            if (UiManager.Instance.HealthText != null)
             {
                 StartCoroutine(SetHealthTextOnStart());
             }
         }
         if (GameObject.Find("Panel") != null)
         {
-            UiManager.instance.Panel = GameObject.Find("Panel");
+            UiManager.Instance.Panel = GameObject.Find("Panel");
         }
         if (GameObject.Find("Panel (1)") != null)
         {
-            UiManager.instance.Panel1 = GameObject.Find("Panel (1)");
+            UiManager.Instance.Panel1 = GameObject.Find("Panel (1)");
         }
-        UiManager.instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
+        UiManager.Instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
     }
     private IEnumerator SetHealthTextOnStart()
     {
-        yield return new WaitUntil(() => PlayerController.instance != null);
-        UiManager.instance.HealthText.text = PlayerController.instance.PlayerHealth.ToString();
+        yield return new WaitUntil(() => PlayerController.Instance != null);
+        UiManager.Instance.HealthText.text = PlayerController.Instance.PlayerHealth.ToString();
     }
     private void SoundManagerSetup()
     {
         // Get the sources
         if (GameObject.Find("Pistol") != null)
         {
-            SoundManager.instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
+            SoundManager.Instance.GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
         }
         if (GameObject.Find("Watch") != null)
         {
-            SoundManager.instance.WatchSource = GameObject.Find("Watch").GetComponent<AudioSource>();
+            SoundManager.Instance.WatchSource = GameObject.Find("Watch").GetComponent<AudioSource>();
         }
         if (GameObject.Find("GenericSource") != null)
         {
-            SoundManager.instance.GenericSource = GameObject.Find("GenericSource").GetComponent<AudioSource>();
+            SoundManager.Instance.GenericSource = GameObject.Find("GenericSource").GetComponent<AudioSource>();
        
         }
         if (GameObject.Find("AmbientSource") != null)
         {
-            SoundManager.instance.AmbienceSource = GameObject.Find("AmbientSource").GetComponent<AudioSource>();
+            SoundManager.Instance.AmbienceSource = GameObject.Find("AmbientSource").GetComponent<AudioSource>();
         }
         // Load the settings if they exist 
-        SavingAndLoading.instance.LoadSettings();
+        SavingAndLoading.Instance.LoadSettings();
 
         //Set the sliders for astethic purposes, actual volume set in the loadsettings()
-        UiManager.instance.SetSoundSlider();
+        UiManager.Instance.SetSoundSlider();
         // Get and set the audiosources ingame
-        SoundManager.instance.GetAudioSources();
-        SoundManager.instance.SetAudioSources();
+        SoundManager.Instance.GetAudioSources();
+        SoundManager.Instance.SetAudioSources();
     }
     private void StoryManagerSetup()
     {
         if (GameObject.Find("Ch35_nonPBR") != null)
         {
             StoryManager.instance.TutorialCharacter = GameObject.Find("Ch35_nonPBR");
-            StoryManager.instance.agent = StoryManager.instance.TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
-            StoryManager.instance.animator = StoryManager.instance.TutorialCharacter.GetComponentInChildren<Animator>();
+            StoryManager.instance.Agent = StoryManager.instance.TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
+            StoryManager.instance.Animator = StoryManager.instance.TutorialCharacter.GetComponentInChildren<Animator>();
         }
         if (GameObject.Find("Leo") != null)
         {
@@ -250,11 +250,11 @@ public class LevelSetter : MonoBehaviour
     {
         if (GameObject.Find("SpawnPoint1") != null)
         {
-            GameManager.instance.FixedSpawnsLocations[0] = GameObject.Find("SpawnPoint1");
+            GameManager.Instance.FixedSpawnsLocations[0] = GameObject.Find("SpawnPoint1");
         }
         if (GameObject.Find("SpawnPoint1 (1)") != null)
         {
-            GameManager.instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnPoint1 (1)");
+            GameManager.Instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnPoint1 (1)");
         }
     }
 }

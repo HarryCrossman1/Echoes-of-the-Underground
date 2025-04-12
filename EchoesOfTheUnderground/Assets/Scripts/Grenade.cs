@@ -35,12 +35,11 @@ public class Grenade : MonoBehaviour
         {
             if (Hit.CompareTag("ZombieBody"))
             {
-                HighScoreManager.instance.CurrentHighScore += 75;
                 Hit.gameObject.GetComponentInParent<Zombie_Behaviour>().ZombieCurrentHealth -= 300;
             }
             else if (Hit.CompareTag("Dynamite"))
             {
-                DynamiteExplosion.instance.TriggerExplosion();
+                DynamiteExplosion.Instance.TriggerExplosion();
             }
         }
         yield return new WaitForSeconds(seconds/2);

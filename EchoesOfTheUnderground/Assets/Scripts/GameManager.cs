@@ -1,4 +1,3 @@
-//using AcmLib;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -9,19 +8,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
     public GameObject[] ZombiePrefabs;
     [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
     private int RandomZombieAmount;
-
     public bool HasZombies;
     public static bool FixedSpawns=true;
     [SerializeField] public GameObject[] FixedSpawnsLocations; 
-    private bool MovementExecuted;
-    private int CurrentDifficulty;
+
 
     public bool IsActive;
 
@@ -30,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
-        instance = this;
+        Instance = this;
     }
     private void Start()
     {
@@ -38,7 +35,6 @@ public class GameManager : MonoBehaviour
     }
     public void Init()
     {
-        MovementExecuted = false;
         RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
         if (HasZombies)
         {
@@ -55,9 +51,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < ZombieAmount; i++)
         {
+            //Choose a random prefab and instantiate it 
             int rand = UnityEngine.Random.Range(0, ZombiePrefabs.Length);
             GameObject Ins_Obj = Instantiate(ZombiePrefabs[rand]);
-
+            // Set it to inactive and add it too the pool
             Ins_Obj.SetActive(false);
             ZombiePool.Add(Ins_Obj);
         }
@@ -70,40 +67,43 @@ public class GameManager : MonoBehaviour
             CurrentZomb.transform.position = SpawnPoint;
             CurrentZomb.SetActive(true);
 
-            var zombie = CurrentZomb.GetComponent<Zombie_Behaviour>();
+            var Zombie = CurrentZomb.GetComponent<Zombie_Behaviour>();
 
             // Reset values
-            zombie.ZombieCurrentHealth = zombie.ZombieHealth;
-            zombie.IsStunned = false;
-            zombie.HasAtacked = false;
+            Zombie.ZombieCurrentHealth = Zombie.ZombieHealth;
+            Zombie.IsStunned = false;
+            Zombie.HasAtacked = false;
 
             // Audio & Anim
-            zombie.PlayZombieAudio(zombie.AmbientAudio, true);
-            SoundManager.instance.GetAudioSources();
-            SoundManager.instance.SetAudioSources();
-            zombie.ZombieCalledOnStart();
+            Zombie.PlayZombieAudio(Zombie.AmbientAudio, true);
+            SoundManager.Instance.GetAudioSources();
+            SoundManager.Instance.SetAudioSources();
+            Zombie.ZombieCalledOnStart();
 
             ModifyCurrentZombie(CurrentZomb);
             CurrentZomb.GetComponent<NavMeshAgent>().isStopped = false;
 
-            foreach (GameObject bloodObj in BulletWounds)
+            foreach (GameObject BloodObj in BulletWounds)
             {
-                bloodObj.SetActive(false);
+                BloodObj.SetActive(false);
             }
             BulletWounds.Clear();
 
-            var anim = zombie.ZombieAnimator;
-            anim.SetBool("Walking", true);
-            anim.SetBool("Idle", false);
+            var Anim = Zombie.ZombieAnimator;
+            Anim.SetBool("Walking", true);
+            Anim.SetBool("Idle", false);
         }
     }
-    private void ModifyCurrentZombie(GameObject obj)
+    private void ModifyCurrentZombie(GameObject Obj)
     {
-        NavMeshAgent navMeshAgent = obj.GetComponent<NavMeshAgent>();
+        NavMeshAgent NavMeshAgent = Obj.GetComponent<NavMeshAgent>();
 
-        if (navMeshAgent == null) { navMeshAgent = obj.AddComponent<NavMeshAgent>(); }
+        if (NavMeshAgent == null)
+        { 
+            NavMeshAgent = Obj.AddComponent<NavMeshAgent>(); 
+        }
 
-        navMeshAgent.acceleration = UnityEngine.Random.Range(obj.GetComponent<Zombie_Behaviour>().AccelMin, obj.GetComponent<Zombie_Behaviour>().AccelMax);
+        NavMeshAgent.acceleration = UnityEngine.Random.Range(Obj.GetComponent<Zombie_Behaviour>().AccelMin, Obj.GetComponent<Zombie_Behaviour>().AccelMax);
     }
 
     public GameObject GetPooledZombie()
@@ -127,8 +127,8 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < RandomZombieAmount; i++)
                 {
                     //Choose a random spawn point on z 
-                    Vector3 RandomSpawn = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
-                    Vector3 RandomSpawnBackup = new Vector3(PlayerController.instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
+                    Vector3 RandomSpawn = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
+                    Vector3 RandomSpawnBackup = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
                     NavMeshHit hit;
                     if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
                     {
@@ -156,9 +156,9 @@ public class GameManager : MonoBehaviour
     }
     public void DebugAgents()
     {
-        foreach (GameObject gb in ZombiePool)
+        foreach (GameObject Gb in ZombiePool)
         {
-            NavMeshAgent agent = gb.GetComponent<NavMeshAgent>();
+            NavMeshAgent agent = Gb.GetComponent<NavMeshAgent>();
             Debug.Log($"{agent.name} - isOnNavMesh: {agent.isOnNavMesh}, hasPath: {agent.hasPath}, pathStatus: {agent.pathStatus}, remainingDistance: {agent.remainingDistance}");
         }
     }

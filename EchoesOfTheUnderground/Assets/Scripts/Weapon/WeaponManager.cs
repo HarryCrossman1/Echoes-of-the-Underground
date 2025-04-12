@@ -8,13 +8,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager instance;
-  [SerializeField] public Weapon CurrentWeapon;
+    [SerializeField] public Weapon CurrentWeapon;
     [SerializeField] public GameObject HeldWeapon;
     [SerializeField] public Animator HeldAnimator;
     [SerializeField]private float LastShot;
     [SerializeField] public XrSocketTag[] AllInteractors;
     [SerializeField] public Light MuzzleFlash;
-   // [SerializeField] private GameObject PistolAmmoPrefab;
+
     // Visual Effects 
     [SerializeField] private GameObject BloodPrefab;
 
@@ -42,11 +42,10 @@ public class WeaponManager : MonoBehaviour
     }
     private void Update()
     {
-       // if (MuzzleFlash != null) { MuzzleFlash.enabled = false; }
+
     }
     public void Fire()
     {
-        Debug.Log("Firing");
         if (Time.time - LastShot < (CurrentWeapon.FireRate))
         {
             return;
@@ -56,13 +55,12 @@ public class WeaponManager : MonoBehaviour
 
         if (HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag != null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
         {
-            SoundManager.instance.PlayGunshot(CurrentWeapon);
-   
+            SoundManager.Instance.PlayGunshot(CurrentWeapon);
             HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber--;
         }
         else
         {
-            SoundManager.instance.PlayEmpty();
+            SoundManager.Instance.PlayEmpty();
         }
         if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
         {
@@ -73,21 +71,14 @@ public class WeaponManager : MonoBehaviour
                 Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
-                //Apply Stun
-                //if (CurrentWeapon != Smg)
-                //{
-                //    zombie_Behaviour.ShotStun();
-                //    Debug.Log("Check");
-                //}
 
-                //Take ammo
+                //Take Checkdeath
                 zombie_Behaviour.DeathCheck();
 
                 // Do blood effect
-
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
-                GameManager.instance.BulletWounds.Add(Blood);
+                GameManager.Instance.BulletWounds.Add(Blood);
             }
             else if (hit.collider.CompareTag("ZombieHead"))
             {
@@ -95,24 +86,20 @@ public class WeaponManager : MonoBehaviour
                 Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
-                //Apply Stun
-                //if (CurrentWeapon != Smg)
-                //{
-                //    zombie_Behaviour.ShotStun();
-                //}
-                //Take ammo
+
+                //Take Checkdeath
                 zombie_Behaviour.DeathCheck();
 
                 // Do blood effect
-
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
-                GameManager.instance.BulletWounds.Add(Blood);
+                GameManager.Instance.BulletWounds.Add(Blood);
             }
             else if (hit.collider.CompareTag("MiscItem"))
             {
                 if (StoryManager.instance.gameObject != null)
                 {
+                    // In the tutorial the storymanager need to check if the bottle has been shot 
                     StoryManager.instance.HitMiscItem = false;
                 }
                 if (hit.collider.attachedRigidbody != null)
@@ -128,7 +115,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Dynamite"))
             {
-                DynamiteExplosion.instance.TriggerExplosion();
+                DynamiteExplosion.Instance.TriggerExplosion();
             }
             else
             {
@@ -136,27 +123,24 @@ public class WeaponManager : MonoBehaviour
             }
             if (ShotsTaken > 0)
             {
-                GameManager.instance.AccuracyRating = (ShotsHit / (float)ShotsTaken) * 100f;
+                GameManager.Instance.AccuracyRating = (ShotsHit / (float)ShotsTaken) * 100f;
             }
             else
             {
-                GameManager.instance.AccuracyRating = 0f;
+                GameManager.Instance.AccuracyRating = 0f;
             }
         }
-              //  }
-           // }
-          //  else { SoundManager.instance.PlayEmpty(); }
     }
     public void AddMagazine(SelectEnterEventArgs args)
     {
         HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = args.interactableObject.transform.GetComponent<Magazine>();
         Debug.Log(args.interactableObject.transform.GetComponent<Magazine>());
-        SoundManager.instance.PlayReload(true);
+        SoundManager.Instance.PlayReload(true);
     }
     public void RemoveMagazine(SelectExitEventArgs args)
     {
         HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
-        SoundManager.instance.PlayReload(false);
+        SoundManager.Instance.PlayReload(false);
     }
     
 }

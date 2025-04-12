@@ -7,12 +7,10 @@ public class Zombie_Behaviour : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
-    public int ZombieCurrentHealth,ZombieHealth; //{ get; set; }
+    public int ZombieCurrentHealth,ZombieHealth;
     public bool HasAtacked;
    [SerializeField] public bool IsStunned;
     public float AccelMin,AccelMax;
-    private bool HasChecked = false;
-    private Vector3 OldPosition;
 
     // Store Animations 
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
@@ -41,7 +39,7 @@ public class Zombie_Behaviour : MonoBehaviour
     void Update()
     {
         DeathCheck();
-        CheckAttackRange(PlayerController.instance.PlayerTransform.gameObject);     
+        CheckAttackRange(PlayerController.Instance.PlayerTransform.gameObject);     
     }
     public void CheckAttackRange(GameObject Target)
     {
@@ -56,14 +54,15 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void Chase()
     {
-        Zombie_Agent.SetDestination(PlayerController.instance.PlayerTransform.transform.position);
+        Zombie_Agent.SetDestination(PlayerController.Instance.PlayerTransform.transform.position);
     }
     private IEnumerator CheckIfStuck()
     {
         while (gameObject.activeInHierarchy)
         {
-            NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            Debug.Log($"{agent.name} - isOnNavMesh: {agent.isOnNavMesh}, hasPath: {agent.hasPath}, pathStatus: {agent.pathStatus}, remainingDistance: {agent.remainingDistance}");
+            //Set old pos and log the agent details
+            NavMeshAgent Agent = GetComponent<NavMeshAgent>();
+            Debug.Log($"{Agent.name} - isOnNavMesh: {Agent.isOnNavMesh}, hasPath: {Agent.hasPath}, pathStatus: {Agent.pathStatus}, remainingDistance: {Agent.remainingDistance}");
             Vector3 oldPos = transform.position;
             yield return new WaitForSeconds(3f);
             Vector3 newPos = transform.position;
@@ -93,8 +92,8 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Stunned", false);
         PlayZombieAudio(AttackAudio, false);
         yield return new WaitForSeconds(cooldown);
-        PlayerController.instance.PlayerHealth--;
-        PlayerController.instance.PlayerDeathCheck();
+        PlayerController.Instance.PlayerHealth--;
+        PlayerController.Instance.PlayerDeathCheck();
         HasAtacked = false;
     }
     public void DeathCheck()
@@ -123,6 +122,7 @@ public class Zombie_Behaviour : MonoBehaviour
         gameObject.SetActive(false);
         CheckActiveZombies();
     }
+    //Not using for zombie in current build
     protected bool SightCheck(Vector3 PlayerPosition, GameObject Zombie, float Range, float ViewCone)
     {
         Vector3 Forward = Zombie.transform.forward;
@@ -153,18 +153,18 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void CheckActiveZombies()
     {
-        for (int i = 0; i < GameManager.instance.ZombiePool.Count; i++)
+        for (int i = 0; i < GameManager.Instance.ZombiePool.Count; i++)
         {
             // check if there are any zombies active in the hierarchy 
-            if (GameManager.instance.ZombiePool[i].activeInHierarchy)
+            if (GameManager.Instance.ZombiePool[i].activeInHierarchy)
             {
-                GameManager.instance.IsActive = true;
+                GameManager.Instance.IsActive = true;
                 break;
             }
             else
             {
                 // if none are active 
-                GameManager.instance.IsActive = false;
+                GameManager.Instance.IsActive = false;
             }
         }
     }

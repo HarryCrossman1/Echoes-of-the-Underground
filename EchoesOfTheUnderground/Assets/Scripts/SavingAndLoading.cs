@@ -27,16 +27,16 @@ public class IngameData
 
 public class SavingAndLoading : MonoBehaviour
 {
-    public static SavingAndLoading instance;
+    public static SavingAndLoading Instance;
     private string FilePathSettings;
     private string FilePathGameData;
     [SerializeField] private GameObject MagPrefab;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -50,9 +50,9 @@ public class SavingAndLoading : MonoBehaviour
     public void SaveSettings()
     { 
         Settings settings = new Settings();
-        settings.MusicVol = UiManager.instance.MusicSlider.value;
-        settings.FxVol = UiManager.instance.SoundSlider.value;
-        settings.NpcVol = UiManager.instance.NpcSlider.value;
+        settings.MusicVol = UiManager.Instance.MusicSlider.value;
+        settings.FxVol = UiManager.Instance.SoundSlider.value;
+        settings.NpcVol = UiManager.Instance.NpcSlider.value;
         settings.GraphicsLevel = QualitySettings.GetQualityLevel();
 
         string json = JsonUtility.ToJson(settings,true);
@@ -66,20 +66,20 @@ public class SavingAndLoading : MonoBehaviour
             string json = File.ReadAllText(FilePathSettings);
             Settings settings = JsonUtility.FromJson<Settings>(json);
 
-            SoundManager.instance.MusicVol = settings.MusicVol;
-            SoundManager.instance.FxVol = settings.FxVol;
-            SoundManager.instance.NpcVol = settings.NpcVol;
-            UiManager.instance.SetGraphics(settings.GraphicsLevel);
+            SoundManager.Instance.MusicVol = settings.MusicVol;
+            SoundManager.Instance.FxVol = settings.FxVol;
+            SoundManager.Instance.NpcVol = settings.NpcVol;
+            UiManager.Instance.SetGraphics(settings.GraphicsLevel);
         }
     }
     public void SaveIngameData(Vector3 NextLocation) 
     {
         IngameData ingameData = new IngameData();
 
-        ingameData.PlayerHealth = PlayerController.instance.PlayerHealth;
+        ingameData.PlayerHealth = PlayerController.Instance.PlayerHealth;
         ingameData.PlayerSpawnPosition = NextLocation;
         // add the player sockets to playercontroller and then get the info from there 
-        foreach (GameObject obj in PlayerController.instance.MagList)
+        foreach (GameObject obj in PlayerController.Instance.MagList)
         {
             ingameData.MagObject.Add(obj.name);
             ingameData.AmmoValue.Add(obj.GetComponent<Magazine>().BulletNumber);
@@ -95,16 +95,17 @@ public class SavingAndLoading : MonoBehaviour
             string json = File.ReadAllText(FilePathGameData);
             IngameData data = JsonUtility.FromJson<IngameData>(json);
 
-            PlayerController.instance.PlayerHealth = data.PlayerHealth;
+            PlayerController.Instance.PlayerHealth = data.PlayerHealth;
             if (data.PlayerSpawnPosition != new Vector3(0, 0, 0))
             {
-                PlayerController.instance.PlayerTransform.position = data.PlayerSpawnPosition;
+                PlayerController.Instance.PlayerTransform.position = data.PlayerSpawnPosition;
             }
             for (int i = 0; i < data.MagObject.Count; i++)
             {
+                //Add the saved ammo to the mag 
                 GameObject Mag = Instantiate(MagPrefab);
                 Mag.GetComponent<Magazine>().BulletNumber = data.AmmoValue[i];
-                PlayerController.instance.MagLocations[i].startingSelectedInteractable = Mag.GetComponent<XRGrabInteractable>();
+                PlayerController.Instance.MagLocations[i].startingSelectedInteractable = Mag.GetComponent<XRGrabInteractable>();
             }
         }
     }

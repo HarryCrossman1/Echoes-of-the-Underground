@@ -10,12 +10,6 @@ public class ButtonInteractor : MonoBehaviour
     {
         BaseMat = GetComponent<Renderer>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void EnterHoverColorChange()
     { 
         BaseMat.material.color = Color.white;

@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
-//using AcmLib;
 using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController instance;
+    public static PlayerController Instance;
     public Transform PlayerTransform;
     public Transform PistolHip,AmmoHip;
     public int PlayerHealth;
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Path = Application.persistentDataPath + ".txt";
-        instance = this;
+        Instance = this;
         PlayerTransform= transform;
         Time.timeScale = 1;
         foreach (XrSocketTag xrSocketTag in MagLocations)
@@ -49,18 +48,18 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerDeathCheck()
     {
-        if (UiManager.instance.HealthText.text != null)
+        if (UiManager.Instance.HealthText.text != null)
         {
-            UiManager.instance.HealthText.text = PlayerHealth.ToString();
+            UiManager.Instance.HealthText.text = PlayerHealth.ToString();
         }
 
         if (PlayerHealth < 2)
         {
-            SoundManager.instance.PlayWatch();
+            SoundManager.Instance.PlayWatch();
         }
         else
         {
-            SoundManager.instance.StopWatch();
+            SoundManager.Instance.StopWatch();
         }
 
         if (PlayerHealth <= 0)
@@ -73,16 +72,16 @@ public class PlayerController : MonoBehaviour
     public void AddHealth()
     {
         PlayerHealth++;
-        if (UiManager.instance.HealthText.text != null)
+        if (UiManager.Instance.HealthText.text != null)
         {
-            UiManager.instance.HealthText.text = PlayerHealth.ToString();
+            UiManager.Instance.HealthText.text = PlayerHealth.ToString();
         }
     }
     public void PlayerDeath()
     {
         Time.timeScale= 0;
-        SoundManager.instance.PlayDeath();
-        SoundManager.instance.StopWatch();
+        SoundManager.Instance.PlayDeath();
+        SoundManager.Instance.StopWatch();
         StartCoroutine(DeathTimer(2));
     }
     private IEnumerator DeathTimer(float seconds)
@@ -95,9 +94,9 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         LerpValue = 0f;
-        Color NewCol = UiManager.instance.DeathCanvas.GetComponent<Image>().color;
+        Color NewCol = UiManager.Instance.DeathCanvas.GetComponent<Image>().color;
         NewCol.a = LerpValue;
-        UiManager.instance.DeathCanvas.gameObject.GetComponent<Image>().color = NewCol;
+        UiManager.Instance.DeathCanvas.gameObject.GetComponent<Image>().color = NewCol;
         yield return new WaitForSecondsRealtime(seconds);
         SceneManager.LoadScene("MenuScene");
     }
