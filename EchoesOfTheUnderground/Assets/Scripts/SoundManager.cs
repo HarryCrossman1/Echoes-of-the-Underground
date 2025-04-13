@@ -77,7 +77,11 @@ public class SoundManager : MonoBehaviour
     }
     public void SetAudioSources()
     {
-        SavingAndLoading.Instance.LoadSettings();
+        if (SavingAndLoading.Instance != null)
+        {
+            SavingAndLoading.Instance.LoadSettings();
+        }
+       
         MusicSources.Clear();
         SoundFxSources.Clear();
         NpcSources.Clear();

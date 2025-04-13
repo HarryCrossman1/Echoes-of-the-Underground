@@ -1141,8 +1141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cc2850804f1434da92d060cd3c63c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headTransform: {fileID: 4923524751447333060}
-  waistOffset: {x: 0, y: -0.55, z: 0}
+  HeadTransform: {fileID: 4923524751447333060}
+  WaistOffset: {x: 0, y: -0.5, z: 0}
 --- !u!1 &5829092848633904057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,10 +1419,10 @@ MonoBehaviour:
   m_PositionInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Position Input
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: f9f0e4ca-1390-4e39-820d-0c938c7ea797
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1431,10 +1431,10 @@ MonoBehaviour:
   m_RotationInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Rotation Input
+      m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 26649289-1980-4509-b9f9-0f266c9060a6
+      m_Id: 
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

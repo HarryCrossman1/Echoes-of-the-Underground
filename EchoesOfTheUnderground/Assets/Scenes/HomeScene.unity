@@ -2308,7 +2308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830600e4a2b852d47aa002c75dddd550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 75b487531db38514fa073f659e7efe59, type: 2}
+  Character: {fileID: 11400000, guid: 75b487531db38514fa073f659e7efe59, type: 2}
   VoiceLineTimer: 0
   ReadyForVoiceline: 1
   DialogueRadius: 3
@@ -10088,6 +10088,9 @@ PrefabInstance:
     - {fileID: 4656100085094435762, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
     - {fileID: 624806462681092421, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
     - {fileID: 5872359148193769270, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
+    - {fileID: 5068189353023568407, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
+    - {fileID: 2740994616383902805, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
+    - {fileID: 8440736447143026362, guid: e5a6a12f929953f49a73813661b7c44a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -10231,7 +10234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830600e4a2b852d47aa002c75dddd550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 39b055f657737154b91d04ad1146a632, type: 2}
+  Character: {fileID: 11400000, guid: 39b055f657737154b91d04ad1146a632, type: 2}
   VoiceLineTimer: 0
   ReadyForVoiceline: 1
   DialogueRadius: 3
@@ -15591,8 +15594,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 3202914162767905819, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
-    - {fileID: 6617236109046182278, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
     - {fileID: 8538105537673416190, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
     - {fileID: 9011421136864388131, guid: 08ebf8e37fd1f4b4b9add3cbeb74a2f6, type: 3}
     m_RemovedGameObjects: []

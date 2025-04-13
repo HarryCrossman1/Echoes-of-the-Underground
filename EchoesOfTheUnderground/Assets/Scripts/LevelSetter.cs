@@ -197,13 +197,18 @@ public class LevelSetter : MonoBehaviour
             SoundManager.Instance.AmbienceSource = GameObject.Find("AmbientSource").GetComponent<AudioSource>();
         }
         // Load the settings if they exist 
+        if(SavingAndLoading.Instance!=null)
         SavingAndLoading.Instance.LoadSettings();
 
         //Set the sliders for astethic purposes, actual volume set in the loadsettings()
+        if(UiManager.Instance!=null)
         UiManager.Instance.SetSoundSlider();
         // Get and set the audiosources ingame
-        SoundManager.Instance.GetAudioSources();
-        SoundManager.Instance.SetAudioSources();
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.GetAudioSources();
+            SoundManager.Instance.SetAudioSources();
+        }
     }
     private void StoryManagerSetup()
     {

@@ -156,9 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830600e4a2b852d47aa002c75dddd550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 75b487531db38514fa073f659e7efe59, type: 2}
+  Character: {fileID: 11400000, guid: 75b487531db38514fa073f659e7efe59, type: 2}
   VoiceLineTimer: 0
   ReadyForVoiceline: 1
+  DialogueRadius: 3
+  NpcCooldown: 10
 --- !u!1001 &1624122661706527116
 PrefabInstance:
   m_ObjectHideFlags: 0
