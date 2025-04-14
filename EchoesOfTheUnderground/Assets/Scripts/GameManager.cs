@@ -14,13 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
-    private int RandomZombieAmount;
     public bool HasZombies;
-    public static bool FixedSpawns=true;
-    [SerializeField] public GameObject[] FixedSpawnsLocations; 
+    public static bool FixedSpawns;
+    [SerializeField] public GameObject[] FixedSpawnsLocations;
 
 
     public bool IsActive;
+    private bool WaitingForZombies=true;
 
     // Values For Difficulty 
     public float AccuracyRating = 100f;
@@ -31,11 +31,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        Init();
     }
     public void Init()
     {
-        RandomZombieAmount = UnityEngine.Random.Range(1, ZombiePoolAmount);
+        BuildLogger.Instance.BuildLog(ZombiePoolAmount.ToString());
         if (HasZombies)
         {
             ZombiePool.Clear();
@@ -121,38 +120,47 @@ public class GameManager : MonoBehaviour
     {
         if (!IsActive)
         {
-            if (!FixedSpawns)
+            if (WaitingForZombies == true && HasZombies)
             {
-                // Debug.Log("Zombies spawning = " + RandomZombieAmount);
-                for (int i = 0; i < RandomZombieAmount; i++)
-                {
-                    //Choose a random spawn point on z 
-                    Vector3 RandomSpawn = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
-                    Vector3 RandomSpawnBackup = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
-                    NavMeshHit hit;
-                    if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
-                    {
-                        SpawnZombies(hit.position);
-                        break;
-                    }
-                    else if (NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
-                    {
-                        SpawnZombies(hit.position);
-                    }
-
-
-                }
-            }
-            else
-            {
-                for (int i = 0; i < RandomZombieAmount; i++)
-                {
-                    int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
-                    SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
-                }
+                StartCoroutine(WaitForZombies());
+                WaitingForZombies= false;
             }
         }
 
+    }
+    private IEnumerator WaitForZombies()
+    {
+        if (!FixedSpawns)
+        {
+
+            for (int i = 0; i < ZombiePoolAmount; i++)
+            {
+                //Choose a random spawn point on z 
+                Vector3 RandomSpawn = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
+                Vector3 RandomSpawnBackup = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
+                {
+                    SpawnZombies(hit.position);
+                }
+                else if (NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
+                {
+                    SpawnZombies(hit.position);
+                }
+            }
+            yield return new WaitForSeconds(8);
+            WaitingForZombies = true;
+        }
+        else
+        {
+            for (int i = 0; i < ZombiePoolAmount; i++)
+            {
+                int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
+                SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+            }
+            yield return new WaitForSeconds(5);
+            WaitingForZombies = true;
+        }
     }
     public void DebugAgents()
     {

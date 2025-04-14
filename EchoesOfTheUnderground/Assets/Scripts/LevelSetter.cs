@@ -23,11 +23,10 @@ public class LevelSetter : MonoBehaviour
         {
             Destroy(this);
         }
-        SetLevel();
     }
     public void Start()
     {
-
+        SetLevel();
     }
     public void SetLevel()
     {
@@ -53,13 +52,14 @@ public class LevelSetter : MonoBehaviour
                 {
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
-                        GameManager.Instance.IsActive = false;
+
                     }
                     else
                     {
-                        GameManager.Instance.IsActive = false;
+                        
                     }
-                    
+                    GameManager.FixedSpawns= false;
+                    GameManager.Instance.IsActive = false;
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
@@ -67,7 +67,6 @@ public class LevelSetter : MonoBehaviour
                     SavingAndLoading.Instance.LoadIngameData();
                     GameManager.Instance.HasZombies= true;
                     
-                    Debug.Log(GameManager.Instance.HasZombies);
                     GameManager.Instance.Init();
                     break;
                 }
@@ -85,6 +84,7 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
                     break;

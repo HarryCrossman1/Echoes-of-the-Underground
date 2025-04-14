@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeadTransform: {fileID: 4923524751447333060}
-  WaistOffset: {x: 0, y: -0.5, z: 0}
+  WaistOffset: {x: 0, y: -0.55, z: 0}
 --- !u!1 &5829092848633904057
 GameObject:
   m_ObjectHideFlags: 0

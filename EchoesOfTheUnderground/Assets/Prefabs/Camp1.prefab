@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -255,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -367,6 +377,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -477,6 +492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -589,6 +609,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -700,6 +725,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccbfab357ed0e154fa1a02fe6b910c28,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -778,6 +808,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -889,6 +924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1080,6 +1120,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1191,6 +1236,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tent02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccbfab357ed0e154fa1a02fe6b910c28,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1269,6 +1319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1381,6 +1436,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1491,6 +1551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1603,6 +1668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1713,6 +1783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1825,6 +1900,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (38)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1935,6 +2015,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2047,6 +2132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sample10 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d32ce48f45458145b3839695e8045cf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2125,6 +2215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2237,6 +2332,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2348,6 +2448,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WireFence (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2399,10 +2504,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3362471003757792908}
     m_Modifications:
+    - target: {fileID: 483248095918860206, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 760060035545956390, guid: 8089bcdc794e87549b6ed729fb810a07,
         type: 3}
       propertyPath: m_Name
       value: Fire 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 760060035545956390, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082242606189567339, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414100309177266338, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3827805456945169418, guid: 8089bcdc794e87549b6ed729fb810a07,
         type: 3}
@@ -2459,6 +2584,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7338018536518848854, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8598556357358590612, guid: 8089bcdc794e87549b6ed729fb810a07,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -2488,6 +2618,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -38.938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718639931460416504, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068327850757693020, guid: 8089bcdc794e87549b6ed729fb810a07,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2567,6 +2707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WireFence (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22062685cc7291246b8c98088a6fb6ed,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
