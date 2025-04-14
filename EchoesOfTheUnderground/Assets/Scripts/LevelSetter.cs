@@ -253,13 +253,13 @@ public class LevelSetter : MonoBehaviour
     }
     private void GameManagerSetup()
     {
-        if (GameObject.Find("SpawnPoint1") != null)
+        if (GameObject.Find("SpawnLocationOne") != null)
         {
-            GameManager.Instance.FixedSpawnsLocations[0] = GameObject.Find("SpawnPoint1");
+            GameManager.Instance.FixedSpawnsLocations[0] = GameObject.Find("SpawnLocationOne");
         }
-        if (GameObject.Find("SpawnPoint1 (1)") != null)
+        if (GameObject.Find("SpawnLocationTwo") != null)
         {
-            GameManager.Instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnPoint1 (1)");
+            GameManager.Instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnLocationTwo");
         }
     }
 }
