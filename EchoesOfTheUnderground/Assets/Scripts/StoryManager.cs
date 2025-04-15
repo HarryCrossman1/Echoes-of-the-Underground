@@ -181,7 +181,7 @@ public class StoryManager : MonoBehaviour
                     {
                         if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(184, 1, 162)) < 3)
                         {
-                            SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                            SavingAndLoading.Instance.SaveIngameData(new Vector3(-4.317f, 0, -27.59f));
                             SceneManager.LoadScene("SubwayScene");
                         }
                     }

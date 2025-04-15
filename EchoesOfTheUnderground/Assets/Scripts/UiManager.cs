@@ -61,6 +61,13 @@ public class UiManager : MonoBehaviour
                 {
                     MenuPanel.SetActive(true);
                     SoundManager.Instance.PlaySelectSound();
+                    MenuIsActive= true;
+                }
+                else if (MenuIsActive && (LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimary1) && leftPrimary1 || RightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimary1) && rightPrimary1))
+                {
+                    MenuPanel.SetActive(false);
+                    SoundManager.Instance.PlaySelectSound();
+                    MenuIsActive = false;
                 }
             }
         }

@@ -50,14 +50,14 @@ public class LevelSetter : MonoBehaviour
                 }
             case "OpenWorldMain":
                 {
-                    // Add level skip logic later 
+
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
-
+                        LevelSkipLogic(new Vector3(12, 0.1f, 3));
                     }
                     else
                     {
-                        
+                        LevelSkipLogic(new Vector3(160, 1, 44));
                     }
                     GameManager.FixedSpawns= false;
                     GameManager.Instance.IsActive = false;
@@ -65,7 +65,7 @@ public class LevelSetter : MonoBehaviour
                     UiManagerSetup();
                     StoryManagerSetup();
                     GameManagerSetup();
-                    SavingAndLoading.Instance.LoadIngameData();
+                    
                     GameManager.Instance.HasZombies= true;
                     
                     GameManager.Instance.Init();
@@ -73,21 +73,21 @@ public class LevelSetter : MonoBehaviour
                 }
             case "CampDynamite":
                 {
+                    LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
                     UiManager.InCampDynamite = true;
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
-                    SavingAndLoading.Instance.LoadIngameData();
                     GameManager.Instance.HasZombies= false;
                     GameManager.Instance.IsActive = true;
                     break;
                 }
             case "SubwayScene":
                 {
+                    LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
-                    SavingAndLoading.Instance.LoadIngameData();
                     GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
@@ -186,10 +186,11 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.GraphicsPanel = GameObject.Find("GraphicsQualityInGame");
         }
         //Buttons 
-        if (GameObject.Find("Back (1)") != null)
+        if (GameObject.Find("Back") != null)
         {
-            UiManager.Instance.Back = GameObject.Find("Back (1)").GetComponent<Button>();
-            UiManager.Instance.Back.onClick.AddListener(UiManager.Instance.CloseMenu);
+            UiManager.Instance.Back = GameObject.Find("Back").GetComponent<Button>();
+            UiManager.Instance.Back.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            // Add saving and loading of sound 
         }
         if (GameObject.Find("Exit") != null)
         {
@@ -199,22 +200,26 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("Skip") != null)
         {
             UiManager.Instance.Skip = GameObject.Find("Skip").GetComponent<Button>();
-          //  UiManager.Instance.Skip.onClick.AddListener()
+            UiManager.Instance.Skip.onClick.AddListener(UiManager.Instance.SkipLevel);
+            UiManager.Instance.Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
         if (GameObject.Find("Performance") != null)
         {
             UiManager.Instance.Performance = GameObject.Find("Performance").GetComponent<Button>();
             UiManager.Instance.Performance.onClick.AddListener (() => UiManager.Instance.SetGraphics(0));
+            UiManager.Instance.Performance.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
         if (GameObject.Find("Balanced") != null)
         {
             UiManager.Instance.Balanced = GameObject.Find("Balanced").GetComponent<Button>();
             UiManager.Instance.Balanced.onClick.AddListener(() => UiManager.Instance.SetGraphics(1));
+            UiManager.Instance.Balanced.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
         if (GameObject.Find("Quality") != null)
         {
             UiManager.Instance.Quality = GameObject.Find("Quality").GetComponent<Button>();
             UiManager.Instance.Quality.onClick.AddListener(() => UiManager.Instance.SetGraphics(2));
+            UiManager.Instance.Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
         UiManager.Instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
     }
@@ -307,6 +312,18 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("SpawnLocationTwo") != null)
         {
             GameManager.Instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnLocationTwo");
+        }
+    }
+    private void LevelSkipLogic(Vector3 NewPos)
+    {
+        if (UiManager.LevelSkipped == false)
+        {
+            SavingAndLoading.Instance.LoadIngameData();
+        }
+        else
+        {
+            UiManager.LevelSkipped = true;
+            PlayerController.Instance.PlayerTransform.position = NewPos;
         }
     }
 }
