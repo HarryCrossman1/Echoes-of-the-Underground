@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.AI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class LevelSetter : MonoBehaviour
 {
@@ -75,6 +75,7 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    SavingAndLoading.Instance.LoadIngameData();
                     GameManager.Instance.HasZombies= false;
                     GameManager.Instance.IsActive = true;
                     break;
@@ -84,6 +85,7 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    SavingAndLoading.Instance.LoadIngameData();
                     GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
@@ -168,6 +170,49 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("Panel (1)") != null)
         {
             UiManager.Instance.Panel1 = GameObject.Find("Panel (1)");
+        }
+        if (GameObject.Find("SettingsPanelInGame") != null)
+        {
+            UiManager.Instance.MenuPanel = GameObject.Find("SettingsPanelInGame");
+        }
+        if (GameObject.Find("AudioQualityInGame") != null)
+        {
+            UiManager.Instance.AudioPanel = GameObject.Find("AudioQualityInGame");
+        }
+        if (GameObject.Find("GraphicsQualityInGame") != null)
+        {
+            UiManager.Instance.GraphicsPanel = GameObject.Find("GraphicsQualityInGame");
+        }
+        //Buttons 
+        if (GameObject.Find("Back (1)") != null)
+        {
+            UiManager.Instance.Back = GameObject.Find("Back (1)").GetComponent<Button>();
+            UiManager.Instance.Back.onClick.AddListener(UiManager.Instance.CloseMenu);
+        }
+        if (GameObject.Find("Exit") != null)
+        {
+            UiManager.Instance.Exit = GameObject.Find("Exit").GetComponent<Button>();
+            UiManager.Instance.Exit.onClick.AddListener(UiManager.Instance.Quit);
+        }
+        if (GameObject.Find("Skip") != null)
+        {
+            UiManager.Instance.Skip = GameObject.Find("Skip").GetComponent<Button>();
+          //  UiManager.Instance.Skip.onClick.AddListener()
+        }
+        if (GameObject.Find("Performance") != null)
+        {
+            UiManager.Instance.Performance = GameObject.Find("Performance").GetComponent<Button>();
+            UiManager.Instance.Performance.onClick.AddListener (() => UiManager.Instance.SetGraphics(0));
+        }
+        if (GameObject.Find("Balanced") != null)
+        {
+            UiManager.Instance.Balanced = GameObject.Find("Balanced").GetComponent<Button>();
+            UiManager.Instance.Balanced.onClick.AddListener(() => UiManager.Instance.SetGraphics(1));
+        }
+        if (GameObject.Find("Quality") != null)
+        {
+            UiManager.Instance.Quality = GameObject.Find("Quality").GetComponent<Button>();
+            UiManager.Instance.Quality.onClick.AddListener(() => UiManager.Instance.SetGraphics(2));
         }
         UiManager.Instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
     }
