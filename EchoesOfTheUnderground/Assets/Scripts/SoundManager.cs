@@ -48,7 +48,9 @@ public class SoundManager : MonoBehaviour
     public void GetAudioSources()
     {
         AudioCategory[] Objects = FindObjectsOfType<AudioCategory>();
-
+        MusicSources.Clear();
+        SoundFxSources.Clear();
+        NpcSources.Clear();
         foreach (AudioCategory category in Objects)
         {
             AudioSource source = category.GetComponent<AudioSource>();
@@ -81,10 +83,6 @@ public class SoundManager : MonoBehaviour
         {
             SavingAndLoading.Instance.LoadSettings();
         }
-       
-        MusicSources.Clear();
-        SoundFxSources.Clear();
-        NpcSources.Clear();
         if (MusicSources != null)
         {
             foreach (AudioSource source in MusicSources)

@@ -165,6 +165,20 @@ public class LevelSetter : MonoBehaviour
                 StartCoroutine(SetHealthTextOnStart());
             }
         }
+        // Sound Sliders
+        if (GameObject.Find("Music Vol") != null)
+        {
+            UiManager.Instance.MusicSlider = GameObject.Find("Music Vol").GetComponent<Slider>();
+        }
+        if (GameObject.Find("Music Vol (1)") != null)
+        {
+            UiManager.Instance.SoundSlider = GameObject.Find("Music Vol (1)").GetComponent<Slider>();
+        }
+        if (GameObject.Find("Music Vol (2)") != null)
+        {
+            UiManager.Instance.NpcSlider = GameObject.Find("Music Vol (2)").GetComponent<Slider>();
+        }
+        //Pannels
         if (GameObject.Find("Panel") != null)
         {
             UiManager.Instance.Panel = GameObject.Find("Panel");
@@ -191,6 +205,9 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.Back = GameObject.Find("Back").GetComponent<Button>();
             UiManager.Instance.Back.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
             // Add saving and loading of sound 
+            UiManager.Instance.Back.onClick.AddListener(SavingAndLoading.Instance.SaveSettings);
+            UiManager.Instance.Back.onClick.AddListener(SoundManager.Instance.GetAudioSources);
+            UiManager.Instance.Back.onClick.AddListener(SoundManager.Instance.SetAudioSources);
         }
         if (GameObject.Find("Exit") != null)
         {
