@@ -50,6 +50,7 @@ public class LevelSetter : MonoBehaviour
                 }
             case "OpenWorldMain":
                 {
+                    // Add level skip logic later 
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
 
@@ -72,6 +73,7 @@ public class LevelSetter : MonoBehaviour
                 }
             case "CampDynamite":
                 {
+                    UiManager.InCampDynamite = true;
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
@@ -136,7 +138,7 @@ public class LevelSetter : MonoBehaviour
         {
             Instantiate(GameManagerPrefab);
         }
-        if (StoryManager.instance == null)
+        if (StoryManager.Instance == null)
         {
             Instantiate(StoryManagerPrefab);
         }
@@ -259,41 +261,41 @@ public class LevelSetter : MonoBehaviour
     {
         if (GameObject.Find("Ch35_nonPBR") != null)
         {
-            StoryManager.instance.TutorialCharacter = GameObject.Find("Ch35_nonPBR");
-            StoryManager.instance.Agent = StoryManager.instance.TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
-            StoryManager.instance.Animator = StoryManager.instance.TutorialCharacter.GetComponentInChildren<Animator>();
+            StoryManager.Instance.TutorialCharacter = GameObject.Find("Ch35_nonPBR");
+            StoryManager.Instance.Agent = StoryManager.Instance.TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
+            StoryManager.Instance.Animator = StoryManager.Instance.TutorialCharacter.GetComponentInChildren<Animator>();
         }
         if (GameObject.Find("Leo") != null)
         {
-            StoryManager.instance.Leo = GameObject.Find("Leo");
+            StoryManager.Instance.Leo = GameObject.Find("Leo");
         }
         if (GameObject.Find("Megan") != null)
         {
-            StoryManager.instance.Megan = GameObject.Find("Megan");
+            StoryManager.Instance.Megan = GameObject.Find("Megan");
         }
         if (GameObject.Find("CampDynamiteLoadTrigger") != null)
         {
-            StoryManager.instance.CampDynamiteLoadTrigger = GameObject.Find("CampDynamiteLoadTrigger");
+            StoryManager.Instance.CampDynamiteLoadTrigger = GameObject.Find("CampDynamiteLoadTrigger");
         }
         if (GameObject.Find("Rubble") != null)
         {
-            StoryManager.instance.Rubble = GameObject.Find("Rubble");
+            StoryManager.Instance.Rubble = GameObject.Find("Rubble");
         }
         if (GameObject.Find("NewRubble") != null)
         {
-            StoryManager.instance.NewRubble = GameObject.Find("NewRubble");
+            StoryManager.Instance.NewRubble = GameObject.Find("NewRubble");
         }
         if (GameObject.Find("Dynamite") != null)
         {
-            StoryManager.instance.Dynamite = GameObject.Find("Dynamite");
+            StoryManager.Instance.Dynamite = GameObject.Find("Dynamite");
         }
         if (GameObject.Find("AlertIconParent 1") != null)
         {
-            StoryManager.instance.AlertIcon = GameObject.Find("AlertIconParent 1");
+            StoryManager.Instance.AlertIcon = GameObject.Find("AlertIconParent 1");
         }
         if (GameObject.Find("PlaceToMove") != null)
         {
-            StoryManager.instance.PlaceToMove = GameObject.Find("PlaceToMove");
+            StoryManager.Instance.PlaceToMove = GameObject.Find("PlaceToMove");
         }
     }
     private void GameManagerSetup()

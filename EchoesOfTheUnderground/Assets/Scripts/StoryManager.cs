@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
 {
-    public static StoryManager instance;
+    public static StoryManager Instance;
     public enum StoryState {Menu,Tutorial,Streets,StreetsPartTwo,Subway }
     public static StoryState State;
     //State for debugging 
@@ -33,9 +33,9 @@ public class StoryManager : MonoBehaviour
     public string PressedButtonName;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {

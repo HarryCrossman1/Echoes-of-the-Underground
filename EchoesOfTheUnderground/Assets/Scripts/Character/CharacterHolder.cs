@@ -38,7 +38,7 @@ public class CharacterHolder : MonoBehaviour
 
             if (Character.TutorialCharacter)
             {
-                StoryManager.instance.CurrentState++;
+                StoryManager.Instance.CurrentState++;
             }
 
             HasPlayedAmbientLine = false; // Allow ambient NPCs to speak again

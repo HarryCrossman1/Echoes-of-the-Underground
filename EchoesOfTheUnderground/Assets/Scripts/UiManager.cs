@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -7,6 +8,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
+using static StoryManager;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class UiManager : MonoBehaviour
 {
@@ -26,6 +30,7 @@ public class UiManager : MonoBehaviour
     public GameObject MenuPanel,GraphicsPanel,AudioPanel;
     public Button Back, Exit, Skip, Quality, Balanced, Performance;
     public static bool LevelSkipped = false;
+    public static bool InCampDynamite = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -48,7 +53,7 @@ public class UiManager : MonoBehaviour
     }
     private void Update()
     {
-        if (StoryManager.instance!=null)
+        if (StoryManager.Instance !=null)
         {
             if (StoryManager.State != StoryManager.StoryState.Menu && MenuPanel!=null)
             {
@@ -85,6 +90,56 @@ public class UiManager : MonoBehaviour
     public void SkipLevel()
     { 
         LevelSkipped= true;
+        if (SavingAndLoading.Instance != null && PlayerController.Instance != null)
+        {
+            GameObject Mag1 = Instantiate(SavingAndLoading.Instance.MagPrefab);
+            GameObject Mag2 = Instantiate(SavingAndLoading.Instance.MagPrefab);
+            PlayerController.Instance.MagLocations[0].startingSelectedInteractable = Mag1.GetComponent<XRGrabInteractable>();
+            PlayerController.Instance.MagLocations[1].startingSelectedInteractable = Mag2.GetComponent<XRGrabInteractable>();
+        }
+        if (StoryManager.Instance != null)
+        {
+            switch (StoryManager.State)
+            {
+                case StoryState.Tutorial:
+                    {
+                        SceneManager.LoadScene("OpenWorldMain");
+                        StoryManager.State = StoryState.Streets;
+                        StoryManager.Instance.CurrentState = 0;
+                        break;
+                    }
+                case StoryState.Streets:
+                    {
+                        if (!InCampDynamite)
+                        {
+                            SceneManager.LoadScene("CampDynamite");
+                            StoryManager.Instance.CurrentState = 1;
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("OpenWorldMain");
+                            StoryManager.State = StoryState.StreetsPartTwo;
+                            StoryManager.Instance.CurrentState = 0;
+                        }
+
+                        break;
+                    }
+                case StoryState.StreetsPartTwo:
+                    {
+                        SceneManager.LoadScene("SubwayScene");
+                        StoryManager.State = StoryState.Subway;
+                        StoryManager.Instance.CurrentState = 0;
+                        break;
+                    }
+                case StoryState.Subway:
+                    {
+                        ColorBlock cb = Skip.colors;
+                        cb.normalColor = Color.red;
+                        Skip.colors = cb;
+                        break;
+                    }
+            }
+        }
     }
     public void ResetSkippedLevel()
     {

@@ -97,19 +97,19 @@ public class WeaponManager : MonoBehaviour
             }
             else if (hit.collider.CompareTag("MiscItem"))
             {
-                if (StoryManager.instance.gameObject != null)
+                if (StoryManager.Instance.gameObject != null)
                 {
                     // In the tutorial the storymanager need to check if the bottle has been shot 
-                    StoryManager.instance.HitMiscItem = false;
-                }
+                    StoryManager.Instance.HitMiscItem = false;
+                }   
                 if (hit.collider.attachedRigidbody != null)
                 {
                     Rigidbody body = hit.collider.attachedRigidbody;
                     body.AddForce(hit.point, ForceMode.Impulse);
 
-                    if (StoryManager.instance.gameObject != null)
+                    if (StoryManager.Instance.gameObject != null)
                     {
-                        StoryManager.instance.HitMiscItem = true;
+                        StoryManager.Instance.HitMiscItem = true;
                     }
                 }
             }

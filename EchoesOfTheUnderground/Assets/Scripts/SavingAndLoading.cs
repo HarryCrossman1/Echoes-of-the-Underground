@@ -30,7 +30,7 @@ public class SavingAndLoading : MonoBehaviour
     public static SavingAndLoading Instance;
     private string FilePathSettings;
     private string FilePathGameData;
-    [SerializeField] private GameObject MagPrefab;
+    public GameObject MagPrefab;
 
     private void Awake()
     {
