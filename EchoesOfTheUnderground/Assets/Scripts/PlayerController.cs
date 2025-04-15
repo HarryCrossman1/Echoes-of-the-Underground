@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     string Path;
     private float LerpValue = 1f;
     private float LerpDuration = 1f;
+    public GameObject LeftHandController, RightHandController;
+    public GameObject LeftHandControllerRay,RightHandControllerRay;
     void Awake()
     {
         Path = Application.persistentDataPath + ".txt";

@@ -168,15 +168,15 @@ public class LevelSetter : MonoBehaviour
         // Sound Sliders
         if (GameObject.Find("Music Vol") != null)
         {
-            UiManager.Instance.MusicSlider = GameObject.Find("Music Vol").GetComponent<Slider>();
+            UiManager.Instance.MusicSlider = GameObject.Find("Music Vol").GetComponentInChildren<Slider>();
         }
         if (GameObject.Find("Music Vol (1)") != null)
         {
-            UiManager.Instance.SoundSlider = GameObject.Find("Music Vol (1)").GetComponent<Slider>();
+            UiManager.Instance.SoundSlider = GameObject.Find("Music Vol (1)").GetComponentInChildren<Slider>();
         }
         if (GameObject.Find("Music Vol (2)") != null)
         {
-            UiManager.Instance.NpcSlider = GameObject.Find("Music Vol (2)").GetComponent<Slider>();
+            UiManager.Instance.NpcSlider = GameObject.Find("Music Vol (2)").GetComponentInChildren<Slider>();
         }
         //Pannels
         if (GameObject.Find("Panel") != null)
@@ -194,7 +194,6 @@ public class LevelSetter : MonoBehaviour
         if (GameObject.Find("AudioQualityInGame") != null)
         {
             UiManager.Instance.AudioPanel = GameObject.Find("AudioQualityInGame");
-        }
         if (GameObject.Find("GraphicsQualityInGame") != null)
         {
             UiManager.Instance.GraphicsPanel = GameObject.Find("GraphicsQualityInGame");
@@ -239,6 +238,11 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
         UiManager.Instance.InvokeRepeating("SwitchPanel", 0, 15.1f);
+        UiManager.Instance.InitializeControllersInGame();
+        UiManager.Instance.GraphicsPanel.SetActive(false);
+        UiManager.Instance.AudioPanel.SetActive(false);
+        UiManager.Instance.MenuPanel.SetActive(false);
+        }
     }
     private IEnumerator SetHealthTextOnStart()
     {

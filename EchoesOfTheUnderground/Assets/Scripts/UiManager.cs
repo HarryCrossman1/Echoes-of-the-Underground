@@ -31,6 +31,9 @@ public class UiManager : MonoBehaviour
     public Button Back, Exit, Skip, Quality, Balanced, Performance;
     public static bool LevelSkipped = false;
     public static bool InCampDynamite = false;
+    // Editing the button press to make it not work by frame 
+    private bool leftPrimaryPrev = false;
+    private bool rightPrimaryPrev = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,18 +60,47 @@ public class UiManager : MonoBehaviour
         {
             if (StoryManager.State != StoryManager.StoryState.Menu && MenuPanel!=null)
             {
-                if (!MenuIsActive && (LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimary) && leftPrimary || RightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimary) && rightPrimary))
+                bool leftPrimary = false;
+                bool rightPrimary = false;
+
+                LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out leftPrimary);
+                RightController.TryGetFeatureValue(CommonUsages.primaryButton, out rightPrimary);
+
+                // Check for "button down" (current true, previous false)
+                bool leftPressedThisFrame = leftPrimary && !leftPrimaryPrev;
+                bool rightPressedThisFrame = rightPrimary && !rightPrimaryPrev;
+
+                if (!MenuIsActive && (leftPressedThisFrame || rightPressedThisFrame))
                 {
+                    if (PlayerController.Instance != null)
+                    {
+                        PlayerController.Instance.LeftHandController.SetActive(false);
+                        PlayerController.Instance.RightHandController.SetActive(false);
+                        PlayerController.Instance.LeftHandControllerRay.SetActive(true);
+                        PlayerController.Instance.RightHandControllerRay.SetActive(true);
+                    }
+                    Debug.Log("ActivatedMenu");
                     MenuPanel.SetActive(true);
                     SoundManager.Instance.PlaySelectSound();
-                    MenuIsActive= true;
+                    MenuIsActive = true;
                 }
-                else if (MenuIsActive && (LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimary1) && leftPrimary1 || RightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimary1) && rightPrimary1))
+                else if (MenuIsActive && (leftPressedThisFrame || rightPressedThisFrame))
                 {
                     MenuPanel.SetActive(false);
                     SoundManager.Instance.PlaySelectSound();
                     MenuIsActive = false;
+                    if (PlayerController.Instance != null)
+                    {
+                        PlayerController.Instance.LeftHandController.SetActive(true);
+                        PlayerController.Instance.RightHandController.SetActive(true);
+                        PlayerController.Instance.LeftHandControllerRay.SetActive(false);
+                        PlayerController.Instance.RightHandControllerRay.SetActive(false);
+                    }
                 }
+
+                // Update previous states
+                leftPrimaryPrev = leftPrimary;
+                rightPrimaryPrev = rightPrimary;
             }
         }
     }
