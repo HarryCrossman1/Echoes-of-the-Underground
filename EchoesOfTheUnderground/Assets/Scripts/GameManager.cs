@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     }
     private void GameplayLoop()
     {
-        if (!IsActive)
+        if (!IsActive && Instance!=null)
         {
             if (WaitingForZombies == true && HasZombies)
             {
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         if (!FixedSpawns)
         {
-            yield return new WaitForSeconds(13);
+            yield return new WaitForSeconds(12);
             for (int i = 0; i < ZombiePoolAmount; i++)
             {
                 //Choose a random spawn point on z 

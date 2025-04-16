@@ -39,10 +39,15 @@ public class ProceduralGeneration : MonoBehaviour
         else
         {
             // Weird hack to fix zombie movement bug and keep spawning of zombies 
-            GenerateNavmesh();
             GenerateGrid(WorldSizeX, WorldSizeZ);
+            NavmeshSurface[0].RemoveData();
             GenerateNavmesh();
-        }  
+        }
+
+    }
+    private void Start()
+    {
+
     }
     private void Update()
     {

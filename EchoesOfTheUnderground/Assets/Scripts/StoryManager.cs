@@ -32,6 +32,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] public GameObject Dynamite;
     //Subway 
     public string PressedButtonName;
+    private bool SceneLoaded=false;
     private void Awake()
     {
         if (Instance == null)
@@ -193,12 +194,14 @@ public class StoryManager : MonoBehaviour
                 }
             case StoryState.Subway: 
                 {
-                    if (PressedButtonName == "RickCampButton")
+                    if (PressedButtonName == "RickCampButton" && !SceneLoaded)
                     {
+                        SceneLoaded= true;
                         SceneManager.LoadScene("CampDynamiteRuined");
                     }
-                    else if (PressedButtonName == "CampDynamiteButton")
+                    else if (PressedButtonName == "CampDynamiteButton" && !SceneLoaded)
                     {
+                        SceneLoaded= true;
                         SceneManager.LoadScene("HomeSceneRuined");
                     }
                     break;
