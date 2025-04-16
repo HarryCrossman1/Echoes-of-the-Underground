@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     {
         if (!FixedSpawns)
         {
-
+            yield return new WaitForSeconds(13);
             for (int i = 0; i < ZombiePoolAmount; i++)
             {
                 //Choose a random spawn point on z 
@@ -148,17 +148,16 @@ public class GameManager : MonoBehaviour
                     SpawnZombies(hit.position);
                 }
             }
-            yield return new WaitForSeconds(13);
             WaitingForZombies = true;
         }
         else
         {
+            yield return new WaitForSeconds(15);
             for (int i = 0; i < ZombiePoolAmount; i++)
             {
                 int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
                 SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
             }
-            yield return new WaitForSeconds(13);
             WaitingForZombies = true;
         }
     }

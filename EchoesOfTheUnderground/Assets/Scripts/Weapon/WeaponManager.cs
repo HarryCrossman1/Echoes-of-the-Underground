@@ -150,8 +150,14 @@ public class WeaponManager : MonoBehaviour
     }
     public void RemoveMagazine(SelectExitEventArgs args)
     {
-        if(HeldWeapon!=null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag!=null)
-        HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
+        if (HeldWeapon != null)
+        {
+            var weaponPickup = HeldWeapon.GetComponentInParent<XrWeaponPickup>();
+            if (weaponPickup != null && weaponPickup.CurrentMag != null)
+            {
+                weaponPickup.CurrentMag = null;
+            }
+        }
         if (SoundManager.Instance != null && SoundManager.Instance.GunSource != null)
         {
             SoundManager.Instance.PlayReload(false);
