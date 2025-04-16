@@ -4239,7 +4239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ebe554b99528f4a81ab3dcbd45882b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!4 &864192364
 Transform:
   m_ObjectHideFlags: 0
@@ -4255,89 +4254,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 74
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &902538721
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1308481034}
-    m_Modifications:
-    - target: {fileID: 963889582138417652, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: StartingVoiceline
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 963889582138417652, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: VoiceLineFinished
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1440131964564172660, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.463783
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.5421003
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -54.983673
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7d8b5c40864d6094dae7005a3f6fcecb, type: 3}
 --- !u!1001 &908515265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4599,12 +4515,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3456990098554187981, guid: 363acfa94083b2244b4e7c455ed73eba, type: 3}
---- !u!4 &924139029 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5761467105074212544, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-    type: 3}
-  m_PrefabInstance: {fileID: 902538721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &933332668
 GameObject:
   m_ObjectHideFlags: 0
@@ -7013,7 +6923,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 912878419}
-  - {fileID: 924139029}
   m_Father: {fileID: 0}
   m_RootOrder: 114
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9456,7 +9365,7 @@ GameObject:
   - component: {fileID: 1624881212}
   - component: {fileID: 1624881214}
   m_Layer: 0
-  m_Name: Ambient
+  m_Name: AmbientSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
