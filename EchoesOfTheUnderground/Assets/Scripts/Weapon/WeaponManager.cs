@@ -62,7 +62,7 @@ public class WeaponManager : MonoBehaviour
         {
             SoundManager.Instance.PlayEmpty();
         }
-        if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100) && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
+        if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100) && HeldWeapon!=null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag!=null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
         {
             if (hit.collider.CompareTag("ZombieBody"))
             {
@@ -79,6 +79,8 @@ public class WeaponManager : MonoBehaviour
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
                 GameManager.Instance.BulletWounds.Add(Blood);
+                // Sound 
+                zombie_Behaviour.PlayZombieAudio(zombie_Behaviour.GetComponent<Zombie_Behaviour>().ShotAudio, false);
             }
             else if (hit.collider.CompareTag("ZombieHead"))
             {
@@ -94,6 +96,8 @@ public class WeaponManager : MonoBehaviour
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
                 GameManager.Instance.BulletWounds.Add(Blood);
+                //
+                zombie_Behaviour.PlayZombieAudio(zombie_Behaviour.GetComponent<Zombie_Behaviour>().ShotAudio, false);
             }
             else if (hit.collider.CompareTag("MiscItem"))
             {

@@ -16,7 +16,7 @@ public class Zombie_Behaviour : MonoBehaviour
     [SerializeField] private AnimationClip Attacking, Hit, Dead;
     // Zombie Audio
     [SerializeField] private AudioSource ZombieSource;
-    [SerializeField] public AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
+    public AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
     void Awake()
     {
         ZombieSource = GetComponent<AudioSource>();
@@ -100,7 +100,6 @@ public class Zombie_Behaviour : MonoBehaviour
     {
         if (ZombieCurrentHealth <= 0)
         {
-            PlayZombieAudio(DeathAudio, false);
             Zombie_Agent.isStopped=true;
             StartCoroutine(WaitForAnim(3f));
             ZombieAnimator.SetBool("Dead", true);
@@ -118,6 +117,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private IEnumerator WaitForAnim(float seconds)
     {
+        PlayZombieAudio(DeathAudio, false);
         yield return new WaitForSeconds(seconds);
         gameObject.SetActive(false);
         CheckActiveZombies();
@@ -176,6 +176,11 @@ public class Zombie_Behaviour : MonoBehaviour
             ZombieSource.Play();
             ZombieSource.loop = false;
         }
-        else { ZombieSource.loop = true; }
+        else
+        {
+            ZombieSource.clip = clip;
+            ZombieSource.Play();
+            ZombieSource.loop = true; 
+        }
     }
 }

@@ -71,6 +71,7 @@ public class UiManager : MonoBehaviour
                 {
                     if (PlayerController.Instance != null)
                     {
+                        Time.timeScale= 0f;
                         PlayerController.Instance.LeftHandController.SetActive(false);
                         PlayerController.Instance.RightHandController.SetActive(false);
                         PlayerController.Instance.LeftHandControllerRay.SetActive(true);
