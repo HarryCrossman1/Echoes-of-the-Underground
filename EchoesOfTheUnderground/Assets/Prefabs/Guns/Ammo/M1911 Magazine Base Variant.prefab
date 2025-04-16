@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109d529a882552045abbe244a5b35405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletNumber: 8
-  MaxAmmo: 8
+  BulletNumber: 12
+  MaxAmmo: 12
 --- !u!1 &8956222287516401920 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 353007883356519431, guid: 71d42f13891e48c4487496fd15802eda,

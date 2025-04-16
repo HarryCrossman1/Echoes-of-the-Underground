@@ -10877,7 +10877,7 @@ GameObject:
   - component: {fileID: 1624881212}
   - component: {fileID: 1624881214}
   m_Layer: 0
-  m_Name: Ambient
+  m_Name: AmbientSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

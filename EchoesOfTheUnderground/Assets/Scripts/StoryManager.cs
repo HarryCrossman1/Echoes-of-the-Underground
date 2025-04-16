@@ -11,6 +11,7 @@ public class StoryManager : MonoBehaviour
     public static StoryState State;
     //State for debugging 
     [SerializeField] private StoryState DebugState;
+    public static bool LevelSkipped = false;
 
     //Tutorial Stuff
     [SerializeField] public GameObject TutorialCharacter;
@@ -140,11 +141,11 @@ public class StoryManager : MonoBehaviour
                 {
                     if (CurrentState == 0)
                     {
-                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, CampDynamiteLoadTrigger.transform.position) < 2)
+                        if (CampDynamiteLoadTrigger != null && Vector3.Distance(PlayerController.Instance.PlayerTransform.position, CampDynamiteLoadTrigger.transform.position) < 2)
                         {
                             CurrentState++;
 
-                                SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                                SavingAndLoading.Instance.SaveIngameData(new Vector3(83.357f, 1, 27.313f));
                                 SceneManager.LoadScene("CampDynamite");          
                         }
                     }
@@ -153,7 +154,7 @@ public class StoryManager : MonoBehaviour
                         if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Leo.transform.position) < 3)
                         {
                             CurrentState++;
-                            SoundManager.Instance.PlayVoiceLine(Leo.GetComponent<AudioSource>(), Leo.GetComponent<CharacterHolder>(), 0, false);
+                            SoundManager.Instance.PlayVoiceLine(Leo.GetComponentInChildren<AudioSource>(), Leo.GetComponentInChildren<CharacterHolder>(), 0, false);
                         }
                     }
                     if (CurrentState == 2)

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class LevelSetter : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class LevelSetter : MonoBehaviour
     {
         SetLevel();
     }
+
+    [System.Obsolete]
     public void SetLevel()
     {
         LevelName = SceneManager.GetActiveScene().name;
@@ -50,6 +53,15 @@ public class LevelSetter : MonoBehaviour
                 }
             case "OpenWorldMain":
                 {
+                    SoundManagerSetup();
+                    UiManagerSetup();
+                    StoryManagerSetup();
+                    GameManagerSetup();
+                    //SavingAndLoading.Instance.LoadIngameData();
+                    GameManager.FixedSpawns = false;
+                    GameManager.Instance.IsActive = false;
+                    GameManager.Instance.HasZombies= true;
+                    GameManager.Instance.Init();
 
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
@@ -57,40 +69,32 @@ public class LevelSetter : MonoBehaviour
                     }
                     else
                     {
-                        LevelSkipLogic(new Vector3(160, 1, 44));
+                        LevelSkipLogic(new Vector3(83.357f, 1, 27.313f));
                     }
-                    GameManager.FixedSpawns= false;
-                    GameManager.Instance.IsActive = false;
-                    SoundManagerSetup();
-                    UiManagerSetup();
-                    StoryManagerSetup();
-                    GameManagerSetup();
-                    
-                    GameManager.Instance.HasZombies= true;
-                    
-                    GameManager.Instance.Init();
+
                     break;
                 }
             case "CampDynamite":
                 {
-                    LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
-                    UiManager.InCampDynamite = true;
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    UiManager.InCampDynamite = true;
                     GameManager.Instance.HasZombies= false;
                     GameManager.Instance.IsActive = true;
+                    LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+
                     break;
                 }
             case "SubwayScene":
                 {
-                    LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
                     GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
+                    LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     break;
                 }
             case "CampDynamiteRunied":
@@ -335,15 +339,30 @@ public class LevelSetter : MonoBehaviour
             GameManager.Instance.FixedSpawnsLocations[1] = GameObject.Find("SpawnLocationTwo");
         }
     }
-    private void LevelSkipLogic(Vector3 NewPos)
+
+    [System.Obsolete]
+    public void LevelSkipLogic(Vector3 NewPos)
     {
-        if (UiManager.LevelSkipped == false)
+        if (StoryManager.LevelSkipped == false)
         {
             SavingAndLoading.Instance.LoadIngameData();
+            Debug.Log(StoryManager.LevelSkipped);
         }
         else
         {
-            UiManager.LevelSkipped = true;
+            // StoryManager.LevelSkipped = false;
+            Debug.Log(StoryManager.LevelSkipped);
+            if (SavingAndLoading.Instance != null && PlayerController.Instance != null)
+            {
+                GameObject Mag1 = Instantiate(SavingAndLoading.Instance.MagPrefab);
+                GameObject Mag2 = Instantiate(SavingAndLoading.Instance.MagPrefab);
+                PlayerController.Instance.MagLocations[0].startingSelectedInteractable = Mag1.GetComponent<XRGrabInteractable>();
+                PlayerController.Instance.MagLocations[1].startingSelectedInteractable = Mag2.GetComponent<XRGrabInteractable>();
+                PlayerController.Instance.MagLocations[0].StartManualInteraction( Mag1.GetComponent<XRGrabInteractable>());
+                PlayerController.Instance.MagLocations[1].StartManualInteraction(Mag2.GetComponent<XRGrabInteractable>());
+                Debug.Log(Mag1.gameObject + "+" + PlayerController.Instance.MagLocations[0]);
+                Debug.Log("Level Has Been Skipped");
+            }
             PlayerController.Instance.PlayerTransform.position = NewPos;
         }
     }

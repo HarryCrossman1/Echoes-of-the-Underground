@@ -87,7 +87,9 @@ public class SavingAndLoading : MonoBehaviour
         string json = JsonUtility.ToJson(ingameData, true);
         File.WriteAllText(FilePathGameData, json);
     }
+
     //Do 12/03/25 
+    [System.Obsolete]
     public void LoadIngameData()
     {
         if (File.Exists(FilePathGameData))
@@ -106,6 +108,7 @@ public class SavingAndLoading : MonoBehaviour
                 GameObject Mag = Instantiate(MagPrefab);
                 Mag.GetComponent<Magazine>().BulletNumber = data.AmmoValue[i];
                 PlayerController.Instance.MagLocations[i].startingSelectedInteractable = Mag.GetComponent<XRGrabInteractable>();
+                PlayerController.Instance.MagLocations[i].StartManualInteraction(Mag.GetComponent<XRGrabInteractable>());
             }
         }
     }

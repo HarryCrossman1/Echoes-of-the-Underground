@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
                     SpawnZombies(hit.position);
                 }
             }
-            yield return new WaitForSeconds(8);
+            yield return new WaitForSeconds(13);
             WaitingForZombies = true;
         }
         else
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
                 int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
                 SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
             }
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(13);
             WaitingForZombies = true;
         }
     }
