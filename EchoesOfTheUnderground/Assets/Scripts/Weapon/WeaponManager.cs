@@ -62,7 +62,7 @@ public class WeaponManager : MonoBehaviour
         {
             SoundManager.Instance.PlayEmpty();
         }
-        if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100))
+        if (Physics.Raycast(HeldWeapon.transform.position, HeldWeapon.transform.forward, out hit, 100) && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag.BulletNumber > 0)
         {
             if (hit.collider.CompareTag("ZombieBody"))
             {

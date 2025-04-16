@@ -3415,6 +3415,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin 1
       objectReference: {fileID: 0}
+    - target: {fileID: 902190717621435222, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4757076299291543135, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
       propertyPath: m_RenderShadows
