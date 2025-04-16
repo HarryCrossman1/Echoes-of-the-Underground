@@ -82,7 +82,10 @@ public class Zombie_Behaviour : MonoBehaviour
         if (!HasAtacked)
         { 
             HasAtacked= true;
-            StartCoroutine(StartAttack(Attacking.length));
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(StartAttack(Attacking.length));
+            }
         }
     }
     private IEnumerator StartAttack(float cooldown) 

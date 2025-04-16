@@ -25,6 +25,8 @@ public class LevelSetter : MonoBehaviour
             Destroy(this);
         }
     }
+
+    [System.Obsolete]
     public void Start()
     {
         SetLevel();
@@ -91,9 +93,11 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    GameManagerSetup();
                     GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
+                    GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     break;
                 }

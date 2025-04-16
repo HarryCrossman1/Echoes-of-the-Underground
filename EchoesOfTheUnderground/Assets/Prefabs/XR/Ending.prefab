@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 1860776068052436953}
   - component: {fileID: 5657320684114618329}
   - component: {fileID: 9016229612870668109}
-  - component: {fileID: 1653406585236496461}
-  - component: {fileID: 4252497902123357508}
   - component: {fileID: 2567637003453712319}
-  - component: {fileID: 6356137396271851765}
   m_Layer: 8
   m_Name: Ending
   m_TagString: Untagged
@@ -69,51 +66,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
---- !u!114 &1653406585236496461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550790245017060996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffae4816ea9de8e4399353d44f6cf61e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerTransform: {fileID: 0}
-  PistolHip: {fileID: 0}
-  AmmoHip: {fileID: 0}
-  PlayerHealth: 2
-  MagLocations:
-  - {fileID: 0}
-  - {fileID: 0}
-  MagList: []
---- !u!114 &4252497902123357508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550790245017060996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a748ba2b40c4144293745d1d90da27c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 0}
-  HeldWeapon: {fileID: 0}
-  HeldAnimator: {fileID: 0}
-  LastShot: 1
-  AllInteractors:
-  - {fileID: 0}
-  MuzzleFlash: {fileID: 0}
-  BloodPrefab: {fileID: 7782137563645058448, guid: d2b02ad6ee8b5cb40ac027a439e311e0,
-    type: 3}
-  Smg: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
-  ShotsHit: 0
-  ShotsTaken: 0
-  StoredAmmoCount: 0
 --- !u!143 &2567637003453712319
 CharacterController:
   m_ObjectHideFlags: 0
@@ -140,21 +92,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6356137396271851765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550790245017060996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6bf904e410ee8479f9093d8830d1f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LocomotionProvider: {fileID: 0}
-  m_MinHeight: 0
-  m_MaxHeight: Infinity
 --- !u!1 &1889777045333084871
 GameObject:
   m_ObjectHideFlags: 0

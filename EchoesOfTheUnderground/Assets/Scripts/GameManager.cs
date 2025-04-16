@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
     public void Init()
     {
-        BuildLogger.Instance.BuildLog(ZombiePoolAmount.ToString());
+        //BuildLogger.Instance.BuildLog(ZombiePoolAmount.ToString());
         if (HasZombies)
         {
             ZombiePool.Clear();

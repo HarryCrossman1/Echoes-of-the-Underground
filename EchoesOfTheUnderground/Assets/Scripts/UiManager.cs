@@ -84,6 +84,7 @@ public class UiManager : MonoBehaviour
                 }
                 else if (MenuIsActive && (leftPressedThisFrame || rightPressedThisFrame))
                 {
+                    Time.timeScale = 1f;
                     MenuPanel.SetActive(false);
                     SoundManager.Instance.PlaySelectSound();
                     MenuIsActive = false;
@@ -125,7 +126,10 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
     public void SkipLevel()
-    { 
+    {
+        leftPrimaryPrev = false;
+        rightPrimaryPrev = false;
+        MenuIsActive = false;
         StoryManager.LevelSkipped = true;
         if (StoryManager.Instance != null)
         {

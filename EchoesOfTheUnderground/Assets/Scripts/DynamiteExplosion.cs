@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class DynamiteExplosion : MonoBehaviour
 {
-    public static DynamiteExplosion Instance;
     private ParticleSystem System;
     private AudioSource Source;
     private void Awake()
     {
-        Instance = this;
+        System = GetComponentInChildren<ParticleSystem>();
+        Source = GetComponent<AudioSource>();
     }
     void Start()
     {
-        System= GetComponentInChildren<ParticleSystem>();
-        Source= GetComponent<AudioSource>();
+
     }
     public void TriggerExplosion()
     { 

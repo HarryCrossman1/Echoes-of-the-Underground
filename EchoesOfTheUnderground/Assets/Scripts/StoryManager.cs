@@ -173,14 +173,17 @@ public class StoryManager : MonoBehaviour
                 {
                     if (CurrentState == 0)
                     {
-                        Vector3 RubbleOriginalPos = Rubble.transform.position;
-                        Rubble.transform.position = new Vector3(200, 0, 0);
-                        NewRubble.transform.position = RubbleOriginalPos;
-                        CurrentState++;
+                        if (Rubble != null && NewRubble != null)
+                        {
+                            Vector3 RubbleOriginalPos = Rubble.transform.position;
+                            Rubble.transform.position = new Vector3(200, 0, 0);
+                            NewRubble.transform.position = RubbleOriginalPos;
+                            CurrentState++;
+                        }
                     }
                     else if (CurrentState == 1) 
                     {
-                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(184, 1, 162)) < 3)
+                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(55.193f, 1, -56)) < 2)
                         {
                             SavingAndLoading.Instance.SaveIngameData(new Vector3(-4.317f, 0, -27.59f));
                             SceneManager.LoadScene("SubwayScene");

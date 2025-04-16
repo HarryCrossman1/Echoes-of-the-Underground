@@ -119,7 +119,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Dynamite"))
             {
-                DynamiteExplosion.Instance.TriggerExplosion();
+                hit.collider.gameObject.GetComponent<DynamiteExplosion>().TriggerExplosion();
             }
             else
             {
@@ -150,6 +150,7 @@ public class WeaponManager : MonoBehaviour
     }
     public void RemoveMagazine(SelectExitEventArgs args)
     {
+        if(HeldWeapon!=null && HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag!=null)
         HeldWeapon.GetComponentInParent<XrWeaponPickup>().CurrentMag = null;
         if (SoundManager.Instance != null && SoundManager.Instance.GunSource != null)
         {

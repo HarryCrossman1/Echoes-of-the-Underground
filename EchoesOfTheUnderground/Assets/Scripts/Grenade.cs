@@ -39,7 +39,7 @@ public class Grenade : MonoBehaviour
             }
             else if (Hit.CompareTag("Dynamite"))
             {
-                DynamiteExplosion.Instance.TriggerExplosion();
+               // DynamiteExplosion.Instance.TriggerExplosion();
             }
         }
         yield return new WaitForSeconds(seconds/2);
