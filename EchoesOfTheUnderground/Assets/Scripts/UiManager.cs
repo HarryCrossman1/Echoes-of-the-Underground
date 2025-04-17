@@ -28,6 +28,9 @@ public class UiManager : MonoBehaviour
     public GameObject MenuPanel,GraphicsPanel,AudioPanel;
     public Button Back, Exit, Skip, Quality, Balanced, Performance;
     public static bool InCampDynamite = false;
+    //GunHolster Menu
+    public TextMeshProUGUI HolsterText, MagText;
+    public bool TextIsEnabled=true;
     // Editing the button press to make it not work by frame 
     private bool leftPrimaryPrev = false;
     private bool rightPrimaryPrev = false;
@@ -86,6 +89,8 @@ public class UiManager : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     MenuPanel.SetActive(false);
+                    GraphicsPanel.SetActive(false);
+                    AudioPanel.SetActive(false);
                     SoundManager.Instance.PlaySelectSound();
                     MenuIsActive = false;
                     if (PlayerController.Instance != null)
@@ -124,6 +129,21 @@ public class UiManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void EnableUI()
+    {
+        if (TextIsEnabled)
+        {
+            MagText.enabled = false;
+            HolsterText.enabled = false;
+            TextIsEnabled = false;
+        }
+        else
+        {
+            MagText.enabled = true;
+            HolsterText.enabled = true;
+            TextIsEnabled = true;
+        }
     }
     public void SkipLevel()
     {

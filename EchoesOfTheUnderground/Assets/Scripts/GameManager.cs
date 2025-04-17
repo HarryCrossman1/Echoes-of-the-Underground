@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
             var Anim = Zombie.ZombieAnimator;
             Anim.SetBool("Walking", true);
             Anim.SetBool("Idle", false);
+            Anim.SetBool("Dead", false);
+            Anim.SetBool("Attacking", false);
         }
     }
     private void ModifyCurrentZombie(GameObject Obj)
@@ -156,7 +158,10 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < ZombiePoolAmount; i++)
             {
                 int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
-                SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+                if (FixedSpawnsLocations[Rand] != null)
+                {
+                    SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+                }
             }
             WaitingForZombies = true;
         }

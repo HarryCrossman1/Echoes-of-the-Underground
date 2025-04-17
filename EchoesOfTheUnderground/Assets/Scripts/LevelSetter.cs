@@ -101,7 +101,7 @@ public class LevelSetter : MonoBehaviour
                     LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     break;
                 }
-            case "CampDynamiteRunied":
+            case "CampDynamiteRuined":
                 {
                     SoundManagerSetup();
                     GameManager.Instance.HasZombies = false;
@@ -206,8 +206,29 @@ public class LevelSetter : MonoBehaviour
         {
             UiManager.Instance.GraphicsPanel = GameObject.Find("GraphicsQualityInGame");
         }
-        //Buttons 
-        if (GameObject.Find("Back") != null)
+            // Text
+            if (GameObject.Find("MagSlots") != null)
+            {
+                UiManager.Instance.MagText = GameObject.Find("MagSlots").GetComponent<TextMeshProUGUI>();
+            }
+            if (GameObject.Find("Holster") != null)
+            {
+                UiManager.Instance.HolsterText = GameObject.Find("Holster").GetComponent<TextMeshProUGUI>();
+            }
+            if (UiManager.Instance.TextIsEnabled)
+            {
+                UiManager.Instance.MagText.enabled = true;
+                UiManager.Instance.HolsterText.enabled = true;
+                UiManager.Instance.TextIsEnabled= true; 
+            }
+            else
+            {
+                UiManager.Instance.MagText.enabled = false;
+                UiManager.Instance.HolsterText.enabled = false;
+                UiManager.Instance.TextIsEnabled = false;
+            }
+            //Buttons 
+            if (GameObject.Find("Back") != null)
         {
             UiManager.Instance.Back = GameObject.Find("Back").GetComponent<Button>();
             UiManager.Instance.Back.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
@@ -227,7 +248,13 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.Skip.onClick.AddListener(UiManager.Instance.SkipLevel);
             UiManager.Instance.Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
-        if (GameObject.Find("Performance") != null)
+            if (GameObject.Find("EnableUI") != null)
+            {
+                UiManager.Instance.Skip = GameObject.Find("EnableUI").GetComponent<Button>();
+                UiManager.Instance.Skip.onClick.AddListener(UiManager.Instance.EnableUI);
+                UiManager.Instance.Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            if (GameObject.Find("Performance") != null)
         {
             UiManager.Instance.Performance = GameObject.Find("Performance").GetComponent<Button>();
             UiManager.Instance.Performance.onClick.AddListener (() => UiManager.Instance.SetGraphics(0));

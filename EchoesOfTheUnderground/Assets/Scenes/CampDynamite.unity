@@ -100,7 +100,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 3fe73838bb213bd499cf41ebd278ef7e,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: f2d0c52054edd3642abdf7086cbd363d,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 454f6669f784c924c8088de340045fc5,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -778,6 +778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TakeOutBox02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d39d42d67b6c02548a54f3f582dc27d1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2469,6 +2474,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 10fa61a9d8ac1ad43ac77ef41367c224,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2581,7 +2591,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2901,7 +2911,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -3182,6 +3192,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrashedSodaCans04 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d7dfef8d1de351345bcd5ab472e5f28b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3876,6 +3891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LargeSquarePipeLShape (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ae2c1cfcbbc4d64d9a3dc2db746c476,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5031,7 +5051,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -5535,6 +5555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 10fa61a9d8ac1ad43ac77ef41367c224,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6174,6 +6199,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrashedSodaCans03
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97bd440ea40d5bd48801ccefc3004cad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6246,6 +6276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TakeOutBox01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1dfdedb6de2f1843ac99014621a7ba5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6475,7 +6510,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -7648,6 +7683,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoftDrinkCup01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1634087595454b9459e9816aa65c3e48,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7720,6 +7760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CrashedSodaCans03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97bd440ea40d5bd48801ccefc3004cad,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8219,6 +8264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sample09
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e2690691fc93ee0499a3fced058f3ac7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9087,6 +9137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TakeOutBox01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1dfdedb6de2f1843ac99014621a7ba5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9241,6 +9296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SoftDrinkCup01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1634087595454b9459e9816aa65c3e48,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9606,7 +9666,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -9624,14 +9684,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275340519}
-  m_LocalRotation: {x: 0.21150738, y: 0.8425563, z: -0.15850233, w: 0.46929803}
-  m_LocalPosition: {x: 86.2, y: 29.38, z: 65.3}
+  m_LocalRotation: {x: 0.1804981, y: -0.58307046, z: 0.13483065, w: 0.7805576}
+  m_LocalPosition: {x: 195.58, y: 40.36, z: 9.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 70
-  m_LocalEulerAnglesHint: {x: 27.75, y: 125.132, z: 13.57}
+  m_LocalEulerAnglesHint: {x: 26.041, y: -73.519, z: 0}
 --- !u!4 &1283099487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d4d1efa26cf9e141914c600ca900e99,
@@ -9668,6 +9728,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 711627831419914856, guid: 47e93cdd05a19d64ab590034529cb8a8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3624093469292999962, guid: 47e93cdd05a19d64ab590034529cb8a8,
         type: 3}
       propertyPath: m_Name
@@ -9945,6 +10010,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CigaretteButt01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dd36a39002e02d848b4661214c88a963,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10218,6 +10288,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrashedSodaCans02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80c698bc10318cc4bb60ff4934efa4d8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10458,6 +10533,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DividerPole
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a80d8c9105c6844aa26eab6a382e382,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10854,6 +10934,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DividerPole (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a80d8c9105c6844aa26eab6a382e382,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11009,6 +11094,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrashedSodaCans02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80c698bc10318cc4bb60ff4934efa4d8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11121,7 +11211,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -11239,7 +11329,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -13108,6 +13198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778197965}
   - component: {fileID: 1778197964}
+  - component: {fileID: 1778197966}
   m_Layer: 0
   m_Name: AmbientSource
   m_TagString: Untagged
@@ -13226,6 +13317,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 74
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778197966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778197963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439aa8635a333114aaedd9518c344db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: 0
 --- !u!1 &1790205832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e2690691fc93ee0499a3fced058f3ac7,
@@ -13317,10 +13421,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 610781400224358618, guid: 9c05b5c9c1dcd204daeeef0c50400941,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9c05b5c9c1dcd204daeeef0c50400941,
         type: 3}
       propertyPath: m_Name
       value: Porta
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9c05b5c9c1dcd204daeeef0c50400941,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134323220077972322, guid: 9c05b5c9c1dcd204daeeef0c50400941,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14639,6 +14758,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrashedSodaCans04
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d7dfef8d1de351345bcd5ab472e5f28b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15722,6 +15846,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3452109779685891192, guid: 3857a4a06e8e08c45834d2d8de63e34c,
+        type: 3}
+      propertyPath: PlayerHealth
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4467735454518706889, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -15901,6 +16030,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 10fa61a9d8ac1ad43ac77ef41367c224,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

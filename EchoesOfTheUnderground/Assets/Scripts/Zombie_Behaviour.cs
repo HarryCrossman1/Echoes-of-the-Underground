@@ -43,7 +43,7 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     public void CheckAttackRange(GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.8f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.9f)
         {
 
         }
