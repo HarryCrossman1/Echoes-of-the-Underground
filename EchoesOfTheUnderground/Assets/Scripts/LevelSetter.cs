@@ -42,7 +42,13 @@ public class LevelSetter : MonoBehaviour
         {
             case "MenuScene":
                 {
-                    
+                    SoundManagerSetup();
+                    UiManagerSetup();
+                    StoryManagerSetup();
+                    GameManagerSetup();
+                    GameManager.Instance.HasZombies= false;
+                    StoryManager.State = StoryManager.StoryState.Menu;
+                    StoryManager.Instance.CurrentState = 0;
                     break;
                 }
             case "HomeScene":
@@ -173,6 +179,11 @@ public class LevelSetter : MonoBehaviour
                 StartCoroutine(SetHealthTextOnStart());
             }
         }
+        //Menu loading slider 
+        if (GameObject.Find("LoadingBar") != null)
+        {
+            UiManager.Instance.LoadingSlider = GameObject.Find("LoadingBar").GetComponent<Slider>();
+        }
         // Sound Sliders
         if (GameObject.Find("Music Vol") != null)
         {
@@ -277,6 +288,8 @@ public class LevelSetter : MonoBehaviour
         UiManager.Instance.GraphicsPanel.SetActive(false);
         UiManager.Instance.AudioPanel.SetActive(false);
         UiManager.Instance.MenuPanel.SetActive(false);
+        UiManager.Instance.DeathCanvas.GetComponent<Image>().enabled = false;
+        UiManager.Instance.DeathCanvas.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
         }
     }
     private IEnumerator SetHealthTextOnStart()

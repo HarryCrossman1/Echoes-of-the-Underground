@@ -6,7 +6,7 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.UI;
 using System;
-
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
 
     }
@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator DeathTimer(float seconds)
     {
+        UiManager.Instance.DeathCanvas.GetComponent<Image>().enabled = true;
+        UiManager.Instance.DeathCanvas.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
         float Elapsed = 0f;
         while (Elapsed < LerpDuration) 
         {
@@ -100,6 +102,6 @@ public class PlayerController : MonoBehaviour
         NewCol.a = LerpValue;
         UiManager.Instance.DeathCanvas.gameObject.GetComponent<Image>().color = NewCol;
         yield return new WaitForSecondsRealtime(seconds);
-        SceneManager.LoadScene("MenuScene");
+        Application.Quit();
     }
 }

@@ -11,6 +11,7 @@ public class XrWeaponPickup : MonoBehaviour
     public Magazine CurrentMag;
     public void WeaponPickedUp()
     {
+        if(WeaponManager.instance.HeldWeapon)
         WeaponManager.instance.HeldWeapon = WeaponShootPoint;
         WeaponManager.instance.CurrentWeapon= weapon;
         if (weapon.Type == Weapon.AmmoType.Pistol)

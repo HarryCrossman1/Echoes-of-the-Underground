@@ -5100,6 +5100,11 @@ PrefabInstance:
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7130642984269399608, guid: 6885103ce4504a14198b0b10e1056c7d,
+        type: 3}
+      propertyPath: CurrentMag
+      value: 
+      objectReference: {fileID: 1700153297}
     - target: {fileID: 7341982918998925625, guid: 6885103ce4504a14198b0b10e1056c7d,
         type: 3}
       propertyPath: m_Name
@@ -12500,6 +12505,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1700153297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7448611511827526349, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1700153295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109d529a882552045abbe244a5b35405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1724413334

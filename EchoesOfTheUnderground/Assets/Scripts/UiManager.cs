@@ -13,7 +13,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
-    [SerializeField] private Slider LoadingSlider;
+    [SerializeField] public Slider LoadingSlider;
     public Canvas DeathCanvas, TutorialCanvas;
     [SerializeField] public TextMeshProUGUI HealthText;
     public bool PauseLevelLoading;
