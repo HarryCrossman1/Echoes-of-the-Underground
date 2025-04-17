@@ -89,7 +89,8 @@ public class LevelSetter : MonoBehaviour
                     StoryManagerSetup();
                     UiManager.InCampDynamite = true;
                     GameManager.Instance.HasZombies= false;
-                    GameManager.Instance.IsActive = true;
+                    GameManager.Instance.IsActive = false;
+                    GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
 
                     break;

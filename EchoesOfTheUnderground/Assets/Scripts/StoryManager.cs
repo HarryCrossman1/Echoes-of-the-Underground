@@ -146,7 +146,7 @@ public class StoryManager : MonoBehaviour
                         {
                             CurrentState++;
 
-                                SavingAndLoading.Instance.SaveIngameData(new Vector3(83.357f, 1, 27.313f));
+                                SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
                                 SceneManager.LoadScene("CampDynamite");          
                         }
                     }
@@ -162,7 +162,7 @@ public class StoryManager : MonoBehaviour
                     {
                         if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 3)
                         {
-                                SavingAndLoading.Instance.SaveIngameData(new Vector3(160, 1, 44));
+                                SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
                                 CurrentState = 0;
                                 State = StoryState.StreetsPartTwo;
                                 SceneManager.LoadScene("OpenWorldMain");
