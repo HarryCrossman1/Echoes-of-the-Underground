@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
 
     public bool IsActive;
-    private bool WaitingForZombies=true;
+   [SerializeField] public bool WaitingForZombies=true;
 
     // Values For Difficulty 
     public float AccuracyRating = 100f;
@@ -34,10 +34,10 @@ public class GameManager : MonoBehaviour
     }
     public void Init()
     {
+        ZombiePool.Clear();
         //BuildLogger.Instance.BuildLog(ZombiePoolAmount.ToString());
         if (HasZombies)
         {
-            ZombiePool.Clear();
             PoolZombies(ZombiePoolAmount);
         }
     }
@@ -84,7 +84,10 @@ public class GameManager : MonoBehaviour
 
             foreach (GameObject BloodObj in BulletWounds)
             {
-                BloodObj.SetActive(false);
+                if (BloodObj != null)
+                {
+                    BloodObj.SetActive(false);
+                }
             }
             BulletWounds.Clear();
 
@@ -126,6 +129,7 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(WaitForZombies());
                 WaitingForZombies= false;
+                Debug.Log(HasZombies);
             }
         }
 
@@ -135,35 +139,41 @@ public class GameManager : MonoBehaviour
         if (!FixedSpawns)
         {
             yield return new WaitForSeconds(12);
-            for (int i = 0; i < ZombiePoolAmount; i++)
+            if (HasZombies)
             {
-                //Choose a random spawn point on z 
-                Vector3 RandomSpawn = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
-                Vector3 RandomSpawnBackup = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
+                for (int i = 0; i < ZombiePoolAmount; i++)
                 {
-                    SpawnZombies(hit.position);
+                    //Choose a random spawn point on z 
+                    Vector3 RandomSpawn = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(18, 30)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-10, 10)));
+                    Vector3 RandomSpawnBackup = new Vector3(PlayerController.Instance.PlayerTransform.position.x + (UnityEngine.Random.Range(5, 10)), 0, PlayerController.Instance.transform.position.z + (UnityEngine.Random.Range(-5, 5)));
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(RandomSpawn, out hit, 0.5f, NavMesh.AllAreas))
+                    {
+                        SpawnZombies(hit.position);
+                    }
+                    else if (NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
+                    {
+                        SpawnZombies(hit.position);
+                    }
                 }
-                else if (NavMesh.SamplePosition(RandomSpawnBackup, out hit, 0.5f, NavMesh.AllAreas))
-                {
-                    SpawnZombies(hit.position);
-                }
+                WaitingForZombies = true;
             }
-            WaitingForZombies = true;
         }
         else
         {
             yield return new WaitForSeconds(15);
-            for (int i = 0; i < ZombiePoolAmount; i++)
+            if (HasZombies)
             {
-                int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
-                if (FixedSpawnsLocations[Rand] != null)
+                for (int i = 0; i < ZombiePoolAmount; i++)
                 {
-                    SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+                    int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
+                    if (FixedSpawnsLocations[Rand] != null)
+                    {
+                        SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
+                    }
                 }
+                WaitingForZombies = true;
             }
-            WaitingForZombies = true;
         }
     }
     public void DebugAgents()

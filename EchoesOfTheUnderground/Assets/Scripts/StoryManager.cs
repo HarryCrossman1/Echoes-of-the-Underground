@@ -32,7 +32,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] public GameObject Dynamite;
     //Subway 
     public string PressedButtonName;
-    private bool SceneLoaded=false;
+   [SerializeField] private bool SceneLoaded=false;
     private void Awake()
     {
         if (Instance == null)
@@ -140,24 +140,37 @@ public class StoryManager : MonoBehaviour
                 }
             case StoryState.Streets: 
                 {
-                    if (CurrentState == 0)
-                    {
-                        if (CampDynamiteLoadTrigger != null && Vector3.Distance(PlayerController.Instance.PlayerTransform.position, CampDynamiteLoadTrigger.transform.position) < 2)
-                        {
-                            CurrentState++;
+                    switch (CurrentState)
+                    { 
+                        case 0: 
+                            {
+                                if (CampDynamiteLoadTrigger != null && Vector3.Distance(PlayerController.Instance.PlayerTransform.position, CampDynamiteLoadTrigger.transform.position) < 2)
+                                {
+                                    CurrentState++;
 
-                                SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
-                                SceneManager.LoadScene("CampDynamite");          
-                        }
-                    }
-                    if (CurrentState == 1 && Leo!=null)
-                    {
-                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Leo.transform.position) < 3)
-                        {
-                            CurrentState++;
-                            SoundManager.Instance.PlayVoiceLine(Leo.GetComponentInChildren<AudioSource>(), Leo.GetComponentInChildren<CharacterHolder>(), 0, false);
-                        }
-                    }
+                                    SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                                    SceneManager.LoadScene("CampDynamite");
+                                }
+                                break;
+                            }
+                        case 1: 
+                            {
+                                if (Leo != null)
+                                {
+                                    if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Leo.transform.position) < 3)
+                                    {
+                                        CurrentState++;
+                                        SoundManager.Instance.PlayVoiceLine(Leo.GetComponentInChildren<AudioSource>(), Leo.GetComponentInChildren<CharacterHolder>(), 0, false);
+                                    }
+                                }
+                                break;
+                            }
+                        case 2: 
+                            {
+                                break;
+                            }
+                    } 
+                }
                     if (CurrentState == 2)
                     {
                         if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 3)
@@ -196,12 +209,14 @@ public class StoryManager : MonoBehaviour
                 {
                     if (PressedButtonName == "RickCampButton" && !SceneLoaded)
                     {
+                        Debug.Log("Loading : " + PressedButtonName);
                         SceneLoaded= true;
                         SceneManager.LoadScene("CampDynamiteRuined");
                     }
                     else if (PressedButtonName == "CampDynamiteButton" && !SceneLoaded)
                     {
-                        SceneLoaded= true;
+                        Debug.Log("Loading : " + PressedButtonName);
+                        SceneLoaded = true;
                         SceneManager.LoadScene("HomeSceneRuined");
                     }
                     break;

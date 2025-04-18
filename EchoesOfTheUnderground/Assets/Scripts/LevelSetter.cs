@@ -69,8 +69,11 @@ public class LevelSetter : MonoBehaviour
                     GameManager.FixedSpawns = false;
                     GameManager.Instance.IsActive = false;
                     GameManager.Instance.HasZombies= true;
+                    GameManager.Instance.WaitingForZombies = true;
                     GameManager.Instance.Init();
-
+                    Debug.Log("Gamemanger Fixed Spawns" + GameManager.FixedSpawns);
+                    Debug.Log("Gamemanger Is active" + GameManager.Instance.IsActive);
+                    Debug.Log("Gamemanger HasZombies" + GameManager.Instance.HasZombies);
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
                         LevelSkipLogic(new Vector3(12, 0.1f, 3));
@@ -87,6 +90,7 @@ public class LevelSetter : MonoBehaviour
                     SoundManagerSetup();
                     UiManagerSetup();
                     StoryManagerSetup();
+                    GameManagerSetup();
                     UiManager.InCampDynamite = true;
                     GameManager.Instance.HasZombies= false;
                     GameManager.Instance.IsActive = false;
@@ -104,6 +108,7 @@ public class LevelSetter : MonoBehaviour
                     GameManager.FixedSpawns= true;
                     GameManager.Instance.HasZombies = true;
                     GameManager.Instance.IsActive = false;
+                    GameManager.Instance.WaitingForZombies = true;
                     GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
                     break;

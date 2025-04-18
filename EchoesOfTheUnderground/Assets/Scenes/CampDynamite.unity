@@ -1031,7 +1031,7 @@ PrefabInstance:
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 121.236
+      value: 120.29
       objectReference: {fileID: 0}
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
@@ -1041,7 +1041,7 @@ PrefabInstance:
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.334
+      value: 38.64
       objectReference: {fileID: 0}
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
@@ -3073,7 +3073,7 @@ PrefabInstance:
     - target: {fileID: 8114636688885232661, guid: 4722b6c81e6127d4c850517f1c6b762f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 122.51121
+      value: 122.446
       objectReference: {fileID: 0}
     - target: {fileID: 8114636688885232661, guid: 4722b6c81e6127d4c850517f1c6b762f,
         type: 3}
@@ -3083,7 +3083,7 @@ PrefabInstance:
     - target: {fileID: 8114636688885232661, guid: 4722b6c81e6127d4c850517f1c6b762f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.509197
+      value: 39.093
       objectReference: {fileID: 0}
     - target: {fileID: 8114636688885232661, guid: 4722b6c81e6127d4c850517f1c6b762f,
         type: 3}
@@ -16522,7 +16522,7 @@ PrefabInstance:
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 121.726
+      value: 121.697
       objectReference: {fileID: 0}
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
@@ -16532,7 +16532,7 @@ PrefabInstance:
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.422
+      value: 38.357
       objectReference: {fileID: 0}
     - target: {fileID: 8692774566677558375, guid: 5ac4f2e3827dfb04abf4a711fb9573a5,
         type: 3}
@@ -17480,6 +17480,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 87bc7b83511151e4fbe76621943325ac,
         type: 2}
+    - target: {fileID: 6515833883894314938, guid: 75adbdae387dcdd46809f74e300a864c,
+        type: 3}
+      propertyPath: DialogueRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6515833883894314938, guid: 75adbdae387dcdd46809f74e300a864c,
         type: 3}
       propertyPath: ReadyForVoiceline

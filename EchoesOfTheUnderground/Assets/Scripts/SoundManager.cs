@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     [Header("Main Menu")]
-    [SerializeField] public AudioSource GenericSource;
+    public AudioSource GenericSource;
     public AudioSource AmbienceSource;
     [SerializeField] private AudioClip MenuClipSelect;
 
@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource  WatchSource;
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
-    [HideInInspector]public bool WatchIsPlaying;
+    [HideInInspector]public bool WatchIsPlaying = false;
     [Header("Data")]
     public float MusicVol;
     public float FxVol;
@@ -38,12 +38,6 @@ public class SoundManager : MonoBehaviour
         { 
             Destroy(gameObject);
         }
-    }
-
-    // Update is called once per frame
-    void Start()
-    {
-        WatchIsPlaying = false;
     }
     public void GetAudioSources()
     {
