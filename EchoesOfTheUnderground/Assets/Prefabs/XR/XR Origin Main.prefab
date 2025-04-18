@@ -252,13 +252,11 @@ MonoBehaviour:
   LastShot: 1
   AllInteractors:
   - {fileID: 0}
-  MuzzleFlash: {fileID: 0}
   BloodPrefab: {fileID: 7782137563645058448, guid: d2b02ad6ee8b5cb40ac027a439e311e0,
     type: 3}
   Smg: {fileID: 11400000, guid: a1fd57ce06eed484bad8d201dd163fe4, type: 2}
   ShotsHit: 0
   ShotsTaken: 0
-  StoredAmmoCount: 0
 --- !u!143 &1438130757053624305
 CharacterController:
   m_ObjectHideFlags: 0

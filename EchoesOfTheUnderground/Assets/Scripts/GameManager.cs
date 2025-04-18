@@ -10,17 +10,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject[] ZombiePrefabs;
-    [SerializeField] public List<GameObject> ZombiePool = new List<GameObject>();
-    [SerializeField] public List<GameObject> ActiveZombies = new List<GameObject>();
+    public List<GameObject> ZombiePool = new List<GameObject>();
+    public List<GameObject> ActiveZombies = new List<GameObject>();
     public List<GameObject> BulletWounds = new List<GameObject>();
     public int ZombiePoolAmount;
     public bool HasZombies;
     public static bool FixedSpawns;
-    [SerializeField] public GameObject[] FixedSpawnsLocations;
+    public GameObject[] FixedSpawnsLocations;
 
 
     public bool IsActive;
-   [SerializeField] public bool WaitingForZombies=true;
+    public bool WaitingForZombies=true;
 
     // Values For Difficulty 
     public float AccuracyRating = 100f;
@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
 
             // Reset values
             Zombie.ZombieCurrentHealth = Zombie.ZombieHealth;
-            Zombie.IsStunned = false;
             Zombie.HasAtacked = false;
 
             // Audio & Anim
@@ -161,13 +160,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(8);
             if (HasZombies)
             {
                 for (int i = 0; i < ZombiePoolAmount; i++)
                 {
                     int Rand = UnityEngine.Random.Range(0, FixedSpawnsLocations.Length);
-                    if (FixedSpawnsLocations[Rand] != null)
+                    if (FixedSpawnsLocations[Rand] != null && Vector3.Distance(PlayerController.Instance.PlayerTransform.position, FixedSpawnsLocations[Rand].transform.position) > 10)
                     {
                         SpawnZombies(FixedSpawnsLocations[Rand].transform.position);
                     }

@@ -9,7 +9,6 @@ public class Zombie_Behaviour : MonoBehaviour
     public Animator ZombieAnimator;
     public int ZombieCurrentHealth,ZombieHealth;
     public bool HasAtacked;
-   [SerializeField] public bool IsStunned;
     public float AccelMin,AccelMax;
 
     // Store Animations 
@@ -95,8 +94,10 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Stunned", false);
         PlayZombieAudio(AttackAudio, false);
         yield return new WaitForSeconds(cooldown);
-        PlayerController.Instance.PlayerHealth--;
-        PlayerController.Instance.PlayerDeathCheck();
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.PlayerHealth--;
+        }
         HasAtacked = false;
     }
     public void DeathCheck()

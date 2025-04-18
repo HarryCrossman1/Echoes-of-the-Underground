@@ -14,25 +14,24 @@ public class StoryManager : MonoBehaviour
     public static bool LevelSkipped = false;
 
     //Tutorial Stuff
-    [SerializeField] public GameObject TutorialCharacter;
-    [SerializeField] public GameObject AlertIcon;
-    [SerializeField] public int CurrentState;
-    [SerializeField] public bool HitMiscItem;
+    public GameObject TutorialCharacter;
+    public GameObject AlertIcon;
+    public int CurrentState;
+    public bool HitMiscItem;
     public Animator Animator;
     public NavMeshAgent Agent;
-   [SerializeField] public GameObject PlaceToMove;
-   [SerializeField] private bool StartLoad;
+    public GameObject PlaceToMove;
     //Camp Dynamite 
-    [SerializeField] public GameObject Leo;
-    [SerializeField] public GameObject Megan;
-    [SerializeField] public GameObject CampDynamiteLoadTrigger;
+    public GameObject Leo;
+    public GameObject Megan;
+    public GameObject CampDynamiteLoadTrigger;
     
     //Streets Part Two 
-    [SerializeField] public GameObject Rubble,NewRubble;
-    [SerializeField] public GameObject Dynamite;
+    public GameObject Rubble,NewRubble;
+    public GameObject Dynamite;
     //Subway 
     public string PressedButtonName;
-   [SerializeField] private bool SceneLoaded=false;
+    [SerializeField] private bool SceneLoaded=false;
     private void Awake()
     {
         if (Instance == null)
@@ -167,41 +166,42 @@ public class StoryManager : MonoBehaviour
                             }
                         case 2: 
                             {
+                                if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 3)
+                                {
+                                    SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                                    CurrentState = 0;
+                                    State = StoryState.StreetsPartTwo;
+                                    SceneManager.LoadScene("OpenWorldMain");
+                                }
                                 break;
                             }
-                    } 
-                }
-                    if (CurrentState == 2)
-                    {
-                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 3)
-                        {
-                                SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
-                                CurrentState = 0;
-                                State = StoryState.StreetsPartTwo;
-                                SceneManager.LoadScene("OpenWorldMain");
-                        }
                     }
-                        break;
+                    break;
                 }
             case StoryState.StreetsPartTwo:
                 {
-                    if (CurrentState == 0)
-                    {
-                        if (Rubble != null && NewRubble != null)
-                        {
-                            Vector3 RubbleOriginalPos = Rubble.transform.position;
-                            Rubble.transform.position = new Vector3(200, 0, 0);
-                            NewRubble.transform.position = RubbleOriginalPos;
-                            CurrentState++;
-                        }
-                    }
-                    else if (CurrentState == 1) 
-                    {
-                        if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(55.193f, 1, -56)) < 2)
-                        {
-                            SavingAndLoading.Instance.SaveIngameData(new Vector3(-4.317f, 0, -27.59f));
-                            SceneManager.LoadScene("SubwayScene");
-                        }
+                    switch (CurrentState)
+                    { 
+                        case 0: 
+                            {
+                                if (Rubble != null && NewRubble != null)
+                                {
+                                    Vector3 RubbleOriginalPos = Rubble.transform.position;
+                                    Rubble.transform.position = new Vector3(200, 0, 0);
+                                    NewRubble.transform.position = RubbleOriginalPos;
+                                    CurrentState++;
+                                }
+                                break;
+                            }
+                        case 1: 
+                            {
+                                if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(55.193f, 1, -56)) < 2)
+                                {
+                                    SavingAndLoading.Instance.SaveIngameData(new Vector3(-4.317f, 0, -27.59f));
+                                    SceneManager.LoadScene("SubwayScene");
+                                }
+                                break;
+                            }
                     }
                     break;
                 }

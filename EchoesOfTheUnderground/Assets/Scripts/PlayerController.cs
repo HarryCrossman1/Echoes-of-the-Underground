@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
     public Transform PlayerTransform;
     public Transform PistolHip,AmmoHip;
-    public int PlayerHealth;
     public XrSocketTag[] MagLocations;
     public List<GameObject> MagList = new List<GameObject>();
     string Path;
@@ -20,6 +19,20 @@ public class PlayerController : MonoBehaviour
     private float LerpDuration = 1f;
     public GameObject LeftHandController, RightHandController;
     public GameObject LeftHandControllerRay,RightHandControllerRay;
+    // Player Health Event 
+   [SerializeField] private int playerHealth;
+    public int PlayerHealth
+    {
+        get => playerHealth;
+        set
+        {
+            playerHealth = value;
+            OnPlayerHealthChanged?.Invoke(playerHealth);
+        }
+    }
+
+    public event Action<int> OnPlayerHealthChanged;
+
     void Awake()
     {
         Path = Application.persistentDataPath + ".txt";
@@ -36,8 +49,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-
+        OnPlayerHealthChanged += HandlePlayerHealthChanged;
     }
+    private void OnDestroy()
+    {
+        OnPlayerHealthChanged -= HandlePlayerHealthChanged;
+    }
+
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
         GameObject interactor = args.interactableObject.transform.gameObject;
@@ -48,14 +66,14 @@ public class PlayerController : MonoBehaviour
         GameObject interactor = args.interactableObject.transform.gameObject;
         MagList.Remove(interactor);
     }
-    public void PlayerDeathCheck()
+    private void HandlePlayerHealthChanged(int health)
     {
-        if (UiManager.Instance.HealthText.text != null)
+        if (UiManager.Instance.HealthText != null)
         {
-            UiManager.Instance.HealthText.text = PlayerHealth.ToString();
+            UiManager.Instance.HealthText.text = health.ToString();
         }
 
-        if (PlayerHealth < 2)
+        if (health < 2)
         {
             SoundManager.Instance.PlayWatch();
         }
@@ -64,12 +82,11 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.StopWatch();
         }
 
-        if (PlayerHealth <= 0)
+        if (health <= 0)
         {
             PlayerDeath();
             Debug.Log("Dead");
         }
-     
     }
     public void AddHealth()
     {

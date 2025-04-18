@@ -8,21 +8,19 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager instance;
-    [SerializeField] public Weapon CurrentWeapon;
-    [SerializeField] public GameObject HeldWeapon;
-    [SerializeField] public Animator HeldAnimator;
+    public Weapon CurrentWeapon;
+    public GameObject HeldWeapon;
+    public Animator HeldAnimator;
     [SerializeField]private float LastShot;
-    [SerializeField] public XrSocketTag[] AllInteractors;
-    [SerializeField] public Light MuzzleFlash;
+    public XrSocketTag[] AllInteractors;
 
     // Visual Effects 
     [SerializeField] private GameObject BloodPrefab;
 
     [SerializeField] private Weapon Smg;
-
+    //Accuracy
     public int ShotsHit;
-    public int ShotsTaken;
-    public int StoredAmmoCount;
+    [SerializeField]private int ShotsTaken;
     void Awake()
     {
         instance= this;

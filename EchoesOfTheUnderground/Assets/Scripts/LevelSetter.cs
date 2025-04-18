@@ -11,7 +11,6 @@ public class LevelSetter : MonoBehaviour
 {
     public static LevelSetter Instance;
     private string LevelName;
-   [SerializeField] private GameObject SoundManagerPrefab,SavingAndLoadingPrefab,UiManagerPrefab,StoryManagerPrefab,GameManagerPrefab;
     private bool CoroutineStarted = false;
     // Start is called before the first frame update
     private void Awake()
@@ -65,7 +64,6 @@ public class LevelSetter : MonoBehaviour
                     UiManagerSetup();
                     StoryManagerSetup();
                     GameManagerSetup();
-                    //SavingAndLoading.Instance.LoadIngameData();
                     GameManager.FixedSpawns = false;
                     GameManager.Instance.IsActive = false;
                     GameManager.Instance.HasZombies= true;
@@ -96,7 +94,6 @@ public class LevelSetter : MonoBehaviour
                     GameManager.Instance.IsActive = false;
                     GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
-
                     break;
                 }
             case "SubwayScene":
@@ -120,7 +117,7 @@ public class LevelSetter : MonoBehaviour
                     GameManager.Instance.IsActive = true;
                     if (!CoroutineStarted)
                     {
-                        StartCoroutine(EndGame());
+                        StartCoroutine(EndGameDelayed(8));
                         CoroutineStarted = true;
                     }
                     break;
@@ -132,40 +129,17 @@ public class LevelSetter : MonoBehaviour
                     GameManager.Instance.IsActive = true;
                     if (!CoroutineStarted)
                     {
-                        StartCoroutine(EndGame());
+                        StartCoroutine(EndGameDelayed(8));
                         CoroutineStarted= true;
                     }
                     break;
                 }
         }
     }
-    private IEnumerator EndGame()
+    private IEnumerator EndGameDelayed(int Seconds)
     {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(Seconds);
         Application.Quit();
-    }
-    private void InstatiateCoreManagers()
-    {
-        if (UiManager.Instance == null)
-        {
-            Instantiate(UiManagerPrefab);
-        }
-        if (SoundManager.Instance == null)
-        {
-            Instantiate(SoundManagerPrefab);
-        }
-        if (GameManager.Instance == null)
-        {
-            Instantiate(GameManagerPrefab);
-        }
-        if (StoryManager.Instance == null)
-        {
-            Instantiate(StoryManagerPrefab);
-        }
-        if (SavingAndLoading.Instance == null)
-        {
-            Instantiate(SavingAndLoadingPrefab);
-        }
     }
     private void UiManagerSetup()
     {
@@ -182,7 +156,7 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
             if (UiManager.Instance.HealthText != null)
             {
-                StartCoroutine(SetHealthTextOnStart());
+                StartCoroutine(UiManager.Instance.SetHealthTextOnStart());
             }
         }
         //Menu loading slider 
@@ -298,11 +272,6 @@ public class LevelSetter : MonoBehaviour
         UiManager.Instance.DeathCanvas.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
         }
     }
-    private IEnumerator SetHealthTextOnStart()
-    {
-        yield return new WaitUntil(() => PlayerController.Instance != null);
-        UiManager.Instance.HealthText.text = PlayerController.Instance.PlayerHealth.ToString();
-    }
     private void SoundManagerSetup()
     {
         // Get the sources
@@ -408,7 +377,7 @@ public class LevelSetter : MonoBehaviour
                 GameObject Mag2 = Instantiate(SavingAndLoading.Instance.MagPrefab);
                 PlayerController.Instance.MagLocations[0].startingSelectedInteractable = Mag1.GetComponent<XRGrabInteractable>();
                 PlayerController.Instance.MagLocations[1].startingSelectedInteractable = Mag2.GetComponent<XRGrabInteractable>();
-                PlayerController.Instance.MagLocations[0].StartManualInteraction( Mag1.GetComponent<XRGrabInteractable>());
+                PlayerController.Instance.MagLocations[0].StartManualInteraction(Mag1.GetComponent<XRGrabInteractable>());
                 PlayerController.Instance.MagLocations[1].StartManualInteraction(Mag2.GetComponent<XRGrabInteractable>());
                 Debug.Log(Mag1.gameObject + "+" + PlayerController.Instance.MagLocations[0]);
                 Debug.Log("Level Has Been Skipped");

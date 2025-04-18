@@ -13,13 +13,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
-    [SerializeField] public Slider LoadingSlider;
+    public Slider LoadingSlider;
     public Canvas DeathCanvas, TutorialCanvas;
-    [SerializeField] public TextMeshProUGUI HealthText;
-    public bool PauseLevelLoading;
+    public TextMeshProUGUI HealthText;
     private AsyncOperation Operation;
-    [SerializeField] public Slider MusicSlider, SoundSlider, NpcSlider;
-    [SerializeField] public GameObject Panel, Panel1;
+    public Slider MusicSlider, SoundSlider, NpcSlider;
+    public GameObject Panel, Panel1;
     private bool TutorialControls = true;
     //Menu
     private InputDevice LeftController;
@@ -48,17 +47,11 @@ public class UiManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-
-    // Update is called once per frame
-    void Start()
-    {
-
-    }
     private void Update()
     {
-        if (StoryManager.Instance !=null)
+        if (StoryManager.Instance !=null && MenuPanel != null && MenuPanel.activeSelf)
         {
-            if (StoryManager.State != StoryManager.StoryState.Menu && MenuPanel!=null)
+            if (StoryManager.State != StoryManager.StoryState.Menu)
             {
                 bool leftPrimary = false;
                 bool rightPrimary = false;
@@ -144,6 +137,11 @@ public class UiManager : MonoBehaviour
             HolsterText.enabled = true;
             TextIsEnabled = true;
         }
+    }
+    public IEnumerator SetHealthTextOnStart()
+    {
+        yield return new WaitUntil(() => PlayerController.Instance != null);
+        HealthText.text = PlayerController.Instance.PlayerHealth.ToString();
     }
     public void SkipLevel()
     {
