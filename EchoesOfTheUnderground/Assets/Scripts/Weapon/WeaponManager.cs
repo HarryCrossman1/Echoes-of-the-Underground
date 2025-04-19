@@ -70,9 +70,6 @@ public class WeaponManager : MonoBehaviour
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue;
 
-                //Take Checkdeath
-                zombie_Behaviour.DeathCheck();
-
                 // Do blood effect
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);
                 Blood.transform.position = hit.point;
@@ -86,9 +83,6 @@ public class WeaponManager : MonoBehaviour
                 Zombie_Behaviour zombie_Behaviour = hit.collider.GetComponentInParent<Zombie_Behaviour>();
                 // Deal Damage 
                 zombie_Behaviour.ZombieCurrentHealth -= CurrentWeapon.DamageValue * 2;
-
-                //Take Checkdeath
-                zombie_Behaviour.DeathCheck();
 
                 // Do blood effect
                 GameObject Blood = Instantiate(BloodPrefab, hit.collider.gameObject.transform);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class Zombie_Behaviour : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent Zombie_Agent;
     public Animator ZombieAnimator;
-    public int ZombieCurrentHealth,ZombieHealth;
+    public int zombieCurrentHealth,ZombieHealth;
     public bool HasAtacked;
     public float AccelMin,AccelMax;
 
@@ -16,6 +17,17 @@ public class Zombie_Behaviour : MonoBehaviour
     // Zombie Audio
     [SerializeField] private AudioSource ZombieSource;
     public AudioClip AttackAudio, ShotAudio,DeathAudio,AmbientAudio;
+
+    public int ZombieCurrentHealth
+    { 
+        get => zombieCurrentHealth;
+        set
+        { 
+            zombieCurrentHealth = value;
+            OnZombieHealthChanged?.Invoke();
+        }
+    }
+    public event Action OnZombieHealthChanged;
     void Awake()
     {
         ZombieSource = GetComponent<AudioSource>();
@@ -23,13 +35,17 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private void Start()
     {
-
+        OnZombieHealthChanged += HandleDeathCheck;
+    }
+    private void OnDestroy()
+    {
+        OnZombieHealthChanged -= HandleDeathCheck;
     }
     public void ZombieCalledOnStart()
     {
         if (isActiveAndEnabled)
         {
-            InvokeRepeating("Chase", 0.1f, 0.1f);
+            InvokeRepeating("CheckAttackRangeWrapper", 0.1f, 0.1f);
             StartCoroutine(CheckIfStuck());
             Zombie_Agent.autoRepath = true;
         }
@@ -37,23 +53,28 @@ public class Zombie_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DeathCheck();
-        CheckAttackRange(PlayerController.Instance.PlayerTransform.gameObject);     
+         
+    }
+    public void CheckAttackRangeWrapper()
+    {
+        CheckAttackRange(PlayerController.Instance.PlayerTransform.gameObject);
     }
     public void CheckAttackRange(GameObject Target)
     {
-        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 0.9f)
+        if (Vector3.Distance(gameObject.transform.position, Target.transform.position) > 1.2f)
         {
-
+            Chase();
         }
         else
         {
-            Invoke("Attack",Attacking.length);
+            Attack();
         }
     }
     private void Chase()
     {
         Zombie_Agent.SetDestination(PlayerController.Instance.PlayerTransform.transform.position);
+        ZombieAnimator.SetBool("Attacking", false);
+        ZombieAnimator.SetBool("Walking", true);
     }
     private IEnumerator CheckIfStuck()
     {
@@ -89,18 +110,19 @@ public class Zombie_Behaviour : MonoBehaviour
     }
     private IEnumerator StartAttack(float cooldown) 
     {
+        Zombie_Agent.SetDestination(PlayerController.Instance.PlayerTransform.transform.position);
         ZombieAnimator.SetBool("Attacking", true);
         ZombieAnimator.SetBool("Walking", false);
         ZombieAnimator.SetBool("Stunned", false);
         PlayZombieAudio(AttackAudio, false);
         yield return new WaitForSeconds(cooldown);
-        if (PlayerController.Instance != null)
+        if (PlayerController.Instance != null && gameObject.activeSelf)
         {
             PlayerController.Instance.PlayerHealth--;
         }
         HasAtacked = false;
     }
-    public void DeathCheck()
+    public void HandleDeathCheck()
     {
         if (ZombieCurrentHealth <= 0)
         {
@@ -111,8 +133,7 @@ public class Zombie_Behaviour : MonoBehaviour
             ZombieAnimator.SetBool("Attacking", false);
             ZombieAnimator.SetBool("Stunned", false);
             //Cancel invokes memory reasons 
-            CancelInvoke("Chase");
-            CancelInvoke("CheckPosition");
+            CancelInvoke("CheckAttackRangeWrapper");
             //Stop coroutine  
             StopCoroutine(CheckIfStuck());
             StopCoroutine(StartAttack(Attacking.length));

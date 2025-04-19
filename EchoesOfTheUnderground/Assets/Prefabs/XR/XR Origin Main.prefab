@@ -225,7 +225,6 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   PistolHip: {fileID: 0}
   AmmoHip: {fileID: 0}
-  PlayerHealth: 0
   MagLocations:
   - {fileID: 4353222970606845800}
   - {fileID: 8149630778245954271}
@@ -234,6 +233,7 @@ MonoBehaviour:
   RightHandController: {fileID: 4214528153044417849}
   LeftHandControllerRay: {fileID: 7447041693576194771}
   RightHandControllerRay: {fileID: 2637811427404490159}
+  playerHealth: 3
 --- !u!114 &7897730511431175910
 MonoBehaviour:
   m_ObjectHideFlags: 0

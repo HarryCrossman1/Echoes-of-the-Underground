@@ -49,7 +49,7 @@ public class UiManager : MonoBehaviour
     }
     private void Update()
     {
-        if (StoryManager.Instance !=null && MenuPanel != null && MenuPanel.activeSelf)
+        if (StoryManager.Instance !=null && MenuPanel != null)
         {
             if (StoryManager.State != StoryManager.StoryState.Menu)
             {
