@@ -158,7 +158,6 @@ public class StoryManager : MonoBehaviour
                                 {
                                     if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Leo.transform.position) < 3)
                                     {
-                                        CurrentState++;
                                         SoundManager.Instance.PlayVoiceLine(Leo.GetComponentInChildren<AudioSource>(), Leo.GetComponentInChildren<CharacterHolder>(), 0, false);
                                     }
                                 }
@@ -166,7 +165,7 @@ public class StoryManager : MonoBehaviour
                             }
                         case 2: 
                             {
-                                if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 3)
+                                if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 2.2f)
                                 {
                                     SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
                                     CurrentState = 0;

@@ -92,6 +92,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 429383497321365260, guid: 9f6c32914eafab746a202860ebbfef50,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831546855050990316, guid: 9f6c32914eafab746a202860ebbfef50,
+        type: 3}
+      propertyPath: m_Name
+      value: grenade Variant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831546855050990316, guid: 9f6c32914eafab746a202860ebbfef50,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3170670959598241878, guid: 9f6c32914eafab746a202860ebbfef50,
         type: 3}
       propertyPath: m_RootOrder

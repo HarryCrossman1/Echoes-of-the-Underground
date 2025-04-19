@@ -6995,6 +6995,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioQuality
       objectReference: {fileID: 0}
+    - target: {fileID: 1269076720419974730, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678525344332277230, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678525344332277230, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305010057529304689, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305010057529304689, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305010057529304689, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469529920107804285, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469529920107804285, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469529920107804285, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569589292501169698, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569589292501169698, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569589292501169698, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6605262575935642378, guid: c7dab0b6e6fc8c3438e204d552d80539,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -7015,6 +7075,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 532555431}
+    - target: {fileID: 7053553237240527800, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7053553237240527800, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699378894012319114, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699378894012319114, guid: c7dab0b6e6fc8c3438e204d552d80539,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7403,6 +7483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930839765836055763, guid: 8485ce76950c5f947aa2547e4bcf7b4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7497873209258898639, guid: 8485ce76950c5f947aa2547e4bcf7b4f,
         type: 3}

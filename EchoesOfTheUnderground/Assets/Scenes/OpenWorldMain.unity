@@ -10034,6 +10034,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 240c5281c1f77024eac9492525716935,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10887,6 +10892,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterBottle01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 240c5281c1f77024eac9492525716935,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12146,6 +12156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 240c5281c1f77024eac9492525716935,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13386,6 +13401,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBottle01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 240c5281c1f77024eac9492525716935,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14266,6 +14286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GasContainer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ec9ee62b2f8bb3c438a955d7cd0a2797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15932,6 +15957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TakeOutBox01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c1dfdedb6de2f1843ac99014621a7ba5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21388,16 +21418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acaad4a7f8cc504ea25257109c98ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundManagerPrefab: {fileID: 1440131964564172660, guid: 7d8b5c40864d6094dae7005a3f6fcecb,
-    type: 3}
-  SavingAndLoadingPrefab: {fileID: 379309441248803531, guid: 0611be95786742d4eb9f80d9079ada3b,
-    type: 3}
-  UiManagerPrefab: {fileID: 6802728485690297328, guid: 8b3c98d99d65e7a41ac80828a8df4dfc,
-    type: 3}
-  StoryManagerPrefab: {fileID: 389216603363037211, guid: a7659eb46f31f884c9f83a7f974a7c25,
-    type: 3}
-  GameManagerPrefab: {fileID: 1684303226467612079, guid: f3d806d6024e56a4a85a0dcc774e23b4,
-    type: 3}
 --- !u!4 &1240451160
 Transform:
   m_ObjectHideFlags: 0
@@ -22246,7 +22266,7 @@ PrefabInstance:
     - target: {fileID: 778170384786512191, guid: 9735313327e9ac84e9c5521fc8efc56d,
         type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 1500
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6113768617667890442, guid: 9735313327e9ac84e9c5521fc8efc56d,
         type: 3}
@@ -22307,6 +22327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FogPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591516794999115759, guid: 9735313327e9ac84e9c5521fc8efc56d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23597,6 +23622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GasContainer1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ec9ee62b2f8bb3c438a955d7cd0a2797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26371,6 +26401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GasContainer3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce22ea030097cda4b84a1118da77e4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33909,7 +33944,7 @@ PrefabInstance:
     - target: {fileID: 902190717621435222, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
       propertyPath: far clip plane
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1344591696257568595, guid: 3857a4a06e8e08c45834d2d8de63e34c,
         type: 3}
@@ -37170,6 +37205,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GasContainer3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce22ea030097cda4b84a1118da77e4d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38643,6 +38683,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4824812028254077418, guid: 2aa9cc0a5999f9a4b9e113d2ba947820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5313962059169110864, guid: 2aa9cc0a5999f9a4b9e113d2ba947820,
         type: 3}
       propertyPath: m_RootOrder
@@ -38873,6 +38918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -39.938427
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762399358077494813, guid: 30088bdfd63483e42b08203116da1cb8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39310,6 +39360,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -37.568996
       objectReference: {fileID: 0}
+    - target: {fileID: 3198208404849323204, guid: b28cfb72a19b63f4ab9f4a4596477a0a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3839548022896601753, guid: b28cfb72a19b63f4ab9f4a4596477a0a,
         type: 3}
       propertyPath: m_Name
@@ -39545,6 +39600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TakeOutBox01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2282717697256327565, guid: f8abfdb4cb87c1f40a0850ea57cedcbf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5823250768614356118, guid: f8abfdb4cb87c1f40a0850ea57cedcbf,
         type: 3}

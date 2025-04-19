@@ -239,13 +239,8 @@ public class LevelSetter : MonoBehaviour
             UiManager.Instance.Skip.onClick.AddListener(UiManager.Instance.SkipLevel);
             UiManager.Instance.Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
         }
-            if (GameObject.Find("EnableUI") != null)
-            {
-                UiManager.Instance.Skip = GameObject.Find("EnableUI").GetComponent<Button>();
-                UiManager.Instance.Skip.onClick.AddListener(UiManager.Instance.EnableUI);
-                UiManager.Instance.Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
-            }
-            if (GameObject.Find("Performance") != null)
+  
+        if (GameObject.Find("Performance") != null)
         {
             UiManager.Instance.Performance = GameObject.Find("Performance").GetComponent<Button>();
             UiManager.Instance.Performance.onClick.AddListener (() => UiManager.Instance.SetGraphics(0));

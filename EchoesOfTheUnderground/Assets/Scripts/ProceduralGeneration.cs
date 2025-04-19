@@ -67,7 +67,7 @@ public class ProceduralGeneration : MonoBehaviour
                 {
                     if (Random.Range(0, 100) < CarChance)
                     {
-                        GameObject gridblock = Instantiate(PlaceableSceneObjects[Random.Range(0, 2)], pos, Quaternion.Euler(0, Random.Range(0, 360), 0));
+                        GameObject gridblock = Instantiate(PlaceableSceneObjects[Random.Range(0, 2)], pos + new Vector3(0,-0.1f,0), Quaternion.Euler(0, Random.Range(0, 360), 0));
                         spawnedBlocks.Add(gridblock);
                     }
                     // Spawn the item pickups

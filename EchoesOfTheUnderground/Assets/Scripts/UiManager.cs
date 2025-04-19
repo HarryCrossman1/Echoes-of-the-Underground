@@ -123,21 +123,6 @@ public class UiManager : MonoBehaviour
     {
         Application.Quit();
     }
-    public void EnableUI()
-    {
-        if (TextIsEnabled)
-        {
-            MagText.enabled = false;
-            HolsterText.enabled = false;
-            TextIsEnabled = false;
-        }
-        else
-        {
-            MagText.enabled = true;
-            HolsterText.enabled = true;
-            TextIsEnabled = true;
-        }
-    }
     public IEnumerator SetHealthTextOnStart()
     {
         yield return new WaitUntil(() => PlayerController.Instance != null);
