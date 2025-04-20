@@ -226,11 +226,11 @@ public class StoryManager : MonoBehaviour
     }
     public void StoryManagerSetup()
     {
-        if (GameObject.Find("Ch35_nonPBR") != null)
+        if (GameObject.Find("Ch08_nonPBR") != null)
         {
-            TutorialCharacter = GameObject.Find("Ch35_nonPBR");
-            Agent = TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
-            Animator = TutorialCharacter.GetComponentInChildren<Animator>();
+            TutorialCharacter = GameObject.Find("Ch08_nonPBR");
+            Agent = TutorialCharacter.GetComponent<NavMeshAgent>();
+            Animator = TutorialCharacter.GetComponent<Animator>();
         }
         if (GameObject.Find("Leo") != null)
         {
