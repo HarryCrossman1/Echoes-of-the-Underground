@@ -15,20 +15,20 @@ public class StoryManager : MonoBehaviour
 
     //Tutorial Stuff
     public GameObject TutorialCharacter;
-    public GameObject AlertIcon;
+    [SerializeField] private GameObject AlertIcon;
     public int CurrentState;
     public bool HitMiscItem;
     public Animator Animator;
     public NavMeshAgent Agent;
-    public GameObject PlaceToMove;
+    [SerializeField] private GameObject PlaceToMove;
     //Camp Dynamite 
     public GameObject Leo;
-    public GameObject Megan;
-    public GameObject CampDynamiteLoadTrigger;
+    [SerializeField] private GameObject Megan;
+    [SerializeField] private GameObject CampDynamiteLoadTrigger;
     
     //Streets Part Two 
-    public GameObject Rubble,NewRubble;
-    public GameObject Dynamite;
+    [SerializeField] private GameObject Rubble,NewRubble;
+    [SerializeField] private GameObject Dynamite;
     //Subway 
     public string PressedButtonName;
     [SerializeField] private bool SceneLoaded=false;
@@ -167,7 +167,7 @@ public class StoryManager : MonoBehaviour
                             {
                                 if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, Megan.transform.position) < 2.2f)
                                 {
-                                    SavingAndLoading.Instance.SaveIngameData(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                                    SavingAndLoading.Instance.SaveIngameData(new Vector3(83.357f, 1, 27.313f));
                                     CurrentState = 0;
                                     State = StoryState.StreetsPartTwo;
                                     SceneManager.LoadScene("OpenWorldMain");
@@ -197,6 +197,8 @@ public class StoryManager : MonoBehaviour
                                 if (Vector3.Distance(PlayerController.Instance.PlayerTransform.position, new Vector3(55.193f, 1, -56)) < 2)
                                 {
                                     SavingAndLoading.Instance.SaveIngameData(new Vector3(-4.317f, 0, -27.59f));
+                                    CurrentState = 0;
+                                    State = StoryState.Subway;
                                     SceneManager.LoadScene("SubwayScene");
                                 }
                                 break;
@@ -220,6 +222,47 @@ public class StoryManager : MonoBehaviour
                     }
                     break;
                 }
+        }
+    }
+    public void StoryManagerSetup()
+    {
+        if (GameObject.Find("Ch35_nonPBR") != null)
+        {
+            TutorialCharacter = GameObject.Find("Ch35_nonPBR");
+            Agent = TutorialCharacter.GetComponentInChildren<NavMeshAgent>();
+            Animator = TutorialCharacter.GetComponentInChildren<Animator>();
+        }
+        if (GameObject.Find("Leo") != null)
+        {
+            Leo = GameObject.Find("Leo");
+        }
+        if (GameObject.Find("Megan") != null)
+        {
+            Megan = GameObject.Find("Megan");
+        }
+        if (GameObject.Find("CampDynamiteLoadTrigger") != null)
+        {
+            CampDynamiteLoadTrigger = GameObject.Find("CampDynamiteLoadTrigger");
+        }
+        if (GameObject.Find("Rubble") != null)
+        {
+            Rubble = GameObject.Find("Rubble");
+        }
+        if (GameObject.Find("NewRubble") != null)
+        {
+            NewRubble = GameObject.Find("NewRubble");
+        }
+        if (GameObject.Find("Dynamite") != null)
+        {
+            Dynamite = GameObject.Find("Dynamite");
+        }
+        if (GameObject.Find("AlertIconParent 1") != null)
+        {
+            AlertIcon = GameObject.Find("AlertIconParent 1");
+        }
+        if (GameObject.Find("PlaceToMove") != null)
+        {
+            PlaceToMove = GameObject.Find("PlaceToMove");
         }
     }
 }

@@ -9,11 +9,11 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
     [Header("Main Menu")]
     public AudioSource GenericSource;
-    public AudioSource AmbienceSource;
+    [SerializeField] private AudioSource AmbienceSource;
     [SerializeField] private AudioClip MenuClipSelect;
 
     [Header("In Game")]
-    public AudioSource  GunSource;
+    public AudioSource GunSource;
     public AudioSource  WatchSource;
     [SerializeField] private AudioClip GunEmpty, GunReload, GunUnload, PlayerDeathClip;
     [SerializeField] private AudioClip ScaryAmbienceClip, ChillAmbienceClip;
@@ -105,48 +105,48 @@ public class SoundManager : MonoBehaviour
     public void PlaySelectSound()
     { 
         GenericSource.clip= MenuClipSelect;
-        GenericSource.Play();
+        GenericSource?.Play();
     }
     public void PlayGunshot(Weapon weapon)
     {
         GunSource.clip = weapon.Clip;
-        GunSource.Play();
+        GunSource?.Play();
     }
     public void PlayEmpty()
     {
         GunSource.clip = GunEmpty;
-        GunSource.Play();
+        GunSource?.Play();
     }
     public void PlayReload(bool Loading)
     {
         if (Loading)
         {
             GunSource.clip = GunReload;
-            GunSource.Play();
+            GunSource?.Play();
         }
         else
         {
             GunSource.clip = GunUnload;
-            GunSource.Play();
+            GunSource?.Play();
         }
     }
     public void PlayWatch()
     {
         if (!WatchIsPlaying)
         {
-            WatchSource.Play();
+            WatchSource?.Play();
             WatchIsPlaying= true;
         }
     }
     public void StopWatch()
     {
-        WatchSource.Stop();
+        WatchSource?.Stop();
         WatchIsPlaying = false;
     }
     public void PlayDeath()
     {
         GunSource.clip = PlayerDeathClip;
-        GunSource.Play();
+        GunSource?.Play();
     }
     public void PlayVoiceLine(AudioSource source, CharacterHolder character, int voicelineNum, bool random = true)
     {
@@ -166,6 +166,40 @@ public class SoundManager : MonoBehaviour
             source.Play();
             character.ReadyForVoiceline = false;
             character.VoiceLineTimer = 0f; // reset timer so CharacterHolder picks it up
+        }
+    }
+    public void SoundManagerSetup()
+    {
+        // Get the sources
+        if (GameObject.Find("Pistol") != null)
+        {
+            GunSource = GameObject.Find("Pistol").GetComponent<AudioSource>();
+        }
+        if (GameObject.Find("Watch") != null)
+        {
+            WatchSource = GameObject.Find("Watch").GetComponent<AudioSource>();
+        }
+        if (GameObject.Find("GenericSource") != null)
+        {
+            GenericSource = GameObject.Find("GenericSource").GetComponent<AudioSource>();
+
+        }
+        if (GameObject.Find("AmbientSource") != null)
+        {
+            AmbienceSource = GameObject.Find("AmbientSource").GetComponent<AudioSource>();
+        }
+        // Load the settings if they exist 
+        if (SavingAndLoading.Instance != null)
+            SavingAndLoading.Instance.LoadSettings();
+
+        //Set the sliders for astethic purposes, actual volume set in the loadsettings()
+        if (UiManager.Instance != null)
+            UiManager.Instance.SetSoundSlider();
+        // Get and set the audiosources ingame
+        if (SoundManager.Instance != null)
+        {
+            GetAudioSources();
+            SetAudioSources();
         }
     }
 }

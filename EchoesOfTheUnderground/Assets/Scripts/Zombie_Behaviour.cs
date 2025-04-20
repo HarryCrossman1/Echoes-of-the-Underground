@@ -114,10 +114,10 @@ public class Zombie_Behaviour : MonoBehaviour
         ZombieAnimator.SetBool("Attacking", true);
         ZombieAnimator.SetBool("Walking", false);
         ZombieAnimator.SetBool("Stunned", false);
-        PlayZombieAudio(AttackAudio, false);
         yield return new WaitForSeconds(cooldown);
         if (PlayerController.Instance != null && ZombieCurrentHealth > 0)
         {
+            PlayZombieAudio(AttackAudio, false);
             PlayerController.Instance.PlayerHealth--;
         }
         HasAtacked = false;

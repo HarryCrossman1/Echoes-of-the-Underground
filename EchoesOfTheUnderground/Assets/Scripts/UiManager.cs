@@ -13,26 +13,26 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class UiManager : MonoBehaviour
 {
     public static UiManager Instance;
-    public Slider LoadingSlider;
+    [SerializeField] private Slider LoadingSlider;
     public Canvas DeathCanvas, TutorialCanvas;
     public TextMeshProUGUI HealthText;
     private AsyncOperation Operation;
     public Slider MusicSlider, SoundSlider, NpcSlider;
-    public GameObject Panel, Panel1;
-    private bool TutorialControls = true;
+    [SerializeField] private GameObject Panel, Panel1;
+    [SerializeField] private bool TutorialControls = true;
     //Menu
     private InputDevice LeftController;
     private InputDevice RightController;
-    private bool MenuIsActive = false;
-    public GameObject MenuPanel,GraphicsPanel,AudioPanel;
-    public Button Back, Exit, Skip, Quality, Balanced, Performance;
+    [SerializeField] private bool MenuIsActive = false;
+    [SerializeField] private GameObject MenuPanel,GraphicsPanel,AudioPanel;
+    [SerializeField] private Button Back, Exit, Skip, Quality, Balanced, Performance;
     public static bool InCampDynamite = false;
     //GunHolster Menu
-    public TextMeshProUGUI HolsterText, MagText;
-    public bool TextIsEnabled=true;
+    [SerializeField] private TextMeshProUGUI HolsterText, MagText;
+    [SerializeField] private bool TextIsEnabled=true;
     // Editing the button press to make it not work by frame 
-    private bool leftPrimaryPrev = false;
-    private bool rightPrimaryPrev = false;
+    [SerializeField] private bool leftPrimaryPrev = false;
+    [SerializeField] private bool rightPrimaryPrev = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -223,6 +223,132 @@ public class UiManager : MonoBehaviour
                 LoadingSlider.value = Progress;
                 yield return null;
             }
+        }
+    }
+    public void UiManagerSetup()
+    {
+        if (GameObject.Find("DeathCanvas") != null)
+        {
+            DeathCanvas = GameObject.Find("DeathCanvas").GetComponent<Canvas>();
+        }
+        if (GameObject.Find("TutorialCanvas") != null)
+        {
+            TutorialCanvas = GameObject.Find("TutorialCanvas").GetComponent<Canvas>();
+        }
+        if (GameObject.Find("Health") != null)
+        {
+            HealthText = GameObject.Find("Health").GetComponent<TextMeshProUGUI>();
+            if (HealthText != null)
+            {
+                StartCoroutine(SetHealthTextOnStart());
+            }
+        }
+        //Menu loading slider 
+        if (GameObject.Find("LoadingBar") != null)
+        {
+            LoadingSlider = GameObject.Find("LoadingBar").GetComponent<Slider>();
+        }
+        // Sound Sliders
+        if (GameObject.Find("Music Vol") != null)
+        {
+            MusicSlider = GameObject.Find("Music Vol").GetComponentInChildren<Slider>();
+        }
+        if (GameObject.Find("Music Vol (1)") != null)
+        {
+            SoundSlider = GameObject.Find("Music Vol (1)").GetComponentInChildren<Slider>();
+        }
+        if (GameObject.Find("Music Vol (2)") != null)
+        {
+            NpcSlider = GameObject.Find("Music Vol (2)").GetComponentInChildren<Slider>();
+        }
+        //Pannels
+        if (GameObject.Find("Panel") != null)
+        {
+            Panel = GameObject.Find("Panel");
+        }
+        if (GameObject.Find("Panel (1)") != null)
+        {   
+            Panel1 = GameObject.Find("Panel (1)");
+        }
+        if (GameObject.Find("SettingsPanelInGame") != null)
+        {
+            MenuPanel = GameObject.Find("SettingsPanelInGame");
+        }
+        if (GameObject.Find("AudioQualityInGame") != null)
+        {
+            AudioPanel = GameObject.Find("AudioQualityInGame");
+            if (GameObject.Find("GraphicsQualityInGame") != null)
+            {
+                GraphicsPanel = GameObject.Find("GraphicsQualityInGame");
+            }
+            // Text
+            if (GameObject.Find("MagSlots") != null)
+            {
+                MagText = GameObject.Find("MagSlots").GetComponent<TextMeshProUGUI>();
+            }
+            if (GameObject.Find("Holster") != null)
+            {
+                HolsterText = GameObject.Find("Holster").GetComponent<TextMeshProUGUI>();
+            }
+            if (TextIsEnabled)
+            {
+                MagText.enabled = true;
+                HolsterText.enabled = true;
+                TextIsEnabled = true;
+            }
+            else
+            {
+                MagText.enabled = false;
+                HolsterText.enabled = false;
+                TextIsEnabled = false;
+            }
+            //Buttons 
+            if (GameObject.Find("Back") != null)
+            {
+                Back = GameObject.Find("Back").GetComponent<Button>();
+                Back.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+                // Add saving and loading of sound 
+                Back.onClick.AddListener(SavingAndLoading.Instance.SaveSettings);
+                Back.onClick.AddListener(SoundManager.Instance.GetAudioSources);
+                Back.onClick.AddListener(SoundManager.Instance.SetAudioSources);
+            }
+            if (GameObject.Find("Exit") != null)
+            {
+                Exit = GameObject.Find("Exit").GetComponent<Button>();
+                Exit.onClick.AddListener(Quit);
+            }
+            if (GameObject.Find("Skip") != null)
+            {
+                Skip = GameObject.Find("Skip").GetComponent<Button>();
+                Skip.onClick.AddListener(SkipLevel);
+                Skip.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+
+            if (GameObject.Find("Performance") != null)
+            {
+                Performance = GameObject.Find("Performance").GetComponent<Button>();
+                Performance.onClick.AddListener(() => SetGraphics(0));
+                Performance.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            if (GameObject.Find("Balanced") != null)
+            {
+                Balanced = GameObject.Find("Balanced").GetComponent<Button>();
+                Balanced.onClick.AddListener(() => SetGraphics(1));
+                Balanced.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            if (GameObject.Find("Quality") != null)
+            {
+                Quality = GameObject.Find("Quality").GetComponent<Button>();
+                Quality.onClick.AddListener(() => SetGraphics(2));
+                Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            InvokeRepeating("SwitchPanel", 0, 15.1f);
+            InitializeControllersInGame();
+            GraphicsPanel.SetActive(false);
+            AudioPanel.SetActive(false);
+            MenuPanel.SetActive(false);
+            DeathCanvas.GetComponent<Image>().enabled = false;
+            DeathCanvas.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
         }
     }
 }

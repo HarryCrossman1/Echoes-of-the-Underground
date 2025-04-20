@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int ZombiePoolAmount;
     public bool HasZombies;
     public static bool FixedSpawns;
-    public GameObject[] FixedSpawnsLocations;
+    [SerializeField] private GameObject[] FixedSpawnsLocations;
 
 
     public bool IsActive;
@@ -183,4 +183,16 @@ public class GameManager : MonoBehaviour
             Debug.Log($"{agent.name} - isOnNavMesh: {agent.isOnNavMesh}, hasPath: {agent.hasPath}, pathStatus: {agent.pathStatus}, remainingDistance: {agent.remainingDistance}");
         }
     }
+    public void GameManagerSetup()
+    {
+        if (GameObject.Find("SpawnLocationOne") != null)
+        {
+            FixedSpawnsLocations[0] = GameObject.Find("SpawnLocationOne");
+        }
+        if (GameObject.Find("SpawnLocationTwo") != null)
+        {
+            FixedSpawnsLocations[1] = GameObject.Find("SpawnLocationTwo");
+        }
+    }
+
 }
