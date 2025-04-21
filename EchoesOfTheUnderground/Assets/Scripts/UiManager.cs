@@ -25,7 +25,7 @@ public class UiManager : MonoBehaviour
     private InputDevice RightController;
     [SerializeField] private bool MenuIsActive = false;
     [SerializeField] private GameObject MenuPanel,GraphicsPanel,AudioPanel;
-    [SerializeField] private Button Back, Exit, Skip, Quality, Balanced, Performance;
+    [SerializeField] private Button Back, Exit, Skip, Quality, Balanced, Performance,GraphicsMenu,AudioMenu;
     public static bool InCampDynamite = false;
     //GunHolster Menu
     [SerializeField] private TextMeshProUGUI HolsterText, MagText;
@@ -340,6 +340,16 @@ public class UiManager : MonoBehaviour
             {
                 Quality = GameObject.Find("Quality").GetComponent<Button>();
                 Quality.onClick.AddListener(() => SetGraphics(2));
+                Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            if (GameObject.Find("Graphics") != null)
+            {
+                Quality = GameObject.Find("Graphics").GetComponent<Button>();
+                Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
+            }
+            if (GameObject.Find("Audio Settings") != null)
+            {
+                Quality = GameObject.Find("Audio Settings").GetComponent<Button>();
                 Quality.onClick.AddListener(SoundManager.Instance.PlaySelectSound);
             }
             InvokeRepeating("SwitchPanel", 0, 15.1f);
