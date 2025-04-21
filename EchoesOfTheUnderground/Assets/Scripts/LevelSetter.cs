@@ -75,10 +75,12 @@ public class LevelSetter : MonoBehaviour
                     if (StoryManager.State == StoryManager.StoryState.Streets)
                     {
                         LevelSkipLogic(new Vector3(12, 0.1f, 3));
+                        StoryManager.LevelSkipped = false;
                     }
                     else
                     {
                         LevelSkipLogic(new Vector3(83.357f, 1, 27.313f));
+                        StoryManager.LevelSkipped = false;
                     }
 
                     break;
@@ -94,6 +96,7 @@ public class LevelSetter : MonoBehaviour
                     GameManager.Instance.IsActive = false;
                     GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(149.6411f, -0.03065634f, 40.60464f));
+                    StoryManager.LevelSkipped = false;
                     break;
                 }
             case "SubwayScene":
@@ -108,6 +111,7 @@ public class LevelSetter : MonoBehaviour
                     GameManager.Instance.WaitingForZombies = true;
                     GameManager.Instance.Init();
                     LevelSkipLogic(new Vector3(-4.317f, 0, -27.59f));
+                    StoryManager.LevelSkipped = false;
                     break;
                 }
             case "CampDynamiteRuined":

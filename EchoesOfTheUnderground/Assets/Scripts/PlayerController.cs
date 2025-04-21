@@ -91,10 +91,6 @@ public class PlayerController : MonoBehaviour
     public void AddHealth()
     {
         PlayerHealth++;
-        if (UiManager.Instance.HealthText.text != null)
-        {
-            UiManager.Instance.HealthText.text = PlayerHealth.ToString();
-        }
     }
     public void PlayerDeath()
     {
